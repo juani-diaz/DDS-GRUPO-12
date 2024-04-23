@@ -4,7 +4,7 @@ public class Envio {
    private Entidad remitente;
    private Entidad destinatario;
    private Number precio;
-   private Integer codRastreo;
-   private Rastreo rastreoEnvio;
+   private Integer codigo_rastreo;
+   private Rastreo rastreo_envio;
    private Empleado cartero;
 }

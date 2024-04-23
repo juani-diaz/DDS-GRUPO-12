@@ -4,5 +4,5 @@ public class Entidad {
    private String nombre;
    private String direccion;
    private String localidad;
-   private Integer codPostal;
+   private Integer codigo_postal;
 }

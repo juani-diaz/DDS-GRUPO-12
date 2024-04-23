@@ -4,5 +4,5 @@ import Correo.Envio;
 
 public class Carta extends Envio{
    private EnumSellado sellado;
-   private EnumCarta tipoCarta;
+   private EnumCarta tipo_carta;
 }

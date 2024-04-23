@@ -4,5 +4,5 @@ import Correo.Envio;
 
 public class Telegrama extends Envio{
    private String texto;
-   private EnumTelegrama claseTelegrama;
+   private EnumTelegrama clase_telegrama;
 }
