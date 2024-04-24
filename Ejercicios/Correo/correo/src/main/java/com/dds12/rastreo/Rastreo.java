@@ -17,4 +17,25 @@ public class Rastreo {
       this.fechas_en_sucursal = fechas_en_sucursal;
       this.lugares_enviado = lugares_enviado;
    }
+
+   public void agregarParada(Date fecha, String lugar) {
+      fechas_en_sucursal.add(fecha);
+      lugares_enviado.add(lugar);
+   }
+
+   public List<Date> getFechas_en_sucursal() {
+      return fechas_en_sucursal;
+   }
+
+   public List<String> getLugares_enviado() {
+      return lugares_enviado;
+   }
+
+   public Date getFecha_recibido() {
+      return fecha_recibido;
+   }
+
+   public void setFecha_recibido(Date fecha_recibido) {
+      this.fecha_recibido = fecha_recibido;
+   }
 }

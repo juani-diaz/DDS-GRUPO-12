@@ -12,4 +12,8 @@ public class Entidad {
       this.localidad = localidad;
       this.codigo_postal = codigo_postal;
    }
+
+   public String getDireccion() {
+      return direccion;
+   }
 }

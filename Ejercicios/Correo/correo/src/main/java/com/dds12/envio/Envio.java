@@ -24,4 +24,20 @@ public class Envio {
    public Envio() {
 
    }
+
+   public Rastreo getRastreo_envio() {
+      return rastreo_envio;
+   }
+
+   public Integer getCodigo_rastreo() {
+      return codigo_rastreo;
+   }
+
+   public Empleado getCartero() {
+      return cartero;
+   }
+
+   public Entidad getDestinatario() {
+      return destinatario;
+   }
 }

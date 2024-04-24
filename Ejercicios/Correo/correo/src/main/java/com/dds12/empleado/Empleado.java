@@ -17,4 +17,8 @@ public class Empleado {
       this.id_empleado = id_empleado;
       this.tipo_empleado = tipo_empleado;
    }
+
+   public String getNombre() {
+      return nombre;
+   }
 }

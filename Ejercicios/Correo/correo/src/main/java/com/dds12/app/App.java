@@ -191,6 +191,7 @@ public class App  {
                 break;
             }
             sucursales.get(id_sucursal).realizarEnvio(envio);
+            System.out.println("Su código de rastreo es "+nuevo_codigo_rastreo);
             return nuevo_codigo_rastreo;
         } else {
             System.out.println("Envío cancelado");
@@ -198,16 +199,120 @@ public class App  {
         return 0;
     }
 
+    private void rastrearEnvio() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Número de sucursal que realizó el envío:");
+        Integer id_sucursal = Integer.parseInt(scanner.nextLine());
+
+        if(id_sucursal > sucursales.size() - 1){
+            System.out.println("Sucursal inexistente.");
+            return;
+        }
+
+        System.out.println("Código de rastreo:");
+        Integer codigo_rastreo = Integer.parseInt(scanner.nextLine());
+
+        Sucursal sucursal = sucursales.get(id_sucursal);
+        for(Envio e : sucursal.getEnvios()){
+            if(e.getCodigo_rastreo() == codigo_rastreo){
+                imprimirRastreo(e.getRastreo_envio());
+                return;
+            }
+        }
+        System.out.println("No se encontró el envío en la sucursal.");
+    }
+
+    private void imprimirRastreo(Rastreo rastreo) {
+        if(rastreo.getFecha_recibido() == null) {
+            System.out.println("ENVÍO EN CAMINO");
+        } else {
+            System.out.println("ENVÍO ENTREGADO");
+        }
+
+        for(int i=0; i<rastreo.getFechas_en_sucursal().size(); i++) {
+            System.out.println(rastreo.getFechas_en_sucursal().get(i).toString() +" - "+rastreo.getLugares_enviado().get(i));
+        }
+    }
+
+    private void avanzarEnvio() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Número de sucursal que realizó el envío:");
+        Integer id_sucursal = Integer.parseInt(scanner.nextLine());
+
+        if(id_sucursal > sucursales.size() - 1){
+            System.out.println("Sucursal inexistente.");
+            return;
+        }
+
+        System.out.println("Código de rastreo:");
+        Integer codigo_rastreo = Integer.parseInt(scanner.nextLine());
+
+        Sucursal sucursal = sucursales.get(id_sucursal);
+        for(Envio e : sucursal.getEnvios()){
+            if(e.getCodigo_rastreo() == codigo_rastreo){
+                System.out.println("Dónde llegó?:");
+                String localidad = scanner.nextLine();
+                sucursal.avanzarEnvio(codigo_rastreo, localidad);
+                return;
+            }
+        }
+        System.out.println("No se encontró el envío en la sucursal.");
+    }
+
+    private void entregarEnvio() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Número de sucursal que realizó el envío:");
+        Integer id_sucursal = Integer.parseInt(scanner.nextLine());
+
+        if(id_sucursal > sucursales.size() - 1){
+            System.out.println("Sucursal inexistente.");
+            return;
+        }
+
+        System.out.println("Código de rastreo:");
+        Integer codigo_rastreo = Integer.parseInt(scanner.nextLine());
+
+        Sucursal sucursal = sucursales.get(id_sucursal);
+        for(Envio e : sucursal.getEnvios()){
+            if(e.getCodigo_rastreo() == codigo_rastreo){
+                e.getRastreo_envio().setFecha_recibido(new Date());
+                System.out.println("Entregado por "+e.getCartero().getNombre()+" en "+e.getDestinatario().getDireccion());
+                return;
+            }
+        }
+        System.out.println("No se encontró el envío en la sucursal.");
+    }
+
+    private void menu() {
+        Scanner scanner = new Scanner(System.in);
+        Integer opcion = 0;
+        while(opcion != 9) {
+            System.out.println("1 - Realizar envío");
+            System.out.println("2 - Rastrear envío");
+            System.out.println("3 - Avanzar envío");
+            System.out.println("4 - Entregar envío");
+            System.out.println("9 - Salir");
+            opcion = Integer.parseInt(scanner.nextLine());
+            if(opcion == 1) { recibirEnvio(); }
+            if(opcion == 2) { rastrearEnvio(); }
+            if(opcion == 3) { avanzarEnvio(); }
+            if(opcion == 4) { entregarEnvio(); }
+        }
+    }
+
     public static void main( String[] args ) {
         App app = new App();
 
+        // Algunos datos
         sucursales = new ArrayList<>();
-
         List<Empleado> empleados = new ArrayList<>();
         empleados.add(new Empleado("Tomás", "Cerezo", 67, EnumEmpleado.CARTERO));
         Sucursal sucursal_0 = new Sucursal(0, "Nogoyá 6367", "Villa Real", empleados, new ArrayList<>());
         sucursales.add(sucursal_0);
 
-        app.recibirEnvio();
+        app.menu();
     }
 }
