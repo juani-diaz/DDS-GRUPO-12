@@ -1,6 +1,6 @@
 package com.dds12.envio.carta;
 
-enum EnumCarta {
+public enum EnumCarta {
    SIMPLE,
    CERTIFICADA,
    EXPRESA

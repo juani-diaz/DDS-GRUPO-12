@@ -1,6 +1,6 @@
 package com.dds12.envio.encomienda;
 
-enum EnumEncomienda {
+public enum EnumEncomienda {
    POR_PERSONA,
    PACKET
 }

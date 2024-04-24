@@ -1,6 +1,6 @@
 package com.dds12.envio.carta;
 
-enum EnumSellado {
+public enum EnumSellado {
    ROJO,
    NEGRO
 }

@@ -1,6 +1,6 @@
 package com.dds12.empleado;
 
-enum EnumEmpleado {
+public enum EnumEmpleado {
    ADMINISTRATIVO,
    CARTERO
 }
