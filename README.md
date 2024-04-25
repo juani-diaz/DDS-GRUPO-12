@@ -14,7 +14,7 @@
 
 ## Entregas
 
-- [ ] 25/04: Implementación de ejercicio Correo (en Git)
+- [X] 25/04: Implementación de ejercicio Correo (en Git) - Ejercicio Correo
 
 - [ ] 26/04: Ejercicio Reserva de Vuelos (sin entrega, lo veremos en clase)
 
