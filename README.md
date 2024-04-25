@@ -16,7 +16,7 @@
 
 - [X] 25/04: Implementación de ejercicio Correo (en Git) - Ejercicio Correo
 
-- [ ] 26/04: Ejercicio Reserva de Vuelos (sin entrega, lo veremos en clase)
+- [X] 26/04: Ejercicio Reserva de Vuelos (sin entrega, lo veremos en clase)
 
 - [ ] 03/05: Entrega 1 TP Anual (en Aula Virtual + Git)
 
