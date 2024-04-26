@@ -1,4 +1,6 @@
 # DDS-GRUPO-12
+## Integrantes
+  - Juan Ignacio Diaz Puig, Juan Martin Terrizzi, Tomás Cerezo, Lucio Valenzano Vecchio, Fahim Wahid, Iñaki Aranzamendi, Juan Polito
 
 ![alt text](https://bocajuniors2016.wordpress.com/wp-content/uploads/2016/03/telon-bandera-boca-juniors-la-12-tevez.jpeg)
 
