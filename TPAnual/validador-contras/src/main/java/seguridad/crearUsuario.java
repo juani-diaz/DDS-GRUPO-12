@@ -66,7 +66,7 @@ public class crearUsuario {
   }
   public static boolean comparar_contra_contra_top10000(String contra){
     try {
-      File archivo_txt = new File("TPAnual/top10000_Peores_Contras.txt");
+      File archivo_txt = new File("seguridad/top10000_Peores_Contras.txt");
       Scanner myReader = new Scanner(archivo_txt);
 
       while (myReader.hasNextLine()) {
