@@ -44,7 +44,7 @@ public class crearUsuario {
   public static void escribir_en_archivo_txt(){
     //Abre y escribe en archivo
     try {
-      FileWriter archivo_txt = new FileWriter("usuario-contrasena.txt", true);
+      FileWriter archivo_txt = new FileWriter("validador-contras/src/main/java/seguridad/usuario-contras.txt", true);
       archivo_txt.write(System.lineSeparator());
       archivo_txt.write(N_Usuario +" split " + Contra);
       archivo_txt.close();
@@ -66,7 +66,7 @@ public class crearUsuario {
   }
   public static boolean comparar_contra_contra_top10000(String contra){
     try {
-      File archivo_txt = new File("seguridad/top10000_Peores_Contras.txt");
+      File archivo_txt = new File("top10000_Peores_Contras.txt");
       Scanner myReader = new Scanner(archivo_txt);
 
       while (myReader.hasNextLine()) {
