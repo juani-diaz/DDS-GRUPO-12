@@ -20,6 +20,6 @@
 
 - [X] 26/04: Ejercicio Reserva de Vuelos (sin entrega, lo veremos en clase)
 
-- [ ] 03/05: Entrega 1 TP Anual (en Aula Virtual + Git)
+- [X] 03/05: Entrega 1 TP Anual (en Aula Virtual + Git)
 
 - [ ] 18/05: Actividad sobre Diseño UX/UI (en Aula Virtual)
