@@ -5,7 +5,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class TOP10000 extends Requisitos{
-    public String ruta = "validador-contras/src/main/java/seguridad/usuario-contras.txt";
+    public String ruta = "top10000_Peores_Contras.txt";
     public boolean evaluarContrasena(String contra) {
         String linea;
         LectorArchivo leer = new LectorArchivo();
