@@ -1,3 +1,7 @@
+import domain.persona.Requisitos;
+import domain.persona.TAMANIO;
+import domain.persona.TOP10000;
+import domain.persona.Usuario;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
