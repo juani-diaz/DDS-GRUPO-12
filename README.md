@@ -22,4 +22,14 @@
 
 - [X] 03/05: Entrega 1 TP Anual (en Aula Virtual + Git)
 
-- [ ] 18/05: Actividad sobre Diseño UX/UI (en Aula Virtual)
+- [X] 18/05: Actividad sobre Diseño UX/UI (en Aula Virtual)
+
+- [ ] 23/5: PokeAPI
+
+- [ ] 1/6: Entrega 2 TP Anual PARTE 1
+
+- [ ] 4/6: Entrega 2 TP Anual PARTE 2
+
+- [ ] 14/6: Analizar y proponer requerimientos no funcionales basados en los atributos de calidad para el TP Integrador Anual
+
+- [ ] 17/6: Proponer casos de prueba para la validación de contraseñas de la Entrega 1
