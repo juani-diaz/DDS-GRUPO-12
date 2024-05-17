@@ -24,7 +24,7 @@
 
 - [X] 18/05: Actividad sobre Diseño UX/UI (en Aula Virtual)
 
-- [ ] 23/5: PokeAPI
+- [ ] 29/5: PokeAPI
 
 - [ ] 1/6: Entrega 2 TP Anual PARTE 1
 
