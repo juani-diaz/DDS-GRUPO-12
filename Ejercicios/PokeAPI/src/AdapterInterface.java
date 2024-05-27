@@ -9,7 +9,7 @@ public interface AdapterInterface(){
 
     }
 
-    public List<String> obtenerPokemonsPorMovimiento(String){
+    public List<String> obtenerImagen(String){
 
     }
 

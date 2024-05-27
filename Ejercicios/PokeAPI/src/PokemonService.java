@@ -20,7 +20,7 @@ public class PokemonService(){
     }
 
     public String obtenerMovimientosPokemon(String pokemon){
-        return pokeApi.obtenerImagen(pokemon);
+        return pokeApi.obtenerMovimientos(pokemon);
 
     }
 
