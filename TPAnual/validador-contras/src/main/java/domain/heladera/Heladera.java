@@ -2,7 +2,7 @@ package domain.heladera;
 
 import lombok.Getter;
 import lombok.Setter;
-import sun.management.Sensor;
+//import sun.management.Sensor;
 
 import domain.vianda.Vianda;
 import domain.heladera.Sensor;
@@ -22,5 +22,5 @@ public class Heladera {
   private List<Vianda> viandasEnHeladeraList;
   private Float temperaturaMinima;
   private Float temperaturaMaxima;
-  private List<Sensor> sensores
+  private List<Sensor> sensores;
 }
