@@ -1,7 +1,9 @@
 package domain.servicios;
 public class ApiUbicaciones implements AdapterUbicacionesInterface{
 
-    private List<Ubicacion>obtenerUbicacionesRecomendadas(Ubicacion ubicacion){
+    private String adaptadoURL;
+
+    private List<Ubicacion> ApiUbicacionAdapter(Ubicacion ubicacion){
         return null
                 //TODO: adaptar mock a api
     }
