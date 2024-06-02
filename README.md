@@ -26,10 +26,12 @@
 
 - [X] 29/5: PokeAPI
 
-- [ ] 1/6: Entrega 2 TP Anual PARTE 1
+- [X] 1/6: Entrega 2 TP Anual PARTE 1
 
 - [ ] 4/6: Entrega 2 TP Anual PARTE 2
 
 - [ ] 14/6: Analizar y proponer requerimientos no funcionales basados en los atributos de calidad para el TP Integrador Anual
 
 - [ ] 17/6: Proponer casos de prueba para la validación de contraseñas de la Entrega 1
+
+- [ ] 6/7: Entrega 3
