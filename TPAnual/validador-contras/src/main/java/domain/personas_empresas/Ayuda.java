@@ -1,5 +1,6 @@
 package domain.personas_empresas;
 
+import domain.colaboraciones.Colaboracion;
 import lombok.Getter;
 import lombok.Setter;
 

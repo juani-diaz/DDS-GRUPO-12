@@ -20,8 +20,4 @@ public class PersonaVulnerable {
   private List<ViandaRecogida> viandasTomadasList;
   private Tarjeta tarjeta;
   private List<UsoDeTarjeta> usosList;
-
-  public void setTarjeta(Tarjeta tarjeta) {
-    this.tarjeta = tarjeta;
-  }
 }
