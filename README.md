@@ -28,7 +28,7 @@
 
 - [X] 1/6: Entrega 2 TP Anual PARTE 1
 
-- [ ] 4/6: Entrega 2 TP Anual PARTE 2
+- [X] 4/6: Entrega 2 TP Anual PARTE 2
 
 - [ ] 14/6: Analizar y proponer requerimientos no funcionales basados en los atributos de calidad para el TP Integrador Anual
 
