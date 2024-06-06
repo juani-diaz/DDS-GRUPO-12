@@ -7,8 +7,15 @@ import java.util.List;
 
 @Setter @Getter
 public class PersonaColaboradora {
-  private String dericcion;
+  private String direccion;
   private List<Ayuda> ayudasList;
   private MedioContacto contacto;
-  private Integer cantidadPuntos;
+
+  public Float cantidadPuntos(){
+    return 0F; //TODO SERVICIO
+  }
+
+  public void canjear(){
+    return 0F; //TODO SERVICIO
+  }
 }
