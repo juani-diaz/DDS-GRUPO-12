@@ -7,6 +7,6 @@ public class Mailer {
     private String destinatary;
 
     public void enviarMail() {
-        // TODO leer el csv y crear los colaboradores
+
     }
 }
