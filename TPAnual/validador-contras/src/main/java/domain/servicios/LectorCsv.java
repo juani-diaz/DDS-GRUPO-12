@@ -22,7 +22,7 @@ public class LectorCsv {
                 String[] line = lines.get(i);
                 PersonaColaboradora colaborador = new PersonaColaboradora(
                 );
-                //cargar colaboradores, pero soy imbecil y no se ahora mismo como crearlos
+                //cargar colaboradores
                 colaboradores.add(colaborador);
             }
         } catch (IOException | CsvException e) {
