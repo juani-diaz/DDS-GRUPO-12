@@ -5,5 +5,5 @@ import domain.servicios.*;
 import java.util.List;
 public class AdministradorHeladera {
     private List<Heladera> heladeras;
-    private AdapterUbicacionesInterface apiUbicaciones;
+    //private AdapterUbicacionesInterface apiUbicaciones;
 }
