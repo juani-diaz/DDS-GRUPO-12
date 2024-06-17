@@ -1,3 +1,4 @@
+/*
 package domain.servicios;
 public class ApiUbicaciones implements AdapterUbicacionesInterface{
 
@@ -23,3 +24,4 @@ public class ApiUbicaciones implements AdapterUbicacionesInterface{
         return ubicaciones;
     }
 }
+*/

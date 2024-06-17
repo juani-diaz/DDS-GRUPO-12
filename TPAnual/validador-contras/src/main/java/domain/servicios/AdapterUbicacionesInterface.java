@@ -1,3 +1,4 @@
+/*
 package domain.servicios;
 public interface AdapterUbicacionesInterface {
 
@@ -11,3 +12,4 @@ public interface AdapterUbicacionesInterface {
 
 
 }
+*/

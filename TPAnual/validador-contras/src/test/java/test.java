@@ -53,7 +53,7 @@ public class test {
   DistribucionVianda distribucionViandaVacia = new DistribucionVianda(heladera_origen, heladera_destino, new ArrayList<>(), DESPERFECTO_HELADERA, 3F);
 
   @Test
-  public void noSeCreaPorTamañoContraseña() {
+  public void noSeCreaPorTamañoChicoContraseña() { // No se crea por ser demasiado corta (8 caracteres)
     Usuario usuario = new Usuario();
 
     chequeos.add(tam);
@@ -62,22 +62,37 @@ public class test {
   }
 
   @Test
-  public void seCreaContraseña() {
+  public void noSeCreaPorTamañoGrandeContraseña() { // No se crea al tener más de 63 caracteres
     Usuario usuario = new Usuario();
     chequeos.add(tam);
-    chequeos.add(top);
-    usuario.crearUsuario("djkasbjkdbsakkdkasb", "G19", chequeos);
-    Assertions.assertEquals("djkasbjkdbsakkdkasb", usuario.getContraseña());
+
+    usuario.crearUsuario("senfosler6.s0r,elr3@teh*teOy()65senfosler6.s0r,elr3@teh*teOy()65", "G19", chequeos);
+    Assertions.assertNotEquals("senfosler6.s0r,elr3@teh*teOy()65senfosler6.s0r,elr3@teh*teOy()65", usuario.getContraseña());
   }
+
   @Test
-  public void noSeCreaPortop10000Contraseña() {
+  public void noSeCreaPortop10000Contraseña() { // No se crea por ser muy insegura
     Usuario usuario = new Usuario();
     chequeos.add(top);
     usuario.crearUsuario("123456789", "G19", chequeos);
     Assertions.assertNotEquals("123456789", usuario.getContraseña());
   }
 
+  @Test
+  public void seCreaConCaracteresUnicode() {
+    Usuario usuario = new Usuario();
+    usuario.crearUsuario("℘⇴϶∀2024", "G19", chequeos);
+    Assertions.assertEquals("℘⇴϶∀2024", usuario.getContraseña());
+  }
 
+  @Test
+  public void seCreaContraseña() { // Se crea al estar entre 8 y 64 y ser segura
+    Usuario usuario = new Usuario();
+    chequeos.add(tam);
+    chequeos.add(top);
+    usuario.crearUsuario("djkasbjkdbsakkdkasb", "G19", chequeos);
+    Assertions.assertEquals("djkasbjkdbsakkdkasb", usuario.getContraseña());
+  }
 
   @Test
   public void cantidadViandas_4() {

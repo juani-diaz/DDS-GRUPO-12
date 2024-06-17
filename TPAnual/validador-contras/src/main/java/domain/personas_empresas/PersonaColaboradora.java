@@ -16,6 +16,6 @@ public class PersonaColaboradora {
   }
 
   public void canjear(){
-    return 0F; //TODO SERVICIO
+     //TODO SERVICIO
   }
 }
