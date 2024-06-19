@@ -4,6 +4,7 @@ import domain.heladera.Heladera;
 import domain.vianda.Vianda;
 import lombok.*;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,7 @@ public class DistribucionVianda extends Colaboracion {
     private Heladera destino;
     private List<Vianda> viandasMovidas;
     private EnumMotivosMovimientoVianda motivo;
+    private Date fecha;
     private Float multiplicador;
 
     public int cantidadViandas(){

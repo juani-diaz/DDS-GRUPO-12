@@ -1,6 +1,10 @@
 package domain.colaboraciones;
 
-public class PresentacionOferta extends Colaboracion{//TODO: Chequear q extend este este bien
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter @Setter
+public class PresentacionOferta extends Colaboracion{
     private String rubro;
     private String nombre;
     private String puntosNecesarios;

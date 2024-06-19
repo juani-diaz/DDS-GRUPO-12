@@ -1,6 +1,6 @@
 package domain.vianda;
 
-public enum EnumEstadoVianda {
+public enum EnumEstadoVianda extends Vianda {
   ENTREGADO,
   NO_ENTREGADO;
 }

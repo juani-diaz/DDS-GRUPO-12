@@ -1,5 +1,6 @@
 package domain.personas_empresas;
 
+import domain.colaboraciones.Colaboracion;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,7 +9,7 @@ import java.util.List;
 @Setter @Getter
 public class PersonaColaboradora {
   private String direccion;
-  private List<Ayuda> ayudasList;
+  private List<Colaboracion> listColaboraciona;
   private MedioContacto contacto;
 
   public Float cantidadPuntos(){

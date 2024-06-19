@@ -10,7 +10,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ViandaRecogida {
+public class ViandaRecogida extends Vianda {
   private PersonaVulnerable necesitado;
   private Heladera heraderaDeVianda;
   private Vianda viandaRecogida;

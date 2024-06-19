@@ -1,8 +1,11 @@
 package domain.heladera;
 
 
+import lombok.Getter;
+import lombok.Setter;
 
-public class Ubicacion {
+@Getter @Setter
+public class Ubicacion extends Heladera {
     private String ciudad;
     private String latitud;
     private String longitud;

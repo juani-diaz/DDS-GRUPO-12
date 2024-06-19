@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 
-public class RegistroTemperatura {
+public class RegistroTemperatura extends SensorDeTemperatura {
     private LocalDate fecha;
     private LocalTime hora;
     private Float temperatura;
