@@ -21,7 +21,5 @@ public class ColaboradorHumano extends PersonaColaboradora {
         return false;
     }
 
-    public void recibirTarjetas(List<Tarjeta> tarjetas){
-        //TODO
-    }
+    public void recibirTarjetas(List<Tarjeta> tarjetas) { tarjetasParaEntregar.addAll(tarjetas); }
 }
