@@ -17,8 +17,15 @@ public class PersonaVulnerable extends Persona {
   private List<ViandaRecogida> viandasTomadas;
   private Tarjeta tarjeta;
   private List<UsoDeTarjeta> usos;
+  private Integer usosRestantesPorDia = this.calcularUsos(menoresACargo);
+  public void retirarVianda(Vianda viandaARecoger, Heladera heladera){
+    if(usosRestantesPorDia > 0){
+      usosRestantesPorDia = usosRestantesPorDia - 1;
+      viandasTomadas.add(new ViandaRecogida('this', 'heladera', 'viandaARecoger', 'new Date'));
+    }
 
-  public void retirarVianda(){
-    //TODO
+  }
+  public Integer calcularUsos(menoresACargo){
+    return 4 + menoresACargo*2;
   }
 }

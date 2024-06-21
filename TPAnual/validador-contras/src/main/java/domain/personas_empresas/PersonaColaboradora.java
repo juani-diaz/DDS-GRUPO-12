@@ -11,14 +11,16 @@ import java.util.List;
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class PersonaColaboradora extends Persona {
   private List<Colaboracion> colaboraciones;
-  private Float puntos;
+  private Float cantidadPuntos;
 
-  public void realizarColaboracion(){
+  public void realizarColaboracion(Colaboracion colaboracion){
     //TODO
+    colaboracion.realizarColaboracion();
   }
 
-  public void actualizarPuntos(){
+  public void actualizarPuntos(Integer puntosPorColaborar){
     //TODO
+    set
   }
 
   public void realizarCanje(){
