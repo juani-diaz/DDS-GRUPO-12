@@ -9,4 +9,8 @@ public class PresentacionOferta extends Colaboracion{
     private String nombre;
     private String puntosNecesarios;
     private String imagen;
+
+    public void ejecutar(){
+        //TODO
+    }
 }

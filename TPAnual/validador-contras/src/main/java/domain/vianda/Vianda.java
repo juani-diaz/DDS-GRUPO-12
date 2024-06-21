@@ -1,6 +1,9 @@
 package domain.vianda;
 
 import domain.heladera.Heladera;
+import domain.heladera.RegistroMovimiento;
+import domain.heladera.RegistroTemperatura;
+import domain.heladera.SensorDeTemperatura;
 import domain.personas_empresas.PersonaColaboradora;
 import lombok.*;
 
@@ -14,6 +17,6 @@ public class Vianda {
   private PersonaColaboradora colaborador;
   private Heladera heladera;
   private String calorias;
-  private String peso;
+  private Float peso;
   private EnumEstadoVianda estado;
 }

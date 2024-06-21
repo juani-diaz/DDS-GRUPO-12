@@ -4,10 +4,16 @@ import lombok.*;
 import java.util.Date;
 
 
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor
-
+@Getter @Setter @NoArgsConstructor
 public class SensorDeMovimiento extends Sensor{
-    private Date fecha;
 
+    public SensorDeMovimiento(Heladera hel){
+        super(hel);
+    }
 
+    @Override
+    public void nuevoRegistro(RegistroSensor registro) {
+        this.registros.add(registro);
+        this.enviarAlerta();
+    }
 }

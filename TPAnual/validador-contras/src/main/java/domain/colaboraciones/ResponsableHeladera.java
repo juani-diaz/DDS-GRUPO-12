@@ -9,4 +9,8 @@ import lombok.Setter;
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class ResponsableHeladera extends Colaboracion{
     private Heladera heladera;
+
+    public void ejecutar(){
+        //TODO
+    }
 }

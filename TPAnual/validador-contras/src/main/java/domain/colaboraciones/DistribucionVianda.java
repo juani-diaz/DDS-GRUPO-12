@@ -18,4 +18,7 @@ public class DistribucionVianda extends Colaboracion {
     public int cantidadViandas(){
         return this.viandasMovidas.size();
     }
+    public void ejecutar(){
+        //TODO
+    }
 }

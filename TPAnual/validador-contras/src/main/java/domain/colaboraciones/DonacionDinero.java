@@ -11,4 +11,8 @@ import java.time.LocalDate;
 public class DonacionDinero extends Colaboracion {
     private Float monto;
     private String frecuencia;
+
+    public void ejecutar(){
+        //TODO
+    }
 }

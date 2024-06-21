@@ -12,4 +12,8 @@ import lombok.Setter;
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class RegistroPersonasVulnerables extends  Colaboracion{
     private Tarjeta tarjetaEntregada;
+
+    public void ejecutar(){
+        //TODO
+    }
 }

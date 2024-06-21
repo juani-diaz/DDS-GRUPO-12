@@ -10,4 +10,6 @@ import java.time.LocalDate;
 public abstract class Colaboracion {
     private PersonaColaboradora colaborador;
     private LocalDate fecha;
+
+    public abstract void ejecutar();
 }

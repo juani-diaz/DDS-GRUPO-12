@@ -1,8 +1,6 @@
 import domain.colaboraciones.DistribucionVianda;
 import domain.colaboraciones.EnumMotivosMovimientoVianda;
-import domain.heladera.Heladera;
-import domain.heladera.Sensor;
-import domain.heladera.Ubicacion;
+import domain.heladera.*;
 import domain.persona_contra.Requisitos;
 import domain.persona_contra.TAMANIO;
 import domain.persona_contra.TOP10000;
@@ -40,17 +38,15 @@ public class test {
   Vianda vianda6 = new Vianda();
   List<Vianda> listaVianda2 = Arrays.asList(vianda5,vianda6);
 
-  Sensor sensor1 = new Sensor();
-  Sensor sensor2 = new Sensor();
-  Sensor sensor3 = new Sensor();
-  List<Sensor> listaSensor = Arrays.asList(sensor1,sensor2,sensor3);
-  List<Sensor> listaSensor2 = Arrays.asList(sensor1,sensor2);
+  Heladera heladera_origen = new Heladera("healdera_origen", ubicacion, 100, fechaFuncionamiento, listaVianda, 12F, 20F, EnumEstadoHeladera.DISPONIBLE);
+  Heladera heladera_destino = new Heladera("heladera_destino", ubicacion, 50, fechaFuncionamiento, listaVianda, 4F, 21F, EnumEstadoHeladera.DISPONIBLE);
 
-  Heladera heladera_origen = new Heladera("healdera_origen", ubicacion, 100, fechaFuncionamiento, listaVianda, 12F, 20F, listaSensor);
-  Heladera heladera_destino = new Heladera("heladera_destino", ubicacion, 50, fechaFuncionamiento, listaVianda, 4F, 21F, listaSensor2);
+  Sensor sensor1 = new SensorDeTemperatura(heladera_origen);
+  Sensor sensor2 = new SensorDeTemperatura(heladera_destino);
+  Sensor sensor3 = new SensorDeMovimiento(heladera_origen);
 
-  DistribucionVianda distribucionVianda = new DistribucionVianda(heladera_origen, heladera_destino, listaVianda, DESPERFECTO_HELADERA, 3F);
-  DistribucionVianda distribucionViandaVacia = new DistribucionVianda(heladera_origen, heladera_destino, new ArrayList<>(), DESPERFECTO_HELADERA, 3F);
+  DistribucionVianda distribucionVianda = new DistribucionVianda(heladera_origen, heladera_destino, listaVianda, DESPERFECTO_HELADERA);
+  DistribucionVianda distribucionViandaVacia = new DistribucionVianda(heladera_origen, heladera_destino, new ArrayList<>(), DESPERFECTO_HELADERA);
 
   @Test
   public void noSeCreaPorTamañoChicoContraseña() { // No se crea por ser demasiado corta (8 caracteres)
@@ -106,21 +102,15 @@ public class test {
   //----------------HELADERA--------------------------------------------------------------------------------------------
   @Test
   public void ingresarVianda() {
-    int canViandas = heladera_destino.getViandasEnHeladeraList().size();
+    int canViandas = heladera_destino.getViandasEnHeladera().size();
     heladera_destino.ingresarViandas(listaVianda2);
     System.out.println(listaVianda2.size());
-    Assertions.assertEquals(canViandas + listaVianda2.size(), heladera_destino.getViandasEnHeladeraList().size());
+    Assertions.assertEquals(canViandas + listaVianda2.size(), heladera_destino.getViandasEnHeladera().size());
   }
 
   @Test
   public void sacarViandas() {
     Assertions.assertEquals(0, distribucionViandaVacia.cantidadViandas());
   }
-
-
-
-
-
-
 
 }
