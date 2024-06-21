@@ -1,12 +1,13 @@
 package domain.heladera;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
+import java.util.Date;
 
 
-
-@Getter
-@Setter
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
 
 public class SensorDeMovimiento extends Sensor{
+    private Date fecha;
+
 
 }

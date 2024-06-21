@@ -14,8 +14,6 @@ public class DistribucionVianda extends Colaboracion {
     private Heladera destino;
     private List<Vianda> viandasMovidas;
     private EnumMotivosMovimientoVianda motivo;
-    private Date fecha;
-    private Float multiplicador;
 
     public int cantidadViandas(){
         return this.viandasMovidas.size();

@@ -1,22 +1,27 @@
 package domain.personas_empresas;
 
 import domain.colaboraciones.Colaboracion;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
 
-@Setter @Getter
-public class PersonaColaboradora {
-  private String direccion;
-  private List<Colaboracion> listColaboraciona;
-  private MedioContacto contacto;
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
+public class PersonaColaboradora extends Persona {
+  private List<Colaboracion> colaboraciones;
+  private Float puntos;
 
-  public Float cantidadPuntos(){
-    return 0F; //TODO SERVICIO
+  public void realizarColaboracion(){
+    //TODO
   }
 
-  public void canjear(){
-     //TODO SERVICIO
+  public void actualizarPuntos(){
+    //TODO
+  }
+
+  public void realizarCanje(){
+    //TODO
   }
 }

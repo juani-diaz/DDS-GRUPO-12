@@ -1,19 +1,16 @@
 package domain.heladera;
 //import domain.servicios.AdapterUbicacionesInterface;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
-@Getter @Setter
-public class RecomendadorUbicacion extends Heladera {
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
+public class RecomendadorUbicacion {
 
-    private List<Heladera> listaHeladera;
+    private List<Ubicacion> ubicacionesHeladeras;
+    private AdapterUbicacionInterface proveedorUbicaciones;
     //private AdapterUbicacionesInterface proveedorUbicacion; TODO: Ni idea de como apregar un adapter
-
-
-    private void darDeAltaHeladera(){ new Heladera(); } //TODO: darDeAltaHeladera
 
 }
 

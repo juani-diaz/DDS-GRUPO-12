@@ -1,14 +1,14 @@
 package domain.colaboraciones;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
 
-@Getter @Setter
-public class DonacionDinero extends Colaboracion{ //TODO: Chequear q extend este este bien
-    private LocalDate fecha;
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
+public class DonacionDinero extends Colaboracion {
     private Float monto;
     private String frecuencia;
-    private Float multiplicador;
 }

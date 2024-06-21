@@ -1,13 +1,11 @@
 package domain.heladera;
 
 import domain.heladera.RegistroTemperatura;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 
 import java.util.List;
-@Getter
-@Setter
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class SensorDeTemperatura extends Sensor{
     private List<RegistroTemperatura> temperaturas;
 

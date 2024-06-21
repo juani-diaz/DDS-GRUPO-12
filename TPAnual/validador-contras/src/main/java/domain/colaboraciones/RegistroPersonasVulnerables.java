@@ -4,12 +4,12 @@ import domain.personas_empresas.Tarjeta;
 
 import java.util.List;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class RegistroPersonasVulnerables extends  Colaboracion{
-    private List<Tarjeta> tarjetas;
-
-
+    private Tarjeta tarjetaEntregada;
 }

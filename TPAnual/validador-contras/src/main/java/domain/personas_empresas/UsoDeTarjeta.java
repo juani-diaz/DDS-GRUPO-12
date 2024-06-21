@@ -1,13 +1,15 @@
 package domain.personas_empresas;
 
 import domain.heladera.Heladera;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Time;
 import java.time.LocalDate;
 
-@Getter @Setter
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class UsoDeTarjeta {
   private LocalDate dia;
   private Time hora;

@@ -1,11 +1,10 @@
 package domain.personas_empresas;
 
+import lombok.*;
+
 import java.util.List;
 
-public class Tecnico {
-  private String nombre;
-  private String apellido;
-  private Documento documento;
-  private MedioContacto contacto;
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
+public class Tecnico extends Persona {
   private List<String> areaCobertura;
 }

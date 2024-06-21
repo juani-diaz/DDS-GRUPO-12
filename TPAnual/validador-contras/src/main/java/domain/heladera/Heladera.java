@@ -12,23 +12,24 @@ import java.util.Collections;
 import java.util.List;
 
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
-public class Heladera extends Sensor {
+public class Heladera {
   private String nombre;
   private Ubicacion direccion;
-  private Integer TamanioEnViandas;
+  private Integer tamanioEnViandas;
   private LocalDate fechaFuncionamiento;
-  private List<Vianda> viandasEnHeladeraList;
+  private List<Vianda> viandasEnHeladera;
   private Float temperaturaMinima;
   private Float temperaturaMaxima;
   private List<Sensor> sensores;
   private EnumEstadoHeladera estado;
+  private List<RegistroTemperatura> temperaturas;
 
-  public void ingresarViandas(List<Vianda> listViandas) {
-    System.out.println(listViandas.size());
-    this.viandasEnHeladeraList.addAll(listViandas);
+  public void ingresarViandas(List<Vianda> Viandas) {
+    System.out.println(Viandas.size());
+    this.viandasEnHeladera.addAll(Viandas);
   }
-  public void sacarViandas(List<Vianda> listViandas) {
-    viandasEnHeladeraList.removeAll(listViandas);
+  public void sacarViandas(List<Vianda> Viandas) {
+    viandasEnHeladera.removeAll(Viandas);
   }
 
   public List<EnumEstadoHeladera> getEstado() {
