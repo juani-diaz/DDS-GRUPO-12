@@ -22,17 +22,7 @@ public class PersonaColaboradora extends Persona {
   public void actualizarPuntos(){
     Float puntosNuevos = 0F;
     for(Colaboracion col : this.colaboraciones){
-      Class clase = col.getClass();
-      if(clase == DonacionVianda.class){
-        puntosNuevos += 1.5F;
-      } else if(clase == DistribucionVianda.class){
-        puntosNuevos += 1F;
-      } else if(clase == DonacionDinero.class){
-        DonacionDinero don = (DonacionDinero) col;
-        puntosNuevos += 0.5F * don.getMonto();
-      } else if(clase == RegistroPersonasVulnerables.class){
-        puntosNuevos += 2F;
-      }
+      puntosNuevos += col.puntosObtenidos();
     }
     this.cantidadPuntos = puntosNuevos;
   }

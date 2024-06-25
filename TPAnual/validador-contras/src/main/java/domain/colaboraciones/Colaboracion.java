@@ -12,4 +12,6 @@ public abstract class Colaboracion {
     private LocalDate fecha;
 
     public abstract void ejecutar();
+
+    public abstract Float puntosObtenidos();
 }

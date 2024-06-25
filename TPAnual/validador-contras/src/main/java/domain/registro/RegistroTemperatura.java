@@ -1,8 +1,4 @@
-package domain.heladera;
-
-import java.time.LocalTime;
-import java.time.LocalDate;
-import java.util.Date;
+package domain.registro;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

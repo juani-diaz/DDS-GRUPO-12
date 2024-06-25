@@ -1,7 +1,6 @@
 package domain.heladera;
+import domain.registro.RegistroSensor;
 import lombok.*;
-
-import java.util.Date;
 
 
 @Getter @Setter @NoArgsConstructor
@@ -13,7 +12,6 @@ public class SensorDeMovimiento extends Sensor{
 
     @Override
     public void nuevoRegistro(RegistroSensor registro) {
-        this.registros.add(registro);
-        this.enviarAlerta();
+        this.enviarAlerta(registro);
     }
 }

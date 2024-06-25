@@ -1,9 +1,6 @@
 package domain.vianda;
 
 import domain.heladera.Heladera;
-import domain.heladera.RegistroMovimiento;
-import domain.heladera.RegistroTemperatura;
-import domain.heladera.SensorDeTemperatura;
 import domain.personas_empresas.PersonaColaboradora;
 import lombok.*;
 

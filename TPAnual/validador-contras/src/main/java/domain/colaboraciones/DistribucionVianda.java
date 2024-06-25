@@ -10,6 +10,8 @@ import java.util.List;
 
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
 public class DistribucionVianda extends Colaboracion {
+    public final static Float multiplicador = 1F;
+
     private Heladera origen;
     private Heladera destino;
     private List<Vianda> viandasMovidas;
@@ -20,5 +22,9 @@ public class DistribucionVianda extends Colaboracion {
     }
     public void ejecutar(){
         //TODO
+    }
+
+    public Float puntosObtenidos(){
+        return multiplicador;
     }
 }

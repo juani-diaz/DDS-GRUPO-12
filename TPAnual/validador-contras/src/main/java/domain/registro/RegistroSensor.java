@@ -1,4 +1,4 @@
-package domain.heladera;
+package domain.registro;
 
 import java.util.Date;
 

@@ -13,4 +13,8 @@ public class ResponsableHeladera extends Colaboracion{
     public void ejecutar(){
         //TODO
     }
+
+    public Float puntosObtenidos(){
+        return 0F; // TODO
+    }
 }

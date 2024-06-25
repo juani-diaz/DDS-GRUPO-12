@@ -10,9 +10,15 @@ import java.time.LocalDate;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class DonacionVianda extends Colaboracion {
+    public final static Float multiplicador = 1.5F;
+
     private Vianda vianda;
 
     public void ejecutar(){
         //TODO
+    }
+
+    public Float puntosObtenidos(){
+        return multiplicador;
     }
 }
