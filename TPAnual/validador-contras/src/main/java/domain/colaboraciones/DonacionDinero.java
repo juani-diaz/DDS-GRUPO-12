@@ -16,6 +16,7 @@ public class DonacionDinero extends Colaboracion {
 
     public void ejecutar(){
         //TODO
+
     }
 
     public Float puntosObtenidos(){
