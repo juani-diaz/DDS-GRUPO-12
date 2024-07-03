@@ -9,7 +9,7 @@ import java.util.List;
 public class RecomendadorUbicacion {
 
     private List<Ubicacion> ubicacionesHeladeras;
-    //private AdapterUbicacionesInterface proveedorUbicacion; TODO: Ni idea de como apregar un adapter
+    //private AdapterUbicacionesInterface proveedorUbicacion; TODO
 
 }
 

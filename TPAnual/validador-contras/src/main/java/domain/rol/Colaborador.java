@@ -2,6 +2,7 @@ package domain.rol;
 
 import domain.colaboraciones.*;
 import domain.persona.Persona;
+import domain.servicios.Catalogo;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -46,7 +47,7 @@ public class Colaborador extends Rol {
 
   public void recibirTarjetas(List<Tarjeta> tarjetas) { tarjetasParaEntregar.addAll(tarjetas); }
 
-  public void realizarCanje(){
-    //TODO
+  public boolean realizarCanje(Integer indiceOferta){
+    return Catalogo.otorgar(indiceOferta, this);
   }
 }

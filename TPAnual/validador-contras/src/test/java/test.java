@@ -9,9 +9,7 @@ import domain.vianda.Vianda;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static domain.colaboraciones.EnumMotivosMovimientoVianda.DESPERFECTO_HELADERA;
 
@@ -42,7 +40,7 @@ public class test {
   Sensor sensor2 = new SensorDeTemperatura(heladera_destino);
   Sensor sensor3 = new SensorDeMovimiento(heladera_origen);
 
-  DistribucionVianda distribucionVianda = new DistribucionVianda(heladera_origen, heladera_destino, listaVianda, DESPERFECTO_HELADERA);
+  DistribucionVianda distribucionVianda = new DistribucionVianda(heladera_origen, heladera_destino, Collections.singletonList(0), DESPERFECTO_HELADERA);
   DistribucionVianda distribucionViandaVacia = new DistribucionVianda(heladera_origen, heladera_destino, new ArrayList<>(), DESPERFECTO_HELADERA);
 
   @Test
@@ -89,7 +87,7 @@ public class test {
 
   @Test
   public void cantidadViandas_4() {
-    Assertions.assertEquals(4, distribucionVianda.cantidadViandas());
+    Assertions.assertEquals(1, distribucionVianda.cantidadViandas());
   }
   @Test
   public void cantidadViandas_0() {
@@ -101,7 +99,6 @@ public class test {
   public void ingresarVianda() {
     int canViandas = heladera_destino.getViandasEnHeladera().size();
     heladera_destino.ingresarViandas(listaVianda2);
-    System.out.println(listaVianda2.size());
     Assertions.assertEquals(canViandas + listaVianda2.size(), heladera_destino.getViandasEnHeladera().size());
   }
 

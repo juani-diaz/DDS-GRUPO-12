@@ -19,7 +19,7 @@ import java.util.List;
 public class LectorCsv {
     private String rutaArchivo;
     private Mailer mailer;
-    private List<Colaborador> colaboradoresExistentes; // este podria ser abstraido a una clase tipo repo de colaboradores
+    private List<Colaborador> colaboradoresExistentes;
 
     public LectorCsv(String rutaArchivo, Mailer mailer) {
         this.rutaArchivo = rutaArchivo;

@@ -1,5 +1,6 @@
 package domain.colaboraciones;
 
+import domain.servicios.Catalogo;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,7 +12,7 @@ public class PresentacionOferta extends Colaboracion{
     private String imagen;
 
     public void ejecutar(){
-        //TODO
+        Catalogo.agregarAlCatalogo(this);
     }
 
     public Float puntosObtenidos(){
