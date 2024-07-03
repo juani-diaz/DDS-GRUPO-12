@@ -43,6 +43,10 @@ public class test {
   DistribucionVianda distribucionVianda = new DistribucionVianda(heladera_origen, heladera_destino, Collections.singletonList(0), DESPERFECTO_HELADERA);
   DistribucionVianda distribucionViandaVacia = new DistribucionVianda(heladera_origen, heladera_destino, new ArrayList<>(), DESPERFECTO_HELADERA);
 
+
+
+
+  //---------------------------CONTRASEÑAS------------------------------------
   @Test
   public void noSeCreaPorTamañoChicoContraseña() { // No se crea por ser demasiado corta (8 caracteres)
     Usuario usuario = new Usuario();
@@ -85,6 +89,7 @@ public class test {
     Assertions.assertEquals("djkasbjkdbsakkdkasb", usuario.getContraseña());
   }
 
+  //------------------------------------VIANDAS------------------------------------
   @Test
   public void cantidadViandas_4() {
     Assertions.assertEquals(1, distribucionVianda.cantidadViandas());
@@ -94,18 +99,11 @@ public class test {
     Assertions.assertEquals(0, distribucionViandaVacia.cantidadViandas());
   }
 
-  //----------------HELADERA--------------------------------------------------------------------------------------------
-  /*@Test
 
-  public void ingresarVianda() {
-    int canViandas = heladera_destino.getViandasEnHeladera().size();
-    heladera_destino.ingresarViandas(listaVianda2);
-    Assertions.assertEquals(canViandas + listaVianda2.size(), heladera_destino.getViandasEnHeladera().size());
-  }
 
+  //------------------------------------COLABORADOR----------------------------------
   @Test
-  public void sacarViandas() {
-    Assertions.assertEquals(0, distribucionViandaVacia.cantidadViandas());
+  public void crearColaborador() {
+
   }
-*/
 }
