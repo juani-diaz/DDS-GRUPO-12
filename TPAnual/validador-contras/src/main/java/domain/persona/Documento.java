@@ -9,6 +9,4 @@ import lombok.Setter;
 public class Documento {
   private String tipo;
   private String numero;
-  private String sexo;
-  private String genero;
 }

@@ -7,4 +7,5 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RegistroMovimiento extends RegistroSensor {
+  private Float movimiento;
 }

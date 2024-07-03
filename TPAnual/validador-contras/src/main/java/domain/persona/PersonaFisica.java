@@ -13,13 +13,28 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class PersonaFisica extends Persona {
     private String apellido;
-    private Documento documento;
+    private String sexo;
+    private String genero;
     private LocalDate fechaNacimiento;
 
-    public PersonaFisica(String nombre, MedioContacto medioContacto, String direccion, String apellido, Documento documento, LocalDate fechaNacimiento){
-        super(nombre, medioContacto, direccion);
+
+    //TODO: No se que hacd esto :)
+    public PersonaFisica(
+        String nombre,
+        MedioContacto medioContacto,
+        String direccion,
+        Documento documento,
+        String apellido,
+        String sexo,
+        String genero,
+        LocalDate fechaNacimiento
+        ){
+        super(nombre, medioContacto, direccion, documento);
         this.apellido = apellido;
-        this.documento = documento;
+        this.setDocumento(documento);
         this.fechaNacimiento = fechaNacimiento;
     }
+
+
+
 }

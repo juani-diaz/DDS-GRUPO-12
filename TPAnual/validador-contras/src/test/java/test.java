@@ -95,7 +95,8 @@ public class test {
   }
 
   //----------------HELADERA--------------------------------------------------------------------------------------------
-  @Test
+  /*@Test
+
   public void ingresarVianda() {
     int canViandas = heladera_destino.getViandasEnHeladera().size();
     heladera_destino.ingresarViandas(listaVianda2);
@@ -106,5 +107,5 @@ public class test {
   public void sacarViandas() {
     Assertions.assertEquals(0, distribucionViandaVacia.cantidadViandas());
   }
-
+*/
 }

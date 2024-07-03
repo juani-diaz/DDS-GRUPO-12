@@ -42,7 +42,7 @@ public class LectorCsv {
 
         for (int i = 1; i < lineasArchivo.size(); i++) { // i =1 para saltar encabezado que tiene los nombres de columnas
             String[] linea = lineasArchivo.get(i);
-            ColaboradorHumano colaborador = cargarColaborador(linea);
+            Colaborador colaborador = cargarColaborador(linea);
             if (colaborador != null) {
                 if (!existeColaborador(colaborador)) {
                     nuevosColaboradores.add(colaborador);
@@ -66,7 +66,7 @@ public class LectorCsv {
             medioDeContacto.setEmails(Collections.singletonList(linea[4]));
             LocalDate fechaNacimiento = LocalDate.parse(linea[5], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
-            Persona p = new PersonaFisica(nombre, medioDeContacto, null, apellido, documento, fechaNacimiento);
+            Persona p = new PersonaFisica(nombre, medioDeContacto, null, documento, apellido, null, null, fechaNacimiento);
             Colaborador colaborador = new Colaborador(p, null, null, null);
 
             return colaborador;
@@ -76,17 +76,17 @@ public class LectorCsv {
         }
     }
 
-    private boolean existeColaborador(ColaboradorHumano colaborador) {
-        for (ColaboradorHumano existente : colaboradoresExistentes) {
-            if (existente.getDocumento().equals(colaborador.getDocumento())) {
+    private boolean existeColaborador(Colaborador colaborador) {
+        for (Colaborador existente : colaboradoresExistentes) {
+            if (existente.getPersona().getDocumento().equals(colaborador.getPersona().getDocumento())) {
                 return true;
             }
         }
         return false;
     }
 
-    private void enviarCorreoBienvenida(ColaboradorHumano colaborador) {
-        String destinatario = colaborador.getMedioDeContacto().getEmails().get(0);
+    private void enviarCorreoBienvenida(Colaborador colaborador) {
+        String destinatario = colaborador.getPersona().getMedioDeContacto().getEmails().get(0);
         String header = "¡Bienvenido al sistema!";
         String body = "Hola " + colaborador.getPersona().getNombre() + ",\n\n" +
                 "Gracias por unirte a nuestro sistema. ¡Estamos encantados de tenerte con nosotros!\n\n" +
