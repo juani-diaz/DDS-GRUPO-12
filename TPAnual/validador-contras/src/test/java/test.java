@@ -1,10 +1,9 @@
 import domain.colaboraciones.DistribucionVianda;
-import domain.colaboraciones.EnumMotivosMovimientoVianda;
 import domain.heladera.*;
-import domain.persona_contra.Requisitos;
-import domain.persona_contra.TAMANIO;
-import domain.persona_contra.TOP10000;
-import domain.persona_contra.Usuario;
+import domain.contra.Requisitos;
+import domain.contra.TAMANIO;
+import domain.contra.TOP10000;
+import domain.contra.Usuario;
 import org.junit.jupiter.api.Assertions;
 import domain.vianda.Vianda;
 import org.junit.jupiter.api.Test;
@@ -22,8 +21,6 @@ public class test {
   TAMANIO tam = new TAMANIO();
   TOP10000 top = new TOP10000();
   List<Requisitos> chequeos = new ArrayList<>();
-
-
 
   Ubicacion ubicacion = new Ubicacion();
   LocalDate fechaFuncionamiento = LocalDate.now();

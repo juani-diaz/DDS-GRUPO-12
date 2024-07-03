@@ -2,9 +2,11 @@ package domain.servicios;
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
-import domain.personas_empresas.ColaboradorHumano;
-import domain.personas_empresas.Documento;
-import domain.personas_empresas.MedioContacto;
+import domain.persona.Documento;
+import domain.persona.MedioContacto;
+import domain.persona.Persona;
+import domain.persona.PersonaFisica;
+import domain.rol.Colaborador;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -17,7 +19,7 @@ import java.util.List;
 public class LectorCsv {
     private String rutaArchivo;
     private Mailer mailer;
-    private List<ColaboradorHumano> colaboradoresExistentes; // este podria ser abstraido a una clase tipo repo de colaboradores
+    private List<Colaborador> colaboradoresExistentes; // este podria ser abstraido a una clase tipo repo de colaboradores
 
     public LectorCsv(String rutaArchivo, Mailer mailer) {
         this.rutaArchivo = rutaArchivo;
@@ -34,8 +36,8 @@ public class LectorCsv {
         }
     }
 
-    public List<ColaboradorHumano> cargarArchivo() {
-        List<ColaboradorHumano> nuevosColaboradores = new ArrayList<>();
+    public List<Colaborador> cargarArchivo() {
+        List<Colaborador> nuevosColaboradores = new ArrayList<>();
         List<String[]> lineasArchivo = leerArchivo(rutaArchivo);
 
         for (int i = 1; i < lineasArchivo.size(); i++) { // i =1 para saltar encabezado que tiene los nombres de columnas
@@ -53,7 +55,7 @@ public class LectorCsv {
         return nuevosColaboradores;
     }
 
-    private ColaboradorHumano cargarColaborador(String[] linea) {
+    private Colaborador cargarColaborador(String[] linea) {
         try {
             Documento documento = new Documento();
             documento.setTipo(linea[0]);
@@ -64,12 +66,8 @@ public class LectorCsv {
             medioDeContacto.setEmails(Collections.singletonList(linea[4]));
             LocalDate fechaNacimiento = LocalDate.parse(linea[5], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
-            ColaboradorHumano colaborador = new ColaboradorHumano();
-            colaborador.setNombre(nombre);
-            colaborador.setApellido(apellido);
-            colaborador.setDocumento(documento);
-            colaborador.setMedioDeContacto(medioDeContacto);
-            colaborador.setFechaNacimiento(fechaNacimiento);
+            Persona p = new PersonaFisica(nombre, medioDeContacto, null, apellido, documento, fechaNacimiento);
+            Colaborador colaborador = new Colaborador(p, null, null, null);
 
             return colaborador;
         } catch (Exception e) {
@@ -90,7 +88,7 @@ public class LectorCsv {
     private void enviarCorreoBienvenida(ColaboradorHumano colaborador) {
         String destinatario = colaborador.getMedioDeContacto().getEmails().get(0);
         String header = "¡Bienvenido al sistema!";
-        String body = "Hola " + colaborador.getNombre() + ",\n\n" +
+        String body = "Hola " + colaborador.getPersona().getNombre() + ",\n\n" +
                 "Gracias por unirte a nuestro sistema. ¡Estamos encantados de tenerte con nosotros!\n\n" +
                 "Saludos,\nEl equipo.";
 

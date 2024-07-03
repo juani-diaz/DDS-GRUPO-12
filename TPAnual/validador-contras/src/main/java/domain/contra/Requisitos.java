@@ -1,4 +1,4 @@
-package domain.persona_contra;
+package domain.contra;
 import lombok.Getter;
 import lombok.Setter;
 @Getter

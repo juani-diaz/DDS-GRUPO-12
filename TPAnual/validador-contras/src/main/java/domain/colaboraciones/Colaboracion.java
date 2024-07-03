@@ -1,5 +1,5 @@
 package domain.colaboraciones;
-import domain.personas_empresas.PersonaColaboradora;
+import domain.rol.Colaborador;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 @Getter @Setter
 public abstract class Colaboracion {
-    private PersonaColaboradora colaborador;
+    private Colaborador colaborador;
     private LocalDate fecha;
 
     public abstract void ejecutar();

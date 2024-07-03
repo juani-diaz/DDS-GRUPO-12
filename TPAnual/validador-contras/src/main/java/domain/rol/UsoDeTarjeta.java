@@ -1,4 +1,4 @@
-package domain.personas_empresas;
+package domain.rol;
 
 import domain.heladera.Heladera;
 import lombok.AllArgsConstructor;

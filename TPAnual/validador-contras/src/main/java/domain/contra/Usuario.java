@@ -1,4 +1,4 @@
-package domain.persona_contra;
+package domain.contra;
 import java.util.ArrayList;
 import java.util.List;
 

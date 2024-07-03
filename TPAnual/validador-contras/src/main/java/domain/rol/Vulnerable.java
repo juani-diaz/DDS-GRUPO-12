@@ -1,6 +1,7 @@
-package domain.personas_empresas;
+package domain.rol;
 
 import domain.heladera.Heladera;
+import domain.persona.Persona;
 import domain.vianda.Vianda;
 import domain.vianda.ViandaRecogida;
 import lombok.AllArgsConstructor;
@@ -13,7 +14,7 @@ import java.util.Date;
 import java.util.List;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
-public class PersonaVulnerable extends Persona {
+public class Vulnerable extends Rol {
   private LocalDate fechaRegistro;
   private EnumSituacionCalle situacionCalle;
   private Integer menoresACargo;

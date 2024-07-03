@@ -1,4 +1,4 @@
-package domain.personas_empresas;
+package domain.persona;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,9 +1,9 @@
-package domain.personas_empresas;
+package domain.rol;
 
 import lombok.*;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class Tarjeta {
   private String identificador;
-  private PersonaColaboradora donante;
+  private Colaborador donante;
 }

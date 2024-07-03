@@ -1,8 +1,6 @@
 package domain.colaboraciones;
 
-import domain.personas_empresas.Tarjeta;
-
-import java.util.List;
+import domain.rol.Tarjeta;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,6 +1,6 @@
 package domain.vianda;
 import domain.heladera.Heladera;
-import domain.personas_empresas.PersonaVulnerable;
+import domain.rol.Vulnerable;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,7 +12,7 @@ import java.util.Date;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class ViandaRecogida  {
-  private PersonaVulnerable necesitado;
+  private Vulnerable necesitado;
   private Heladera heraderaDeVianda;
   private Vianda viandaRecogida;
   private Date fechaDeRecogida;

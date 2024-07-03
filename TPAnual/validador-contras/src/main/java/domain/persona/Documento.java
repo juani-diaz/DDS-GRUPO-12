@@ -1,4 +1,4 @@
-package domain.personas_empresas;
+package domain.persona;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,5 +11,4 @@ public class Documento {
   private String numero;
   private String sexo;
   private String genero;
-  private String cuil;
 }
