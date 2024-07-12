@@ -20,7 +20,6 @@ public class test_colaboraciones {
     Colaborador colaborador1 = new Colaborador(null, null, null,null);
     Vianda viandaDonada= new Vianda();
     Heladera heladeraADonar= new Heladera();
-    Heladera heladera2 = new Heladera("ss", new Ubicacion(), 2, LocalDate.now(), viandaEsperada, 0F, 0F, DISPONIBLE);
     List<Vianda> viandaEsperada= Arrays.asList(viandaDonada);
     Heladera heladera2 = new Heladera("ss", new Ubicacion(), 2, LocalDate.now(), viandaEsperada, 0F, 0F, DISPONIBLE);
 
