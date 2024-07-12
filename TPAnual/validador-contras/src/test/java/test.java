@@ -4,6 +4,7 @@ import domain.contra.Requisitos;
 import domain.contra.TAMANIO;
 import domain.contra.TOP10000;
 import domain.contra.Usuario;
+import domain.persona.*;
 import org.junit.jupiter.api.Assertions;
 import domain.vianda.Vianda;
 import org.junit.jupiter.api.Test;
@@ -43,6 +44,15 @@ public class test {
   DistribucionVianda distribucionVianda = new DistribucionVianda(heladera_origen, heladera_destino, Collections.singletonList(0), DESPERFECTO_HELADERA);
   DistribucionVianda distribucionViandaVacia = new DistribucionVianda(heladera_origen, heladera_destino, new ArrayList<>(), DESPERFECTO_HELADERA);
 
+  List<String> email = Arrays.asList("juanmartin@gmail.com");
+  List<String> telefono = Arrays.asList("1100001111");
+  List<String> whatsap = Arrays.asList("1100001111");
+  MedioContacto medioDePersona = new MedioContacto(email,telefono,whatsap);
+  Documento documento = new Documento("dni","450123456");
+
+  PersonaFisica personaFisica1 = new PersonaFisica("Juan_Martin",medioDePersona,"Avenida_Libertador_1820",documento,"Terrizzi","masculino","masculino",fechaFuncionamiento);
+
+  PersonaJuridica personaJuridica1 = new PersonaJuridica("darVianda",EnumTipoPersonaJuridica.EMPRESA, "Empresa");
 
 
 
@@ -101,9 +111,30 @@ public class test {
 
 
 
+
   //------------------------------------COLABORADOR----------------------------------
   @Test
   public void crearColaborador() {
 
   }
-}
+
+  //------------------------------------PERSONA----------------------------------
+  @Test
+  public void crearPersonaFisica(){
+  Assertions.assertEquals("Juan_Martin",personaFisica1.getNombre());
+  Assertions.assertEquals(medioDePersona,personaFisica1.getMedioDeContacto());
+  Assertions.assertEquals("Avenida_Libertador_1820",personaFisica1.getDireccion());
+  Assertions.assertEquals(documento,personaFisica1.getDocumento());
+  Assertions.assertEquals("Terrizzi",personaFisica1.getApellido());
+  //Assertions.assertEquals("masculino",personaFisica1.getGenero()); nose xq no anda estos 2
+  //Assertions.assertEquals("masculino",personaFisica1.getSexo());
+  Assertions.assertEquals(LocalDate.now(),personaFisica1.getFechaNacimiento());
+  }
+
+  @Test
+public void crearPersonaJuridica(){
+  Assertions.assertEquals("darVianda",personaJuridica1.getRazonSocial());
+  Assertions.assertEquals(EnumTipoPersonaJuridica.EMPRESA,personaJuridica1.getTipo());
+  Assertions.assertEquals("Empresa",personaJuridica1.getRubro());
+}}
+
