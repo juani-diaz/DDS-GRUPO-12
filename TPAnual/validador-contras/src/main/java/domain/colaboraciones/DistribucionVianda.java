@@ -5,7 +5,6 @@ import domain.rol.Colaborador;
 import domain.vianda.Vianda;
 import lombok.*;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -36,10 +35,11 @@ public class DistribucionVianda extends Colaboracion {
     }
 
     public void ejecutar(){
-        Collections.sort(viandasMovidas, Collections.reverseOrder());
+        List<Integer> viandasMovidasMutable = new ArrayList<>(viandasMovidas);
+        viandasMovidasMutable.sort(Collections.reverseOrder());
         List<Vianda> viandasAMover = new ArrayList<Vianda>();
 
-        for(Integer indice : viandasMovidas){
+        for(Integer indice : viandasMovidasMutable){
             viandasAMover.add(origen.sacarVianda(indice));
         }
 

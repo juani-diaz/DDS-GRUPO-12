@@ -9,6 +9,7 @@ import domain.vianda.Vianda;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
@@ -17,7 +18,7 @@ public class Heladera {
   private Ubicacion direccion;
   private Integer tamanioEnViandas;
   private LocalDate fechaFuncionamiento;
-  private List<Vianda> viandasEnHeladera;
+  private List<Vianda> viandasEnHeladera=new ArrayList<>();
   private Float temperaturaMinima;
   private Float temperaturaMaxima;
   private EnumEstadoHeladera estado;
@@ -27,6 +28,7 @@ public class Heladera {
   }
 
   public Vianda sacarVianda(int indice) {
+    viandasEnHeladera=new LinkedList<>(viandasEnHeladera);
     return viandasEnHeladera.remove(indice);
   }
 

@@ -16,6 +16,7 @@ public class Usuario  {
 
   private List<Requisitos> chequeos = new ArrayList<>();
 
+  //TODO que sea automatico al crearse
 
 
   private void iniciarRequisitos(List<Requisitos> req){

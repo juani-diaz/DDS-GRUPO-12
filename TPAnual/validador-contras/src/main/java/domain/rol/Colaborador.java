@@ -10,7 +10,7 @@ import lombok.Setter;
 
 import java.util.List;
 
-@Getter @Setter @NoArgsConstructor
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class Colaborador extends Rol {
   private List<Colaboracion> colaboraciones;
   private Float cantidadPuntos;
