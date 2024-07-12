@@ -10,6 +10,8 @@ import domain.rol.Colaborador;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -17,18 +19,23 @@ import java.util.Collections;
 import java.util.List;
 
 public class LectorCsv {
-    private String rutaArchivo;
+    private InputStream stream;
     private Mailer mailer;
     private List<Colaborador> colaboradoresExistentes;
 
-    public LectorCsv(String rutaArchivo, Mailer mailer) {
-        this.rutaArchivo = rutaArchivo;
+
+    public List<Colaborador> getColaboradoresExistentes() {
+        return colaboradoresExistentes;
+    }
+
+    public LectorCsv(InputStream inputStream, Mailer mailer) {
+        this.stream = inputStream;
         this.mailer = mailer;
         this.colaboradoresExistentes = new ArrayList<>();
     }
 
-    private List<String[]> leerArchivo(String csvFile) {
-        try (CSVReader reader = new CSVReader(new FileReader(csvFile))) {
+    private List<String[]> leerArchivo(InputStream inputStream) {
+        try (CSVReader reader = new CSVReader(new InputStreamReader(inputStream))) {
             return reader.readAll();
         } catch (IOException | CsvException e) {
             e.printStackTrace();
@@ -38,7 +45,7 @@ public class LectorCsv {
 
     public List<Colaborador> cargarArchivo() {
         List<Colaborador> nuevosColaboradores = new ArrayList<>();
-        List<String[]> lineasArchivo = leerArchivo(rutaArchivo);
+        List<String[]> lineasArchivo = leerArchivo(stream);
 
         for (int i = 1; i < lineasArchivo.size(); i++) { // i =1 para saltar encabezado que tiene los nombres de columnas
             String[] linea = lineasArchivo.get(i);
@@ -92,7 +99,7 @@ public class LectorCsv {
                 "Gracias por unirte a nuestro sistema. ¡Estamos encantados de tenerte con nosotros!\n\n" +
                 "Saludos,\nEl equipo.";
 
-        Mailer mailer = new Mailer(header, body, destinatario);
-        mailer.enviarMail();
+        Mailer mailer = new Mailer();
+        mailer.enviarMail(header, body, destinatario);
     }
 }

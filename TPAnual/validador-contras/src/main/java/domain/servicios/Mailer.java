@@ -10,22 +10,14 @@ import java.util.Properties;
 
 @Setter @Getter
 public class Mailer {
-    private String header;
-    private String body;
-    private String destinatary;
-    private String username; //habria que crear un mail para aca setear pass y user, talvez dockerizar para seguridad
-    private String password;
+    private String username="e80377901@gmail.com"; //habria que crear un mail para aca setear pass y user, talvez dockerizar para seguridad
+    private String password="asd12345/";
 
-    public Mailer(String header, String body, String destinatary) {
-        this.header = header;
-        this.body = body;
-        this.destinatary = destinatary;
-        this.username = username;
-        this.password = password;
-    }
 
-    public void enviarMail() {
-        Properties props = new Properties();
+//Asd1234567891011/
+
+    public void enviarMail(String header,String body,String destinatary) {
+  /*      Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.host", "smtp.gmail.com");
@@ -40,7 +32,7 @@ public class Mailer {
         try {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(username));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(destinatary));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("juanidiaz8260@gmail.com"));
             message.setSubject(header);
             message.setText(body);
 
@@ -50,6 +42,6 @@ public class Mailer {
 
         } catch (MessagingException e) {
             throw new RuntimeException(e);
-        }
+        }*/
     }
 }
