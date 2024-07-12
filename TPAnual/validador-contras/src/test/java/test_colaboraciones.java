@@ -22,6 +22,8 @@ public class test_colaboraciones {
     Heladera heladeraADonar= new Heladera();
     Heladera heladera2 = new Heladera("ss", new Ubicacion(), 2, LocalDate.now(), viandaEsperada, 0F, 0F, DISPONIBLE);
     List<Vianda> viandaEsperada= Arrays.asList(viandaDonada);
+    Heladera heladera2 = new Heladera("ss", new Ubicacion(), 2, LocalDate.now(), viandaEsperada, 0F, 0F, DISPONIBLE);
+
 
     DistribucionVianda donacionVianda1 = new DistribucionVianda(colaborador1, LocalDate.now(), heladera2, heladeraADonar, List.of(0), DESPERFECTO_HELADERA);
 
