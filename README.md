@@ -33,5 +33,24 @@
 - [X] 14/6: Analizar y proponer requerimientos no funcionales basados en los atributos de calidad para el TP Integrador Anual
 
 - [X] 17/6: Proponer casos de prueba para la validación de contraseñas de la Entrega 1
+- Actividad 16/08
+Reserva de Vuelo (Ej 31)
+Entregar Diagrama de Clases
+Entregar DER explicando las estrategias de mapeo
+
+Puertos (Ej 32)
+Entregar Diagrama de Clases
+Entregar DER explicando las estrategias de mapeo
+
+Viajes Compartidos (Ej 28)
+Entregar Diagrama de Clases
+Entregar DER del TP Integrador explicando las estrategias de mapeo
 
 - [ ] 26/7: Entrega 3
+  
+- [ ] - [ ] 04/09: Entrega 4
+Realizar una interfaz de usuario que solicite usuario y contraseña para el registro de usuario.
+Deben asegurarse que los datos tanto de usuario y contraseña han sido completados.
+Y deben incluir una validación de ingreso de datos, asegurándose que el usuario no ingrese el usuario admin o contraseñas 1234 o admin.
+Deben utilizar HTML, CSS (es obligatorio el uso de Bootstrap) y Java Script.
+
