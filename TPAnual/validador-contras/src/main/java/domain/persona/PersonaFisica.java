@@ -21,7 +21,7 @@ public class PersonaFisica extends Persona {
     //TODO: No se que hacd esto :)
     public PersonaFisica(
         String nombre,
-        MedioContacto medioContacto,
+        MedioDeContacto medioContacto,
         String direccion,
         Documento documento,
         String apellido,

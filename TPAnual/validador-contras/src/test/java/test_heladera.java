@@ -1,21 +1,10 @@
-import domain.colaboraciones.DistribucionVianda;
 import domain.heladera.*;
-import domain.contra.Requisitos;
-import domain.contra.TAMANIO;
-import domain.contra.TOP10000;
-import domain.contra.Usuario;
-import domain.persona.MedioContacto;
-import domain.persona.Persona;
-import domain.registro.RegistroSensor;
-import domain.registro.RegistroTemperatura;
 import org.junit.jupiter.api.Assertions;
 import domain.vianda.Vianda;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.util.*;
-
-import static domain.colaboraciones.EnumMotivosMovimientoVianda.DESPERFECTO_HELADERA;
 
 public class test_heladera {
     

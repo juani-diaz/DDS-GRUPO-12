@@ -50,4 +50,6 @@ public class Colaborador extends Rol {
   public boolean realizarCanje(Integer indiceOferta){
     return Catalogo.otorgar(indiceOferta, this);
   }
+
+  public void reportarIncidente(){}//TODO:hacer funcion reportarIncidente
 }

@@ -5,5 +5,4 @@ import lombok.*;
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class Tarjeta {
   private String identificador;
-  private Colaborador donante;
 }

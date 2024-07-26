@@ -3,12 +3,11 @@ package domain.servicios;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 import domain.persona.Documento;
-import domain.persona.MedioContacto;
+import domain.persona.MedioDeContacto;
 import domain.persona.Persona;
 import domain.persona.PersonaFisica;
 import domain.rol.Colaborador;
 
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -69,7 +68,7 @@ public class LectorCsv {
             documento.setNumero(linea[1]);
             String nombre = linea[2];
             String apellido = linea[3];
-            MedioContacto medioDeContacto = new MedioContacto();
+            MedioDeContacto medioDeContacto = new MedioDeContacto();
             medioDeContacto.setEmails(Collections.singletonList(linea[4]));
             LocalDate fechaNacimiento = LocalDate.parse(linea[5], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 

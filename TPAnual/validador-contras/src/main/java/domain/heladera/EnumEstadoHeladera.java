@@ -2,5 +2,6 @@ package domain.heladera;
 
 public enum EnumEstadoHeladera {
     DISPONIBLE,
-    TEMPERATURA_FUERA_DE_RANGO
+    INACTIVA_POR_FALLA,
+    INACTIVA_POR_ALERTA
 }
