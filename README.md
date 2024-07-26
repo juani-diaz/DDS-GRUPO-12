@@ -35,3 +35,4 @@
 - [X] 17/6: Proponer casos de prueba para la validación de contraseñas de la Entrega 1
 
 - [ ] 26/7: Entrega 3
+- [ ] werqwrqwerqwerwq
