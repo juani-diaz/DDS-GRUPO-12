@@ -1,7 +1,9 @@
 package domain.rol;
 
+import domain.heladera.AdministradorSolicitudes;
 import domain.heladera.Heladera;
 import domain.persona.Persona;
+import domain.registro.SingletonSeguidorEstadistica;
 import domain.vianda.Vianda;
 import domain.vianda.ViandaRecogida;
 import lombok.AllArgsConstructor;
@@ -27,6 +29,11 @@ public class Vulnerable extends Rol {
     if(usosRestantesPorDia > 0){
       usosRestantesPorDia = usosRestantesPorDia - 1;
       Vianda viandaRecogida = heladera.sacarVianda(indiceViandas);
+      ViandaRecogida vr = new ViandaRecogida(this, heladera, viandaRecogida, new Date());
+
+      SingletonSeguidorEstadistica se = new SingletonSeguidorEstadistica(); // TODO singleton?
+      se.getRetirosViandas().add(vr);
+
       viandasTomadas.add(new ViandaRecogida(this, heladera, viandaRecogida, new Date()));
       return true;
     } else

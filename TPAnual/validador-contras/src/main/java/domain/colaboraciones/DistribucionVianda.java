@@ -1,6 +1,7 @@
 package domain.colaboraciones;
 
 import domain.heladera.Heladera;
+import domain.registro.SingletonSeguidorEstadistica;
 import domain.rol.Colaborador;
 import domain.vianda.Vianda;
 import lombok.*;
@@ -44,6 +45,9 @@ public class DistribucionVianda extends Colaboracion {
         }
 
         destino.ingresarViandas(viandasAMover);
+
+        SingletonSeguidorEstadistica se = new SingletonSeguidorEstadistica(); // TODO singleton?
+        se.getDistribucionViandas().add(this);
     }
 
     public Float puntosObtenidos(){

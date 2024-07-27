@@ -21,7 +21,7 @@ public class Catalogo {
 
     public static boolean otorgar(Integer indiceCatalogo, Colaborador colaborador){
         PresentacionOferta o = ofertas.get(indiceCatalogo);
-        if(Float.parseFloat(o.getPuntosNecesarios()) >= colaborador.getCantidadPuntos()){
+        if(Float.parseFloat(o.getPuntosNecesarios()) <= colaborador.getCantidadPuntos()){
             //TODO hacer lo que corresponda (mail, envio)
             colaborador.setCantidadPuntos(colaborador.getCantidadPuntos() - Float.parseFloat(o.getPuntosNecesarios()));
             return true;
