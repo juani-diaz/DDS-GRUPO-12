@@ -1,17 +1,24 @@
 package domain.heladera;
 
-import domain.heladera.RegistroTemperatura;
-import lombok.Getter;
-import lombok.Setter;
+import domain.registro.RegistroSensor;
+import domain.registro.RegistroTemperatura;
+import lombok.*;
 
-
-import java.util.List;
-@Getter
-@Setter
+@Getter @Setter @NoArgsConstructor
 public class SensorDeTemperatura extends Sensor{
-    private List<RegistroTemperatura> temperaturas;
 
-    public Float getUltimaTemperatura() {
-        return temperaturas.get(temperaturas.size()-1).getTemperatura();
+    public SensorDeTemperatura(Heladera hel){
+        super(hel);
+    }
+
+    @Override
+    public void nuevoRegistro(RegistroSensor registro) {
+        Float temp = ((RegistroTemperatura) registro).getTemperatura(); // TODO cosas raras abstract Java
+        if(temp < this.heladeraAsignada.getTemperaturaMinima() || temp > this.heladeraAsignada.getTemperaturaMaxima()) {
+            this.enviarAlerta(registro);
+            this.heladeraAsignada.setEstado(EnumEstadoHeladera.TEMPERATURA_FUERA_DE_RANGO);
+        } else {
+            this.heladeraAsignada.setEstado(EnumEstadoHeladera.DISPONIBLE);
+        }
     }
 }

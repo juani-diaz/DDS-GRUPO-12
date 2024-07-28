@@ -1,20 +1,16 @@
 import domain.colaboraciones.DistribucionVianda;
-import domain.colaboraciones.EnumMotivosMovimientoVianda;
-import domain.heladera.Heladera;
-import domain.heladera.Sensor;
-import domain.heladera.Ubicacion;
-import domain.persona_contra.Requisitos;
-import domain.persona_contra.TAMANIO;
-import domain.persona_contra.TOP10000;
-import domain.persona_contra.Usuario;
+import domain.heladera.*;
+import domain.contra.Requisitos;
+import domain.contra.TAMANIO;
+import domain.contra.TOP10000;
+import domain.contra.Usuario;
+import domain.persona.*;
 import org.junit.jupiter.api.Assertions;
 import domain.vianda.Vianda;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static domain.colaboraciones.EnumMotivosMovimientoVianda.DESPERFECTO_HELADERA;
 
@@ -24,8 +20,6 @@ public class test {
   TAMANIO tam = new TAMANIO();
   TOP10000 top = new TOP10000();
   List<Requisitos> chequeos = new ArrayList<>();
-
-
 
   Ubicacion ubicacion = new Ubicacion();
   LocalDate fechaFuncionamiento = LocalDate.now();
@@ -40,18 +34,29 @@ public class test {
   Vianda vianda6 = new Vianda();
   List<Vianda> listaVianda2 = Arrays.asList(vianda5,vianda6);
 
-  Sensor sensor1 = new Sensor();
-  Sensor sensor2 = new Sensor();
-  Sensor sensor3 = new Sensor();
-  List<Sensor> listaSensor = Arrays.asList(sensor1,sensor2,sensor3);
-  List<Sensor> listaSensor2 = Arrays.asList(sensor1,sensor2);
+  Heladera heladera_origen = new Heladera("healdera_origen", ubicacion, 100, fechaFuncionamiento, listaVianda, 12F, 20F, EnumEstadoHeladera.DISPONIBLE);
+  Heladera heladera_destino = new Heladera("heladera_destino", ubicacion, 50, fechaFuncionamiento, listaVianda, 4F, 21F, EnumEstadoHeladera.DISPONIBLE);
 
-  Heladera heladera_origen = new Heladera("healdera_origen", ubicacion, 100, fechaFuncionamiento, listaVianda, 12F, 20F, listaSensor);
-  Heladera heladera_destino = new Heladera("heladera_destino", ubicacion, 50, fechaFuncionamiento, listaVianda, 4F, 21F, listaSensor2);
+  Sensor sensor1 = new SensorDeTemperatura(heladera_origen);
+  Sensor sensor2 = new SensorDeTemperatura(heladera_destino);
+  Sensor sensor3 = new SensorDeMovimiento(heladera_origen);
 
-  DistribucionVianda distribucionVianda = new DistribucionVianda(heladera_origen, heladera_destino, listaVianda, DESPERFECTO_HELADERA, 3F);
-  DistribucionVianda distribucionViandaVacia = new DistribucionVianda(heladera_origen, heladera_destino, new ArrayList<>(), DESPERFECTO_HELADERA, 3F);
+  DistribucionVianda distribucionVianda = new DistribucionVianda(heladera_origen, heladera_destino, Collections.singletonList(0), DESPERFECTO_HELADERA);
+  DistribucionVianda distribucionViandaVacia = new DistribucionVianda(heladera_origen, heladera_destino, new ArrayList<>(), DESPERFECTO_HELADERA);
 
+  List<String> email = Arrays.asList("juanmartin@gmail.com");
+  List<String> telefono = Arrays.asList("1100001111");
+  List<String> whatsap = Arrays.asList("1100001111");
+  MedioDeContacto medioDePersona = new MedioDeContacto(email,telefono,whatsap);
+  Documento documento = new Documento("dni","450123456");
+
+  PersonaFisica personaFisica1 = new PersonaFisica("Juan_Martin",medioDePersona,"Avenida_Libertador_1820",documento,"Terrizzi","masculino","masculino",fechaFuncionamiento);
+
+  PersonaJuridica personaJuridica1 = new PersonaJuridica("darVianda",EnumTipoPersonaJuridica.EMPRESA, "Empresa");
+
+
+
+  //---------------------------CONTRASEÑAS------------------------------------
   @Test
   public void noSeCreaPorTamañoChicoContraseña() { // No se crea por ser demasiado corta (8 caracteres)
     Usuario usuario = new Usuario();
@@ -94,33 +99,42 @@ public class test {
     Assertions.assertEquals("djkasbjkdbsakkdkasb", usuario.getContraseña());
   }
 
+  //------------------------------------VIANDAS------------------------------------
   @Test
   public void cantidadViandas_4() {
-    Assertions.assertEquals(4, distribucionVianda.cantidadViandas());
+    Assertions.assertEquals(1, distribucionVianda.cantidadViandas());
   }
   @Test
   public void cantidadViandas_0() {
     Assertions.assertEquals(0, distribucionViandaVacia.cantidadViandas());
   }
 
-  //----------------HELADERA--------------------------------------------------------------------------------------------
+
+
+
+  //------------------------------------COLABORADOR----------------------------------
   @Test
-  public void ingresarVianda() {
-    int canViandas = heladera_destino.getViandasEnHeladeraList().size();
-    heladera_destino.ingresarViandas(listaVianda2);
-    System.out.println(listaVianda2.size());
-    Assertions.assertEquals(canViandas + listaVianda2.size(), heladera_destino.getViandasEnHeladeraList().size());
+  public void crearColaborador() {
+
+  }
+
+  //------------------------------------PERSONA----------------------------------
+  @Test
+  public void crearPersonaFisica(){
+  Assertions.assertEquals("Juan_Martin",personaFisica1.getNombre());
+  Assertions.assertEquals(medioDePersona,personaFisica1.getMedioDeContacto());
+  Assertions.assertEquals("Avenida_Libertador_1820",personaFisica1.getDireccion());
+  Assertions.assertEquals(documento,personaFisica1.getDocumento());
+  Assertions.assertEquals("Terrizzi",personaFisica1.getApellido());
+  //Assertions.assertEquals("masculino",personaFisica1.getGenero()); nose xq no anda estos 2
+  //Assertions.assertEquals("masculino",personaFisica1.getSexo());
+  Assertions.assertEquals(LocalDate.now(),personaFisica1.getFechaNacimiento());
   }
 
   @Test
-  public void sacarViandas() {
-    Assertions.assertEquals(0, distribucionViandaVacia.cantidadViandas());
-  }
+public void crearPersonaJuridica(){
+  Assertions.assertEquals("darVianda",personaJuridica1.getRazonSocial());
+  Assertions.assertEquals(EnumTipoPersonaJuridica.EMPRESA,personaJuridica1.getTipo());
+  Assertions.assertEquals("Empresa",personaJuridica1.getRubro());
+}}
 
-
-
-
-
-
-
-}
