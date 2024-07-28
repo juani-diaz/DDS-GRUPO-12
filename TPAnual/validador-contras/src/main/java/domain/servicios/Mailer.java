@@ -10,8 +10,7 @@ import java.util.Properties;
 
 @Setter @Getter
 public class Mailer {
-    private String username="e80377901@gmail.com"; //habria que crear un mail para aca setear pass y user, talvez dockerizar para seguridad
-    private String password="asd12345/";
+
 
 
 //Asd1234567891011/
