@@ -1,6 +1,7 @@
 package domain.servicios;
 
 import domain.heladera.*;
+import domain.rol.*;
 
 import java.util.*;
 
@@ -27,10 +28,13 @@ public class Broker {
         }
     }
 
-    public void abrirHeladera(String nombreHeladera, int vianda) {
+    public void abrirHeladera(String nombreHeladera, EnumMotivoApertura motivo,Tarjeta tarjeta) {
         Optional<domain.heladera.Heladera> heladera= heladeras.stream().filter(heladera1 -> Objects.equals(heladera1.getNombre(), nombreHeladera)).findFirst();
         heladera.ifPresent(h -> {
-            h.sacarVianda(vianda);
+            PedidoApertura pedido= new PedidoApertura();
+            pedido.setHeladera(h);
+            pedido.setMotivo(motivo);
+            pedido.setTarjeta(tarjeta);
         });
         if (!heladera.isPresent()) {
             throw new IllegalArgumentException("Heladera no encontrada: " + nombreHeladera);
