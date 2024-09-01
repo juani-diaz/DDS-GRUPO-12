@@ -3,6 +3,7 @@ package domain.colaboraciones;
 import domain.heladera.Heladera;
 import domain.registro.SingletonSeguidorEstadistica;
 import domain.rol.Colaborador;
+import domain.rol.Tarjeta;
 import domain.vianda.Vianda;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,6 +13,7 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class DonacionVianda extends Colaboracion {
@@ -38,4 +40,10 @@ public class DonacionVianda extends Colaboracion {
     public Float puntosObtenidos(){
         return multiplicador;
     }
+
+    public void entregarTarjetas(List<Tarjeta> list_tarjetas){
+        this.colaborador.recibirTarjetas(list_tarjetas);
+    }
 }
+
+

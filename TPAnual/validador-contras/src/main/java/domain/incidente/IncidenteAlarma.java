@@ -1,5 +1,6 @@
 package domain.incidente;
 
+import domain.heladera.EnumEstadoHeladera;
 import domain.heladera.Heladera;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +18,11 @@ public class IncidenteAlarma extends Incidente{
     this.enumTipoDeFalla = falla;
   }
 
-  public void flujoDeSolucion(){} //TODO:hacer funcion flujoDeSolucion
+  public void flujoDeSolucion(){
+    getHeladera().setEstado(EnumEstadoHeladera.INACTIVA_POR_ALERTA);
+    
+  } //TODO:hacer funcion flujoDeSolucion
 }
+
+
 

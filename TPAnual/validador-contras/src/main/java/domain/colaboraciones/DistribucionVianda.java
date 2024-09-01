@@ -2,11 +2,10 @@ package domain.colaboraciones;
 
 import domain.heladera.Heladera;
 import domain.registro.SingletonSeguidorEstadistica;
-import domain.rol.Colaborador;
+import domain.rol.Tarjeta;
 import domain.vianda.Vianda;
 import lombok.*;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -20,16 +19,16 @@ public class DistribucionVianda extends Colaboracion {
     private List<Integer> viandasMovidas;
     private EnumMotivosMovimientoVianda motivo;
 
-    public DistribucionVianda(Colaborador colaborador, LocalDate fecha,
-                              Heladera origen, Heladera destino, List<Integer> viandasMovidas,
-                              EnumMotivosMovimientoVianda motivo){
-        this.colaborador = colaborador;
-        this.fecha = fecha;
-        this.origen = origen;
-        this.destino = destino;
-        this.viandasMovidas = viandasMovidas;
-        this.motivo = motivo;
-    }
+//    public DistribucionVianda(Colaborador colaborador, LocalDate fecha,
+//                              Heladera origen, Heladera destino, List<Integer> viandasMovidas,
+//                              EnumMotivosMovimientoVianda motivo){
+//        this.colaborador = colaborador;
+//        this.fecha = fecha;
+//        this.origen = origen;
+//        this.destino = destino;
+//        this.viandasMovidas = viandasMovidas;
+//        this.motivo = motivo;
+//    }
 
     public int cantidadViandas(){
         return this.viandasMovidas.size();
@@ -48,6 +47,11 @@ public class DistribucionVianda extends Colaboracion {
 
         SingletonSeguidorEstadistica se = new SingletonSeguidorEstadistica(); // TODO singleton?
         se.getDistribucionViandas().add(this);
+
+    }
+
+    public void entregarTarjetas(List<Tarjeta> list_tarjetas){
+        this.colaborador.recibirTarjetas(list_tarjetas);
     }
 
     public Float puntosObtenidos(){

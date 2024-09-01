@@ -17,9 +17,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.swing.*;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class Colaborador extends Rol {
@@ -28,13 +30,13 @@ public class Colaborador extends Rol {
   private List<Tarjeta> tarjetasParaEntregar;
   private Tarjeta tarjetaColaborador;
 
-  public Colaborador(Persona p, List<Colaboracion> lc, Float cp, List<Tarjeta> te, Tarjeta t){
-    this.persona = p;
-    this.colaboraciones = lc;
-    this.cantidadPuntos = cp;
-    this.tarjetasParaEntregar = te;
-    this.tarjetaColaborador = t;
-  }
+//  public Colaborador(Persona p, List<Colaboracion> lc, Float cp, List<Tarjeta> te, Tarjeta t){
+//    this.persona = p;
+//    this.colaboraciones = lc;
+//    this.cantidadPuntos = cp;
+//    this.tarjetasParaEntregar = te;
+//    this.tarjetaColaborador = t;
+//  }
 
   public void realizarColaboracion(Colaboracion colaboracion){
     colaboracion.ejecutar();
@@ -50,6 +52,10 @@ public class Colaborador extends Rol {
     this.cantidadPuntos = puntosNuevos;
   }
 
+  public boolean realizarCanje(Integer indiceOferta){
+    return Catalogo.otorgar(indiceOferta, this);
+  }
+
   public boolean entregarTarjeta(Vulnerable destinatario){
     if(!tarjetasParaEntregar.isEmpty()) {
       destinatario.setTarjeta(tarjetasParaEntregar.remove(0));
@@ -58,11 +64,15 @@ public class Colaborador extends Rol {
     return false;
   }
 
-  public void recibirTarjetas(List<Tarjeta> tarjetas) { tarjetasParaEntregar.addAll(tarjetas); }
-
-  public boolean realizarCanje(Integer indiceOferta){
-    return Catalogo.otorgar(indiceOferta, this);
+  public void recibirTarjetas(List<Tarjeta> tarjetas) {
+    if(this.persona.getDireccion() == null){
+      System.out.println(this.persona.getNombre()+ " no tiene una direccion para enviarle las tarjetas");
+      return;
+    }
+    tarjetasParaEntregar.addAll(tarjetas);
   }
+
+
 
   public void reportarIncidente(Heladera heladera, String descripcion, String foto) {
     IncidenteFallaTecnica falla = new IncidenteFallaTecnica(heladera, new Date(), this, descripcion, foto);
