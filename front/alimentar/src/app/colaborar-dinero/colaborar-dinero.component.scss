@@ -1,0 +1,31 @@
+.panel {
+    display: flex;
+    height: 100%;
+    align-items: stretch;
+}
+
+.panel-derecho {
+    margin: 36px;
+    padding: 36px;
+    background: #EEE;
+    flex: 0.5 1 auto;
+}
+
+.panel-izquierdo {
+    margin: 36px;
+    padding: 36px;
+    flex: 0.5 1 auto;
+}
+
+right-align {
+    text-align: right;
+}
+
+.titulo {
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.sub-titulo {
+    font-size: 24px;
+}

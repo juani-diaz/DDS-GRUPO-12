@@ -1,0 +1,25 @@
+.link {
+	display: inline-flex;
+	flex-basis: auto;
+	padding: 15px 10px;
+	cursor: pointer;
+	mat-icon {
+		margin: 0px 10px;
+	}
+	span {
+		font-size: 16px;
+		line-height: 24px;
+		margin-right: 10px;
+	}
+	border-top-right-radius: 48px;
+	border-bottom-right-radius: 48px;
+}
+
+.link:hover {
+	background: black;
+	color: #ebe0ff;
+}
+
+.link-activo {
+	color: #563099;
+}

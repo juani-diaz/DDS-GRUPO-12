@@ -1,0 +1,10 @@
+<div class='navegacion'>
+  @for (elemento of menu; track elemento.titulo) {
+    <link-navegacion [titulo]='elemento.titulo' [ruta]='elemento.ruta' [icono]='elemento.icono' *ngIf="mostrar(elemento)"></link-navegacion>
+    @for (hijo of elemento.hijos; track hijo.titulo) {
+      <div class='link-hijo'>
+        <link-navegacion [titulo]='hijo.titulo' [ruta]='hijo.ruta' [icono]='hijo.icono' *ngIf="mostrar(hijo)"></link-navegacion>
+      </div>
+    }
+  }
+</div>

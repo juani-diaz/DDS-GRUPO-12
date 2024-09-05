@@ -1,0 +1,35 @@
+<mat-toolbar color="primary">
+  <span>AlimentAR</span>
+
+  <span class="mi-tool"></span>
+
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>person</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+
+    <button mat-menu-item (click)="setUsuario('H')">
+      <mat-icon>H</mat-icon>
+      <span>Colaborador Humano</span>
+    </button>
+
+    <button mat-menu-item (click)="setUsuario('J')">
+      <mat-icon>J</mat-icon>
+      <span>Colaborador Juridico</span>
+    </button>
+
+    <button mat-menu-item (click)="setUsuario('A')">
+      <mat-icon>A</mat-icon>
+      <span>Administrador</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>
+
+<mat-drawer-container class="light-theme mi-drawer" hasBackdrop="false">
+  <mat-drawer #drawer mode="side" opened>
+  	<navegacion></navegacion>
+  </mat-drawer>
+  <mat-drawer-content style="display: block;">
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>
