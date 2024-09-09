@@ -1,0 +1,46 @@
+<div style="margin: 36px">
+    <span class="titulo">Mis ofertas activas</span>
+    <button mat-mini-fab aria-label="agregar" style="margin-left: 20px;" (click)="openDialog()">
+        <mat-icon>add</mat-icon>
+    </button>
+
+    <br><br><br>
+
+    <div class="oferta">
+        <img src="../../assets/rex.png" alt="rexona">
+        <div>
+            <span class="sub-titulo">Desodorante Rexona</span>
+            <p>Desodorante para los campeonees del mundo que no te abandona, esta sería una descripción más larga</p>
+            <p>Precio: <b>670 puntos</b></p>
+            <p>Veces canjeada: <b>25</b></p>
+            <button mat-stroked-button>Editar</button>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="oferta">
+        <img src="../../assets/boca.png" alt="boca">
+        <div>
+            <span class="sub-titulo">Llavero Boca Libertadores</span>
+            <p>El único llavero más grande que lo que tu bolsillo puede soportar, solo para entendidos</p>
+            <p>Precio: <b>2.300 puntos</b></p>
+            <p>Veces canjeada: <b>89</b></p>
+            <button mat-stroked-button>Editar</button>
+        </div>
+    </div>
+
+    @for (o of ofertasNuevas; track o) {
+        <br>
+        <div class="oferta">
+            <img src="../../assets/boca.png" alt="boca">
+            <div>
+                <span class="sub-titulo">{{o.titulo}}</span>
+                <p>{{o.descripcion}}</p>
+                <p>Precio: <b>{{o.puntos}} puntos</b></p>
+                <p>Veces canjeada: <b>0</b></p>
+                <button mat-stroked-button>Editar</button>
+            </div>
+        </div>
+    }
+</div>

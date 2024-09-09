@@ -1,21 +1,29 @@
 package domain.incidente;
 
+import domain.heladera.EnumEstadoHeladera;
 import domain.heladera.Heladera;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
-@Getter @Setter @AllArgsConstructor
+@Getter @Setter
 public abstract class Incidente {
-  Heladera heladera;
-  Date fecha;
-  List<VisitasTecnicas> evolucionDeIncidente;
-  EnumEstadoDeIncidente estadoDeIncidente;
+  private Heladera heladera;
+  private Date fecha;
+  private List<VisitasTecnicas> evolucionDeIncidente;
+  private EnumEstadoDeIncidente estadoDeIncidente;
 
-  public abstract void flujoDeSolucion();
-  //public abstract void cerrarTiquetDeIncidente();//TODO:funciones de Incidente
+  public void flujoDeSolucion(){}
+
+  public void modificarEstado(EnumEstadoDeIncidente nuevoEstado){
+    this.estadoDeIncidente = nuevoEstado;
+  }
+  public void cerrarTiquetIncidente(Heladera heladera){
+    this.estadoDeIncidente = EnumEstadoDeIncidente.SOLUCIONADO;
+    heladera.setEstado(EnumEstadoHeladera.DISPONIBLE);
+  }
 }
+

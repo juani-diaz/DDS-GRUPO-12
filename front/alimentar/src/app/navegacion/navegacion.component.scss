@@ -1,0 +1,14 @@
+.navegacion {
+	display: grid;
+}
+
+.link-hijo {
+	padding-left: 30px;
+	border-top-right-radius: 48px;
+	border-bottom-right-radius: 48px;
+	width: fit-content;
+}
+
+.link-hijo:hover {
+	background: black;
+}

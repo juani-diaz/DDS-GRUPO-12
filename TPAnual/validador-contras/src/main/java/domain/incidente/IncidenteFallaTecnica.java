@@ -1,5 +1,6 @@
 package domain.incidente;
 
+import domain.heladera.EnumEstadoHeladera;
 import domain.heladera.Heladera;
 import domain.rol.Colaborador;
 import lombok.Getter;
@@ -23,7 +24,8 @@ public class IncidenteFallaTecnica extends Incidente {
     this.foto = foto;
   }
 
-  public void flujoDeSolucion(){} //TODO:hacer funcion flujoDeSolucion
+  public void flujoDeSolucion() { //TODO:hacer funcion flujoDeSolucion
+    getHeladera().setEstado(EnumEstadoHeladera.INACTIVA_POR_FALLA);
 
-
+  }
 }
