@@ -6,7 +6,8 @@ import { Injectable } from '@angular/core';
 export class UsuarioService {
   private tipoUsuario!: string;
 
-  constructor() { }
+  constructor() {
+  }
 
   getTipoUsuario() {
     return this.tipoUsuario

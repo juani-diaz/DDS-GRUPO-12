@@ -1,7 +1,18 @@
 import {
-  DOCUMENT,
-  isPlatformBrowser
-} from "./chunk-2KW6KNM4.js";
+  Platform,
+  _getEventTarget,
+  _getFocusedElementPierceShadowDom,
+  _getShadowRoot,
+  _isTestEnvironment,
+  coerceArray,
+  coerceBooleanProperty,
+  coerceElement,
+  coerceNumberProperty,
+  normalizePassiveListenerOptions
+} from "./chunk-DY5FK7EU.js";
+import {
+  DOCUMENT
+} from "./chunk-VAOCC7H2.js";
 import {
   ANIMATION_MODULE_TYPE,
   APP_ID,
@@ -24,7 +35,6 @@ import {
   Observable,
   Optional,
   Output,
-  PLATFORM_ID,
   QueryList,
   Subject,
   Subscription,
@@ -78,226 +88,10 @@ import {
   ɵɵtext,
   ɵɵtextInterpolate1,
   ɵɵviewQuery
-} from "./chunk-2CL33K6Y.js";
-
-// node_modules/@angular/cdk/fesm2022/platform.mjs
-var hasV8BreakIterator;
-try {
-  hasV8BreakIterator = typeof Intl !== "undefined" && Intl.v8BreakIterator;
-} catch {
-  hasV8BreakIterator = false;
-}
-var _Platform = class _Platform {
-  constructor(_platformId) {
-    this._platformId = _platformId;
-    this.isBrowser = this._platformId ? isPlatformBrowser(this._platformId) : typeof document === "object" && !!document;
-    this.EDGE = this.isBrowser && /(edge)/i.test(navigator.userAgent);
-    this.TRIDENT = this.isBrowser && /(msie|trident)/i.test(navigator.userAgent);
-    this.BLINK = this.isBrowser && !!(window.chrome || hasV8BreakIterator) && typeof CSS !== "undefined" && !this.EDGE && !this.TRIDENT;
-    this.WEBKIT = this.isBrowser && /AppleWebKit/i.test(navigator.userAgent) && !this.BLINK && !this.EDGE && !this.TRIDENT;
-    this.IOS = this.isBrowser && /iPad|iPhone|iPod/.test(navigator.userAgent) && !("MSStream" in window);
-    this.FIREFOX = this.isBrowser && /(firefox|minefield)/i.test(navigator.userAgent);
-    this.ANDROID = this.isBrowser && /android/i.test(navigator.userAgent) && !this.TRIDENT;
-    this.SAFARI = this.isBrowser && /safari/i.test(navigator.userAgent) && this.WEBKIT;
-  }
-};
-_Platform.ɵfac = function Platform_Factory(t) {
-  return new (t || _Platform)(ɵɵinject(PLATFORM_ID));
-};
-_Platform.ɵprov = ɵɵdefineInjectable({
-  token: _Platform,
-  factory: _Platform.ɵfac,
-  providedIn: "root"
-});
-var Platform = _Platform;
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(Platform, [{
-    type: Injectable,
-    args: [{
-      providedIn: "root"
-    }]
-  }], () => [{
-    type: Object,
-    decorators: [{
-      type: Inject,
-      args: [PLATFORM_ID]
-    }]
-  }], null);
-})();
-var _PlatformModule = class _PlatformModule {
-};
-_PlatformModule.ɵfac = function PlatformModule_Factory(t) {
-  return new (t || _PlatformModule)();
-};
-_PlatformModule.ɵmod = ɵɵdefineNgModule({
-  type: _PlatformModule
-});
-_PlatformModule.ɵinj = ɵɵdefineInjector({});
-var PlatformModule = _PlatformModule;
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(PlatformModule, [{
-    type: NgModule,
-    args: [{}]
-  }], null, null);
-})();
-var supportedInputTypes;
-var candidateInputTypes = [
-  // `color` must come first. Chrome 56 shows a warning if we change the type to `color` after
-  // first changing it to something else:
-  // The specified value "" does not conform to the required format.
-  // The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-  "color",
-  "button",
-  "checkbox",
-  "date",
-  "datetime-local",
-  "email",
-  "file",
-  "hidden",
-  "image",
-  "month",
-  "number",
-  "password",
-  "radio",
-  "range",
-  "reset",
-  "search",
-  "submit",
-  "tel",
-  "text",
-  "time",
-  "url",
-  "week"
-];
-function getSupportedInputTypes() {
-  if (supportedInputTypes) {
-    return supportedInputTypes;
-  }
-  if (typeof document !== "object" || !document) {
-    supportedInputTypes = new Set(candidateInputTypes);
-    return supportedInputTypes;
-  }
-  let featureTestInput = document.createElement("input");
-  supportedInputTypes = new Set(candidateInputTypes.filter((value) => {
-    featureTestInput.setAttribute("type", value);
-    return featureTestInput.type === value;
-  }));
-  return supportedInputTypes;
-}
-var supportsPassiveEvents;
-function supportsPassiveEventListeners() {
-  if (supportsPassiveEvents == null && typeof window !== "undefined") {
-    try {
-      window.addEventListener("test", null, Object.defineProperty({}, "passive", {
-        get: () => supportsPassiveEvents = true
-      }));
-    } finally {
-      supportsPassiveEvents = supportsPassiveEvents || false;
-    }
-  }
-  return supportsPassiveEvents;
-}
-function normalizePassiveListenerOptions(options) {
-  return supportsPassiveEventListeners() ? options : !!options.capture;
-}
-var RtlScrollAxisType;
-(function(RtlScrollAxisType2) {
-  RtlScrollAxisType2[RtlScrollAxisType2["NORMAL"] = 0] = "NORMAL";
-  RtlScrollAxisType2[RtlScrollAxisType2["NEGATED"] = 1] = "NEGATED";
-  RtlScrollAxisType2[RtlScrollAxisType2["INVERTED"] = 2] = "INVERTED";
-})(RtlScrollAxisType || (RtlScrollAxisType = {}));
-var rtlScrollAxisType;
-var scrollBehaviorSupported;
-function supportsScrollBehavior() {
-  if (scrollBehaviorSupported == null) {
-    if (typeof document !== "object" || !document || typeof Element !== "function" || !Element) {
-      scrollBehaviorSupported = false;
-      return scrollBehaviorSupported;
-    }
-    if ("scrollBehavior" in document.documentElement.style) {
-      scrollBehaviorSupported = true;
-    } else {
-      const scrollToFunction = Element.prototype.scrollTo;
-      if (scrollToFunction) {
-        scrollBehaviorSupported = !/\{\s*\[native code\]\s*\}/.test(scrollToFunction.toString());
-      } else {
-        scrollBehaviorSupported = false;
-      }
-    }
-  }
-  return scrollBehaviorSupported;
-}
-function getRtlScrollAxisType() {
-  if (typeof document !== "object" || !document) {
-    return RtlScrollAxisType.NORMAL;
-  }
-  if (rtlScrollAxisType == null) {
-    const scrollContainer = document.createElement("div");
-    const containerStyle = scrollContainer.style;
-    scrollContainer.dir = "rtl";
-    containerStyle.width = "1px";
-    containerStyle.overflow = "auto";
-    containerStyle.visibility = "hidden";
-    containerStyle.pointerEvents = "none";
-    containerStyle.position = "absolute";
-    const content = document.createElement("div");
-    const contentStyle = content.style;
-    contentStyle.width = "2px";
-    contentStyle.height = "1px";
-    scrollContainer.appendChild(content);
-    document.body.appendChild(scrollContainer);
-    rtlScrollAxisType = RtlScrollAxisType.NORMAL;
-    if (scrollContainer.scrollLeft === 0) {
-      scrollContainer.scrollLeft = 1;
-      rtlScrollAxisType = scrollContainer.scrollLeft === 0 ? RtlScrollAxisType.NEGATED : RtlScrollAxisType.INVERTED;
-    }
-    scrollContainer.remove();
-  }
-  return rtlScrollAxisType;
-}
-var shadowDomIsSupported;
-function _supportsShadowDom() {
-  if (shadowDomIsSupported == null) {
-    const head = typeof document !== "undefined" ? document.head : null;
-    shadowDomIsSupported = !!(head && (head.createShadowRoot || head.attachShadow));
-  }
-  return shadowDomIsSupported;
-}
-function _getShadowRoot(element) {
-  if (_supportsShadowDom()) {
-    const rootNode = element.getRootNode ? element.getRootNode() : null;
-    if (typeof ShadowRoot !== "undefined" && ShadowRoot && rootNode instanceof ShadowRoot) {
-      return rootNode;
-    }
-  }
-  return null;
-}
-function _getFocusedElementPierceShadowDom() {
-  let activeElement = typeof document !== "undefined" && document ? document.activeElement : null;
-  while (activeElement && activeElement.shadowRoot) {
-    const newActiveElement = activeElement.shadowRoot.activeElement;
-    if (newActiveElement === activeElement) {
-      break;
-    } else {
-      activeElement = newActiveElement;
-    }
-  }
-  return activeElement;
-}
-function _getEventTarget(event) {
-  return event.composedPath ? event.composedPath()[0] : event.target;
-}
-function _isTestEnvironment() {
-  return (
-    // @ts-ignore
-    typeof __karma__ !== "undefined" && !!__karma__ || // @ts-ignore
-    typeof jasmine !== "undefined" && !!jasmine || // @ts-ignore
-    typeof jest !== "undefined" && !!jest || // @ts-ignore
-    typeof Mocha !== "undefined" && !!Mocha
-  );
-}
+} from "./chunk-LJELT4FI.js";
 
 // node_modules/@angular/cdk/fesm2022/keycodes.mjs
+var BACKSPACE = 8;
 var TAB = 9;
 var ENTER = 13;
 var SHIFT = 16;
@@ -324,29 +118,6 @@ function hasModifierKey(event, ...modifiers) {
     return modifiers.some((modifier) => event[modifier]);
   }
   return event.altKey || event.shiftKey || event.ctrlKey || event.metaKey;
-}
-
-// node_modules/@angular/cdk/fesm2022/coercion.mjs
-function coerceBooleanProperty(value) {
-  return value != null && `${value}` !== "false";
-}
-function coerceNumberProperty(value, fallbackValue = 0) {
-  return _isNumberValue(value) ? Number(value) : fallbackValue;
-}
-function _isNumberValue(value) {
-  return !isNaN(parseFloat(value)) && !isNaN(Number(value));
-}
-function coerceArray(value) {
-  return Array.isArray(value) ? value : [value];
-}
-function coerceCssPixelValue(value) {
-  if (value == null) {
-    return "";
-  }
-  return typeof value === "string" ? value : `${value}px`;
-}
-function coerceElement(elementOrRef) {
-  return elementOrRef instanceof ElementRef ? elementOrRef.nativeElement : elementOrRef;
 }
 
 // node_modules/@angular/cdk/fesm2022/observers.mjs
@@ -5117,24 +4888,14 @@ var _MatInternalFormField = __MatInternalFormField;
 })();
 
 export {
-  coerceBooleanProperty,
-  coerceNumberProperty,
-  coerceArray,
-  coerceCssPixelValue,
-  coerceElement,
-  Platform,
-  getSupportedInputTypes,
-  normalizePassiveListenerOptions,
-  RtlScrollAxisType,
-  supportsScrollBehavior,
-  getRtlScrollAxisType,
-  _getEventTarget,
-  _isTestEnvironment,
-  Directionality,
-  BidiModule,
+  BACKSPACE,
   ENTER,
   ESCAPE,
   SPACE,
+  PAGE_UP,
+  PAGE_DOWN,
+  END,
+  HOME,
   LEFT_ARROW,
   UP_ARROW,
   RIGHT_ARROW,
@@ -5148,10 +4909,15 @@ export {
   FocusKeyManager,
   InteractivityChecker,
   FocusTrapFactory,
+  CdkTrapFocus,
   isFakeMousedownFromScreenReader,
   isFakeTouchstartFromScreenReader,
   LiveAnnouncer,
   FocusMonitor,
+  CdkMonitorFocus,
+  A11yModule,
+  Directionality,
+  BidiModule,
   VERSION2 as VERSION,
   AnimationCurves,
   AnimationDurations,
@@ -5198,4 +4964,4 @@ export {
   MatRippleLoader,
   _MatInternalFormField
 };
-//# sourceMappingURL=chunk-GOKQHAXE.js.map
+//# sourceMappingURL=chunk-MEK2WX67.js.map

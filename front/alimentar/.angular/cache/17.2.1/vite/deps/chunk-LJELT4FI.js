@@ -24172,6 +24172,7 @@ export {
   defer,
   forkJoin,
   fromEvent,
+  timer,
   merge,
   filter,
   auditTime,
@@ -24678,4 +24679,4 @@ export {
    * found in the LICENSE file at https://angular.io/license
    *)
 */
-//# sourceMappingURL=chunk-2CL33K6Y.js.map
+//# sourceMappingURL=chunk-LJELT4FI.js.map

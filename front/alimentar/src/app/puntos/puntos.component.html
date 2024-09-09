@@ -1,1 +1,34 @@
-<p>puntos works!</p>
+<div style="margin: 36px">
+    <span class="titulo">Catálogo de ofertas</span>
+    <br><br>
+    <span class="sub-titulo">Mis puntos: <b>{{puntos}}</b></span>
+
+    <button mat-stroked-button (click)="mas()" style="margin: 0 20px 0 40px">Más</button>
+    <button mat-stroked-button (click)="menos()">Menos</button>
+
+    <br><br><br>
+
+    <div class="oferta">
+        <img src="../../assets/rex.png" alt="rexona">
+        <div>
+            <span class="sub-titulo">Desodorante Rexona</span>
+            <p>Desodorante para los campeonees del mundo que no te abandona, esta sería una descripción más larga</p>
+            <p>Precio: <b>670 puntos</b></p>
+            <p>Veces canjeada: <b>25</b></p>
+            <button mat-flat-button color="primary" [disabled]="puntos < 670">Canjear</button>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="oferta">
+        <img src="../../assets/boca.png" alt="boca">
+        <div>
+            <span class="sub-titulo">Llavero Boca Libertadores</span>
+            <p>El único llavero más grande que lo que tu bolsillo puede soportar, solo para entendidos</p>
+            <p>Precio: <b>2.300 puntos</b></p>
+            <p>Veces canjeada: <b>89</b></p>
+            <button mat-flat-button color="primary" [disabled]="puntos < 2300">Canjear</button>
+        </div>
+    </div>
+</div>

@@ -17,7 +17,7 @@ export class NavegacionComponent {
       new ElementoNavegacion('Donar vianda', '/colaborar/vianda', 'soup_kitchen', [], ['H']),
       new ElementoNavegacion('Mover vianda', '/colaborar/mover_vianda', 'takeout_dining', [], ['H']),
       new ElementoNavegacion('Registrar persona', '/colaborar/registro', 'person_raised_hand', [], ['H']),
-      new ElementoNavegacion('Heladeras', '/colaborar/heladera', 'kitchen', [], ['J']),
+      new ElementoNavegacion('Heladeras', '/colaborar/heladera', 'kitchen', [], ['H', 'J']),
       new ElementoNavegacion('Ofertas', '/colaborar/oferta', 'category', [], ['J']),
     ], ['H', 'J']),
     new ElementoNavegacion('Fallas', '/fallas', 'feedback', [], ['H']),

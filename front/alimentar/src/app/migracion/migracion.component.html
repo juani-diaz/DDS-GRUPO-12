@@ -1,1 +1,25 @@
-<p>migracion works!</p>
+<div style="width: 800px; margin: 36px;">
+    <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)" 
+    (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+        <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+          Arrastrá tus archivos .csv acá para realizar la migración o
+          <button type="button" (click)="openFileSelector()" style="margin-left: 10px;">Seleccionar</button>
+        </ng-template>
+    </ngx-file-drop>
+    <div class="upload-table">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nombres de los archivos</th>
+                </tr>
+            </thead>
+            <tbody class="upload-name-style">
+                @for(item of files; track item){
+                    <tr>
+                        <td><strong>{{ item.relativePath }}</strong></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

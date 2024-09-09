@@ -1,0 +1,31 @@
+<h2 mat-dialog-title>Nueva oferta</h2>
+<mat-dialog-content>
+    <br>
+    <mat-form-field floatLabel="always" appearance="outline">
+        <mat-label>Título</mat-label>
+        <input matInput [(ngModel)]="titulo"/>
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field floatLabel="always" appearance="outline">
+        <mat-label>Puntos necesarios</mat-label>
+        <input matInput type="number" [(ngModel)]="puntos"/>
+    </mat-form-field>
+
+    <br>
+    
+    <mat-form-field floatLabel="always" appearance="outline">
+    <mat-label>Descripción</mat-label>
+    <textarea matInput
+                cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="10"
+                [(ngModel)]="descripcion"></textarea>
+    </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-flat-button color="primary" [mat-dialog-close]="getData()" cdkFocusInitial>Confirmar</button>
+</mat-dialog-actions>
