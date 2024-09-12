@@ -3,7 +3,7 @@ package domain.heladera;
 import lombok.*;
 //import sun.management.Sensor;
 
-import domain.vianda.Vianda;
+import domain.vianda.*;
 
 
 import java.time.LocalDate;

@@ -30,13 +30,13 @@ public class Colaborador extends Rol {
   private List<Tarjeta> tarjetasParaEntregar;
   private Tarjeta tarjetaColaborador;
 
-//  public Colaborador(Persona p, List<Colaboracion> lc, Float cp, List<Tarjeta> te, Tarjeta t){
-//    this.persona = p;
-//    this.colaboraciones = lc;
-//    this.cantidadPuntos = cp;
-//    this.tarjetasParaEntregar = te;
-//    this.tarjetaColaborador = t;
-//  }
+  public Colaborador(Persona p, List<Colaboracion> lc, Float cp, List<Tarjeta> te, Tarjeta t){
+    this.persona = p;
+    this.colaboraciones = lc;
+    this.cantidadPuntos = cp;
+    this.tarjetasParaEntregar = te;
+    this.tarjetaColaborador = t;
+  }
 
   public void realizarColaboracion(Colaboracion colaboracion){
     colaboracion.ejecutar();

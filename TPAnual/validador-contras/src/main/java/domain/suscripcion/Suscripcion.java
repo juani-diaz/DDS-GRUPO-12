@@ -11,5 +11,7 @@ public abstract class Suscripcion {
   Heladera heladera;
   MedioDeContacto notificadores;
 
-  private void notificar(){}//TODO:hacer funcion
+  private void notificar(){
+    notificadores.noificar();
+  }//TODO:hacer funcion
 }

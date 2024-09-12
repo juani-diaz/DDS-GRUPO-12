@@ -5,7 +5,7 @@ import domain.rol.*;
 
 import java.util.*;
 
-import domain.registro.RegistroTemperatura;
+import domain.registro.*;
 
 public class Broker {
     private String server;

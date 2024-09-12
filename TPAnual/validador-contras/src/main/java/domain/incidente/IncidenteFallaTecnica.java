@@ -22,10 +22,12 @@ public class IncidenteFallaTecnica extends Incidente {
     this.colaborador = colaborador;
     this.descripcion = descripcion;
     this.foto = foto;
+    heladera.setEstado(EnumEstadoHeladera.INACTIVA_POR_FALLA);
   }
 
-  public void flujoDeSolucion() { //TODO:hacer funcion flujoDeSolucion
-    getHeladera().setEstado(EnumEstadoHeladera.INACTIVA_POR_FALLA);
-
+  @Override
+  public void setHeladera(Heladera heladera) {
+    super.setHeladera(heladera);
+    heladera.setEstado(EnumEstadoHeladera.INACTIVA_POR_FALLA);
   }
 }

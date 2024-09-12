@@ -1,6 +1,9 @@
 package domain.heladera;
 
 import domain.rol.Colaborador;
+
+import java.util.*;
+
 import domain.rol.Tarjeta;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,8 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.apache.commons.lang3.time.DateUtils;
 
-import java.util.Date;
-import java.util.List;
+import java.util.Collections;
 
 @Getter
 @Setter
@@ -32,12 +34,22 @@ public class AdministradorSolicitudes {
     return pedido;
   }
 
-  public boolean puedeAbrir(Tarjeta tarjeta, Heladera heladera){
+
+  public boolean puedeAbrir(Tarjeta tarjeta, Heladera heladera) {
     try {
-      PedidoApertura pedido = this.pedidos.reversed().stream().filter(pe -> pe.getHeladera() == heladera && pe.getTarjeta() == tarjeta).findFirst().get();
+      // Crea una copia de la lista de pedidos y la invierte
+      List<PedidoApertura> pedidosInvertidos = new ArrayList<>(this.pedidos);
+      Collections.reverse(pedidosInvertidos);
+
+      PedidoApertura pedido = pedidosInvertidos.stream()
+              .filter(pe -> pe.getHeladera() == heladera && pe.getTarjeta() == tarjeta)
+              .findFirst()
+              .get();
+
       return pedido.getEstado() == EnumPedidoApertura.VALIDO;
     } catch (Exception e) {
       return false;
     }
   }
+
 }

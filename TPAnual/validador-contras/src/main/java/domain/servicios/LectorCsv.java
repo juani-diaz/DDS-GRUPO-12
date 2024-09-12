@@ -73,7 +73,7 @@ public class LectorCsv {
             LocalDate fechaNacimiento = LocalDate.parse(linea[5], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
             Persona p = new PersonaFisica(nombre, medioDeContacto, null, documento, apellido, null, null, fechaNacimiento);
-            Colaborador colaborador = new Colaborador(p, null, null, null);
+            Colaborador colaborador = new Colaborador(p, new ArrayList<>(), null, new ArrayList<>(), null);
 
             return colaborador;
         } catch (Exception e) {

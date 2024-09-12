@@ -3,13 +3,15 @@ package domain.registro;
 import domain.colaboraciones.DistribucionVianda;
 import domain.colaboraciones.DonacionVianda;
 import domain.incidente.Incidente;
-import domain.vianda.ViandaRecogida;
+import domain.vianda.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.apache.commons.lang3.time.DateUtils;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -52,7 +54,8 @@ public class SingletonSeguidorEstadistica {
   public ReporteMovimientoViandas generarReporteMovimientos() {
     List<MovimientoViandasHeladera> mve = new ArrayList<MovimientoViandasHeladera>();
 
-    Date limite = DateUtils.addDays(new Date(), -7);
+    // Utilizar LocalDate en lugar de Date
+    LocalDate limite = LocalDate.now().minus(7, ChronoUnit.DAYS);
 
     List<DonacionVianda> donacionesUltimaSemana = this.donacionViandas.stream().filter(
             i -> i.getFecha().isAfter(limite)

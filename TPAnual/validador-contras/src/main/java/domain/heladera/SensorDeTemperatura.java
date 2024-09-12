@@ -1,7 +1,6 @@
 package domain.heladera;
 
-import domain.registro.RegistroSensor;
-import domain.registro.RegistroTemperatura;
+import domain.registro.*;
 import lombok.*;
 
 @Getter @Setter @NoArgsConstructor
@@ -16,7 +15,7 @@ public class SensorDeTemperatura extends Sensor{
         Float temp = ((RegistroTemperatura) registro).getTemperatura(); // TODO cosas raras abstract Java
         if(temp < this.heladeraAsignada.getTemperaturaMinima() || temp > this.heladeraAsignada.getTemperaturaMaxima()) {
             this.enviarAlerta(registro);
-            this.heladeraAsignada.setEstado(EnumEstadoHeladera.TEMPERATURA_FUERA_DE_RANGO);
+            this.heladeraAsignada.setEstado(EnumEstadoHeladera.INACTIVA_POR_ALERTA);
         } else {
             this.heladeraAsignada.setEstado(EnumEstadoHeladera.DISPONIBLE);
         }

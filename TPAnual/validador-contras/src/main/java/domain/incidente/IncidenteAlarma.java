@@ -16,12 +16,14 @@ public class IncidenteAlarma extends Incidente{
   public IncidenteAlarma(Heladera heladera, Date fecha, EnumTipoDeFalla falla){
     super(heladera, fecha, new ArrayList<VisitasTecnicas>(), EnumEstadoDeIncidente.PENDIENTE_A_SOLUCIONAR);
     this.enumTipoDeFalla = falla;
+    heladera.setEstado(EnumEstadoHeladera.INACTIVA_POR_ALERTA);
   }
 
-  public void flujoDeSolucion(){
-    getHeladera().setEstado(EnumEstadoHeladera.INACTIVA_POR_ALERTA);
-    
-  } //TODO:hacer funcion flujoDeSolucion
+  @Override
+  public void setHeladera(Heladera heladera) {
+    super.setHeladera(heladera);
+    heladera.setEstado(EnumEstadoHeladera.INACTIVA_POR_FALLA);
+  }
 }
 
 
