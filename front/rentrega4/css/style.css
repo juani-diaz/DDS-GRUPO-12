@@ -14775,3 +14775,18 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
   overflow-y: auto;
   max-height: calc(100vh - 146px)
 }
+
+.home-texto {
+  padding: 30px;
+  text-align: center;
+  align-content: center;
+  margin-top: 150px;
+  h1 {
+    color: #7571f9;
+    font-weight: bold;
+  }
+
+  h2 {
+    color: #888;
+  }
+}
