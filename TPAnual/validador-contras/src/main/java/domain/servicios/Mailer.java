@@ -16,11 +16,13 @@ public class Mailer {
 //Asd1234567891011/
 
     public void enviarMail(String header,String body,String destinatary) {
-  /*      Properties props = new Properties();
+        Properties props = new Properties();
+        props.put("mail.smtp.host", "smtp.mailtrap.io");
+        props.put("mail.smtp.port", "2525");
         props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", "smtp.gmail.com");
-        props.put("mail.smtp.port", "587");
+
+        final String username = "2b75f3244c0aa0";
+        final String password = "8420597cdc3845";
 
         Session session = Session.getInstance(props, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
@@ -41,6 +43,6 @@ public class Mailer {
 
         } catch (MessagingException e) {
             throw new RuntimeException(e);
-        }*/
+        }
     }
 }
