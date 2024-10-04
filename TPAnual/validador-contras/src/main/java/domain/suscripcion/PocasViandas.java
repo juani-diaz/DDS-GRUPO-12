@@ -10,7 +10,10 @@ public class PocasViandas extends Suscripcion{
   private Integer numeroMinimo;
 
   public PocasViandas(Heladera heladera, MedioDeContacto notificadores, Integer numeroMinimo){
-    super(heladera, notificadores);
+    this.heladera=heladera;
+    this.notificadores=notificadores;
     this.numeroMinimo = numeroMinimo;
+    header="Notificacion por suscripcion";
+    this.mensaje="Quedan únicamente "+numeroMinimo+" viandas disponibles en la heladera";
   }
 }

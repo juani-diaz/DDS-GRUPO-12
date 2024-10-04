@@ -6,12 +6,16 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-@AllArgsConstructor @Getter @Setter
+@Getter @Setter
 public abstract class Suscripcion {
   Heladera heladera;
   MedioDeContacto notificadores;
 
-  private void notificar(){
-    notificadores.noificar();
-  }//TODO:hacer funcion
+  String header;
+
+  String mensaje;
+
+  void notificar(){
+    notificadores.notificar(header,mensaje);
+  }
 }
