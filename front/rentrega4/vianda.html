@@ -184,11 +184,7 @@
                             <i class="icon-wallet menu-icon"></i><span class="nav-text">Donar Dinero</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="fallas.html" aria-expanded="false">
-                            <i class="icon-ban menu-icon"></i><span class="nav-text">Reportar Fallas</span>
-                        </a>
-                    </li>
+                    
                     <li>
                         <a href="heladeras-p.html" aria-expanded="false">
                             <i class="icon-heladera menu-icon"></i><span class="nav-text">Heladeras</span>
@@ -249,7 +245,59 @@
             Content body start
         ***********************************-->
         <div class="content-body">
-            Home con noticias tal vez?
+            
+            <div style="display: flex;">
+                <div class="col-lg-6" style="margin-top: 15px;">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Datos de la vianda</h4>
+                            <div class="basic-form">
+                                <form>
+                                    <div class="form-group">
+                                        <label>Contenido de la vianda (Comida)</label>
+                                        <input type="text" class="form-control" placeholder="Especifica el contenido de la vianda" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Calorías</label>
+                                        <input type="number" class="form-control" placeholder="Calorías (opcional)">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Peso (en gramos)</label>
+                                        <input type="number" class="form-control" placeholder="Peso (opcional)">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Heladera</label>
+                                        <select class="form-control" required>
+                                            <option selected disabled>Selecciona una opción...</option>
+                                            <option>UTN Medrano</option>
+                                            <option>Ejército de Salvación Central</option>
+                                            <option disabled>Colegio Mariano Moreno</option>
+                                            <option disabled>Parque Centenario 1</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Fecha de donación</label>
+                                        <input type="date" class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Fecha de vencimiento</label>
+                                        <input type="date" class="form-control" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-success">Donar</button>
+                                </form>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" style="margin-top: 15px;">
+                    <div class="card">
+                        <div class="card-body" style="padding: 64px 29px;">
+                            <img class="d-block w-100" src="images/viandas.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
         <!--**********************************
             Content body end

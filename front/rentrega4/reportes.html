@@ -184,11 +184,7 @@
                             <i class="icon-wallet menu-icon"></i><span class="nav-text">Donar Dinero</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="fallas.html" aria-expanded="false">
-                            <i class="icon-ban menu-icon"></i><span class="nav-text">Reportar Fallas</span>
-                        </a>
-                    </li>
+                    
                     <li>
                         <a href="heladeras-p.html" aria-expanded="false">
                             <i class="icon-heladera menu-icon"></i><span class="nav-text">Heladeras</span>
@@ -249,7 +245,136 @@
             Content body start
         ***********************************-->
         <div class="content-body">
-            Home con noticias tal vez?
+
+            <div class="col-lg-12">
+                <div class="card" style="margin: 15px;">
+                    <div class="card-body">
+                        <div style="display: flex;">
+                            <h4 class="card-title" style="align-content: center;">Reportes de la semana </h4>
+                            <div class="form-group" style="position: relative; top: 5px; margin-left: 10px;">
+                                <select class="form-control" required>
+                                    <option selected>29/09/2024 - 05/10/2024</option>
+                                    <option>22/09/2024 - 28/09/2024</option>
+                                    <option>15/09/2024 - 21/09/2024</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-12">
+                <div class="card" style="margin: 15px;">
+                    <div class="card-body">
+                        <h4 class="card-title">Heladeras</h4>
+                        <div class="table-responsive">
+                            <table class="table table-striped zero-configuration">
+                                <thead>
+                                    <tr>
+                                        <th>Heladera</th>
+                                        <th>Fallas</th>
+                                        <th>Viandas Colocadas</th>
+                                        <th>Viandas Retiradas</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>UTN Medrano</th>
+                                        <td>2</td>
+                                        <td>41</td>
+                                        <td>37</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Ejército de Salvación Central</th>
+                                        <td>4</td>
+                                        <td>72</td>
+                                        <td>76</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Colegio Mariano Moreno</th>
+                                        <td>0</td>
+                                        <td>56</td>
+                                        <td>56</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Parque Centenario 1</th>
+                                        <td>11</td>
+                                        <td>64</td>
+                                        <td>68</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12"></div>
+                <div class="card" style="margin: 15px;">
+                    <div class="card-body">
+                        <h4 class="card-title">Colaboradores</h4>
+                        <div class="table-responsive">
+                            <table class="table table-striped zero-configuration">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Apellido</th>
+                                        <th>Usuario</th>
+                                        <th>Viandas Donadas</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>Juan Ignacio</th>
+                                        <td>Diaz Puig</td>
+                                        <td>juani123</td>
+                                        <td>50</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Juan Martin</th>
+                                        <td>Terrizzi</td>
+                                        <td>juanma_moreno</td>
+                                        <td>42</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Tomás</th>
+                                        <td>Cerezo</td>
+                                        <td>naicon67</td>
+                                        <td>67</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Lucio</th>
+                                        <td>Valenzano Vecchio</td>
+                                        <td>lucilu</td>
+                                        <td>23</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Juan</th>
+                                        <td>Polito</td>
+                                        <td>poli</td>
+                                        <td>67</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Fahim</th>
+                                        <td>Wahid</td>
+                                        <td>fahim_bangla</td>
+                                        <td>999</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Iñaki</th>
+                                        <td>Aranzamendi</td>
+                                        <td>inia_b</td>
+                                        <td>43</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
         </div>
         <!--**********************************
             Content body end
@@ -302,6 +427,10 @@
 
 
     <script src="./js/dashboard/dashboard-1.js"></script>
+
+    <script src="./plugins/tables/js/jquery.dataTables.min.js"></script>
+    <script src="./plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
+    <script src="./plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
 
 </body>
 

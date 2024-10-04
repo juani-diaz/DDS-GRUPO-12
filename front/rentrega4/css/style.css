@@ -14725,3 +14725,68 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
 .falso-btn:hover {
   color: white !important;
 }
+
+.desc-calecita {
+  background: #FFFFFFCC;
+  border-radius: 8px;
+}
+
+.lista-ayuda{
+  li {
+    margin-top: 30px;
+    text-align: center;
+    color: #7571f9;
+    font-weight: bold;
+    font-size: 24px;
+  }
+}
+
+.noticias {
+  margin-top: 15px;
+  li {
+    h3 {
+      color: #7571f9;
+    }
+  }
+}
+
+.redes {
+  align-content: center;
+  text-align: center;
+  height: 80%;
+}
+
+.mapa {
+  height: calc(100vh - 131px)
+}
+
+.heladera-item {
+  margin-top: 15px;
+  h3 {
+    span {
+      font-size: 16px; position: relative; bottom: 4px; margin-left: 5px;
+    }
+  }
+
+}
+
+.lista-heladera {
+  margin-top: 15px;
+  overflow-y: auto;
+  max-height: calc(100vh - 146px)
+}
+
+.home-texto {
+  padding: 30px;
+  text-align: center;
+  align-content: center;
+  margin-top: 150px;
+  h1 {
+    color: #7571f9;
+    font-weight: bold;
+  }
+
+  h2 {
+    color: #888;
+  }
+}
