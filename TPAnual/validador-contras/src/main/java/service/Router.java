@@ -1,2 +1,4 @@
-package service;public class Router {
+package service;
+
+public class Router {
 }
