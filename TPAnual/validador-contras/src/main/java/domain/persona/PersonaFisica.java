@@ -29,7 +29,7 @@ public class PersonaFisica extends Persona {
         String genero,
         LocalDate fechaNacimiento
         ){
-        super(nombre, medioContacto, direccion, documento);
+        super(documento, nombre, medioContacto, direccion);
         this.apellido = apellido;
         this.setDocumento(documento);
         this.fechaNacimiento = fechaNacimiento;

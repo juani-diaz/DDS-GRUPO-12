@@ -7,37 +7,41 @@ import domain.rol.Colaborador;
 import domain.vianda.EnumEstadoVianda;
 import domain.vianda.Vianda;
 import io.javalin.http.Context;
+import persistence.BDUtils;
+
+import javax.persistence.EntityManager;
 import java.util.Collections;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class HeladeraController {
 
     //Como no está el ORM tenemos que usar algo para guardar
     private static Map<String, Colaborador> colaboradores = new HashMap<>();
-    private static Map<String, Heladera> heladeras = new HashMap<>();
+    //private static Map<String, Heladera> heladeras = new HashMap<>();
 
 
-    public Vianda sacarVianda(Context ctx) {
+    public void sacarVianda(Context ctx) {
         String heladeraId = ctx.formParam("heladeraId");
         int indice = Integer.parseInt(ctx.formParam("indice"));
 
         // Buscar la heladera en el almacenamiento en memoria
-        Heladera heladera = heladeras.get(heladeraId);
+        //Heladera heladera = heladeras.get(heladeraId);
 
         // Validación: verificar que la heladera exista
-        if (heladera == null) {
-            ctx.result("Heladera no encontrada");
-            return null;
-        }
 
+        /*if (heladera == null) {
+            ctx.result("Heladera no encontrada");
+            //return null;
+        }*/
         // Sacar la vianda en el índice especificado
-        Vianda vianda = heladera.sacarVianda(indice);
+        //Vianda vianda = heladera.sacarVianda(indice);
 
         // Retornar la vianda sacada y enviar una respuesta
         ctx.result("Vianda retirada exitosamente.");
-        return vianda;
+        //return vianda;
     }
 
     //Esta la dejamos para obtener una heladera por ID cuando tengamos la base de datos
@@ -55,39 +59,29 @@ public class HeladeraController {
         String fechaDonacionStr = ctx.formParam("fechaDonacion");
         String calorias = ctx.formParam("calorias");
         String pesoStr = ctx.formParam("peso");
-        String colaboradorId = ctx.formParam("colaboradorId");
+        //String colaboradorId = ctx.formParam("colaboradorId");
         String heladeraId = ctx.formParam("heladeraId");
-        String estadoStr = ctx.formParam("estado");
+        //String estadoStr = ctx.formParam("estado");
 
 
         // Convertir parámetros necesarios
         LocalDate fechaVencimiento = LocalDate.parse(fechaVencimientoStr);
         LocalDate fechaDonacion = LocalDate.parse(fechaDonacionStr);
         float peso = Float.parseFloat(pesoStr);
-        EnumEstadoVianda estado = Enum.valueOf(EnumEstadoVianda.class, estadoStr);
-
-        // Buscar el colaborador y la heladera en el almacenamiento en memoria
-        Colaborador colaborador = colaboradores.get(colaboradorId);
-        Heladera heladera = heladeras.get(heladeraId);
-
-        // Validación: verificar que existan colaborador y heladera
-        if (colaborador == null || heladera == null) {
-            ctx.result("Colaborador o Heladera no encontrados");
-            return;
+        EnumEstadoVianda estado = EnumEstadoVianda.NO_ENTREGADO;
+        Vianda vianda = new Vianda(comida, fechaVencimiento, fechaDonacion, /*heladeraId,*/ calorias, peso, estado);
+        // Buscar la heladera en el almacenamiento en BD
+        EntityManager em = BDUtils.getEntityManager();
+        BDUtils.comenzarTransaccion(em);
+        try {
+            em.persist(vianda);
+        }catch (Exception e) {
+            System.out.println("Error al agregar la vianda: "+ e);
         }
 
-        // Crear una nueva vianda con los datos recibidos
-        Vianda vianda = new Vianda();
-        vianda.setComida(comida);
-        vianda.setFechaVencimiento(fechaVencimiento);
-        vianda.setFechaDonacion(fechaDonacion);
-        vianda.setCalorias(calorias);
-        vianda.setPeso(peso);
-        vianda.setColaborador(colaborador);
-        vianda.setHeladera(heladera);
 
-        // Agregar la vianda a la heladera
-        heladera.ingresarViandas(Collections.singletonList(vianda));
+        BDUtils.commit(em);
+
         ctx.result("Vianda agregada exitosamente.");
     }
 
@@ -100,3 +94,6 @@ public class HeladeraController {
 
     //}
 }
+
+
+

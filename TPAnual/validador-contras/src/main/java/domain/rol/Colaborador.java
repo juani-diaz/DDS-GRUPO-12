@@ -17,6 +17,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.*;
 import javax.swing.*;
 import java.time.LocalDate;
 import java.util.Date;
@@ -24,10 +25,18 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
+//@Entity
 public class Colaborador extends Rol {
+
+  //@OneToMany(cascade = CascadeType.ALL)
   private List<Colaboracion> colaboraciones;
+
   private Float cantidadPuntos;
+  //@OneToMany(cascade = CascadeType.ALL)
+  //@ElementCollection
   private List<Tarjeta> tarjetasParaEntregar;
+
+  //@Embedded
   private Tarjeta tarjetaColaborador;
 
   public Colaborador(Persona p, List<Colaboracion> lc, Float cp, List<Tarjeta> te, Tarjeta t){

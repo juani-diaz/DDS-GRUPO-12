@@ -11,17 +11,24 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
+//@Entity
 public class Vulnerable extends Rol {
   private LocalDate fechaRegistro;
+
   private EnumSituacionCalle situacionCalle;
   private Integer menoresACargo;
+  //Tambien ver esto
   private List<ViandaRecogida> viandasTomadas;
   private Tarjeta tarjeta;
+  //Ver Esto
   private List<UsoDeTarjeta> usos;
   private Integer usosRestantesPorDia;
 

@@ -10,16 +10,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
+//@Entity
 public class DonacionVianda extends Colaboracion {
     public final static Float multiplicador = 1.5F;
-
+    //@ManyToOne
     private Vianda vianda;
+    //@ManyToOne
     private Heladera destino;
 
     public DonacionVianda(Colaborador colaborador, LocalDate fecha,

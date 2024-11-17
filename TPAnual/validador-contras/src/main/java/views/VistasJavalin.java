@@ -1,5 +1,6 @@
 package views;
 
+import controllers.HeladeraController;
 import io.javalin.Javalin;
 
 
@@ -17,5 +18,7 @@ import java.util.function.Consumer;
             app.get("/{html}", ctx -> {
                 ctx.result("El HTML es: " + ctx.pathParam("html"));
             });
+            HeladeraController heladeraController = new HeladeraController();
+            app.post("/vianda", heladeraController::agregarVianda);
         }
     }

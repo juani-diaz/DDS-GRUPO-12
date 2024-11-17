@@ -252,18 +252,18 @@
                         <div class="card-body">
                             <h4 class="card-title">Datos de la vianda</h4>
                             <div class="basic-form">
-                                <form>
+                                <form method="post">
                                     <div class="form-group">
                                         <label>Contenido de la vianda (Comida)</label>
-                                        <input type="text" class="form-control" placeholder="Especifica el contenido de la vianda" required>
+                                        <input type="text" name = "comida" class="form-control" placeholder="Especifica el contenido de la vianda" required>
                                     </div>
                                     <div class="form-group">
                                         <label>Calorías</label>
-                                        <input type="number" class="form-control" placeholder="Calorías (opcional)">
+                                        <input type="number" name = "calorias" class="form-control" placeholder="Calorías (opcional)">
                                     </div>
                                     <div class="form-group">
                                         <label>Peso (en gramos)</label>
-                                        <input type="number" class="form-control" placeholder="Peso (opcional)">
+                                        <input type="number" name = "peso" class="form-control" placeholder="Peso (opcional)">
                                     </div>
                                     <div class="form-group">
                                         <label>Heladera</label>
@@ -277,11 +277,11 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Fecha de donación</label>
-                                        <input type="date" class="form-control" required>
+                                        <input type="date" name = "fechaDonacion" class="form-control" required>
                                     </div>
                                     <div class="form-group">
                                         <label>Fecha de vencimiento</label>
-                                        <input type="date" class="form-control" required>
+                                        <input type="date" name="fechaVencimiento" class="form-control" required>
                                     </div>
                                     <button type="submit" class="btn btn-success">Donar</button>
                                 </form>                                

@@ -4,10 +4,18 @@ import domain.rol.Colaborador;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Getter @Setter
+//@Entity
+//@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Colaboracion {
+
+//    @Id @GeneratedValue
+//    private Long id;
+//    @ManyToOne
+//    @JoinColumn(name = "colaborador_id")
     Colaborador colaborador;
     LocalDate fecha;
 

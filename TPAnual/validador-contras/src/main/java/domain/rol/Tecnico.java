@@ -7,15 +7,17 @@ import domain.incidente.VisitasTecnicas;
 import domain.persona.Persona;
 import lombok.*;
 
+import javax.persistence.Entity;
 import java.time.LocalDate;
 import java.util.List;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
+//@Entity
 public class Tecnico extends Rol {
   private List<String> areaCobertura;
-
+//Empezar a ver incidentes
   private List<Incidente> incidentesARevisar;
-
+//Ver las visitas tecnicas
   private List<VisitasTecnicas> visitasRealizadas;
 
   private void realizarVisitaTecnica(Incidente incidente, LocalDate fecha, String trabajoRealizado, String foto, Boolean solucionado){
