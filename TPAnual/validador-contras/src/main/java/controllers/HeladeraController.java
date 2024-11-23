@@ -20,72 +20,96 @@ public class HeladeraController {
 
     //Como no está el ORM tenemos que usar algo para guardar
     private static Map<String, Colaborador> colaboradores = new HashMap<>();
-    //private static Map<String, Heladera> heladeras = new HashMap<>();
+    private static Map<String, Heladera> heladeras = new HashMap<>();
 
 
-    public void sacarVianda(Context ctx) {
+    public Vianda sacarVianda(Context ctx) {
         String heladeraId = ctx.formParam("heladeraId");
         int indice = Integer.parseInt(ctx.formParam("indice"));
 
-        // Buscar la heladera en el almacenamiento en memoria
-        //Heladera heladera = heladeras.get(heladeraId);
+        //Buscar la heladera en el almacenamiento en memoria
+        Heladera heladera = heladeras.get(heladeraId);
 
         // Validación: verificar que la heladera exista
 
-        /*if (heladera == null) {
+        if (heladera == null) {
             ctx.result("Heladera no encontrada");
-            //return null;
-        }*/
+            return null;
+        }
         // Sacar la vianda en el índice especificado
-        //Vianda vianda = heladera.sacarVianda(indice);
+        Vianda vianda = heladera.sacarVianda(indice);
 
         // Retornar la vianda sacada y enviar una respuesta
         ctx.result("Vianda retirada exitosamente.");
-        //return vianda;
+        return vianda;
     }
 
     //Esta la dejamos para obtener una heladera por ID cuando tengamos la base de datos
-    //  private Heladera obtenerHeladera(Context ctx) {
-    //    String heladeraId = ctx.formParam("heladeraId");
+      private Heladera obtenerHeladera(Context ctx) {
+        String heladeraId = ctx.formParam("heladeraId");
     //      Buscar la heladera por su ID
-    //    return new Heladera(); // Simulación: obtén la heladera desde la base de datos o un repositorio
-    //}
+
+        EntityManager em = BDUtils.getEntityManager();
+        BDUtils.comenzarTransaccion(em);
+        Heladera heladera = null;
+        try {
+          heladera = em.find(Heladera.class, 4);
+        } catch (Exception e) {
+          System.out.println("Error al agregar la vianda: " + e);
+        }
+        BDUtils.commit(em);
+
+        return heladera; // Simulación: obtén la heladera desde la base de datos o un repositorio
+    }
 
     // Metodo para agregar una vianda a la heladera
     public void agregarVianda(Context ctx) {
-        // Obtener parámetros del formulario (datos enviados en la solicitud)
-        String comida = ctx.formParam("comida");
-        String fechaVencimientoStr = ctx.formParam("fechaVencimiento");
-        String fechaDonacionStr = ctx.formParam("fechaDonacion");
-        String calorias = ctx.formParam("calorias");
-        String pesoStr = ctx.formParam("peso");
-        //String colaboradorId = ctx.formParam("colaboradorId");
-        String heladeraId = ctx.formParam("heladeraId");
-        //String estadoStr = ctx.formParam("estado");
+      System.out.println("estou en HeladeraController");
+
+      // Obtener parámetros del formulario (datos enviados en la solicitud)
+      String comida = ctx.formParam("comida");
+      System.out.println(comida);
+      String fechaVencimientoStr = ctx.formParam("fechaVencimiento");
+      String fechaDonacionStr = ctx.formParam("fechaDonacion");
+      String calorias = ctx.formParam("calorias");
+      String pesoStr = ctx.formParam("peso");
+      //String colaboradorId = ctx.formParam("colaboradorId");
+      //String heladeraId = ctx.formParam("heladeraId");
+      //String estadoStr = ctx.formParam("estado");
 
 
-        // Convertir parámetros necesarios
-        LocalDate fechaVencimiento = LocalDate.parse(fechaVencimientoStr);
-        LocalDate fechaDonacion = LocalDate.parse(fechaDonacionStr);
-        float peso = Float.parseFloat(pesoStr);
-        EnumEstadoVianda estado = EnumEstadoVianda.NO_ENTREGADO;
-        Vianda vianda = new Vianda(comida, fechaVencimiento, fechaDonacion, /*heladeraId,*/ calorias, peso, estado);
-        // Buscar la heladera en el almacenamiento en BD
-        EntityManager em = BDUtils.getEntityManager();
-        BDUtils.comenzarTransaccion(em);
-        try {
-            em.persist(vianda);
-        }catch (Exception e) {
-            System.out.println("Error al agregar la vianda: "+ e);
-        }
+      // Convertir parámetros necesarios
+      LocalDate fechaVencimiento = LocalDate.parse(fechaVencimientoStr);
+      LocalDate fechaDonacion = LocalDate.parse(fechaDonacionStr);
+      float peso = Float.parseFloat(pesoStr);
+      EnumEstadoVianda estado = EnumEstadoVianda.NO_ENTREGADO;
+      // Buscar la heladera en el almacenamiento en BD
+      EntityManager em = BDUtils.getEntityManager();
+      BDUtils.comenzarTransaccion(em);
+      Heladera heladera = null;
+      try {
+        System.out.println("try  1111");
+        heladera = em.find(Heladera.class, 4L);
+      } catch (Exception e) {
+        System.out.println("Error al agregar la heladera: " + e);
+      }
+      Vianda vianda = new Vianda(comida, fechaVencimiento, fechaDonacion, calorias, peso, estado);
+      vianda.setHeladera(heladera);
+
+      try {
+        System.out.println("try  2");
+        em.persist(vianda);
+      } catch (Exception e) {
+        System.out.println("Error al agregar la vianda: " + e);
+      }
 
 
-        BDUtils.commit(em);
+      BDUtils.commit(em);
 
-        ctx.result("Vianda agregada exitosamente.");
+      ctx.result("Vianda agregada exitosamente.");
     }
 
-    // Metodo para obtener el colaborador por su ID
+    //Metodo para obtener el colaborador por su ID
     //La idea es implementar esto para cuando haya una base de datos
     //private Colaborador obtenerColaboradorPorId(String colaboradorId) {
 

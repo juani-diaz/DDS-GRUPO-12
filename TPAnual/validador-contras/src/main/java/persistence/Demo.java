@@ -22,8 +22,8 @@ public class Demo {
 
         Heladera heladera = new Heladera("heladera2",direccion, 20, LocalDate.now(), 5f, 10.0f, EnumEstadoHeladera.INACTIVA_POR_FALLA);
 
-        Vianda vianda = new Vianda("carne", LocalDate.now(), LocalDate.now(), /*heladera*/ "100", 300f, EnumEstadoVianda.ENTREGADO);
-        Vianda vianda2 = new Vianda("papa", LocalDate.now(), LocalDate.now(), /*heladera,*/ "100", 300f, EnumEstadoVianda.ENTREGADO);
+        Vianda vianda = new Vianda("carne", LocalDate.now(), LocalDate.now(),  "100", 300f, EnumEstadoVianda.ENTREGADO);
+        Vianda vianda2 = new Vianda("papa", LocalDate.now(), LocalDate.now(),  "100", 300f, EnumEstadoVianda.ENTREGADO);
 
         vianda.setHeladera(heladera);
         vianda2.setHeladera(heladera);
