@@ -18,7 +18,7 @@ public class test_heladera {
     List<Vianda> listaVianda = Arrays.asList(vianda1,vianda2,vianda3);
     List<Vianda> listaViandaEsperada1 = Arrays.asList(vianda1,vianda2,vianda3,vianda4);
     List<Vianda> listaViandaEsperada2 = Arrays.asList(vianda1,vianda3);
-    Heladera heladera1 = new Heladera("heladera1",ubicacion, 100, fechaFuncionamiento,listaVianda,12F,20F, EnumEstadoHeladera.DISPONIBLE);
+    Heladera heladera1 = new Heladera("heladera1",ubicacion, 100, fechaFuncionamiento,12F,20F, EnumEstadoHeladera.DISPONIBLE);
 
     Sensor sensor = new SensorDeTemperatura(heladera1);
 
