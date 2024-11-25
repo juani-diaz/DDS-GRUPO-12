@@ -30,7 +30,7 @@ public class testSuscripcion {
         Ubicacion ubicacion = new Ubicacion();
         LocalDate fechaFuncionamiento = LocalDate.now();
 
-        Heladera heladera1 = new Heladera("heladera1",ubicacion, 100, fechaFuncionamiento,null,12F,20F, EnumEstadoHeladera.DISPONIBLE);
+        Heladera heladera1 = new Heladera("heladera1",ubicacion, 100, fechaFuncionamiento,12F,20F, EnumEstadoHeladera.DISPONIBLE);
         MedioDeContacto medioDeContacto1= new Email();
         medioDeContacto1.setDireccion("juanidiaz8260@gmail.com");
 
