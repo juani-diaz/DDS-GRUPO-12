@@ -29,7 +29,7 @@ public class Heladera {
   private LocalDate fechaFuncionamiento;
 
   @OneToMany//(cascade = CascadeType.ALL)
-  @JoinColumn(name = "heladera")
+  //@JoinColumn(name = "heladera")
   private List<Vianda> viandasEnHeladera=new ArrayList<>();
 
   private Float temperaturaMinima;
