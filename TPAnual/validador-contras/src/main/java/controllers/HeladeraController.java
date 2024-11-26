@@ -22,20 +22,20 @@ public class HeladeraController {
     private static Map<String, Colaborador> colaboradores = new HashMap<>();
     private static Map<String, Heladera> heladeras = new HashMap<>();
 
-
     public Vianda sacarVianda(Context ctx) {
         String heladeraId = ctx.formParam("heladeraId");
         int indice = Integer.parseInt(ctx.formParam("indice"));
 
+        Heladera heladera = HeladeraController.obtenerHeladera(heladeraId);
+
         //Buscar la heladera en el almacenamiento en memoria
-        Heladera heladera = heladeras.get(heladeraId);
+        //Heladera heladera = heladeras.get(heladeraId);
 
         // Validación: verificar que la heladera exista
-
-        if (heladera == null) {
-            ctx.result("Heladera no encontrada");
-            return null;
-        }
+       // if (heladera == null) {
+        //    ctx.result("Heladera no encontrada");
+        //    return null;
+        //}
         // Sacar la vianda en el índice especificado
         Vianda vianda = heladera.sacarVianda(indice);
 
@@ -44,27 +44,21 @@ public class HeladeraController {
         return vianda;
     }
 
-    //Esta la dejamos para obtener una heladera por ID cuando tengamos la base de datos
-      private Heladera obtenerHeladera(Context ctx) {
-        String heladeraId = ctx.formParam("heladeraId");
-    //      Buscar la heladera por su ID
+      private static Heladera obtenerHeladera(String heladeraId) {
+        //Buscar la heladera en el almacenamiento en memoria
+        Heladera heladera = heladeras.get(heladeraId);
 
-        EntityManager em = BDUtils.getEntityManager();
-        BDUtils.comenzarTransaccion(em);
-        Heladera heladera = null;
-        try {
-          heladera = em.find(Heladera.class, 4);
-        } catch (Exception e) {
-          System.out.println("Error al agregar la vianda: " + e);
+        // Validación: verificar que la heladera exista
+        if (heladera == null) {
+          System.out.println("la heladera" + heladeraId + "no existe");
+          return null;
         }
-        BDUtils.commit(em);
-
         return heladera; // Simulación: obtén la heladera desde la base de datos o un repositorio
     }
 
     // Metodo para agregar una vianda a la heladera
     public void agregarVianda(Context ctx) {
-      System.out.println("estou en HeladeraController");
+      System.out.println("estoy en agregarVianda");
 
       // Obtener parámetros del formulario (datos enviados en la solicitud)
       String comida = ctx.formParam("comida");
@@ -74,25 +68,27 @@ public class HeladeraController {
       String calorias = ctx.formParam("calorias");
       String pesoStr = ctx.formParam("peso");
       //String colaboradorId = ctx.formParam("colaboradorId");
-      //String heladeraId = ctx.formParam("heladeraId");
+      String heladeraId = ctx.formParam("heladeraId");
       //String estadoStr = ctx.formParam("estado");
-
 
       // Convertir parámetros necesarios
       LocalDate fechaVencimiento = LocalDate.parse(fechaVencimientoStr);
       LocalDate fechaDonacion = LocalDate.parse(fechaDonacionStr);
       float peso = Float.parseFloat(pesoStr);
       EnumEstadoVianda estado = EnumEstadoVianda.NO_ENTREGADO;
+
+
       // Buscar la heladera en el almacenamiento en BD
       EntityManager em = BDUtils.getEntityManager();
       BDUtils.comenzarTransaccion(em);
-      Heladera heladera = null;
+      Heladera heladera = HeladeraController.obtenerHeladera(heladeraId);
       try {
         System.out.println("try  1111");
-        heladera = em.find(Heladera.class, 4L);
+        heladera = em.find(Heladera.class, heladeraId);
       } catch (Exception e) {
         System.out.println("Error al agregar la heladera: " + e);
       }
+
       Vianda vianda = new Vianda(comida, fechaVencimiento, fechaDonacion, calorias, peso, estado);
       vianda.setHeladera(heladera);
 
@@ -103,21 +99,20 @@ public class HeladeraController {
         System.out.println("Error al agregar la vianda: " + e);
       }
 
-
       BDUtils.commit(em);
 
-      ctx.result("Vianda agregada exitosamente.");
+      //ctx.result("Vianda agregada exitosamente.");
     }
 
     //Metodo para obtener el colaborador por su ID
     //La idea es implementar esto para cuando haya una base de datos
     //private Colaborador obtenerColaboradorPorId(String colaboradorId) {
-
       //  return new Colaborador();
-
-
     //}
 }
+
+
+
 
 
 
