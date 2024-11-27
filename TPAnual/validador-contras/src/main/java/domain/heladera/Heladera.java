@@ -1,6 +1,8 @@
 package domain.heladera;
 
 import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 //import sun.management.Sensor;
 
 import domain.vianda.*;

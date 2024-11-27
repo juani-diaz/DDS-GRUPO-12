@@ -18,6 +18,8 @@ import java.util.List;
 
 public class HeladeraController {
 
+  //private Collection<Heladera> heladeras;
+
       private static Heladera obtenerHeladera(EntityManager em,Long heladeraID_Long) {
 
         Heladera heladera = null;
