@@ -9,7 +9,7 @@
     <!-- theme meta -->
     <meta name="theme-name" content="quixlab" />
   
-    <title>Donar Vianda</title>
+    <title>Donar Dinero</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
     <!-- Pignose Calender -->
@@ -49,7 +49,7 @@
         ***********************************-->
         <div class="nav-header">
             <div class="brand-logo">
-                <a href="index.html">
+                <a href="index">
                     <b class="logo-abbr"><img src="images/logo.png" alt=""> </b>
                     <span class="logo-compact"><img src="./images/logo_n.png" alt=""></span>
                     <span class="brand-title">
@@ -140,11 +140,11 @@
                                 <div class="dropdown-content-body">
                                     <ul>
                                         <li>
-                                            <a href="app-profile.html"><i class="icon-user"></i> <span>Mi cuenta</span></a>
+                                            <a href="app-profile"><i class="icon-user"></i> <span>Mi cuenta</span></a>
                                         </li>
                                         
                                         <hr class="my-2">
-                                        <li><a href="page-login.html"><i class="icon-key"></i> <span>Cerrar sesión</span></a></li>
+                                        <li><a href="page-login"><i class="icon-key"></i> <span>Cerrar sesión</span></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -165,72 +165,72 @@
                 <ul class="metismenu" id="menu">
                     <li class="nav-label">(Personas)</li>
                     <li>
-                        <a href="vianda.html" aria-expanded="false">
+                        <a href="vianda" aria-expanded="false">
                             <i class="icon-cup menu-icon"></i><span class="nav-text">Donar Vianda</span>
                         </a>
                     </li>
                     <li>
-                        <a href="traslado.html" aria-expanded="false">
+                        <a href="traslado" aria-expanded="false">
                             <i class="icon-direction menu-icon"></i><span class="nav-text">Traslados</span>
                         </a>
                     </li>
                     <li>
-                        <a href="registrar-personas.html" aria-expanded="false">
+                        <a href="registrar-personas" aria-expanded="false">
                             <i class="icon-user-follow menu-icon"></i><span class="nav-text">Registrar Personas</span>
                         </a>
                     </li>
                     <li>
-                        <a href="dinero.html" aria-expanded="false">
+                        <a href="dinero" aria-expanded="false">
                             <i class="icon-wallet menu-icon"></i><span class="nav-text">Donar Dinero</span>
                         </a>
                     </li>
                     
                     <li>
-                        <a href="heladeras-p.html" aria-expanded="false">
+                        <a href="heladeras-p" aria-expanded="false">
                             <i class="icon-heladera menu-icon"></i><span class="nav-text">Heladeras</span>
                         </a>
                     </li>
                     <li>
-                        <a href="puntos.html" aria-expanded="false">
+                        <a href="puntos" aria-expanded="false">
                             <i class="icon-diamond menu-icon"></i><span class="nav-text">Puntos</span>
                         </a>
                     </li>
 
                     <li class="nav-label">(Organizaciones)</li>
                     <li>
-                        <a href="heladeras-o.html" aria-expanded="false">
+                        <a href="heladeras-o" aria-expanded="false">
                             <i class="icon-heladera menu-icon"></i><span class="nav-text">Heladeras</span>
                         </a>
                     </li>
                     <li>
-                        <a href="ofertas.html" aria-expanded="false">
+                        <a href="ofertas" aria-expanded="false">
                             <i class="icon-present menu-icon"></i><span class="nav-text">Ofertas</span>
                         </a>
                     </li>
                     <li>
-                        <a href="dinero.html" aria-expanded="false">
+                        <a href="dinero" aria-expanded="false">
                             <i class="icon-wallet menu-icon"></i><span class="nav-text">Donar Dinero</span>
                         </a>
                     </li>
                     <li>
-                        <a href="puntos.html" aria-expanded="false">
+                        <a href="puntos" aria-expanded="false">
                             <i class="icon-diamond menu-icon"></i><span class="nav-text">Puntos</span>
                         </a>
                     </li>
 
                     <li class="nav-label">(Administrador)</li>
                     <li>
-                        <a href="migracion.html" aria-expanded="false">
+                        <a href="migracion" aria-expanded="false">
                             <i class="icon-cloud-upload menu-icon"></i><span class="nav-text">Migración</span>
                         </a>
                     </li>
                     <li>
-                        <a href="heladeras-a.html" aria-expanded="false">
+                        <a href="heladeras-a" aria-expanded="false">
                             <i class="icon-heladera menu-icon"></i><span class="nav-text">Heladeras</span>
                         </a>
                     </li>
                     <li>
-                        <a href="reportes.html" aria-expanded="false">
+                        <a href="reportes" aria-expanded="false">
                             <i class="icon-chart menu-icon"></i><span class="nav-text">Reportes</span>
                         </a>
                     </li>
@@ -250,49 +250,82 @@
                 <div class="col-lg-6" style="margin-top: 15px;">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Datos de la vianda</h4>
+                            <h4 class="card-title">Nueva Donación</h4>
                             <div class="basic-form">
-                                <form action="/vianda" method="post">
+                                <form>
                                     <div class="form-group">
-                                        <label>Contenido de la vianda (Comida)</label>
-                                        <input type="text" name = "comida" class="form-control" placeholder="Especifica el contenido de la vianda" required>
+                                        <label>Monto de dinero a donar</label>
+                                        <input type="number" class="form-control" placeholder="Monto en ARS" required>
                                     </div>
                                     <div class="form-group">
-                                        <label>Calorías</label>
-                                        <input type="number" name = "calorias" class="form-control" placeholder="Calorías (opcional)">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Peso (en gramos)</label>
-                                        <input type="number" name = "peso" class="form-control" placeholder="Peso (opcional)">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>{{hela.nombre}}</label>
-                                        <select class="form-control" name="heladeraId" required>
-                                            <option selected disabled>Selecciona una opción...</option>
-                                            <option value=4 >UTN Medrano</option>
-                                            <option value=8>Ejército de Salvación Central</option>
-                                            <option value=12>Colegio Mariano Moreno</option>
-                                            <option value="16">{{hela.nombre}}</option>
+                                        <label>Tipo de tarjeta</label>
+                                        <select class="form-control" required>
+                                            <option selected disabled>Elige...</option>
+                                            <option>Visa</option>
+                                            <option>MasterCard</option>
+                                            <option>Amex</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label>Fecha de donación</label>
-                                        <input type="date" name = "fechaDonacion" class="form-control" required>
+                                        <label>Número de tarjeta</label>
+                                        <input type="number" class="form-control" placeholder="Número de tarjeta" required>
                                     </div>
                                     <div class="form-group">
-                                        <label>Fecha de vencimiento</label>
-                                        <input type="date" name="fechaVencimiento" class="form-control" required>
+                                        <label>Nombre de la tarjeta</label>
+                                        <input type="text" class="form-control" placeholder="Nombre del titular" required>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>Fecha de vencimiento</label>
+                                            <input type="month" class="form-control" required>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Código de seguridad</label>
+                                            <input type="text" class="form-control" placeholder="Código CVV" required>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex;">
+                                        <div class="form-group">
+                                            <label>Tipo de donación</label>
+                                            <div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="donationType" id="oneTime" value="oneTime" required>
+                                                    <label class="form-check-label" for="oneTime">Única</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="donationType" id="recurring" value="recurring" required>
+                                                    <label class="form-check-label" for="recurring">Recurrente</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" id="recurrenceFrequency" style="display:none; margin-left: 30px;">
+                                            <label>Frecuencia de la recurrencia</label>
+                                            <div class="d-flex justify-content-end">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="recurrenceFrequency" id="weekly" value="weekly" required>
+                                                    <label class="form-check-label" for="weekly">Semanal</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="recurrenceFrequency" id="monthly" value="monthly" required>
+                                                    <label class="form-check-label" for="monthly">Mensual</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="recurrenceFrequency" id="yearly" value="yearly" required>
+                                                    <label class="form-check-label" for="yearly">Anual</label>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <button type="submit" class="btn btn-success">Donar</button>
-                                </form>                                
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6" style="margin-top: 15px;">
                     <div class="card">
-                        <div class="card-body" style="padding: 64px 29px;">
-                            <img class="d-block w-100" src="images/viandas.jpg" alt="">
+                        <div class="card-body" style="padding: 54px 29px;">
+                            <img class="d-block w-100" src="images/dinero.jpg" alt="">
                         </div>
                     </div>
                 </div>
@@ -350,6 +383,20 @@
 
 
     <script src="./js/dashboard/dashboard-1.js"></script>
+
+    <script>
+        // Script para mostrar u ocultar la frecuencia de recurrencia
+        document.querySelectorAll('input[name="donationType"]').forEach((elem) => {
+            elem.addEventListener("change", function(event) {
+                const frequencyDiv = document.getElementById("recurrenceFrequency");
+                if (event.target.value === "recurring") {
+                    frequencyDiv.style.display = "block";
+                } else {
+                    frequencyDiv.style.display = "none";
+                }
+            });
+        });
+    </script>
 
 </body>
 

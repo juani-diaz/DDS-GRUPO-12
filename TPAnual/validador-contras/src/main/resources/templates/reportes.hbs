@@ -9,7 +9,7 @@
     <!-- theme meta -->
     <meta name="theme-name" content="quixlab" />
   
-    <title>Donar Vianda</title>
+    <title>Reportes</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
     <!-- Pignose Calender -->
@@ -49,7 +49,7 @@
         ***********************************-->
         <div class="nav-header">
             <div class="brand-logo">
-                <a href="index.html">
+                <a href="index">
                     <b class="logo-abbr"><img src="images/logo.png" alt=""> </b>
                     <span class="logo-compact"><img src="./images/logo_n.png" alt=""></span>
                     <span class="brand-title">
@@ -140,11 +140,11 @@
                                 <div class="dropdown-content-body">
                                     <ul>
                                         <li>
-                                            <a href="app-profile.html"><i class="icon-user"></i> <span>Mi cuenta</span></a>
+                                            <a href="app-profile"><i class="icon-user"></i> <span>Mi cuenta</span></a>
                                         </li>
                                         
                                         <hr class="my-2">
-                                        <li><a href="page-login.html"><i class="icon-key"></i> <span>Cerrar sesión</span></a></li>
+                                        <li><a href="page-login"><i class="icon-key"></i> <span>Cerrar sesión</span></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -165,72 +165,72 @@
                 <ul class="metismenu" id="menu">
                     <li class="nav-label">(Personas)</li>
                     <li>
-                        <a href="vianda.html" aria-expanded="false">
+                        <a href="vianda" aria-expanded="false">
                             <i class="icon-cup menu-icon"></i><span class="nav-text">Donar Vianda</span>
                         </a>
                     </li>
                     <li>
-                        <a href="traslado.html" aria-expanded="false">
+                        <a href="traslado" aria-expanded="false">
                             <i class="icon-direction menu-icon"></i><span class="nav-text">Traslados</span>
                         </a>
                     </li>
                     <li>
-                        <a href="registrar-personas.html" aria-expanded="false">
+                        <a href="registrar-personas" aria-expanded="false">
                             <i class="icon-user-follow menu-icon"></i><span class="nav-text">Registrar Personas</span>
                         </a>
                     </li>
                     <li>
-                        <a href="dinero.html" aria-expanded="false">
+                        <a href="dinero" aria-expanded="false">
                             <i class="icon-wallet menu-icon"></i><span class="nav-text">Donar Dinero</span>
                         </a>
                     </li>
                     
                     <li>
-                        <a href="heladeras-p.html" aria-expanded="false">
+                        <a href="heladeras-p" aria-expanded="false">
                             <i class="icon-heladera menu-icon"></i><span class="nav-text">Heladeras</span>
                         </a>
                     </li>
                     <li>
-                        <a href="puntos.html" aria-expanded="false">
+                        <a href="puntos" aria-expanded="false">
                             <i class="icon-diamond menu-icon"></i><span class="nav-text">Puntos</span>
                         </a>
                     </li>
 
                     <li class="nav-label">(Organizaciones)</li>
                     <li>
-                        <a href="heladeras-o.html" aria-expanded="false">
+                        <a href="heladeras-o" aria-expanded="false">
                             <i class="icon-heladera menu-icon"></i><span class="nav-text">Heladeras</span>
                         </a>
                     </li>
                     <li>
-                        <a href="ofertas.html" aria-expanded="false">
+                        <a href="ofertas" aria-expanded="false">
                             <i class="icon-present menu-icon"></i><span class="nav-text">Ofertas</span>
                         </a>
                     </li>
                     <li>
-                        <a href="dinero.html" aria-expanded="false">
+                        <a href="dinero" aria-expanded="false">
                             <i class="icon-wallet menu-icon"></i><span class="nav-text">Donar Dinero</span>
                         </a>
                     </li>
                     <li>
-                        <a href="puntos.html" aria-expanded="false">
+                        <a href="puntos" aria-expanded="false">
                             <i class="icon-diamond menu-icon"></i><span class="nav-text">Puntos</span>
                         </a>
                     </li>
 
                     <li class="nav-label">(Administrador)</li>
                     <li>
-                        <a href="migracion.html" aria-expanded="false">
+                        <a href="migracion" aria-expanded="false">
                             <i class="icon-cloud-upload menu-icon"></i><span class="nav-text">Migración</span>
                         </a>
                     </li>
                     <li>
-                        <a href="heladeras-a.html" aria-expanded="false">
+                        <a href="heladeras-a" aria-expanded="false">
                             <i class="icon-heladera menu-icon"></i><span class="nav-text">Heladeras</span>
                         </a>
                     </li>
                     <li>
-                        <a href="reportes.html" aria-expanded="false">
+                        <a href="reportes" aria-expanded="false">
                             <i class="icon-chart menu-icon"></i><span class="nav-text">Reportes</span>
                         </a>
                     </li>
@@ -245,55 +245,132 @@
             Content body start
         ***********************************-->
         <div class="content-body">
-            
-            <div style="display: flex;">
-                <div class="col-lg-6" style="margin-top: 15px;">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Datos de la vianda</h4>
-                            <div class="basic-form">
-                                <form action="/vianda" method="post">
-                                    <div class="form-group">
-                                        <label>Contenido de la vianda (Comida)</label>
-                                        <input type="text" name = "comida" class="form-control" placeholder="Especifica el contenido de la vianda" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Calorías</label>
-                                        <input type="number" name = "calorias" class="form-control" placeholder="Calorías (opcional)">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Peso (en gramos)</label>
-                                        <input type="number" name = "peso" class="form-control" placeholder="Peso (opcional)">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>{{hela.nombre}}</label>
-                                        <select class="form-control" name="heladeraId" required>
-                                            <option selected disabled>Selecciona una opción...</option>
-                                            <option value=4 >UTN Medrano</option>
-                                            <option value=8>Ejército de Salvación Central</option>
-                                            <option value=12>Colegio Mariano Moreno</option>
-                                            <option value="16">{{hela.nombre}}</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Fecha de donación</label>
-                                        <input type="date" name = "fechaDonacion" class="form-control" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Fecha de vencimiento</label>
-                                        <input type="date" name="fechaVencimiento" class="form-control" required>
-                                    </div>
-                                    <button type="submit" class="btn btn-success">Donar</button>
-                                </form>                                
+
+            <div class="col-lg-12">
+                <div class="card" style="margin: 15px;">
+                    <div class="card-body">
+                        <div style="display: flex;">
+                            <h4 class="card-title" style="align-content: center;">Reportes de la semana </h4>
+                            <div class="form-group" style="position: relative; top: 5px; margin-left: 10px;">
+                                <select class="form-control" required>
+                                    <option selected>29/09/2024 - 05/10/2024</option>
+                                    <option>22/09/2024 - 28/09/2024</option>
+                                    <option>15/09/2024 - 21/09/2024</option>
+                                </select>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6" style="margin-top: 15px;">
-                    <div class="card">
-                        <div class="card-body" style="padding: 64px 29px;">
-                            <img class="d-block w-100" src="images/viandas.jpg" alt="">
+            </div>
+            
+            <div class="col-lg-12">
+                <div class="card" style="margin: 15px;">
+                    <div class="card-body">
+                        <h4 class="card-title">Heladeras</h4>
+                        <div class="table-responsive">
+                            <table class="table table-striped zero-configuration">
+                                <thead>
+                                    <tr>
+                                        <th>Heladera</th>
+                                        <th>Fallas</th>
+                                        <th>Viandas Colocadas</th>
+                                        <th>Viandas Retiradas</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>UTN Medrano</th>
+                                        <td>2</td>
+                                        <td>41</td>
+                                        <td>37</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Ejército de Salvación Central</th>
+                                        <td>4</td>
+                                        <td>72</td>
+                                        <td>76</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Colegio Mariano Moreno</th>
+                                        <td>0</td>
+                                        <td>56</td>
+                                        <td>56</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Parque Centenario 1</th>
+                                        <td>11</td>
+                                        <td>64</td>
+                                        <td>68</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12"></div>
+                <div class="card" style="margin: 15px;">
+                    <div class="card-body">
+                        <h4 class="card-title">Colaboradores</h4>
+                        <div class="table-responsive">
+                            <table class="table table-striped zero-configuration">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Apellido</th>
+                                        <th>Usuario</th>
+                                        <th>Viandas Donadas</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>Juan Ignacio</th>
+                                        <td>Diaz Puig</td>
+                                        <td>juani123</td>
+                                        <td>50</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Juan Martin</th>
+                                        <td>Terrizzi</td>
+                                        <td>juanma_moreno</td>
+                                        <td>42</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Tomás</th>
+                                        <td>Cerezo</td>
+                                        <td>naicon67</td>
+                                        <td>67</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Lucio</th>
+                                        <td>Valenzano Vecchio</td>
+                                        <td>lucilu</td>
+                                        <td>23</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Juan</th>
+                                        <td>Polito</td>
+                                        <td>poli</td>
+                                        <td>67</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Fahim</th>
+                                        <td>Wahid</td>
+                                        <td>fahim_bangla</td>
+                                        <td>999</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Iñaki</th>
+                                        <td>Aranzamendi</td>
+                                        <td>inia_b</td>
+                                        <td>43</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -350,6 +427,10 @@
 
 
     <script src="./js/dashboard/dashboard-1.js"></script>
+
+    <script src="./plugins/tables/js/jquery.dataTables.min.js"></script>
+    <script src="./plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
+    <script src="./plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
 
 </body>
 

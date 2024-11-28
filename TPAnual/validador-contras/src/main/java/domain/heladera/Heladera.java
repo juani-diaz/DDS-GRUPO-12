@@ -23,6 +23,9 @@ public class Heladera {
   public long id;
 
   private String nombre;
+  public String getNombre() {
+    return nombre;
+  }
 
   @OneToOne
   private Ubicacion direccion;

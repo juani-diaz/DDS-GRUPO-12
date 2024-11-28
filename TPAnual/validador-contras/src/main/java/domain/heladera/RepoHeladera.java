@@ -40,15 +40,18 @@ public class RepoHeladera {
   //}
 
   public Heladera findById(Long heladeraID_Long) {
+    EntityManager em = BDUtils.getEntityManager();
     BDUtils.comenzarTransaccion(em);
 
     Heladera heladera = null;
-
+    System.out.println("ESTOY EN RERPOHELADERA");
     try {
       heladera = em.getReference(Heladera.class, heladeraID_Long);
     } catch (Exception e) {
       System.out.println("Error al agregar la heladera: " + e + " en HeladeraController.obtenerHeladera");
     }
+    System.out.println("La heladera es: "+heladera);
+    System.out.println("La heladera es: "+heladera.getNombre());
     return heladera;
   }
 
