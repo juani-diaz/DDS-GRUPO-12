@@ -6,15 +6,21 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.time.LocalDate;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
-//@Entity
+@Entity
 public class DonacionDinero extends Colaboracion {
-    public final static Float multiplicador = 0.5F;
 
+    //@Column No se persiste por que es public, si fuera privado se persistiria
+    public final static Float multiplicador = 0.5F;
+    @Column
     private Float monto;
+    @Column
     private String frecuencia;
 
     public DonacionDinero(Colaborador colaborador, LocalDate fecha,

@@ -30,7 +30,7 @@ public class Colaborador extends Rol {
 
   //@OneToMany(cascade = CascadeType.ALL)
   private List<Colaboracion> colaboraciones;
-
+  @Column
   private Float cantidadPuntos;
   //@OneToMany(cascade = CascadeType.ALL)
   //@ElementCollection

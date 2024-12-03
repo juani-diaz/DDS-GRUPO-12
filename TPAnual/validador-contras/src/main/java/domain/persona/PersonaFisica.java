@@ -27,7 +27,7 @@ public class PersonaFisica extends Persona {
     private LocalDate fechaNacimiento;
 
 
-    //TODO: No se que hacd esto :)
+    //TODO: No se que hace esto :)
     public PersonaFisica(
         String nombre,
         MedioDeContacto medioContacto,

@@ -16,16 +16,21 @@ import java.util.List;
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
 //@Entity
 public class DistribucionVianda extends Colaboracion {
+    //@Id
+    //@GeneratedValue
+    //private int id;
+
+    //@Column
     public final static Float multiplicador = 1F;
-    //@OneToOne
+    //@ManyToOne
     private Heladera origen;
-    //@OneToOne
+    //@ManyToOne
     private Heladera destino;
 
     //@ElementCollection
     private List<Integer> viandasMovidas;
 
-    //@Enumerated(value = EnumType.STRING)
+   // @Enumerated(value = EnumType.STRING)
     private EnumMotivosMovimientoVianda motivo;
 
     public DistribucionVianda(Colaborador colaborador, LocalDate fecha,

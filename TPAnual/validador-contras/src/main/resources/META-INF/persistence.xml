@@ -27,7 +27,7 @@
             <property name="use_sql_comments" value="true"/>
                 <!-- Hibernate will put comments inside all generated SQL statements to hint what’s the generated SQL trying to do -->
 
-            <property name="hibernate.hbm2ddl.auto" value="create-drop" />
+            <property name="hibernate.hbm2ddl.auto" value="create" />
             <!--
                 - validate: validate the schema, makes no changes to the database.
                 - update: update the schema.
