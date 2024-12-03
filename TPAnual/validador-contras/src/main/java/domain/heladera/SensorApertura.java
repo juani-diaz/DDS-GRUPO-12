@@ -5,13 +5,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
 @Getter
 @Setter
 @NoArgsConstructor
+
 public class SensorApertura extends Sensor {
 
   public SensorApertura(Heladera hel){
-    super(hel);
+      super(hel);
   }
 
   @Override

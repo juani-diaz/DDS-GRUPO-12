@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-
+//NO SE PERSISTE
 public class RepoHeladera {
 
   //Se crea el EntityManager

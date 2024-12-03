@@ -25,18 +25,19 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
-//@Entity
+@Entity
 public class Colaborador extends Rol {
 
-  //@OneToMany(cascade = CascadeType.ALL)
+  @OneToMany(cascade = CascadeType.ALL)
   private List<Colaboracion> colaboraciones;
   @Column
   private Float cantidadPuntos;
   //@OneToMany(cascade = CascadeType.ALL)
   //@ElementCollection
+  @OneToMany
   private List<Tarjeta> tarjetasParaEntregar;
 
-  //@Embedded
+  @OneToOne
   private Tarjeta tarjetaColaborador;
 
   public Colaborador(Persona p, List<Colaboracion> lc, Float cp, List<Tarjeta> te, Tarjeta t){

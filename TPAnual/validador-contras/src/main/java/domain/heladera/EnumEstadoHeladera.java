@@ -1,5 +1,6 @@
 package domain.heladera;
 
+
 public enum EnumEstadoHeladera {
     DISPONIBLE,
     INACTIVA_POR_FALLA,

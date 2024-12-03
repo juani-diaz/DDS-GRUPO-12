@@ -7,14 +7,18 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import persistence.EntidadPersistente;
 
+import javax.persistence.*;
 import java.util.Date;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PedidoApertura {
+@Entity
+public class PedidoApertura extends EntidadPersistente {
+  @OneToOne
   private Tarjeta tarjeta;
+  @ManyToOne
   private Heladera heladera;
   @Column
   private Date fechaVencimiento;

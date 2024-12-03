@@ -4,6 +4,7 @@ import lombok.*;
 
 
 @Getter @Setter @NoArgsConstructor
+
 public class SensorDeMovimiento extends Sensor{
 
     public SensorDeMovimiento(Heladera hel){

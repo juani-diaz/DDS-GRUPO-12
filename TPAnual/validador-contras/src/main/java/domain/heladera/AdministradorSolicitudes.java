@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.apache.commons.lang3.time.DateUtils;
 
+import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 import java.util.Collections;
 
 @Getter
@@ -18,8 +20,14 @@ import java.util.Collections;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AdministradorSolicitudes {
+
+  @Transient
   private SingletonListadoHeladeras listadoHeladeras;
+
+  @ManyToOne
   private List<PedidoApertura> pedidos;
+
+  @Transient
   private final Integer CANTIDAD_HORAS = 3;
 
   public PedidoApertura solicitarApertura(Tarjeta tarjeta, Integer indiceHeladera, EnumMotivoApertura motivo){
@@ -33,7 +41,6 @@ public class AdministradorSolicitudes {
     this.pedidos.add(pedido);
     return pedido;
   }
-
 
   public boolean puedeAbrir(Tarjeta tarjeta, Heladera heladera) {
     try {

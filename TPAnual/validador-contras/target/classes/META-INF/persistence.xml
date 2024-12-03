@@ -15,7 +15,7 @@
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/dds?serverTimezone=UTC"/>
                 <!--que este en localhost significa que esta en local y no la nuve-->
             <property name="hibernate.connection.username" value="root"/>
-            <property name="hibernate.connection.password" value="1234"/>
+            <property name="hibernate.connection.password" value="junio0606"/>
             <!--<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL57Dialect"/>-->
 
             <property name="hibernate.show_sql" value="true"/>
@@ -27,7 +27,7 @@
             <property name="use_sql_comments" value="true"/>
                 <!-- Hibernate will put comments inside all generated SQL statements to hint what’s the generated SQL trying to do -->
 
-            <property name="hibernate.hbm2ddl.auto" value="create-drop" />
+            <property name="hibernate.hbm2ddl.auto" value="create" />
             <!--
                 - validate: validate the schema, makes no changes to the database.
                 - update: update the schema.

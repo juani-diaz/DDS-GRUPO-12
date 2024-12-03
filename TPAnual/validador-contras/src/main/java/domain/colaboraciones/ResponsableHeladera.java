@@ -12,9 +12,9 @@ import javax.persistence.OneToOne;
 import java.time.LocalDate;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
-//@Entity
+@Entity
 public class ResponsableHeladera extends Colaboracion{
-    //@OneToOne
+    @OneToOne
     private Heladera heladera;
 
     public ResponsableHeladera(Colaborador colaborador, LocalDate fecha, Heladera heladera){
