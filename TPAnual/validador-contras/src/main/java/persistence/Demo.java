@@ -7,7 +7,7 @@ import domain.persona.Persona;
 import domain.rol.Colaborador;
 import domain.vianda.EnumEstadoVianda;
 import domain.vianda.Vianda;
-import org.hibernate.type.LocalDateTimeType;
+//import org.hibernate.type.LocalDateTimeType;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDate;

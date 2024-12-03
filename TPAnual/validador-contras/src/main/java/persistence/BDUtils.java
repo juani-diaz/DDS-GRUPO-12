@@ -10,7 +10,7 @@ public class BDUtils {
     private static final EntityManagerFactory factory;
 
     static {
-        factory = Persistence.createEntityManagerFactory("demo-hibernate-PU");
+        factory = Persistence.createEntityManagerFactory("db");
     }
 
     public static EntityManager getEntityManager() {

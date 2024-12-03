@@ -3,19 +3,18 @@ package domain.rol;
 import domain.persona.Persona;
 import lombok.Getter;
 import lombok.Setter;
+import persistence.EntidadPersistente;
 
 import javax.persistence.*;
 
 @Getter
 @Setter
-//@Entity
+@Entity
 //@Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Rol {
+public abstract class Rol extends EntidadPersistente {
 
-    //@Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     //@OneToOne(cascade = CascadeType.ALL)
     //@JoinColumn(name = "persona_documento", referencedColumnName = "documento")
+    @ManyToOne
     Persona persona;
 }

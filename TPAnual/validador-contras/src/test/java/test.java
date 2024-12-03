@@ -49,9 +49,9 @@ public class test {
   List<String> whatsap = Arrays.asList("1100001111");
   MedioDeContacto medioDePersona = new Email();
 
-  Documento documento = new Documento("dni","450123456");
+  Documento documento;// =new Documento("dni","450123456");
 
-  PersonaFisica personaFisica1 = new PersonaFisica("Juan_Martin",medioDePersona,"Avenida_Libertador_1820",documento,"Terrizzi","masculino","masculino",fechaFuncionamiento);
+  PersonaFisica personaFisica1;//= new PersonaFisica("Juan_Martin",medioDePersona,"Avenida_Libertador_1820",documento,"Terrizzi","masculino","masculino",fechaFuncionamiento);
 
   PersonaJuridica personaJuridica1 = new PersonaJuridica("darVianda",EnumTipoPersonaJuridica.EMPRESA, "Empresa");
 

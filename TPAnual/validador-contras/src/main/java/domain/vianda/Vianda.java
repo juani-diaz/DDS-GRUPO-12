@@ -3,23 +3,34 @@ package domain.vianda;
 import domain.heladera.Heladera;
 import domain.rol.Colaborador;
 import lombok.*;
+import persistence.EntidadPersistente;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
 @Entity
-public class Vianda {
-  @Id @GeneratedValue
-  private Long id;
+public class Vianda extends EntidadPersistente {
+
+  @Column
   private String comida;
+
+  @Column
   private LocalDate fechaVencimiento;
+
+  @Column
   private LocalDate fechaDonacion;
 
   @ManyToOne
+  @JoinColumn(name="vianda_id", referencedColumnName = "id")
   private Heladera heladera;
+
+  @Column
   private String calorias;
+
+  @Column
   private Float peso;
+
   @Enumerated(value = EnumType.STRING)
   private EnumEstadoVianda estado;
 

@@ -1,11 +1,13 @@
 package domain.heladera;
 
+import com.mysql.cj.xdevapi.FetchResult;
 import lombok.*;
 import lombok.Getter;
 import lombok.Setter;
 //import sun.management.Sensor;
 
 import domain.vianda.*;
+import persistence.EntidadPersistente;
 
 
 import javax.persistence.*;
@@ -17,33 +19,37 @@ import java.util.List;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @Entity
-public class Heladera {
-  @Id
-  @GeneratedValue
-  public long id;
+@Table(name = "heladera")
+public class Heladera extends EntidadPersistente {
 
+  @Column(name = "nombre")
   private String nombre;
-  public String getNombre() {
-    return nombre;
-  }
 
-  @OneToOne
+  //public String getNombre() {
+  //  return nombre;
+  //}
+
+  @ManyToOne
   private Ubicacion direccion;
 
+  @Column
   private Integer tamanioEnViandas;
+
+  @Column
   private LocalDate fechaFuncionamiento;
 
-  @OneToMany//(cascade = CascadeType.ALL)
-  //@JoinColumn(name = "heladera")
-  private List<Vianda> viandasEnHeladera=new ArrayList<>();
+  @OneToMany(mappedBy = "heladera", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+  private List<Vianda> viandasEnHeladera; //=new ArrayList<>()
 
+  @Column
   private Float temperaturaMinima;
+
+  @Column
   private Float temperaturaMaxima;
-
-
 
   @Enumerated(value = EnumType.STRING)
   private EnumEstadoHeladera estado;
+
 
   public void ingresarViandas(List<Vianda> Viandas) {
     this.viandasEnHeladera.addAll(Viandas);

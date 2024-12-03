@@ -5,16 +5,25 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import java.time.LocalDate;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 public class PersonaFisica extends Persona {
+
+    @Column
     private String apellido;
+
+    @Column
     private String sexo;
+    @Column
     private String genero;
+    @Column
     private LocalDate fechaNacimiento;
 
 
@@ -29,7 +38,7 @@ public class PersonaFisica extends Persona {
         String genero,
         LocalDate fechaNacimiento
         ){
-        super(documento, nombre, medioContacto, direccion);
+        //super(documento, nombre, medioContacto, direccion);
         this.apellido = apellido;
         this.setDocumento(documento);
         this.fechaNacimiento = fechaNacimiento;

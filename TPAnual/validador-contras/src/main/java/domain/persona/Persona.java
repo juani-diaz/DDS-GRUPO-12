@@ -1,24 +1,30 @@
 package domain.persona;
 
+import domain.heladera.Ubicacion;
 import lombok.*;
+import persistence.EntidadPersistente;
 
 import javax.persistence.*;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
-//@Entity
-public abstract class Persona {
-    //@Id
-    //@OneToOne
+@Entity
+public abstract class Persona extends EntidadPersistente {
+
     //@JoinColumn(name = "documento_tipo", referencedColumnName = "tipo")
     //@JoinColumn(name = "documento_numero", referencedColumnName = "numero")
 
-    //@EmbeddedId
+    @Column
+    private String nombre;
+
+    @Column
+    private String direccion;
+
+    @OneToOne
     private Documento documento;
 
-    private String nombre;
-    //@Embedded
+    @OneToOne
     private MedioDeContacto medioDeContacto;
-    private String direccion;
+
 
 
 
