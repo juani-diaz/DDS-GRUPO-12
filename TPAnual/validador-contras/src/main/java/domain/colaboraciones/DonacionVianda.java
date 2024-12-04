@@ -18,12 +18,12 @@ import java.util.Collections;
 import java.util.List;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
-//@Entity
+@Entity
 public class DonacionVianda extends Colaboracion {
     public final static Float multiplicador = 1.5F;
-    //@ManyToOne
+    @ManyToOne
     private Vianda vianda;
-    //@ManyToOne
+    @ManyToOne
     private Heladera destino;
 
     public DonacionVianda(Colaborador colaborador, LocalDate fecha,

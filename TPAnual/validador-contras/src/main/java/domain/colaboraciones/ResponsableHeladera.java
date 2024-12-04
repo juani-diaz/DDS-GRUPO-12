@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import java.time.LocalDate;
@@ -14,7 +15,7 @@ import java.time.LocalDate;
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @Entity
 public class ResponsableHeladera extends Colaboracion{
-    @OneToOne
+    @OneToOne //Hay un unico responsable por heladera?
     private Heladera heladera;
 
     public ResponsableHeladera(Colaborador colaborador, LocalDate fecha, Heladera heladera){

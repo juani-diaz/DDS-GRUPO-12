@@ -10,11 +10,12 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-//@Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Rol extends EntidadPersistente {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class Rol{
 
-    //@OneToOne(cascade = CascadeType.ALL)
-    //@JoinColumn(name = "persona_documento", referencedColumnName = "documento")
+    @Id
+    private int id;
+
     @ManyToOne
     Persona persona;
 }

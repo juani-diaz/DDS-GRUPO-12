@@ -3,7 +3,10 @@ package domain.heladera;
 import domain.registro.*;
 import lombok.*;
 
+import javax.persistence.Entity;
+
 @Getter @Setter @NoArgsConstructor
+@Entity
 public class SensorDeTemperatura extends Sensor{
 
     public SensorDeTemperatura(Heladera hel){

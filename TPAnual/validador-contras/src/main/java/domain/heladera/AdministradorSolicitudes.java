@@ -10,8 +10,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.apache.commons.lang3.time.DateUtils;
+import persistence.EntidadPersistente;
 
+import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 import java.util.Collections;
 
@@ -19,12 +22,13 @@ import java.util.Collections;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AdministradorSolicitudes {
+@Entity
+public class AdministradorSolicitudes extends EntidadPersistente {
 
   @Transient
   private SingletonListadoHeladeras listadoHeladeras;
 
-  @ManyToOne
+  @OneToMany
   private List<PedidoApertura> pedidos;
 
   @Transient

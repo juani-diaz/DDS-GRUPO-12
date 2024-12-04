@@ -23,7 +23,7 @@ public abstract class MedioDeContacto extends EntidadPersistente {
   @Column
   private String celular;
 
-  protected String direccion;
+  protected String direccion;//@Juani Diaz
 
   public void notificar(String header,String mensaje){};
 

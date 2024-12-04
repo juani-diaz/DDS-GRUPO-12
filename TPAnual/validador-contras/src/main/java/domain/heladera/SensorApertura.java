@@ -11,7 +11,7 @@ import javax.persistence.Entity;
 @Getter
 @Setter
 @NoArgsConstructor
-
+@Entity
 public class SensorApertura extends Sensor {
 
   public SensorApertura(Heladera hel){

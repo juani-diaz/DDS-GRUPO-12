@@ -35,7 +35,7 @@ public class Heladera extends EntidadPersistente {
   @Column
   private Integer tamanioEnViandas;
 
-  @Column
+  @Column(columnDefinition = "DATE")
   private LocalDate fechaFuncionamiento;
 
   @OneToMany(mappedBy = "heladera", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)

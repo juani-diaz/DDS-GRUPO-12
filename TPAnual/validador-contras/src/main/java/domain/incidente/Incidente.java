@@ -5,15 +5,27 @@ import domain.heladera.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import persistence.EntidadPersistente;
 
+import javax.persistence.Entity;
+import javax.persistence.Transient;
 import java.util.Date;
 import java.util.List;
 
 @Getter @Setter
-public abstract class Incidente {
+@Entity
+public abstract class Incidente extends EntidadPersistente {
+
+  @Transient
   private Heladera heladera;
+
+  @Transient
   private Date fecha;
+
+  @Transient
   private List<VisitasTecnicas> evolucionDeIncidente;
+
+  @Transient
   private EnumEstadoDeIncidente estadoDeIncidente;
 
   public Incidente(Heladera heladera, Date fecha, List<VisitasTecnicas> evolucionDeIncidente, EnumEstadoDeIncidente estadoDeIncidente) {

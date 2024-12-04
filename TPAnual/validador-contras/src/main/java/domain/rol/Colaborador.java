@@ -26,10 +26,13 @@ import java.util.logging.Logger;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @Entity
+//@DiscriminatorValue("colaborador")
 public class Colaborador extends Rol {
 
-  @OneToMany(cascade = CascadeType.ALL)
+  @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @JoinTable(name = "colaborador_X_colaboraciones")
   private List<Colaboracion> colaboraciones;
+
   @Column
   private Float cantidadPuntos;
   //@OneToMany(cascade = CascadeType.ALL)

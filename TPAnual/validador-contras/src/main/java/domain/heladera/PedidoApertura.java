@@ -16,7 +16,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Entity
 public class PedidoApertura extends EntidadPersistente {
-  @OneToOne
+  @ManyToOne
   private Tarjeta tarjeta;
   @ManyToOne
   private Heladera heladera;

@@ -10,16 +10,16 @@ import java.time.LocalDate;
 
 @Getter @Setter
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Colaboracion extends EntidadPersistente{
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class Colaboracion{
 
-//    @Id @GeneratedValue
-//    private Long id;
-//    @ManyToOne
-//    @JoinColumn(name = "colaborador_id")
+    @Id
+    private int id;
+
     @ManyToOne
     Colaborador colaborador;
-    @Column
+
+    @Column(columnDefinition = "DATE")
     LocalDate fecha;
 
     public abstract void ejecutar();

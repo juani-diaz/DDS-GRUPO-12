@@ -7,15 +7,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import java.time.LocalDate;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
-//@Entity
+@Entity
 public class PresentacionOferta extends Colaboracion{
+    @Column
     private String rubro;
+    @Column
     private String nombre;
+    @Column
     private String puntosNecesarios;
+    @Column
     private String imagen;
 
     public PresentacionOferta(Colaborador colaborador, LocalDate fecha,

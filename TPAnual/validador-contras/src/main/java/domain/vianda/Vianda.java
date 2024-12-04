@@ -15,10 +15,10 @@ public class Vianda extends EntidadPersistente {
   @Column
   private String comida;
 
-  @Column
+  @Column(columnDefinition = "DATE")
   private LocalDate fechaVencimiento;
 
-  @Column
+  @Column(columnDefinition = "DATE")
   private LocalDate fechaDonacion;
 
   @ManyToOne

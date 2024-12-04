@@ -11,12 +11,9 @@ import javax.persistence.*;
 
 @Getter @Setter @NoArgsConstructor
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class Sensor{
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+public abstract class Sensor extends EntidadPersistente{
 
-    @Id
-    @GeneratedValue
-    private int id;
 
     @ManyToOne
     Heladera heladeraAsignada;

@@ -14,23 +14,22 @@ import java.util.Collections;
 import java.util.List;
 
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
-//@Entity
+@Entity
 public class DistribucionVianda extends Colaboracion {
-    //@Id
-    //@GeneratedValue
-    //private int id;
 
     //@Column
     public final static Float multiplicador = 1F;
-    //@ManyToOne
+
+    @ManyToOne
     private Heladera origen;
-    //@ManyToOne
+
+    @ManyToOne
     private Heladera destino;
 
-    //@ElementCollection
+    @ElementCollection
     private List<Integer> viandasMovidas;
 
-   // @Enumerated(value = EnumType.STRING)
+    @Enumerated(value = EnumType.STRING)
     private EnumMotivosMovimientoVianda motivo;
 
     public DistribucionVianda(Colaborador colaborador, LocalDate fecha,

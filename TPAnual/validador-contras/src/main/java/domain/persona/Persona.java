@@ -10,9 +10,6 @@ import javax.persistence.*;
 @Entity
 public abstract class Persona extends EntidadPersistente {
 
-    //@JoinColumn(name = "documento_tipo", referencedColumnName = "tipo")
-    //@JoinColumn(name = "documento_numero", referencedColumnName = "numero")
-
     @Column
     private String nombre;
 
@@ -24,8 +21,5 @@ public abstract class Persona extends EntidadPersistente {
 
     @OneToOne
     private MedioDeContacto medioDeContacto;
-
-
-
 
 }

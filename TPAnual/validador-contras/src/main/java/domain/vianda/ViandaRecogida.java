@@ -6,14 +6,24 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import persistence.EntidadPersistente;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 import java.util.Date;
 
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
-public class ViandaRecogida  {
+@Entity
+public class ViandaRecogida extends EntidadPersistente {
+  @OneToOne
   private Vulnerable necesitado;
+  @OneToOne
   private Heladera heraderaDeVianda;
+  @OneToOne
   private Vianda viandaRecogida;
+  @Column(columnDefinition = "DATE")
   private Date fechaDeRecogida;
 }

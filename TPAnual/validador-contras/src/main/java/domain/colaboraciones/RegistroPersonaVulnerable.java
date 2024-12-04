@@ -14,12 +14,14 @@ import javax.persistence.OneToOne;
 import java.time.LocalDate;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
-//@Entity
+@Entity
 public class RegistroPersonaVulnerable extends  Colaboracion{
+
     public final static Float multiplicador = 2F;
 
+    @OneToOne
     private Tarjeta tarjetaEntregada;
-    //@OneToOne
+    @OneToOne
     private Vulnerable vulnerable;
 
     public RegistroPersonaVulnerable(Colaborador colaborador, LocalDate fecha,

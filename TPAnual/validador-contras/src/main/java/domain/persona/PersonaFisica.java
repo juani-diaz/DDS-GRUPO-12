@@ -23,7 +23,8 @@ public class PersonaFisica extends Persona {
     private String sexo;
     @Column
     private String genero;
-    @Column
+
+    @Column(columnDefinition = "DATE")
     private LocalDate fechaNacimiento;
 
 

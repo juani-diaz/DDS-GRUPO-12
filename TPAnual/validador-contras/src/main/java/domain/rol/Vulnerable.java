@@ -12,24 +12,38 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
-//@Entity
+@Entity
+@DiscriminatorValue("vulnerable")
 public class Vulnerable extends Rol {
-  private LocalDate fechaRegistro;
 
+  @Column(columnDefinition = "DATE")
+  private LocalDate fechaRegistro;
+  @Enumerated(value = EnumType.STRING)
   private EnumSituacionCalle situacionCalle;
+  @Column
   private Integer menoresACargo;
   //Tambien ver esto
+  @OneToMany
   private List<ViandaRecogida> viandasTomadas;
+  @OneToOne
   private Tarjeta tarjeta;
   //Ver Esto
+  @OneToMany
   private List<UsoDeTarjeta> usos;
+  @Column
   private Integer usosRestantesPorDia;
 
   public boolean retirarVianda(int indiceViandas, Heladera heladera){

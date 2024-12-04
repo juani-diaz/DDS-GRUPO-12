@@ -20,6 +20,7 @@ public class PersonaJuridica extends Persona{
 
     @Column
     private String razonSocial;
+
     @Enumerated(value = EnumType.STRING)
     private EnumTipoPersonaJuridica tipo;
 
