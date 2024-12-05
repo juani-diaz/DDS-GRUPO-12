@@ -15,6 +15,6 @@ public class ListaHeladeraController implements Handler{
 
   @Override
   public void handle(Context ctx) throws Exception {
-    ctx.json(hela.findById(4L));
+    ctx.json(hela.findById(4));
   }
 }

@@ -22,7 +22,7 @@ public class Vianda extends EntidadPersistente {
   private LocalDate fechaDonacion;
 
   @ManyToOne
-  @JoinColumn(name="vianda_id", referencedColumnName = "id")
+  @JoinColumn(name="heladera_id", referencedColumnName = "id")
   private Heladera heladera;
 
   @Column

@@ -29,6 +29,7 @@ import java.util.function.Consumer;
             initTemplateEngine();
 
             RepoHeladera hela = new RepoHeladera();
+
             Integer port = Integer.parseInt(System.getProperty("port", "8001"));
             Javalin app = Javalin.create(config -> {
                 config.staticFiles.add("/front/rentrega4");
@@ -39,6 +40,10 @@ import java.util.function.Consumer;
             HeladeraController heladeraController = new HeladeraController();
 
             app.post("/vianda", heladeraController::agregarVianda);
+
+            app.get("/", ctx -> {
+                ctx.render("index.hbs");
+            });
 
             app.get("/index", ctx -> {
                 ctx.render("index.hbs");

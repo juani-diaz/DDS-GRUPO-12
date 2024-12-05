@@ -39,7 +39,7 @@ public class RepoHeladera {
   //      x -> !x.getId().equals(id));
   //}
 
-  public Heladera findById(Long heladeraID_Long) {
+  public Heladera findById(Integer heladeraID_Long) {
     EntityManager em = BDUtils.getEntityManager();
     BDUtils.comenzarTransaccion(em);
 
