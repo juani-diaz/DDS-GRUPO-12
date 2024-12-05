@@ -47,6 +47,7 @@ public class UI_Vistas implements Handler{
     // Busca la heladera en la BD
     RepoHeladera hela = new RepoHeladera();
     Heladera heladera = hela.findById_Heladera(heladeraID);
+    System.out.println("HelaName= "+heladera.getNombre());
 
     // Crea vianda TODO: tendria que ser una clase aparte llamada creadorVianda
     Vianda vianda = new Vianda(comida, fechaVencimiento, fechaDonacion, calorias, peso, estado);
