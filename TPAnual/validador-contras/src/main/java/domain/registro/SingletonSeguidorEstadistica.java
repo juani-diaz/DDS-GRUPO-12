@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.apache.commons.lang3.time.DateUtils;
+import persistence.EntidadPersistente;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -23,7 +24,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class SingletonSeguidorEstadistica {
+public class SingletonSeguidorEstadistica extends EntidadPersistente {
 
   @OneToMany
   private List<Incidente> incidentes;
