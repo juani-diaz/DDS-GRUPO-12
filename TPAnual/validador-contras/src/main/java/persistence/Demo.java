@@ -2,6 +2,7 @@ package persistence;
 
 import domain.api.ListadoLocalidades;
 import domain.api.LocalidadCantidad;
+import domain.colaboraciones.DonacionVianda;
 import domain.heladera.EnumEstadoHeladera;
 import domain.heladera.Heladera;
 import domain.heladera.Ubicacion;

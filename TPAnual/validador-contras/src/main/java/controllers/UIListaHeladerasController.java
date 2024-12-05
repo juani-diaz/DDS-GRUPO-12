@@ -22,7 +22,7 @@ public class UIListaHeladerasController implements Handler{
   public void handle(Context ctx) throws Exception {
     Map<String, Object> model = new HashMap<>();
 
-    model.put("hela", hela.findById(7));
+    model.put("hela", hela.findById(1));
     ctx.render("vianda.hbs", model);
   }
 

@@ -48,7 +48,7 @@ public class VistasJavalin {
 
             RepoHeladera hela = new RepoHeladera();
 
-            //Demo.main(null);
+            Demo.main(null);
 
             Integer port = Integer.parseInt(System.getProperty("port", "8001"));
             Javalin app = Javalin.create(config -> {
