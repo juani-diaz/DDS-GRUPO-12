@@ -54,7 +54,7 @@ public class testServicios {
         list.add("120.0");
         list.add("100.0");
 
-        Ubicacion ubicacion=new Ubicacion("CABA","1","10","calle","123");
+        Ubicacion ubicacion=new Ubicacion("CABA","Villa Real","1","10","calle","123");
 
         List<String> ubicacionesRecomendadas= ubicacionesApi.obtenerUbicacionesRecomendadas(ubicacion).stream().map(Ubicacion::getLatitud).toList();
 

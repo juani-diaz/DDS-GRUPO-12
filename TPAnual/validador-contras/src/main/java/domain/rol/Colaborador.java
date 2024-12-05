@@ -89,7 +89,7 @@ public class Colaborador extends Rol {
 
   public void reportarIncidente(Heladera heladera, String descripcion, String foto) {
     IncidenteFallaTecnica falla = new IncidenteFallaTecnica(heladera, new Date(), this, descripcion, foto);
-    SingletonSeguidorEstadistica se = new SingletonSeguidorEstadistica(); // TODO singleton?
+    SingletonSeguidorEstadistica se = SingletonSeguidorEstadistica.getInstance();
     se.getIncidentes().add(falla);
   }
 

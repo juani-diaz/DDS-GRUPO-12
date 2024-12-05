@@ -37,7 +37,7 @@ public class DonacionVianda extends Colaboracion {
     public void ejecutar(){
         destino.ingresarViandas(Collections.singletonList(vianda));
 
-        SingletonSeguidorEstadistica se = new SingletonSeguidorEstadistica(); // TODO singleton?
+        SingletonSeguidorEstadistica se = SingletonSeguidorEstadistica.getInstance();
         se.getDonacionViandas().add(this);
     }
 

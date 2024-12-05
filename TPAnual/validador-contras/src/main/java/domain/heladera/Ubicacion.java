@@ -16,6 +16,8 @@ public class Ubicacion extends EntidadPersistente {
     @Column
     private String ciudad;
     @Column
+    private String localidad;
+    @Column
     private String latitud;
     @Column
     private String longitud;

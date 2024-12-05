@@ -27,8 +27,6 @@ public class PersonaFisica extends Persona {
     @Column(columnDefinition = "DATE")
     private LocalDate fechaNacimiento;
 
-
-    //TODO: No se que hace esto :)
     public PersonaFisica(
         String nombre,
         MedioDeContacto medioContacto,
@@ -39,12 +37,15 @@ public class PersonaFisica extends Persona {
         String genero,
         LocalDate fechaNacimiento
         ){
-        //super(documento, nombre, medioContacto, direccion);
+        super(nombre, direccion, documento, medioContacto);
         this.apellido = apellido;
-        this.setDocumento(documento);
+        this.sexo = sexo;
+        this.genero = genero;
         this.fechaNacimiento = fechaNacimiento;
     }
 
-
+    public String getNombreCompleto() {
+        return getNombre() + " " + getApellido();
+    }
 
 }

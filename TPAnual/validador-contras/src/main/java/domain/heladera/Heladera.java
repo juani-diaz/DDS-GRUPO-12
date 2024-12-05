@@ -51,8 +51,8 @@ public class Heladera extends EntidadPersistente {
   private EnumEstadoHeladera estado;
 
 
-  public void ingresarViandas(List<Vianda> Viandas) {
-    this.viandasEnHeladera.addAll(Viandas);
+  public void ingresarViandas(List<Vianda> viandas) {
+    this.viandasEnHeladera.addAll(viandas);
   }
 
   public Vianda sacarVianda(int indice) {
@@ -72,7 +72,7 @@ public class Heladera extends EntidadPersistente {
     this.direccion = direccion;
     this.tamanioEnViandas = tamanioEnViandas;
     this.fechaFuncionamiento = fechaFuncionamiento;
-    //this.viandasEnHeladera = viandas;
+    this.viandasEnHeladera = new ArrayList<Vianda>();
     this.temperaturaMinima = temperaturaMinima;
     this.temperaturaMaxima = temperaturaMaxima;
     this.estado = estado;

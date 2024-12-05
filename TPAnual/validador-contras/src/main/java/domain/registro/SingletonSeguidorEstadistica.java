@@ -1,8 +1,14 @@
 package domain.registro;
 
+import domain.api.ListadoLocalidades;
+import domain.api.LocalidadCantidad;
 import domain.colaboraciones.DistribucionVianda;
 import domain.colaboraciones.DonacionVianda;
+import domain.heladera.PedidoApertura;
 import domain.incidente.Incidente;
+import domain.persona.PersonaFisica;
+import domain.rol.EnumSituacionCalle;
+import domain.rol.Vulnerable;
 import domain.vianda.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,15 +20,12 @@ import persistence.EntidadPersistente;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 public class SingletonSeguidorEstadistica extends EntidadPersistente {
 
@@ -76,5 +79,46 @@ public class SingletonSeguidorEstadistica extends EntidadPersistente {
   public ReporteDonacionesViandas generarReporteDonaciones() {
     // TODO
     return null;
+  }
+
+  public ListadoLocalidades encontrarLocalidades(boolean soloSinHogar, LocalDate desde, LocalDate hasta){
+    List<LocalidadCantidad> localidades = new ArrayList<LocalidadCantidad>();
+    for(ViandaRecogida v : retirosViandas){
+      LocalDate targetLocalDate = v.getFechaDeRecogida().toInstant()
+              .atZone(ZoneId.systemDefault())
+              .toLocalDate();
+      if((!soloSinHogar || v.getNecesitado().getSituacionCalle() == EnumSituacionCalle.NO_POSEE_HOGAR) && !targetLocalDate.isBefore(desde) && !targetLocalDate.isAfter(hasta)) {
+        Vulnerable vul = v.getNecesitado();
+        String nombreCompleto = ((PersonaFisica) vul.getPersona()).getNombreCompleto();
+
+        if (localidades.stream().anyMatch(l -> Objects.equals(l.getLocalidad(), v.getHeraderaDeVianda().getDireccion().getLocalidad()))) {
+          LocalidadCantidad t = localidades.stream().filter(l -> Objects.equals(l.getLocalidad(), v.getHeraderaDeVianda().getDireccion().getLocalidad())).findFirst().get();
+          t.setCantidadPersonas(t.getCantidadPersonas() + 1);
+
+          if(t.getNombresPersonas().stream().noneMatch(n -> Objects.equals(n, nombreCompleto))){
+            t.getNombresPersonas().add(nombreCompleto);
+          }
+        } else {
+          localidades.add(new LocalidadCantidad(v.getHeraderaDeVianda().getDireccion().getLocalidad(), 1, new ArrayList<>(Arrays.asList(nombreCompleto))));
+        }
+      }
+    }
+    return new ListadoLocalidades(localidades);
+  }
+
+  private static SingletonSeguidorEstadistica instance;
+
+  private SingletonSeguidorEstadistica() {
+    this.donacionViandas = new ArrayList<DonacionVianda>();
+    this.incidentes = new ArrayList<Incidente>();
+    this.distribucionViandas = new ArrayList<DistribucionVianda>();
+    this.retirosViandas = new ArrayList<ViandaRecogida>();
+  }
+
+  public static SingletonSeguidorEstadistica getInstance(){
+    if(instance == null){
+      instance = new SingletonSeguidorEstadistica();
+    }
+    return instance;
   }
 }

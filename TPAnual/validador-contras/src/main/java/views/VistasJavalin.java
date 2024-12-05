@@ -1,14 +1,26 @@
 package views;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Template;
 import controllers.HeladeraController;
 import controllers.UIListaHeladerasController;
+import domain.api.ListadoLocalidades;
+import domain.api.LocalidadCantidad;
 import domain.heladera.EnumEstadoHeladera;
 import domain.heladera.Heladera;
 import domain.heladera.RepoHeladera;
 import domain.heladera.Ubicacion;
+import domain.persona.Documento;
+import domain.persona.PersonaFisica;
+import domain.registro.SingletonSeguidorEstadistica;
+import domain.rol.EnumSituacionCalle;
+import domain.rol.Tarjeta;
+import domain.rol.UsoDeTarjeta;
+import domain.rol.Vulnerable;
+import domain.vianda.EnumEstadoVianda;
 import domain.vianda.Vianda;
+import domain.vianda.ViandaRecogida;
 import io.javalin.Javalin;
 import io.javalin.config.JavalinConfig;
 import io.javalin.http.Handler;
@@ -18,17 +30,25 @@ import io.javalin.rendering.JavalinRenderer;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import persistence.Demo;
 
-    public class VistasJavalin {
-        public static void main(String[] args) {
+
+public class VistasJavalin {
+        public static void main(String[] args) throws JsonProcessingException {
 
             initTemplateEngine();
 
             RepoHeladera hela = new RepoHeladera();
+
+            //Demo.main(null);
 
             Integer port = Integer.parseInt(System.getProperty("port", "8001"));
             Javalin app = Javalin.create(config -> {
@@ -90,10 +110,46 @@ import java.util.function.Consumer;
             app.get("/reportes", ctx -> {
                 ctx.render("reportes.hbs");
             });
-            app.get("/traslado", ctx -> {
-                ctx.render("traslado.hbs");
-            });
 
+            app.get("/api/localizacion", ctx -> {
+                String desdeQ = ctx.queryParam("desde");
+                String hastaQ = ctx.queryParam("hasta");
+                String soloQ = ctx.queryParam("soloSinHogar");
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+                LocalDate desde;
+                try {
+                    desde = LocalDate.parse(desdeQ, formatter);
+                } catch (Exception e) {
+                    desde = LocalDate.now().minusDays(1);
+                }
+
+                LocalDate hasta;
+                try {
+                    hasta = LocalDate.parse(hastaQ, formatter);
+                } catch (Exception e) {
+                    hasta = LocalDate.now();
+                }
+
+                boolean soloSinHogar;
+                if(soloQ != null){
+                    soloSinHogar = Boolean.parseBoolean(soloQ);
+                } else {
+                    soloSinHogar = true;
+                }
+
+                String json = null;
+                try {
+                    ObjectWriter ow = new ObjectMapper().writer();
+                    SingletonSeguidorEstadistica se = SingletonSeguidorEstadistica.getInstance();
+                    ListadoLocalidades l = se.encontrarLocalidades(soloSinHogar, desde, hasta);
+                    json = ow.writeValueAsString(l);
+                } catch (JsonProcessingException e) {
+                    json = "Error, algo salio mal";
+                }
+                ctx.result(json);
+            });
         }
         private static void initTemplateEngine() {
             JavalinRenderer.register(

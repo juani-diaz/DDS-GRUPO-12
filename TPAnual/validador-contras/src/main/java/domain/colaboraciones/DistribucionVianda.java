@@ -58,7 +58,7 @@ public class DistribucionVianda extends Colaboracion {
 
         //destino.ingresarViandas(viandasAMover);
 
-        SingletonSeguidorEstadistica se = new SingletonSeguidorEstadistica(); // TODO singleton?
+        SingletonSeguidorEstadistica se = SingletonSeguidorEstadistica.getInstance();
         se.getDistribucionViandas().add(this);
 
     }
