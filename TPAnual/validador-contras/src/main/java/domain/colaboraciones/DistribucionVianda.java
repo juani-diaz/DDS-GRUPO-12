@@ -53,7 +53,7 @@ public class DistribucionVianda extends Colaboracion {
         List<Vianda> viandasAMover = new ArrayList<Vianda>();
 
         /*for(Integer indice : viandasMovidasMutable){
-            viandasAMover.add(origen.sacarVianda(indice));
+            viandasAMover.add_Heladera(origen.sacarVianda(indice));
         }*/
 
         //destino.ingresarViandas(viandasAMover);

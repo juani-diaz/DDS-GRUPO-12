@@ -4,26 +4,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Template;
 import controllers.HeladeraController;
-import controllers.UIListaHeladerasController;
 import domain.api.ListadoLocalidades;
-import domain.api.LocalidadCantidad;
-import domain.heladera.EnumEstadoHeladera;
-import domain.heladera.Heladera;
-import domain.heladera.RepoHeladera;
-import domain.heladera.Ubicacion;
-import domain.persona.Documento;
-import domain.persona.PersonaFisica;
 import domain.registro.SingletonSeguidorEstadistica;
-import domain.rol.EnumSituacionCalle;
-import domain.rol.Tarjeta;
-import domain.rol.UsoDeTarjeta;
-import domain.rol.Vulnerable;
-import domain.vianda.EnumEstadoVianda;
-import domain.vianda.Vianda;
-import domain.vianda.ViandaRecogida;
 import io.javalin.Javalin;
 import io.javalin.config.JavalinConfig;
-import io.javalin.http.Handler;
 import io.javalin.http.HttpStatus;
 import io.javalin.rendering.JavalinRenderer;
 
@@ -31,9 +15,6 @@ import io.javalin.rendering.JavalinRenderer;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.function.Consumer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -46,8 +27,6 @@ public class VistasJavalin {
 
             initTemplateEngine();
 
-            RepoHeladera hela = new RepoHeladera();
-
             Demo.main(null);
 
             Integer port = Integer.parseInt(System.getProperty("port", "8001"));
@@ -55,11 +34,6 @@ public class VistasJavalin {
                 config.staticFiles.add("/front/rentrega4");
             }).start(port);
 
-            app.get("/vianda", new UIListaHeladerasController(hela));
-
-            HeladeraController heladeraController = new HeladeraController();
-
-            app.post("/vianda", heladeraController::agregarVianda);
 
             app.get("/", ctx -> {
                 ctx.render("index.hbs");
@@ -68,15 +42,29 @@ public class VistasJavalin {
             app.get("/index", ctx -> {
                 ctx.render("index.hbs");
             });
+
+//======================VIANDA================================
+            UI_Vistas UIVianda = new UI_Vistas();
+
+            app.get("/vianda", UIVianda);
+            app.post("/vianda", UIVianda::agregarVianda);
+
+//======================TRASLADO================================
             app.get("/traslado", ctx -> {
                 ctx.render("traslado.hbs");
             });
+
+//======================DINERO================================
             app.get("/dinero", ctx -> {
                 ctx.render("dinero.hbs");
             });
+
+//======================FALLAS================================
             app.get("/fallas", ctx -> {
                 ctx.render("fallas.hbs");
             });
+
+//======================HELADERAS-A================================
             app.get("/heladeras-a", ctx -> {
                 ctx.render("heladeras-a.hbs");
             });
