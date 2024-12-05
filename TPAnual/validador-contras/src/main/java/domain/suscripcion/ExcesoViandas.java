@@ -5,8 +5,12 @@ import domain.persona.MedioDeContacto;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Column;
+
 @Getter @Setter
 public class ExcesoViandas extends Suscripcion{
+
+  @Column
   private Integer numeroMaximo;
 
   public ExcesoViandas(Heladera heladera, MedioDeContacto notificadores, Integer numeroMaximo){

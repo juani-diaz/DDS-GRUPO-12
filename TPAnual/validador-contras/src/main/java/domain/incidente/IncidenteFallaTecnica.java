@@ -6,15 +6,22 @@ import domain.rol.Colaborador;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Getter @Setter
+@Entity
 public class IncidenteFallaTecnica extends Incidente {
+  @OneToOne
   private Colaborador colaborador;
+  @Column
   private String descripcion;
+  @Column
   private String foto; //TODO: definir el tipo de la foto (esta como string)
 
   public IncidenteFallaTecnica(Heladera heladera, Date fecha, Colaborador colaborador, String descripcion, String foto){

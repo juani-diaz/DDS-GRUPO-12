@@ -7,25 +7,37 @@ import lombok.Getter;
 import lombok.Setter;
 import persistence.EntidadPersistente;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Transient;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import java.util.Date;
 import java.util.List;
 
 @Getter @Setter
 @Entity
-public abstract class Incidente extends EntidadPersistente {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class Incidente {
 
-  @Transient
+  @Id
+  private int id;
+
+  @ManyToOne
   private Heladera heladera;
 
-  @Transient
+  @Column
   private Date fecha;
 
-  @Transient
+  @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
   private List<VisitasTecnicas> evolucionDeIncidente;
 
-  @Transient
+  @Enumerated
   private EnumEstadoDeIncidente estadoDeIncidente;
 
   public Incidente(Heladera heladera, Date fecha, List<VisitasTecnicas> evolucionDeIncidente, EnumEstadoDeIncidente estadoDeIncidente) {

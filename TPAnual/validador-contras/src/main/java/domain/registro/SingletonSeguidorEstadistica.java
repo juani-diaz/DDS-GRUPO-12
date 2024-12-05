@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.apache.commons.lang3.time.DateUtils;
 
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -20,10 +22,16 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 public class SingletonSeguidorEstadistica {
+
+  @OneToMany
   private List<Incidente> incidentes;
+  @OneToMany
   private List<DonacionVianda> donacionViandas;
+  @OneToMany
   private List<DistribucionVianda> distribucionViandas;
+  @OneToMany
   private List<ViandaRecogida> retirosViandas;
 
   public ReporteFallas generarReporteFallas() {

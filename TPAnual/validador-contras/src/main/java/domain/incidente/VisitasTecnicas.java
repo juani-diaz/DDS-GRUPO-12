@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import persistence.EntidadPersistente;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 import java.time.LocalDate;
 
@@ -16,14 +18,14 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Entity
 public class VisitasTecnicas extends EntidadPersistente {
-  @Transient
+  @OneToOne
   private Tecnico tecnico;
-  @Transient
+  @OneToOne
   private Incidente incidente;
-  @Transient
+  @Column(columnDefinition = "DATE")
   private LocalDate fechaVisita;
-  @Transient
+  @Column
   private String descripcion;
-  @Transient
+  @Column
   private String foto; //TODO:definir el tipo de la foto (esta como string)
 }

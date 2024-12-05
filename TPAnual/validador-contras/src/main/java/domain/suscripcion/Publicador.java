@@ -2,17 +2,22 @@ package domain.suscripcion;
 
 import lombok.Getter;
 import lombok.Setter;
+import persistence.EntidadPersistente;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
 
 @Getter @Setter
-public class Publicador {
+@Entity
+public class Publicador extends EntidadPersistente {
 
+    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
     private List<Suscripcion> observers = new ArrayList<>();
-
-
 
     // Método que notifica a todos los suscriptores
     public void notifyObservers() {

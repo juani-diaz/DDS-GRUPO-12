@@ -5,14 +5,27 @@ import domain.persona.MedioDeContacto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import persistence.EntidadPersistente;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Getter @Setter
-public abstract class Suscripcion {
+@Entity
+public abstract class Suscripcion extends EntidadPersistente {
+  @ManyToOne
   Heladera heladera;
+
+  @OneToOne
   MedioDeContacto notificadores;
 
+  @Column
   String header;
 
+  @Column
   String mensaje;
 
   void notificar(){

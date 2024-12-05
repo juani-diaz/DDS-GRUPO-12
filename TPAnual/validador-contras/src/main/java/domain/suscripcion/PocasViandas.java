@@ -5,8 +5,12 @@ import domain.persona.MedioDeContacto;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Column;
+
 @Getter @Setter
 public class PocasViandas extends Suscripcion{
+
+  @Column
   private Integer numeroMinimo;
 
   public PocasViandas(Heladera heladera, MedioDeContacto notificadores, Integer numeroMinimo){
