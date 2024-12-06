@@ -17,16 +17,20 @@ public class RepoHeladera{
   private EntityManager em = BDUtils.getEntityManager();
 
   public void add_Heladera(Heladera hela) {
+    BDUtils.comenzarTransaccion(em);
     try {
       em.persist(hela);
+      BDUtils.commit(em);
     } catch (Exception e) {
       System.out.println("Error al agregar la HELADERA: " + hela + e);
     }
   }
 
   public void remove_Heladera(Heladera hela) {
+    BDUtils.comenzarTransaccion(em);
     try {
       em.remove(hela);
+      BDUtils.commit(em);
     } catch (Exception e) {
       System.out.println("Error al remover la HELADERA: " + hela + e);
     }

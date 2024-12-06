@@ -18,16 +18,21 @@ public class RepoVianda {
   private EntityManager em = BDUtils.getEntityManager();
 
   public void add_Vianda(Vianda vian) {
+    BDUtils.comenzarTransaccion(em);
     try {
+      System.out.println("add_Vianda: " + vian.getComida());
       em.persist(vian);
+      BDUtils.commit(em);
     } catch (Exception e) {
       System.out.println("Error al agregar la Vianda: " + vian + e);
     }
   }
 
   public void remove_Vianda(Vianda vian) {
+    BDUtils.comenzarTransaccion(em);
     try {
       em.remove(vian);
+      BDUtils.commit(em);
     } catch (Exception e) {
       System.out.println("Error al remover la Vianda: " + vian + e);
     }

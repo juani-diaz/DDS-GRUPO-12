@@ -3,7 +3,6 @@ package views;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Template;
-import controllers.HeladeraController;
 import domain.api.ListadoLocalidades;
 import domain.registro.SingletonSeguidorEstadistica;
 import io.javalin.Javalin;
