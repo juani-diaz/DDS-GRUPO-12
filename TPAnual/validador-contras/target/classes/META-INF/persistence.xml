@@ -15,7 +15,7 @@
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/dds?serverTimezone=UTC"/>
                 <!--que este en localhost significa que esta en local y no la nuve-->
             <property name="hibernate.connection.username" value="root"/>
-            <property name="hibernate.connection.password" value="1234"/>
+            <property name="hibernate.connection.password" value="junio0606"/>
             <!--<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL57Dialect"/>-->
 
             <property name="hibernate.show_sql" value="true"/>

@@ -2,9 +2,10 @@ package domain.persona;
 
 import domain.servicios.Mailer;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-@Getter @Setter
+@Getter @Setter @AllArgsConstructor
 public class Email extends MedioDeContacto {
 public void notificar(String header,String mensaje){
 

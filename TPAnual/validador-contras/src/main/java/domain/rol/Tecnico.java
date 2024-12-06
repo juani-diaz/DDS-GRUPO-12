@@ -5,6 +5,7 @@ import domain.incidente.EnumEstadoDeIncidente;
 import domain.incidente.Incidente;
 import domain.incidente.VisitasTecnicas;
 import domain.persona.Persona;
+import domain.vianda.ViandaRecogida;
 import lombok.*;
 
 import javax.persistence.CascadeType;
@@ -39,6 +40,14 @@ public class Tecnico extends Rol {
 //Ver las visitas tecnicas
   @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType. LAZY)
   private List<VisitasTecnicas> visitasRealizadas;
+
+  public Tecnico(Persona p, List<String> ac, List<Incidente> iAr , List<VisitasTecnicas> vT){
+    this.persona = p;
+    this.areaCobertura = ac;
+    this.incidentesARevisar = iAr;
+    this.visitasRealizadas = vT;
+  }
+
 
   private void realizarVisitaTecnica(Incidente incidente, LocalDate fecha, String trabajoRealizado, String foto, Boolean solucionado){
 
