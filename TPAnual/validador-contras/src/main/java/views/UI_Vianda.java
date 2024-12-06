@@ -14,14 +14,14 @@ import io.javalin.http.Handler;
 import persistence.Repos.RepoHeladera;
 import persistence.Repos.RepoVianda;
 
-public class UI_Vistas implements Handler{
+public class UI_Vianda implements Handler{
 
   @Override
   public void handle(Context ctx) throws Exception {
     RepoHeladera hela = new RepoHeladera();
 
     Map<String, Object> model = new HashMap<>();
-    model.put("hela", hela.getAll_Heladera().get(0));
+    model.put("hela", hela.getAll_Heladera());
     ctx.render("vianda.hbs", model);
   }
 

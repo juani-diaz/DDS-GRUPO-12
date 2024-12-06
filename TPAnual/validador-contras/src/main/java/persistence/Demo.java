@@ -111,6 +111,10 @@ public class Demo {
         em.persist(vianda2);
         em.persist(heladera);
 
+        em.persist(direccionSubteB);
+        em.persist(viandaSubteB);
+        em.persist(heladeraSubteB);
+
         BDUtils.commit(em);
     }
 

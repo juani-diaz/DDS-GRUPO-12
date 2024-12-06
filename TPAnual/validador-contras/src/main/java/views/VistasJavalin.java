@@ -43,7 +43,7 @@ public class VistasJavalin {
             });
 
 //======================VIANDA================================
-            UI_Vistas UIVianda = new UI_Vistas();
+            UI_Vianda UIVianda = new UI_Vianda();
 
             app.get("/vianda", UIVianda);
             app.post("/vianda", UIVianda::agregarVianda);
