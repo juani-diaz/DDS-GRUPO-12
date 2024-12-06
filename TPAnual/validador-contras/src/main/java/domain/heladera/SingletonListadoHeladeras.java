@@ -17,8 +17,10 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 public class SingletonListadoHeladeras{
+
   @Id
   private int id =1;
+
   @OneToMany
   private List<Heladera> heladeras;
 }
