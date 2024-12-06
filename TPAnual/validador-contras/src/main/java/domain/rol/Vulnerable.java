@@ -19,10 +19,10 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Transient;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Transient;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @Entity
@@ -45,6 +45,18 @@ public class Vulnerable extends Rol {
   private List<UsoDeTarjeta> usos;
   @Column
   private Integer usosRestantesPorDia;
+
+
+  public Vulnerable(Persona p, LocalDate fr,EnumSituacionCalle tipo ,Integer mAC, List<ViandaRecogida> vr, Tarjeta t, List<UsoDeTarjeta> u , Integer uRpD){
+    this.persona = p;
+    this.menoresACargo = mAC;
+    this.fechaRegistro = fr;
+    this.situacionCalle = tipo;
+    this.viandasTomadas = vr;
+    this.tarjeta = t;
+    this.usos = u;
+    this.usosRestantesPorDia = uRpD;
+  }
 
   public boolean retirarVianda(int indiceViandas, Heladera heladera){
     if(usosRestantesPorDia > 0){

@@ -30,12 +30,36 @@ public class Demo {
         Ubicacion direccion = new Ubicacion("BSAS","Villa Real", "1011", "200", "GUEMES" ,"4426");
         Heladera heladera = new Heladera("heladera2",direccion, 20, LocalDate.now(), 5f, 10.0f, EnumEstadoHeladera.INACTIVA_POR_FALLA);
 
+        Ubicacion direccionMedrano = new Ubicacion("BSAS","Almagro", "-35", "-58", "Avenida Medrano" ,"951");
+        Heladera heladeraMedrano = new Heladera("heladeraMedrano",direccionMedrano, 20, LocalDate.now(), 5f, 10.0f, EnumEstadoHeladera.DISPONIBLE);
+
+        Ubicacion direccionConstitucion = new Ubicacion("BSAS","Constitucion", "-34", "-58", "Avenida Brasil" ,"1120");
+        Heladera heladeraConstitucion = new Heladera("heladeraConstitucion",direccionConstitucion, 150, LocalDate.now(), 5f, 10.0f, EnumEstadoHeladera.INACTIVA_POR_ALERTA);
+
+        Ubicacion direccionLomasDeZamora = new Ubicacion("BSAS","Lomas de Zamora", "-34.760161891020516", "-58.396944175638076", "Carlos Pellegrini" ,"50");
+        Heladera heladeraLomasDeZamora = new Heladera("estacion de Lomas",direccionLomasDeZamora, 50, LocalDate.now(), 5f, 10.0f, EnumEstadoHeladera.DISPONIBLE);
+
+        Ubicacion direccionSubteB = new Ubicacion("BSAS","Almagro", "-34.60316616966819", "-58.421152913613476", "Avenida Corrientes" ,"1250");
+        Heladera heladeraSubteB = new Heladera("Subte B",direccionSubteB, 50, LocalDate.now(), 5f, 10.0f, EnumEstadoHeladera.DISPONIBLE);
+
+        Ubicacion direccionSubteC = new Ubicacion("BSAS","Chacarita", "-34.584036474171214,", "-58.46678133733317", "Avenida Triunvirato" ,"1450");
+        Heladera heladeraSubteC = new Heladera("Subte C",direccionSubteC, 50, LocalDate.now(), 5f, 10.0f, EnumEstadoHeladera.DISPONIBLE);
+
         Vianda vianda = new Vianda("carne", LocalDate.now(), LocalDate.now(),  "100", 300f, EnumEstadoVianda.ENTREGADO);
         Vianda vianda2 = new Vianda("papa", LocalDate.now(), LocalDate.now(),  "100", 300f, EnumEstadoVianda.ENTREGADO);
+        Vianda viandaHeladeraMedrano = new Vianda("carne con fideos",LocalDate.now(),LocalDate.now(), "450", 350f,EnumEstadoVianda.NO_ENTREGADO);
+        Vianda viandaLomasDeZamora = new Vianda("fideos", LocalDate.now(), LocalDate.now(),  "300", 300f, EnumEstadoVianda.NO_ENTREGADO);
+        Vianda viandaSubteB = new Vianda("carne al horno con papas", LocalDate.now(), LocalDate.now(),  "420", 300f, EnumEstadoVianda.NO_ENTREGADO);
+        Vianda viandaSubteC = new Vianda("guiso de albondigas", LocalDate.now(), LocalDate.now(),  "550", 300f, EnumEstadoVianda.NO_ENTREGADO);
 
         vianda.setHeladera(heladera);
         vianda2.setHeladera(heladera);
-        List<Vianda> viandas = new ArrayList<Vianda>();
+        viandaHeladeraMedrano.setHeladera(heladeraMedrano);
+        viandaLomasDeZamora.setHeladera(heladeraLomasDeZamora);
+        viandaSubteB.setHeladera(heladeraSubteB);
+        viandaSubteC.setHeladera(heladeraSubteC);
+
+        List<Vianda> viandas = new ArrayList<>();
         viandas.add(vianda);
         viandas.add(vianda2);
 
