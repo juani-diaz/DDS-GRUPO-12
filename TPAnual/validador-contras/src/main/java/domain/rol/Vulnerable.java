@@ -1,5 +1,6 @@
 package domain.rol;
 
+import domain.heladera.AdministradorSolicitudes;
 import domain.heladera.Heladera;
 import domain.persona.Persona;
 import domain.registro.SingletonSeguidorEstadistica;
@@ -10,6 +11,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -20,6 +22,7 @@ import javax.persistence.OneToOne;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Transient;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @Entity
