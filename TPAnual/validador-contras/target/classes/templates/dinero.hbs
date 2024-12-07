@@ -252,39 +252,39 @@
                         <div class="card-body">
                             <h4 class="card-title">Nueva Donación</h4>
                             <div class="basic-form">
-                                <form>
+                                <form action="/dinero" method="post">
                                     <div class="form-group">
                                         <label>Monto de dinero a donar</label>
-                                        <input type="number" class="form-control" placeholder="Monto en ARS" required>
+                                        <input type="number" name="monto" class="form-control" placeholder="Monto en ARS" required>
                                     </div>
                                     <div class="form-group">
                                         <label>Tipo de tarjeta</label>
-                                        <select class="form-control" required>
+                                        <select name="tipoTarjeta" class="form-control" required>
                                             <option selected disabled>Elige...</option>
-                                            <option>Visa</option>
-                                            <option>MasterCard</option>
-                                            <option>Amex</option>
+                                            <option value="Visa">Visa</option>
+                                            <option value="MasterCard">MasterCard</option>
+                                            <option value="Amex">Amex</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label>Número de tarjeta</label>
-                                        <input type="number" class="form-control" placeholder="Número de tarjeta" required>
+                                        <input type="text" name="numTarjeta" class="form-control" placeholder="Número de tarjeta" required>
                                     </div>
                                     <div class="form-group">
-                                        <label>Nombre de la tarjeta</label>
-                                        <input type="text" class="form-control" placeholder="Nombre del titular" required>
+                                        <label>Nombre del titular</label>
+                                        <input type="text" name="nombreTitular" class="form-control" placeholder="Nombre del titular" required>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label>Fecha de vencimiento</label>
-                                            <input type="month" class="form-control" required>
+                                            <input type="month" name="mesVencimiento" class="form-control" required>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label>Código de seguridad</label>
-                                            <input type="text" class="form-control" placeholder="Código CVV" required>
+                                            <input type="text" name="codSeguridad" class="form-control" placeholder="Código CVV" required>
                                         </div>
                                     </div>
-                                    <div style="display: flex;">
+                                    <!--<div style="display: flex;">
                                         <div class="form-group">
                                             <label>Tipo de donación</label>
                                             <div>
@@ -315,7 +315,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <button type="submit" class="btn btn-success">Donar</button>
                                 </form>
                             </div>

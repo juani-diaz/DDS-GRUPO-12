@@ -54,9 +54,10 @@ public class VistasJavalin {
             });
 
 //======================DINERO================================
-            app.get("/dinero", ctx -> {
-                ctx.render("dinero.hbs");
-            });
+            UI_Dinero UIDinero = new UI_Dinero();
+
+            app.get("/dinero", UIDinero);
+            app.post("/dinero", UIDinero::agregarDonacion);
 
 //======================FALLAS================================
             app.get("/fallas", ctx -> {

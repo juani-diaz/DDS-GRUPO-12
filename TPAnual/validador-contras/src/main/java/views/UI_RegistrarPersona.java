@@ -25,25 +25,12 @@ public class UI_RegistrarPersona implements Handler{
 
     // Obtener parámetros del formulario (datos enviados en la solicitud)
     String nombre = ctx.formParam("nombre");
-    System.out.println("nombre= "+nombre);
-
     String fechaNacimiento = ctx.formParam("fechaNacimiento");
-    System.out.println("fechaNacimiento= "+fechaNacimiento);
-
     String situacionCalle = ctx.formParam("situacionCalle");
-    System.out.println("situacionCalle= "+situacionCalle);
-
     String direccion = ctx.formParam("direccion");
-    System.out.println("direccion= "+direccion);
-
     String tipoDocumento = ctx.formParam("tipoDocumento");
-    System.out.println("tipoDocumento= "+tipoDocumento);
-
     String documento = ctx.formParam("documento");
-
     String numMenoresACargo =ctx.formParam("numMenoresACargo");
-    System.out.println("numMenoresACargo= "+numMenoresACargo);
-
 
     // Convertir parámetros necesarios
     LocalDate fechaNacimientoParsed = LocalDate.parse(fechaNacimiento);
@@ -73,25 +60,21 @@ public class UI_RegistrarPersona implements Handler{
       vulnerable.setSituacionCalle(EnumSituacionCalle.NO_POSEE_HOGAR);
     }
 
+    //ORM
+    persistirEntidades(docu, persona, vulnerable);
 
+    ctx.render("index.hbs");
+  }
+
+  private static void persistirEntidades(Documento docu, PersonaFisica persona, Vulnerable vulnerable) {
     EntityManager em = BDUtils.getEntityManager();
     BDUtils.comenzarTransaccion(em);
 
     em.persist(docu);
-    System.out.println("Commit Docu");
     em.persist(persona);
-    System.out.println("Commit persona");
     em.persist(vulnerable);
-    System.out.println("Commit vulnerabled");
 
     BDUtils.commit(em);
-
-
-
-    //RepoVulnerable vulne = new RepoVulnerable();
-    //vulne.add_Vulnerable(vulnerable);
-
-    ctx.render("index.hbs");
   }
 
 }

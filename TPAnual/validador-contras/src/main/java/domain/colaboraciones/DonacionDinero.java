@@ -10,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.time.LocalDate;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
@@ -22,6 +23,8 @@ public class DonacionDinero extends Colaboracion {
     private Float monto;
     @Column
     private String frecuencia;
+    @ManyToOne
+    private MedioDePago medioDePago;
 
     public DonacionDinero(Colaborador colaborador, LocalDate fecha,
                           Float monto, String frecuencia){
