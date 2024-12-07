@@ -67,37 +67,51 @@ public class VistasJavalin {
             app.get("/heladeras-a", ctx -> {
                 ctx.render("heladeras-a.hbs");
             });
+//======================
             app.get("/heladeras-o", ctx -> {
                 ctx.render("heladeras-o.hbs");
             });
+//======================
             app.get("/heladeras-p", ctx -> {
                 ctx.render("heladeras-p.hbs");
             });
+//======================
             app.get("/landing", ctx -> {
                 ctx.render("landing.hbs");
             });
+//======================
             app.get("/migracion", ctx -> {
                 ctx.render("migracion.hbs");
             });
+//======================
             app.get("/ofertas", ctx -> {
                 ctx.render("ofertas.hbs");
             });
+//======================
             app.get("/page-login", ctx -> {
                 ctx.render("page-login.hbs");
             });
+//======================
             app.get("/page-register", ctx -> {
                 ctx.render("page-register.hbs");
             });
+//======================
             app.get("/puntos", ctx -> {
                 ctx.render("puntos.hbs");
             });
-            app.get("/registrar-personas", ctx -> {
-                ctx.render("registrar-personas.hbs");
-            });
+
+//======================REGISTRAR PERSONAS ================================
+            UI_RegistrarPersona UIregistrarPersona = new UI_RegistrarPersona();
+
+            app.get("/registrar-persona", UIregistrarPersona);
+            app.post("/registrar-persona", UIregistrarPersona::agregarPersona);
+
+//======================
             app.get("/reportes", ctx -> {
                 ctx.render("reportes.hbs");
             });
 
+//======================
             app.get("/api/localizacion", ctx -> {
                 String desdeQ = ctx.queryParam("desde");
                 String hastaQ = ctx.queryParam("hasta");

@@ -49,7 +49,7 @@ public class UI_Vianda implements Handler{
     Heladera heladera = hela.findById_Heladera(heladeraID);
     System.out.println("HelaName= "+heladera.getNombre());
 
-    // Crea vianda TODO: tendria que ser una clase aparte llamada creadorVianda
+    // Crea vianda
     Vianda vianda = new Vianda(comida, fechaVencimiento, fechaDonacion, calorias, peso, estado);
     vianda.setHeladera(heladera);
 
