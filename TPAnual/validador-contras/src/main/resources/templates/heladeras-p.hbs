@@ -253,71 +253,27 @@
                         zoom="10"
                         map-id="DEMO_MAP_ID"
                         class="mapa">
-                        <gmp-advanced-marker
-                            position="-34.598584, -58.420238"
-                            title="UTN Medrano"
-                        ></gmp-advanced-marker>
-                        <gmp-advanced-marker
-                            position="-34.610504, -58.412421"
-                            title="Ejército de Salvación Central"
-                        ></gmp-advanced-marker>
-                        <gmp-advanced-marker
-                            position="-34.610837, -58.416817"
-                            title="Colegio Mariano Moreno"
-                        ></gmp-advanced-marker>
-                        <gmp-advanced-marker
-                            position="-34.607565, -58.437518"
-                            title="Parque Centenario 1"
-                        ></gmp-advanced-marker>
+                        {{#each hela}}
+                            <gmp-advanced-marker
+                                    position={{lat_lon this.direccion}}
+                                    title={{this.nombre}}
+                            ></gmp-advanced-marker>
+                        {{/each}}
                         
                     </gmp-map>
                 </div>
                 <div class="col-lg-4 lista-heladera">
-
-                    <div class="card">
-                        <div class="card-body heladera-item">
-                            <h3>UTN Medrano <span class="label label-pill label-success">Funcionando</span></h3>
-                            <i class="icon-cup menu-icon"></i><span style="margin-left: 5px;">20/54 viandas</span><br><br>
-                            <button type="button" class="btn mb-1 btn-primary">Donar</button>
-                            <button type="button" class="btn mb-1 btn-outline-primary" disabled="disabled" style="margin-left: 5px;">Trasladar</button>
-                            <button type="button" class="btn mb-1 btn-danger" style="margin-left: 5px;">Reportar falla</button>
-                            <button type="button" class="btn mb-1 btn-outline-danger" style="margin-left: 5px;">Suscribirse</button>
+                    {{#each hela}}
+                        <div class="card">
+                            <div class="card-body heladera-item">
+                                <h3>{{this.nombre}} <span class="label label-pill label-success">Funcionando</span></h3>
+                                <i class="icon-cup menu-icon"></i><span style="margin-left: 5px;">{{viandas_del_total this}} viandas</span><br><br>
+                                <button type="button" class="btn mb-1 btn-primary">Donar</button>
+                                <button type="button" class="btn mb-1 btn-danger" style="margin-left: 5px;">Reportar falla</button>
+                                <button type="button" class="btn mb-1 btn-outline-danger" style="margin-left: 5px;">Suscribirse</button>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-body heladera-item">
-                            <h3>Ejército de Salvación Central <span class="label label-pill label-warning">Vacía</span></h3>
-                            <i class="icon-cup menu-icon"></i><span style="margin-left: 5px;">0/80 viandas</span><br><br>
-                            <button type="button" class="btn mb-1 btn-primary">Donar</button>
-                            <button type="button" class="btn mb-1 btn-outline-primary" style="margin-left: 5px;" disabled>Trasladar</button>
-                            <button type="button" class="btn mb-1 btn-danger" style="margin-left: 5px;">Reportar falla</button>
-                            <button type="button" class="btn mb-1 btn-outline-danger" style="margin-left: 5px;">Suscribirse</button>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-body heladera-item">
-                            <h3>Colegio Mariano Moreno <span class="label label-pill label-warning">Llena</span></h3>
-                            <i class="icon-cup menu-icon"></i><span style="margin-left: 5px;">60/60 viandas</span><br><br>
-                            <button type="button" class="btn mb-1 btn-primary" disabled="disabled">Donar</button>
-                            <button type="button" class="btn mb-1 btn-outline-primary" style="margin-left: 5px;">Trasladar</button>
-                            <button type="button" class="btn mb-1 btn-danger" style="margin-left: 5px;">Reportar falla</button>
-                            <button type="button" class="btn mb-1 btn-success" style="margin-left: 5px;">Suscripto</button>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-body heladera-item">
-                            <h3>Parque Centenario 1 <span class="label label-pill label-danger">Rota</span></h3>
-                            <i class="icon-cup menu-icon"></i><span style="margin-left: 5px;">20/60 viandas</span><br><br>
-                            <button type="button" class="btn mb-1 btn-primary" disabled="disabled">Donar</button>
-                            <button type="button" class="btn mb-1 btn-outline-primary" style="margin-left: 5px;">Trasladar</button>
-                            <button type="button" class="btn mb-1 btn-danger" style="margin-left: 5px;" disabled="disabled">Reportar falla</button>
-                            <button type="button" class="btn mb-1 btn-success" style="margin-left: 5px;">Suscripto</button>
-                        </div>
-                    </div>
-
+                    {{/each}}
                 </div>
             </div>
 

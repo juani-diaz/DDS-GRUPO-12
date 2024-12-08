@@ -254,7 +254,6 @@
                         map-id="DEMO_MAP_ID"
                         class="mapa">
                         {{#each hela}}
-                            {{log (lat_lon this.direccion)}}
                             <gmp-advanced-marker
                                 position={{lat_lon this.direccion}}
                                 title={{this.nombre}}

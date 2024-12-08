@@ -75,9 +75,9 @@ public class VistasJavalin {
                 ctx.render("heladeras-o.hbs");
             });
 //======================
-            app.get("/heladeras-p", ctx -> {
-                ctx.render("heladeras-p.hbs");
-            });
+            UI_HeladerasP UIHeladerasP = new UI_HeladerasP();
+
+            app.get("/heladeras-p", UIHeladerasP);
 //======================
             app.get("/landing", ctx -> {
                 ctx.render("landing.hbs");
