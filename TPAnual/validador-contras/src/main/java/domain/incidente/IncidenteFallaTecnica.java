@@ -2,6 +2,7 @@ package domain.incidente;
 
 import domain.heladera.EnumEstadoHeladera;
 import domain.heladera.Heladera;
+import domain.registro.SingletonSeguidorEstadistica;
 import domain.rol.Colaborador;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,6 +31,12 @@ public class IncidenteFallaTecnica extends Incidente {
     this.descripcion = descripcion;
     this.foto = foto;
     heladera.setEstado(EnumEstadoHeladera.INACTIVA_POR_FALLA);
+    SingletonSeguidorEstadistica se = SingletonSeguidorEstadistica.getInstance();
+    se.getIncidentes().add(this);
+  }
+  // Si no esta este metodo tira error el JPA/Hibernate
+  public IncidenteFallaTecnica() {
+
   }
 
   @Override

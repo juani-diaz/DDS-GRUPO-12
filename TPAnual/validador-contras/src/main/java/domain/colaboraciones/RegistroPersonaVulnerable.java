@@ -1,5 +1,8 @@
 package domain.colaboraciones;
 
+import domain.persona.PersonaFisica;
+import domain.persona.PersonaJuridica;
+import domain.registro.SingletonSeguidorEstadistica;
 import domain.rol.Colaborador;
 import domain.rol.Tarjeta;
 
@@ -20,20 +23,31 @@ public class RegistroPersonaVulnerable extends  Colaboracion{
     public final static Float multiplicador = 2F;
 
     @OneToOne
-    private Tarjeta tarjetaEntregada;
+    private Tarjeta tarjetaEntregada = null;
     @OneToOne
     private Vulnerable vulnerable;
 
     public RegistroPersonaVulnerable(Colaborador colaborador, LocalDate fecha,
-                                     Tarjeta tarjetaEntregada, Vulnerable vulnerable){
+                                     Vulnerable vulnerable){
         this.colaborador = colaborador;
         this.fecha = fecha;
-        this.tarjetaEntregada = tarjetaEntregada;
         this.vulnerable = vulnerable;
     }
 
     public void ejecutar(){
-        vulnerable.setTarjeta(tarjetaEntregada);
+        if (colaborador.getTarjetasParaEntregar() == null || colaborador.getTarjetasParaEntregar().isEmpty()) {
+            throw new IllegalStateException("El colaborador no tiene tarjetas disponibles para entregar.");
+        }
+
+        if (!(colaborador.getPersona() instanceof PersonaFisica)) {
+            throw new IllegalArgumentException("El que entrega la tarjeta debe ser una persona física");
+        }
+        Tarjeta tarjetaEntregada = colaborador.getTarjetasParaEntregar().remove(0);
+
+        // Asignar la tarjeta al vulnerable
+        vulnerable.setearTarjeta(tarjetaEntregada);
+        this.tarjetaEntregada= tarjetaEntregada;
+
     }
 
     public Float puntosObtenidos(){

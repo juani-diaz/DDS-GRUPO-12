@@ -40,12 +40,19 @@ public abstract class Incidente {
   @Enumerated
   private EnumEstadoDeIncidente estadoDeIncidente;
 
+
   public Incidente(Heladera heladera, Date fecha, List<VisitasTecnicas> evolucionDeIncidente, EnumEstadoDeIncidente estadoDeIncidente) {
     this.heladera = heladera;
     this.fecha = fecha;
     this.evolucionDeIncidente = evolucionDeIncidente;
     this.estadoDeIncidente = estadoDeIncidente;
   }
+
+  // Si no esta este metodo tira error el JPA/Hibernate
+  public Incidente() {
+
+  }
+
 
   public void flujoDeSolucion(){
     cerrarTiquetIncidente(heladera);

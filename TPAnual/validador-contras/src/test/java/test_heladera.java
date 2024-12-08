@@ -29,7 +29,7 @@ public class test_heladera {
     }
     @Test
     public void sacarVianda() {
-        heladera1.sacarVianda(1);
+        heladera1.sacarViandaPorIndice(1);
 
         Assertions.assertEquals(listaViandaEsperada2, heladera1.getViandasEnHeladera());
     }

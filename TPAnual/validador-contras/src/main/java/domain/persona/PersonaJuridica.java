@@ -26,4 +26,12 @@ public class PersonaJuridica extends Persona{
 
     @Column
     private String rubro;
+
+    public PersonaJuridica(String razonSocial, EnumTipoPersonaJuridica tipo, String rubro, String direccion, Documento documento, MedioDeContacto medioDeContacto) {
+        super(razonSocial,direccion, documento, medioDeContacto);
+        this.razonSocial = razonSocial;
+        this.tipo = tipo;
+        this.rubro = rubro;
+    }
+
 }

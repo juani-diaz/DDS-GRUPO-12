@@ -1,6 +1,8 @@
 package domain.colaboraciones;
 
 import domain.heladera.Heladera;
+import domain.persona.PersonaFisica;
+import domain.persona.PersonaJuridica;
 import domain.registro.SingletonSeguidorEstadistica;
 import domain.rol.Colaborador;
 import domain.rol.Tarjeta;
@@ -26,44 +28,51 @@ public class DistribucionVianda extends Colaboracion {
     @ManyToOne
     private Heladera destino;
 
-    @ElementCollection
-    private List<Integer> viandasMovidas;
+
+    private Integer cantidadViandasMovidas;
+
+    @OneToMany
+    private List<Vianda> viandasMovidas;
 
     @Enumerated(value = EnumType.STRING)
     private EnumMotivosMovimientoVianda motivo;
 
     public DistribucionVianda(Colaborador colaborador, LocalDate fecha,
-                              Heladera origen, Heladera destino, List<Integer> viandasMovidas,
+                              Heladera origen, Heladera destino, int cantidadViandasMovidas,
                               EnumMotivosMovimientoVianda motivo){
         this.colaborador = colaborador;
         this.fecha = fecha;
         this.origen = origen;
         this.destino = destino;
-        this.viandasMovidas = viandasMovidas;
+        this.cantidadViandasMovidas = cantidadViandasMovidas;
         this.motivo = motivo;
     }
 
     public int cantidadViandas(){
-        return this.viandasMovidas.size();
+        return this.cantidadViandasMovidas;
     }
 
-    public void ejecutar(){
-        List<Integer> viandasMovidasMutable = new ArrayList<>(viandasMovidas);
-        viandasMovidasMutable.sort(Collections.reverseOrder());
-        List<Vianda> viandasAMover = new ArrayList<Vianda>();
 
-        /*for(Integer indice : viandasMovidasMutable){
-            viandasAMover.add_Heladera(origen.sacarVianda(indice));
-        }*/
 
-        //destino.ingresarViandas(viandasAMover);
+    public void ejecutar() {
 
-        SingletonSeguidorEstadistica se = SingletonSeguidorEstadistica.getInstance();
-        se.getDistribucionViandas().add(this);
+        Colaborador colaborador = getColaborador();
+        if (!(colaborador.getPersona() instanceof PersonaFisica)) {
+            throw new IllegalArgumentException("El colaborador debe ser una persona humana");
+        }
+
+            List<Vianda> shuffledList = new ArrayList<>(this.origen.getViandasEnHeladera());
+            Collections.shuffle(shuffledList);
+            this.viandasMovidas = shuffledList.subList(0, this.cantidadViandasMovidas);
+            this.origen.sacarViandas(this.viandasMovidas);
+            this.destino.ingresarViandas(this.viandasMovidas);
+
+            SingletonSeguidorEstadistica se = SingletonSeguidorEstadistica.getInstance();
+            se.getDistribucionViandas().add(this);
+
 
     }
-
-    public void entregarTarjetas(List<Tarjeta> list_tarjetas){
+    public void entregarTarjetas(List<Tarjeta> list_tarjetas){ //osea recibe tarjetas
         this.colaborador.recibirTarjetas(list_tarjetas);
     }
 
