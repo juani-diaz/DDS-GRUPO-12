@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Template;
 import domain.api.ListadoLocalidades;
+import domain.api.Localizacion;
+import domain.heladera.Ubicacion;
 import domain.registro.SingletonSeguidorEstadistica;
 import io.javalin.Javalin;
 import io.javalin.config.JavalinConfig;
@@ -49,9 +51,9 @@ public class VistasJavalin {
             app.post("/vianda", UIVianda::agregarVianda);
 
 //======================TRASLADO================================
-            app.get("/traslado", ctx -> {
-                ctx.render("traslado.hbs");
-            });
+            UI_Traslado UITraslado = new UI_Traslado();
+
+            app.get("/traslado", UITraslado);
 
 //======================DINERO================================
             UI_Dinero UIDinero = new UI_Dinero();
@@ -114,49 +116,16 @@ public class VistasJavalin {
 
 //======================
             app.get("/api/localizacion", ctx -> {
-                String desdeQ = ctx.queryParam("desde");
-                String hastaQ = ctx.queryParam("hasta");
-                String soloQ = ctx.queryParam("soloSinHogar");
-
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-                LocalDate desde;
-                try {
-                    desde = LocalDate.parse(desdeQ, formatter);
-                } catch (Exception e) {
-                    desde = LocalDate.now().minusDays(1);
-                }
-
-                LocalDate hasta;
-                try {
-                    hasta = LocalDate.parse(hastaQ, formatter);
-                } catch (Exception e) {
-                    hasta = LocalDate.now();
-                }
-
-                boolean soloSinHogar;
-                if(soloQ != null){
-                    soloSinHogar = Boolean.parseBoolean(soloQ);
-                } else {
-                    soloSinHogar = true;
-                }
-
-                String json = null;
-                try {
-                    ObjectWriter ow = new ObjectMapper().writer();
-                    SingletonSeguidorEstadistica se = SingletonSeguidorEstadistica.getInstance();
-                    ListadoLocalidades l = se.encontrarLocalidades(soloSinHogar, desde, hasta);
-                    json = ow.writeValueAsString(l);
-                } catch (JsonProcessingException e) {
-                    json = "Error, algo salio mal";
-                }
-                ctx.result(json);
+                ctx.result(Localizacion.localizar(ctx));
             });
         }
         private static void initTemplateEngine() {
+            Handlebars handlebars = new Handlebars();
+
+            handlebars.registerHelpers(new HelperSource());
+
             JavalinRenderer.register(
                 (path, model, context) -> { // Función que renderiza el template
-                    Handlebars handlebars = new Handlebars();
                     Template template = null;
                     try {
                         template = handlebars.compile("templates/" + path.replace(".hbs", ""));

@@ -253,70 +253,42 @@
                         zoom="10"
                         map-id="DEMO_MAP_ID"
                         class="mapa">
-                        <gmp-advanced-marker
-                            position="-34.598584, -58.420238"
-                            title="UTN Medrano"
-                        ></gmp-advanced-marker>
-                        <gmp-advanced-marker
-                            position="-34.610504, -58.412421"
-                            title="Ejército de Salvación Central"
-                        ></gmp-advanced-marker>
-                        <gmp-advanced-marker
-                            position="-34.610837, -58.416817"
-                            title="Colegio Mariano Moreno"
-                        ></gmp-advanced-marker>
-                        <gmp-advanced-marker
-                            position="-34.607565, -58.437518"
-                            title="Parque Centenario 1"
-                        ></gmp-advanced-marker>
+                        {{#each hela}}
+                            {{log (lat_lon this.direccion)}}
+                            <gmp-advanced-marker
+                                position={{lat_lon this.direccion}}
+                                title={{this.nombre}}
+                            ></gmp-advanced-marker>
+                        {{/each}}
                         
                     </gmp-map>
                 </div>
                 <div class="col-lg-4 lista-heladera">
 
-                    <div class="card">
-                        <div class="card-body heladera-item">
-                            <h3>Colegio Mariano Moreno <span class="label label-pill label-warning">Llena</span></h3>
-                            <i class="icon-cup menu-icon"></i><span style="margin-left: 5px;">60/60 viandas</span><br><br>
-                            <div style="display: flex;">
-                                <div class="form-group" style="width: 120px; margin-right: 10px;">
-                                    <input type="number" class="form-control" placeholder="Cantidad">
+                    {{#each hela as |hela|}}
+                        <div class="card">
+                            <div class="card-body heladera-item">
+                                <h3>{{hela.nombre}}
+                                    <span class="label label-pill label-success">Funcionando</span>
+                                </h3>
+                                <i class="icon-cup menu-icon"></i><span style="margin-left: 5px;">{{viandas_del_total hela}} viandas</span><br><br>
+                                <div style="display: flex;">
+                                    <div class="form-group" style="width: 120px; margin-right: 10px;">
+                                        <input type="number" class="form-control" placeholder="Cantidad">
+                                    </div>
+                                    <div class="form-group">
+                                        <select class="form-control" required>
+                                            <option selected disabled>Selecciona una heladera...</option>
+                                            {{#each ../hela as |heladeras_t|}}
+                                                <option>{{heladeras_t.nombre}}</option>
+                                            {{/each}}
+                                        </select>
+                                    </div>
+                                    <button type="button" class="btn mb-1 btn-primary" style="height: 37px; margin-top: 5px; margin-left: 10px;">Trasladar</button>
                                 </div>
-                                <div class="form-group">
-                                    <select class="form-control" required>
-                                        <option selected disabled>Selecciona una heladera...</option>
-                                        <option>UTN Medrano</option>
-                                        <option>Ejército de Salvación Central</option>
-                                        <option disabled>Colegio Mariano Moreno</option>
-                                        <option disabled>Parque Centenario 1</option>
-                                    </select>
-                                </div>
-                                <button type="button" class="btn mb-1 btn-primary" style="height: 37px; margin-top: 5px; margin-left: 10px;">Trasladar</button>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-body heladera-item">
-                            <h3>Parque Centenario 1 <span class="label label-pill label-danger">Rota</span></h3>
-                            <i class="icon-cup menu-icon"></i><span style="margin-left: 5px;">20/60 viandas</span><br><br>
-                            <div style="display: flex;">
-                                <div class="form-group" style="width: 120px; margin-right: 10px;">
-                                    <input type="number" class="form-control" placeholder="Cantidad">
-                                </div>
-                                <div class="form-group">
-                                    <select class="form-control" required>
-                                        <option selected disabled>Selecciona una heladera...</option>
-                                        <option>UTN Medrano</option>
-                                        <option>Ejército de Salvación Central</option>
-                                        <option disabled>Colegio Mariano Moreno</option>
-                                        <option disabled>Parque Centenario 1</option>
-                                    </select>
-                                </div>
-                                <button type="button" class="btn mb-1 btn-primary" style="height: 37px; margin-top: 5px; margin-left: 10px;">Trasladar</button>
-                            </div>
-                        </div>
-                    </div>
+                    {{/each}}
 
                 </div>
             </div>

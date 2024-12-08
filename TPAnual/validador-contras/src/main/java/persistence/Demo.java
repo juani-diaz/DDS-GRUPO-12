@@ -44,7 +44,7 @@ public class Demo {
         Ubicacion direccionSubteB = new Ubicacion("BSAS","Almagro", "-34.60316616966819", "-58.421152913613476", "Avenida Corrientes" ,"1250");
         Heladera heladeraSubteB = new Heladera("Subte B",direccionSubteB, 50, LocalDate.now(), 5f, 10.0f, EnumEstadoHeladera.DISPONIBLE);
 
-        Ubicacion direccionSubteC = new Ubicacion("BSAS","Chacarita", "-34.584036474171214,", "-58.46678133733317", "Avenida Triunvirato" ,"1450");
+        Ubicacion direccionSubteC = new Ubicacion("BSAS","Chacarita", "-34.584036474171214", "-58.46678133733317", "Avenida Triunvirato" ,"1450");
         Heladera heladeraSubteC = new Heladera("Subte C",direccionSubteC, 50, LocalDate.now(), 5f, 10.0f, EnumEstadoHeladera.DISPONIBLE);
 
         Vianda vianda = new Vianda("carne", LocalDate.now(), LocalDate.now(),  "100", 300f, EnumEstadoVianda.ENTREGADO);
@@ -108,14 +108,22 @@ public class Demo {
         EntityManager em = BDUtils.getEntityManager();
         BDUtils.comenzarTransaccion(em);
 
-        em.persist(direccion);
-        em.persist(vianda);
-        em.persist(vianda2);
-        em.persist(heladera);
+//        em.persist(direccion);
+//        em.persist(vianda);
+//        em.persist(vianda2);
+//        em.persist(heladera);
 
         em.persist(direccionSubteB);
         em.persist(viandaSubteB);
         em.persist(heladeraSubteB);
+
+        em.persist(direccionSubteC);
+        em.persist(viandaSubteC);
+        em.persist(heladeraSubteC);
+
+        em.persist(direccionLomasDeZamora);
+        em.persist(viandaLomasDeZamora);
+        em.persist(heladeraLomasDeZamora);
 
         BDUtils.commit(em);
     }
