@@ -29,6 +29,8 @@ public class Demo {
 
     public static void main(String[] args) {
 
+        personas(null);
+        /*
         Ubicacion direccion = new Ubicacion("BSAS","Villa Real", "1011", "200", "GUEMES" ,"4426");
         Heladera heladera = new Heladera("heladera2",direccion, 20, LocalDate.now(), 5f, 10.0f, EnumEstadoHeladera.INACTIVA_POR_FALLA);
 
@@ -173,16 +175,24 @@ public class Demo {
         vulnerable4.retirarVianda(1, heladera2);
 
         //em.persist(vulnerable4);
-
-        BDUtils.commit(em);
+        BDUtils.commit(em);*/
     }
+
     public static void personas(String[] args) {
+        EntityManager em = BDUtils.getEntityManager();
+        BDUtils.comenzarTransaccion(em);
+
+
+
         Email emailManuel = new Email("manubocha@gmail.com");
         String direccionManuel = "Montes De Oca 2671";
         Documento documentoManuel = new Documento("DNI", "47112068");
         LocalDate fechaNacimientoManuel = LocalDate.of(2000, 10, 12);
         PersonaFisica manuelBochini = new PersonaFisica("Manuel", emailManuel,direccionManuel,documentoManuel, "Bochini","Hombre","Masculino", fechaNacimientoManuel);
 
+        em.persist(emailManuel);
+        em.persist(documentoManuel);
+        em.persist(manuelBochini);
         //Persona fisica: ruffini
 
         Email emailRuffini = new Email("ruffus@gmail.com");
@@ -191,6 +201,9 @@ public class Demo {
         LocalDate fechaNacimientoRuffini = LocalDate.of(2018, 12, 9);
         PersonaFisica ruffini = new PersonaFisica("ruffini", emailRuffini,direccionRuffini,documentoRuffini, "Perez","Hombre","Masculino", fechaNacimientoRuffini);
 
+        em.persist(emailRuffini);
+        em.persist(documentoRuffini);
+        em.persist(ruffini);
         //Persona fisica: Emma
 
         Email emailEmma = new Email("Emma@gmail.com");
@@ -199,6 +212,9 @@ public class Demo {
         LocalDate fechaNacimientoEmma = LocalDate.of(2014, 9, 20);
         PersonaFisica emma = new PersonaFisica("Emma", emailEmma,direccionEmma,documentoEmma, "Gonzalez","Mujer","Femenino", fechaNacimientoEmma);
 
+        em.persist(emailEmma);
+        em.persist(documentoEmma);
+        em.persist(emma);
         //Persona fisica: Adriana
 
         Email emailAdriana = new Email("adriana@hotmail.com");
@@ -207,6 +223,9 @@ public class Demo {
         LocalDate fechaNacimientoAdriana = LocalDate.of(1958, 7, 24);
         PersonaFisica adrianaCirulli = new PersonaFisica("Adriana", emailAdriana,direccionAdriana,documentoAdriana, "Cirulli","Mujer","Femenino", fechaNacimientoAdriana);
 
+        em.persist(emailAdriana);
+        em.persist(documentoAdriana);
+        em.persist(adrianaCirulli);
         //Colaboradores:
 
         //Colaborador Manuel:
@@ -226,6 +245,11 @@ public class Demo {
         Colaborador colaboradorAdriana = new Colaborador(adrianaCirulli, null,0f,null,null);
 
 
+        //Persisto los colaboradores
+        em.persist(colaboradorManuel);
+        em.persist(colaboradorAdriana);
+        em.persist(colaboradorEmma);
+        em.persist(colaboradorRuffini);
 
 
         //PERSONAS JURIDICAS
@@ -236,12 +260,23 @@ public class Demo {
         Documento estatutoKiosco = new Documento("CUIT", "42823012");
         PersonaJuridica kiosco = new PersonaJuridica("Kiosco SRL", EnumTipoPersonaJuridica.EMPRESA,"Comercio", direccionKiosco, estatutoKiosco, emailKiosco);
 
+        em.persist(emailKiosco);
+        em.persist(estatutoKiosco);
+        em.persist(kiosco);
         //Persona Juridica ONG
         Email emailONG = new Email("AyudasONG@yahoo.com");
         String direccionONG = "Gurruchaga 2345";
         Documento estatutoONG = new Documento("CUIT", "42823024");
         PersonaJuridica ong = new PersonaJuridica("ONG", EnumTipoPersonaJuridica.ONG,"Ayuda", direccionONG, estatutoONG, emailONG);
 
+        em.persist(emailONG);
+        em.persist(estatutoONG);
+        em.persist(ong);
+
+
+        //Persisto las personas juridicas
+        em.persist(kiosco);
+        em.persist(ong);
 
         //PERSONAS TECNICAS
         Email emailTecnico1 = new Email("reparaTodo@gmail.com");
@@ -251,6 +286,11 @@ public class Demo {
         PersonaFisica albertoTecnico = new PersonaFisica("Alberto", emailTecnico1,direccionTecnico1, documentoTecnico1, "Fernandez", "Hombre", "Masculino", fechaNacimientoTecnico1);
 
 
+        em.persist(emailTecnico1);
+        em.persist(documentoTecnico1);
+        em.persist(albertoTecnico);
+
+
         //PERSONAS TECNICAS
         Email emailTecnico2 = new Email("destapaTodo@gmail.com");
         String direccionTecnico2 = "Santa Fe 4405";
@@ -258,18 +298,9 @@ public class Demo {
         LocalDate fechaNacimientoTecnico2 = LocalDate.of(1989, 1, 28);
         PersonaFisica marioTecnico = new PersonaFisica("Mario", emailTecnico2,direccionTecnico2, documentoTecnico2, "Ruiz", "Hombre", "Masculino", fechaNacimientoTecnico2);
 
-        EntityManager em = BDUtils.getEntityManager();
-        BDUtils.comenzarTransaccion(em);
-
-        //Persisto los colaboradores
-        em.persist(colaboradorManuel);
-        em.persist(colaboradorAdriana);
-        em.persist(colaboradorEmma);
-        em.persist(colaboradorRuffini);
-
-        //Persisto las personas juridicas
-        em.persist(kiosco);
-        em.persist(ong);
+        em.persist(emailTecnico2);
+        em.persist(documentoTecnico2);
+        em.persist(marioTecnico);
 
         //Persisto los tecnicos
         em.persist(albertoTecnico);
@@ -281,12 +312,18 @@ public class Demo {
 
     public static void colaboraciones(String[] args) {
 
+        EntityManager em = BDUtils.getEntityManager();
+        BDUtils.comenzarTransaccion(em);
+
         Tarjeta tarjeta1 = new Tarjeta("Tarjeta1");
         Tarjeta tarjeta2 = new Tarjeta("Tarjeta2");
         Tarjeta tarjeta3 = new Tarjeta("Tarjeta3");
         Tarjeta tarjeta4 = new Tarjeta("Tarjeta4");
 
-
+        em.persist(tarjeta1);
+        em.persist(tarjeta2);
+        em.persist(tarjeta3);
+        em.persist(tarjeta4);
 
         List<Tarjeta> tarjetasParaEntregarElsa = new ArrayList();
         tarjetasParaEntregarElsa.add(tarjeta1);
@@ -301,6 +338,10 @@ public class Demo {
         PersonaFisica elsa = new PersonaFisica("Elsa", emailElsa,direccionElsa,documentoElsa, "Pato","Mujer","Femenino", fechaNacimientoElsa);
         Colaborador colaboradorElsa = new Colaborador(elsa, null,0f,tarjetasParaEntregarElsa,null);
 
+        em.persist(emailElsa);
+        em.persist(documentoElsa);
+        em.persist(elsa);
+        em.persist(colaboradorElsa);
 
         //Dar de alta una persona vulnerable
         Email emailJuan = new Email("JuanVulnerable@gmail.com");
@@ -310,9 +351,15 @@ public class Demo {
         PersonaFisica juan = new PersonaFisica("Juan", emailJuan,direccionJuan, documentoJuan, "Bores", "Hombre", "Masculino", fechaNacimientoJuan);
         Vulnerable vulnerableJuan = new Vulnerable(juan, LocalDate.now(), EnumSituacionCalle.POSEE_HOGAR, 0, null, null, null);
 
+        em.persist(emailJuan);
+        em.persist(documentoJuan);
+        em.persist(juan);
+        em.persist(vulnerableJuan);
+
         RegistroPersonaVulnerable registroJuan = new RegistroPersonaVulnerable(colaboradorElsa,LocalDate.now(),vulnerableJuan);
         registroJuan.ejecutar();
 
+        em.persist(registroJuan);
         //Dar de alta segunda persona vulnerable
 
         Email emailIñaki = new Email("IñakiVulnerable@gmail.com");
@@ -322,9 +369,15 @@ public class Demo {
         PersonaFisica iñaki = new PersonaFisica("Iñaki", emailIñaki,direccionIñaki, documentoIñaki, "Ansa", "Hombre", "Masculino", fechaNacimientoIñaki);
         Vulnerable vulnerableIñaki = new Vulnerable(iñaki, LocalDate.now(), EnumSituacionCalle.POSEE_HOGAR, 0, null, null, null);
 
+        em.persist(emailIñaki);
+        em.persist(documentoIñaki);
+        em.persist(iñaki);
+        em.persist(vulnerableIñaki);
+
         RegistroPersonaVulnerable registroIñaki = new RegistroPersonaVulnerable(colaboradorElsa,LocalDate.now(),vulnerableIñaki);
         registroIñaki.ejecutar();
 
+        em.persist(registroIñaki);
         //Dar de alta tercera persona vulnerable
 
         Email emailTomas = new Email("tomas_martinez@gmail.com");
@@ -334,9 +387,15 @@ public class Demo {
         PersonaFisica tomas = new PersonaFisica("Tomas", emailTomas,direccionTomas, documentoTomas, "Martinez", "Hombre", "Masculino", fechaNacimientoTomas);
         Vulnerable vulnerableTomas = new Vulnerable(tomas, LocalDate.now(), EnumSituacionCalle.NO_POSEE_HOGAR, 0, null, null, null);
 
+        em.persist(emailTomas);
+        em.persist(documentoTomas);
+        em.persist(tomas);
+        em.persist(vulnerableTomas);
+
         RegistroPersonaVulnerable registroTomas = new RegistroPersonaVulnerable(colaboradorElsa,LocalDate.now(),vulnerableTomas);
         registroTomas.ejecutar();
 
+        em.persist(registroTomas);
         //Dar de alta cuarta persona vulnerable
 
         Email emailLuciana = new Email("luciana_gonzales@gmail.com");
@@ -346,37 +405,65 @@ public class Demo {
         PersonaFisica luciana = new PersonaFisica("Lucio", emailLuciana,direccionLuciana, documentoLuciana, "Gonzalez", "Mujer", "Femenino", fechaNacimientoLuciana);
         Vulnerable vulnerableLuciana = new Vulnerable(luciana, LocalDate.now(), EnumSituacionCalle.POSEE_HOGAR, 0, null, null, null);
 
+        em.persist(emailLuciana);
+        em.persist(documentoLuciana);
+        em.persist(luciana);
+        em.persist(vulnerableLuciana);
+
+
         RegistroPersonaVulnerable registroLuciana = new RegistroPersonaVulnerable(colaboradorElsa,LocalDate.now(),vulnerableLuciana);
         registroLuciana.ejecutar();
 
-
+        em.persist(registroLuciana);
 
         //COLABORACIONES ENCARGADO HELADERA
         //Genero las 4 heladeras
         Ubicacion direccionCabildo = new Ubicacion("BSAS","Congreso", "-34.608607", "-58.373399", "Bolivar" ,"1087");
         Heladera heladeraCabildo = new Heladera("heladera Cabildo",direccionCabildo, 20, LocalDate.now(), 5f, 10.0f, EnumEstadoHeladera.INACTIVA_POR_FALLA);
 
+
+        em.persist(direccionCabildo);
+        em.persist(heladeraCabildo);
+
+
         Ubicacion direccionPlazaItalia = new Ubicacion("BSAS","Palermo", "-34.581467 ", "-58.421326", "Avenida Santa Fe" ,"1425");
         Heladera heladeraPlazaItalia = new Heladera("heladera Plaza Italia",direccionPlazaItalia, 20, LocalDate.now(), 5f, 10.0f, EnumEstadoHeladera.DISPONIBLE);
+
+        em.persist(direccionPlazaItalia);
+        em.persist(heladeraPlazaItalia);
 
         Ubicacion direccionParqueCentenario = new Ubicacion("BSAS","Almagro", "-34.607189", "-58.432794", "Avenida Patricias Argentinas" ,"150");
         Heladera heladeraParqueCentenario = new Heladera("heladera Parque Centenario",direccionParqueCentenario, 150, LocalDate.now(), 5f, 10.0f, EnumEstadoHeladera.INACTIVA_POR_ALERTA);
 
+        em.persist(direccionParqueCentenario);
+        em.persist(heladeraParqueCentenario);
+
         Ubicacion direccionParqueRivadia = new Ubicacion("BSAS","Caballito", "-34.616963", "-58.433521", "Avenida Rivadavia" ,"4815");
         Heladera heladeraParqueRivadavia = new Heladera("heladera Parque Rivadavia",direccionParqueRivadia, 50, LocalDate.now(), 5f, 10.0f, EnumEstadoHeladera.DISPONIBLE);
+
+        em.persist(direccionParqueRivadia);
+        em.persist(heladeraParqueRivadavia);
 
         //Empiezo a asignar a Adriana como responsable de las 4
         ResponsableHeladera responsableUnaHeladeraAdriana = new ResponsableHeladera(colaboradorElsa,LocalDate.now(),heladeraCabildo);
         responsableUnaHeladeraAdriana.ejecutar();
 
+        em.persist(responsableUnaHeladeraAdriana);
+
         ResponsableHeladera responsableDosHeladerasAdriana = new ResponsableHeladera(colaboradorElsa,LocalDate.now(),heladeraPlazaItalia);
         responsableDosHeladerasAdriana.ejecutar();
+
+        em.persist(responsableDosHeladerasAdriana);
 
         ResponsableHeladera responsableTresHeladerasAdriana = new ResponsableHeladera(colaboradorElsa,LocalDate.now(),heladeraParqueCentenario);
         responsableTresHeladerasAdriana.ejecutar();
 
+        em.persist(responsableTresHeladerasAdriana);
+
         ResponsableHeladera responsableCuatroHeladerasAdriana = new ResponsableHeladera(colaboradorElsa,LocalDate.now(),heladeraParqueRivadavia);
         responsableCuatroHeladerasAdriana.ejecutar();
+
+        em.persist(responsableCuatroHeladerasAdriana);
 
         //DONACIONES DE VIANDA A CADA HELADERA
 
@@ -391,6 +478,15 @@ public class Demo {
         Vianda octavaVianda = new Vianda("torta", LocalDate.now(), LocalDate.now(),  "500", 300f, EnumEstadoVianda.ENTREGADO);
         Vianda novenaVianda = new Vianda("manzana", LocalDate.now(), LocalDate.now(),  "100", 250f, EnumEstadoVianda.ENTREGADO);
 
+        em.persist(primerVianda);
+        em.persist(segundaVianda);
+        em.persist(tercerVianda);
+        em.persist(cuartaVianda);
+        em.persist(quintaVianda);
+        em.persist(sextaVianda);
+        em.persist(septimaVianda);
+        em.persist(octavaVianda);
+        em.persist(novenaVianda);
 
         DonacionVianda primerDonacion = new DonacionVianda(colaboradorElsa,LocalDate.now(),primerVianda,heladeraCabildo);
         DonacionVianda segundaDonacion = new DonacionVianda(colaboradorElsa,LocalDate.now(),segundaVianda,heladeraCabildo);
@@ -412,64 +508,11 @@ public class Demo {
         sextaDonacion.ejecutar();
         septimaDonacion.ejecutar();
 
-        DonacionVianda octavaDonacion = new DonacionVianda(colaboradorElsa,LocalDate.now(),tercerVianda,heladeraParqueRivadavia);
-        DonacionVianda novenaDonacion = new DonacionVianda(colaboradorElsa,LocalDate.now(),cuartaVianda,heladeraParqueRivadavia);
+        DonacionVianda octavaDonacion = new DonacionVianda(colaboradorElsa,LocalDate.now(),octavaVianda,heladeraParqueRivadavia);
+        DonacionVianda novenaDonacion = new DonacionVianda(colaboradorElsa,LocalDate.now(),novenaVianda,heladeraParqueRivadavia);
 
         octavaDonacion.ejecutar();
         novenaDonacion.ejecutar();
-
-
-        //TRASLADOS DE VIANDA
-
-        DistribucionVianda primeraDistribucion = new DistribucionVianda(colaboradorElsa, LocalDate.now(),heladeraPlazaItalia,heladeraParqueCentenario,2, EnumMotivosMovimientoVianda.FALTA_DE_VIANDAS);
-        primeraDistribucion.ejecutar();
-
-        DistribucionVianda segundaDistribucion = new DistribucionVianda(colaboradorElsa, LocalDate.now(),heladeraParqueRivadavia,heladeraCabildo,1, EnumMotivosMovimientoVianda.FALTA_DE_VIANDAS);
-        segundaDistribucion.ejecutar();
-
-        DistribucionVianda terceraDistribucion = new DistribucionVianda(colaboradorElsa, LocalDate.now(),heladeraParqueCentenario,heladeraCabildo,1, EnumMotivosMovimientoVianda.FALTA_DE_VIANDAS);
-        terceraDistribucion.ejecutar();
-
-
-        //DONACION DE DINERO
-
-        Colaboracion donacionDinero = new DonacionDinero(colaboradorElsa,fechaNacimientoElsa ,3500F, "1 vez por semana");
-        donacionDinero.ejecutar(); //el ejecutar no hace nada pero bueno
-
-
-        // PRESENTACION OFERTAS
-        Catalogo catalogo = new Catalogo();
-
-        Colaboracion presentarOfertaMartillo = new PresentacionOferta(colaboradorElsa,LocalDate.now(), "Metalurgica","Martillo","200","imagenMartillo");
-        presentarOfertaMartillo.ejecutar();
-
-        Colaboracion presentarOfertaPelota = new PresentacionOferta(colaboradorElsa,LocalDate.now(), "Deporte","Pelota Jabulani","250","imagenJabulani");
-        presentarOfertaPelota.ejecutar();
-
-        EntityManager em = BDUtils.getEntityManager();
-        BDUtils.comenzarTransaccion(em);
-
-
-        //Persistimos a los colaboradores primero
-        em.persist(colaboradorElsa);
-
-        //Persistimos a los vulnerables
-        em.persist(vulnerableJuan);
-        em.persist(vulnerableIñaki);
-        em.persist(vulnerableTomas);
-        em.persist(vulnerableLuciana);
-
-        //Persistimos las heladeras
-        em.persist(heladeraCabildo);
-        em.persist(heladeraPlazaItalia);
-        em.persist(heladeraParqueCentenario);
-        em.persist(heladeraParqueRivadavia);
-
-        //Persistimos las colaboraciones
-        em.persist(responsableUnaHeladeraAdriana);
-        em.persist(responsableDosHeladerasAdriana);
-        em.persist(responsableTresHeladerasAdriana);
-        em.persist(responsableCuatroHeladerasAdriana);
 
         //Persistimos las dinaciones de vianda
         em.persist(primerDonacion);
@@ -482,28 +525,60 @@ public class Demo {
         em.persist(octavaDonacion);
         em.persist(novenaDonacion);
 
+        //TRASLADOS DE VIANDA
+
+        DistribucionVianda primeraDistribucion = new DistribucionVianda(colaboradorElsa, LocalDate.now(),heladeraPlazaItalia,heladeraParqueCentenario,2, EnumMotivosMovimientoVianda.FALTA_DE_VIANDAS);
+        primeraDistribucion.ejecutar();
+
+        DistribucionVianda segundaDistribucion = new DistribucionVianda(colaboradorElsa, LocalDate.now(),heladeraParqueRivadavia,heladeraCabildo,1, EnumMotivosMovimientoVianda.FALTA_DE_VIANDAS);
+        segundaDistribucion.ejecutar();
+
+        DistribucionVianda terceraDistribucion = new DistribucionVianda(colaboradorElsa, LocalDate.now(),heladeraParqueCentenario,heladeraCabildo,1, EnumMotivosMovimientoVianda.FALTA_DE_VIANDAS);
+        terceraDistribucion.ejecutar();
+
         //Persistimos las distribuciones
         em.persist(primeraDistribucion);
         em.persist(segundaDistribucion);
         em.persist(terceraDistribucion);
 
+        //DONACION DE DINERO
+
+        Colaboracion donacionDinero = new DonacionDinero(colaboradorElsa,fechaNacimientoElsa ,3500F, "1 vez por semana");
+        donacionDinero.ejecutar(); //el ejecutar no hace nada pero bueno
+
         //Persistimos donaciones de dinero
         em.persist(donacionDinero);
+
+        // PRESENTACION OFERTAS
+        Catalogo catalogo = new Catalogo();
+
+        Colaboracion presentarOfertaMartillo = new PresentacionOferta(colaboradorElsa,LocalDate.now(), "Metalurgica","Martillo","200","imagenMartillo");
+        presentarOfertaMartillo.ejecutar();
+
+        Colaboracion presentarOfertaPelota = new PresentacionOferta(colaboradorElsa,LocalDate.now(), "Deporte","Pelota Jabulani","250","imagenJabulani");
+        presentarOfertaPelota.ejecutar();
 
         // Persistimos las ofertas
         em.persist(presentarOfertaMartillo);
         em.persist(presentarOfertaPelota);
 
+
         BDUtils.commit(em);
     }
 
     public static void servicios(String[] args){
+        EntityManager em = BDUtils.getEntityManager();
+        BDUtils.comenzarTransaccion(em);
 
         Tarjeta tarjeta1 = new Tarjeta("Tarjeta1");
         Tarjeta tarjeta2 = new Tarjeta("Tarjeta2");
         Tarjeta tarjeta3 = new Tarjeta("Tarjeta3");
         Tarjeta tarjeta4 = new Tarjeta("Tarjeta4");
 
+        em.persist(tarjeta1);
+        em.persist(tarjeta2);
+        em.persist(tarjeta3);
+        em.persist(tarjeta4);
 
 
         List<Tarjeta> tarjetasParaEntregarEdgar = new ArrayList();
@@ -516,10 +591,19 @@ public class Demo {
         String direccionEdgar= "San Mateo 1220";
         Documento documentoEdgar = new Documento("DNI", "143948541");
         LocalDate fechaNacimientoEdgar = LocalDate.of(1962, 12, 24);
-        PersonaFisica elsa = new PersonaFisica("Elsa", emailEdgar,direccionEdgar,documentoEdgar, "Pato","Masculino","Masculino", fechaNacimientoEdgar);
-        Colaborador colaboradorEdgar = new Colaborador(elsa, null,250000f,tarjetasParaEntregarEdgar,null);
+        PersonaFisica edgar = new PersonaFisica("Edgar", emailEdgar,direccionEdgar,documentoEdgar, "Pato","Masculino","Masculino", fechaNacimientoEdgar);
+        Colaborador colaboradorEdgar = new Colaborador(edgar, null,250000f,tarjetasParaEntregarEdgar,null);
+
+        em.persist(emailEdgar);
+        em.persist(documentoEdgar);
+        em.persist(edgar);
+        //persisto el colaborador
+        em.persist(colaboradorEdgar);
 
         Catalogo catalogo = new Catalogo();
+
+        //persisto el catalogo
+        em.persist(catalogo);
 
         Colaboracion presentarOfertaDestornillador = new PresentacionOferta(colaboradorEdgar,LocalDate.now(), "Metalurgica","Martillo","200","imagenMartillo");
         presentarOfertaDestornillador.ejecutar();
@@ -531,13 +615,6 @@ public class Demo {
 
         catalogo.otorgar(1,colaboradorEdgar);
 
-        EntityManager em = BDUtils.getEntityManager();
-        BDUtils.comenzarTransaccion(em);
-
-        //persisto el colaborador
-        em.persist(colaboradorEdgar);
-        //persisto el catalogo
-        em.persist(catalogo);
         //persisto las ofertas
         em.persist(presentarOfertaDestornillador);
         em.persist(presentarOfertaBotines);
@@ -548,16 +625,25 @@ public class Demo {
 
     public static void incidentes(String[] args) {
 
+        EntityManager em = BDUtils.getEntityManager();
+        BDUtils.comenzarTransaccion(em);
+
         //Primero creo Colaborador
         Email emailEzequiel = new Email("ezequiel_colapinto@gmail.com");
         String direccionEzequiel = "Laprida 2534";
         Documento documentoEzequiel = new Documento("DNI", "41376905");
         LocalDate fechaNacimientoEzequiel = LocalDate.of(2000, 10, 12);
 
+        em.persist(documentoEzequiel);
+        em.persist(emailEzequiel);
+
         //Lo hago colaborador
         PersonaFisica ezequiel_colapinto = new PersonaFisica("Ezequiel", emailEzequiel,direccionEzequiel,documentoEzequiel, "Colapinto","Hombre","Masculino", fechaNacimientoEzequiel);
         Colaborador colaboradorEzequiel = new Colaborador(ezequiel_colapinto, null,0f,null,null);
 
+        em.persist(ezequiel_colapinto);
+        //Persisto al colaborador
+        em.persist(colaboradorEzequiel);
 
         //Creamos las heladeras
         Ubicacion direccionBanfield = new Ubicacion("BSAS","Banfield", "-34.743360", "-58.396135", "Alem" ,"1460");
@@ -566,6 +652,12 @@ public class Demo {
         Ubicacion direccionLaBoca = new Ubicacion("BSAS","La Boca", "-34.636439", "-58.364152", "Brandsen" ,"805");
         Heladera heladeraBoca = new Heladera("heladera Estadio Bombonera",direccionLaBoca, 200, LocalDate.now(), 5f, 10.0f, EnumEstadoHeladera.INACTIVA_POR_FALLA);
 
+        em.persist(direccionBanfield);
+        em.persist(direccionLaBoca);
+
+        //Persisto la heladera
+        em.persist(heladeraBanfield);
+        em.persist(heladeraBoca);
         Date fecha = new Date();
 
         //Creamos los incidentes
@@ -573,20 +665,10 @@ public class Demo {
 
         IncidenteAlarma incidentePorAlarma = new IncidenteAlarma(heladeraBoca, fecha, EnumTipoDeFalla.TEMPERATURA);
 
-
-        EntityManager em = BDUtils.getEntityManager();
-        BDUtils.comenzarTransaccion(em);
-
-        //Persisto al colaborador
-        em.persist(colaboradorEzequiel);
-
-        //Persisto la heladera
-        em.persist(heladeraBanfield);
-        em.persist(heladeraBoca);
-
         //Persisto las fallas
         em.persist(incidenteReportado);
         em.persist(incidentePorAlarma);
+
 
         BDUtils.commit(em);
 
