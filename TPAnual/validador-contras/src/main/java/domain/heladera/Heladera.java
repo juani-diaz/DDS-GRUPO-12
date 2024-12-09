@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import domain.vianda.*;
 import persistence.EntidadPersistente;
+import persistence.Repos.RepoHeladera;
 
 
 import javax.persistence.*;

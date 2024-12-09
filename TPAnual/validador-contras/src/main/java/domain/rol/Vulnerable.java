@@ -9,10 +9,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import persistence.BDUtils;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
@@ -60,6 +62,7 @@ public class Vulnerable extends Rol {
 
   public boolean retirarVianda(int indiceViandas, Heladera heladera){
     if(usosRestantesPorDia > 0){
+
       usosRestantesPorDia = usosRestantesPorDia - 1;
       Vianda viandaRecogida = heladera.sacarViandaPorIndice(indiceViandas);
       ViandaRecogida vr = new ViandaRecogida(this, heladera, viandaRecogida, new Date());
@@ -68,6 +71,7 @@ public class Vulnerable extends Rol {
       se.getRetirosViandas().add(vr);
 
       viandasTomadas.add(new ViandaRecogida(this, heladera, viandaRecogida, new Date()));
+
       return true;
     } else
       return false;

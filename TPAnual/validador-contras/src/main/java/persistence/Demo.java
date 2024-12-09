@@ -85,45 +85,94 @@ public class Demo {
         Vulnerable v1 = new Vulnerable(LocalDate.now(), EnumSituacionCalle.NO_POSEE_HOGAR, 0, new ArrayList<ViandaRecogida>(), t1, new ArrayList<UsoDeTarjeta>(), 4);
         Documento d1 = new Documento("DNI", "43126980");
         v1.setPersona(new PersonaFisica("tomas", null, null, d1, "cerezo", "m", "m", LocalDate.now()));
-        v1.retirarVianda(0, heladera);
+        //v1.retirarVianda(0, heladera);
 
         Tarjeta t2 = new Tarjeta("abcd");
         Vulnerable v2 = new Vulnerable(LocalDate.now(), EnumSituacionCalle.NO_POSEE_HOGAR, 2, new ArrayList<ViandaRecogida>(), t2, new ArrayList<UsoDeTarjeta>(), 8);
         Documento d2 = new Documento("DNI", "44601269");
         v2.setPersona(new PersonaFisica("gabriela", null, null, d2, "varela", "f", "f", LocalDate.now()));
-        v2.retirarVianda(0, heladera2);
+        //v2.retirarVianda(0, heladera2);
 
         Tarjeta t3 = new Tarjeta("abcde");
         Vulnerable v3 = new Vulnerable(LocalDate.now(), EnumSituacionCalle.POSEE_HOGAR, 0, new ArrayList<ViandaRecogida>(), t3, new ArrayList<UsoDeTarjeta>(), 4);
         Documento d3 = new Documento("DNI", "45142069");
         v3.setPersona(new PersonaFisica("agustin", null, "MASA 38", d3, "bevilacua", "m", "t", LocalDate.now()));
-        v3.retirarVianda(0, heladera);
+        //v3.retirarVianda(0, heladera);
 
-        Tarjeta t4 = new Tarjeta("abcdef");
-        Vulnerable v4 = new Vulnerable(LocalDate.now(), EnumSituacionCalle.NO_POSEE_HOGAR, 2, new ArrayList<ViandaRecogida>(), t2, new ArrayList<UsoDeTarjeta>(), 8);
+        Tarjeta tarjeta4 = new Tarjeta("tarjeta4");
+        //Vulnerable v4 = new Vulnerable(LocalDate.now(), EnumSituacionCalle.NO_POSEE_HOGAR, 2, new ArrayList<ViandaRecogida>(), t2, new ArrayList<UsoDeTarjeta>(), 8);
         Documento d4 = new Documento("DNI", "46260391");
-        v4.setPersona(new PersonaFisica("ana", null, null, d2, "dinardi", "f", "f", LocalDate.now()));
-        v4.retirarVianda(0, heladera2);
+        PersonaFisica personaFisica4 = new PersonaFisica("ana", null, null, d4, "dinardi", "f", "f", LocalDate.now());
+        ViandaRecogida viandaRecogida4 = new ViandaRecogida();
+        viandaRecogida4.setViandaRecogida(vianda4);
+        ArrayList<ViandaRecogida> viandaRecogidaArrayList = new ArrayList<>();
+        viandaRecogidaArrayList.add(viandaRecogida4);
+        Vulnerable vulnerable4 = new Vulnerable();
+            vulnerable4.setFechaRegistro(LocalDate.now());
+            vulnerable4.setSituacionCalle(EnumSituacionCalle.NO_POSEE_HOGAR);
+            vulnerable4.setMenoresACargo(2);
+            vulnerable4.setTarjeta(tarjeta4);
+            vulnerable4.setUsosRestantesPorDia(8);
+            vulnerable4.setPersona(personaFisica4);
+            vulnerable4.setViandasTomadas(viandaRecogidaArrayList);
+
 
         EntityManager em = BDUtils.getEntityManager();
         BDUtils.comenzarTransaccion(em);
 
-//        em.persist(direccion);
-//        em.persist(vianda);
-//        em.persist(vianda2);
-//        em.persist(heladera);
+        em.persist(direccion);
+        em.persist(heladera);
+
+        em.persist(direccionMedrano);
+        em.persist(heladeraMedrano);
+
+        em.persist(direccionConstitucion);
+        em.persist(heladeraConstitucion);
+
+        em.persist(direccionLomasDeZamora);
+        em.persist(heladeraLomasDeZamora);
 
         em.persist(direccionSubteB);
-        em.persist(viandaSubteB);
         em.persist(heladeraSubteB);
 
         em.persist(direccionSubteC);
-        em.persist(viandaSubteC);
         em.persist(heladeraSubteC);
 
-        em.persist(direccionLomasDeZamora);
+          em.persist(vianda);
+        em.persist(vianda2);
+        em.persist(viandaHeladeraMedrano);
         em.persist(viandaLomasDeZamora);
-        em.persist(heladeraLomasDeZamora);
+        em.persist(viandaSubteB);
+        em.persist(viandaSubteC);
+
+        em.persist(direccion2);
+        em.persist(heladera2);
+
+        em.persist(vianda3);
+
+
+        em.persist(t1);
+
+        em.persist(vianda2);
+      em.persist(d1);
+
+        em.persist(t2);
+        em.persist(d2);
+
+        em.persist(t3);
+        em.persist(d3);
+
+        em.persist(tarjeta4);
+        em.persist(d4);
+        em.persist(personaFisica4);
+        em.persist(vianda4);
+        //em.persist(v1);
+        //em.persist(v2);
+        //em.persist(v3);
+        em.persist(viandaRecogida4);
+        vulnerable4.retirarVianda(1, heladera2);
+
+        //em.persist(vulnerable4);
 
         BDUtils.commit(em);
     }

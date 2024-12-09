@@ -29,6 +29,7 @@ public class VistasJavalin {
             initTemplateEngine();
 
             Demo.main(null);
+            //Demo.personas(null);
 
             Integer port = Integer.parseInt(System.getProperty("port", "8001"));
             Javalin app = Javalin.create(config -> {
