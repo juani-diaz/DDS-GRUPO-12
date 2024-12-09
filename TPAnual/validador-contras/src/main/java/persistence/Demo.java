@@ -29,8 +29,6 @@ public class Demo {
 
     public static void main(String[] args) {
 
-        personas(null);
-        /*
         Ubicacion direccion = new Ubicacion("BSAS","Villa Real", "1011", "200", "GUEMES" ,"4426");
         Heladera heladera = new Heladera("heladera2",direccion, 20, LocalDate.now(), 5f, 10.0f, EnumEstadoHeladera.INACTIVA_POR_FALLA);
 
@@ -175,7 +173,7 @@ public class Demo {
         vulnerable4.retirarVianda(1, heladera2);
 
         //em.persist(vulnerable4);
-        BDUtils.commit(em);*/
+        BDUtils.commit(em);
     }
 
     public static void personas(String[] args) {
@@ -230,7 +228,8 @@ public class Demo {
 
         //Colaborador Manuel:
 
-        Colaborador colaboradorManuel = new Colaborador(manuelBochini, null,0f,null,null);
+        Colaborador colaboradorManuel = new Colaborador();
+        colaboradorManuel.setPersona(manuelBochini);
 
         //Colaborador Ruffini:
 
@@ -248,8 +247,8 @@ public class Demo {
         //Persisto los colaboradores
         em.persist(colaboradorManuel);
         em.persist(colaboradorAdriana);
-        em.persist(colaboradorEmma);
-        em.persist(colaboradorRuffini);
+        //em.persist(colaboradorEmma);
+        //em.persist(colaboradorRuffini);
 
 
         //PERSONAS JURIDICAS
@@ -288,7 +287,7 @@ public class Demo {
 
         em.persist(emailTecnico1);
         em.persist(documentoTecnico1);
-        em.persist(albertoTecnico);
+        //em.persist(albertoTecnico);
 
 
         //PERSONAS TECNICAS
@@ -446,22 +445,22 @@ public class Demo {
 
         //Empiezo a asignar a Adriana como responsable de las 4
         ResponsableHeladera responsableUnaHeladeraAdriana = new ResponsableHeladera(colaboradorElsa,LocalDate.now(),heladeraCabildo);
-        responsableUnaHeladeraAdriana.ejecutar();
+        //responsableUnaHeladeraAdriana.ejecutar();
 
         em.persist(responsableUnaHeladeraAdriana);
 
         ResponsableHeladera responsableDosHeladerasAdriana = new ResponsableHeladera(colaboradorElsa,LocalDate.now(),heladeraPlazaItalia);
-        responsableDosHeladerasAdriana.ejecutar();
+        //responsableDosHeladerasAdriana.ejecutar();
 
         em.persist(responsableDosHeladerasAdriana);
 
         ResponsableHeladera responsableTresHeladerasAdriana = new ResponsableHeladera(colaboradorElsa,LocalDate.now(),heladeraParqueCentenario);
-        responsableTresHeladerasAdriana.ejecutar();
+        //responsableTresHeladerasAdriana.ejecutar();
 
         em.persist(responsableTresHeladerasAdriana);
 
         ResponsableHeladera responsableCuatroHeladerasAdriana = new ResponsableHeladera(colaboradorElsa,LocalDate.now(),heladeraParqueRivadavia);
-        responsableCuatroHeladerasAdriana.ejecutar();
+        //responsableCuatroHeladerasAdriana.ejecutar();
 
         em.persist(responsableCuatroHeladerasAdriana);
 
@@ -477,6 +476,16 @@ public class Demo {
         Vianda septimaVianda = new Vianda("pastel de papa", LocalDate.now(), LocalDate.now(),  "230", 420f, EnumEstadoVianda.ENTREGADO);
         Vianda octavaVianda = new Vianda("torta", LocalDate.now(), LocalDate.now(),  "500", 300f, EnumEstadoVianda.ENTREGADO);
         Vianda novenaVianda = new Vianda("manzana", LocalDate.now(), LocalDate.now(),  "100", 250f, EnumEstadoVianda.ENTREGADO);
+
+        primerVianda.setHeladera(heladeraCabildo);
+        segundaVianda.setHeladera(heladeraPlazaItalia);
+        tercerVianda.setHeladera(heladeraParqueCentenario);
+        cuartaVianda.setHeladera(heladeraParqueRivadavia);
+        quintaVianda.setHeladera(heladeraCabildo);
+        sextaVianda.setHeladera(heladeraPlazaItalia);
+        septimaVianda.setHeladera(heladeraParqueCentenario);
+        octavaVianda.setHeladera(heladeraParqueRivadavia);
+        novenaVianda.setHeladera(heladeraCabildo);
 
         em.persist(primerVianda);
         em.persist(segundaVianda);
@@ -533,13 +542,13 @@ public class Demo {
         DistribucionVianda segundaDistribucion = new DistribucionVianda(colaboradorElsa, LocalDate.now(),heladeraParqueRivadavia,heladeraCabildo,1, EnumMotivosMovimientoVianda.FALTA_DE_VIANDAS);
         segundaDistribucion.ejecutar();
 
-        DistribucionVianda terceraDistribucion = new DistribucionVianda(colaboradorElsa, LocalDate.now(),heladeraParqueCentenario,heladeraCabildo,1, EnumMotivosMovimientoVianda.FALTA_DE_VIANDAS);
-        terceraDistribucion.ejecutar();
+        //DistribucionVianda terceraDistribucion = new DistribucionVianda(colaboradorElsa, LocalDate.now(),heladeraParqueCentenario,heladeraPlazaItalia,1, EnumMotivosMovimientoVianda.FALTA_DE_VIANDAS);
+        //terceraDistribucion.ejecutar();
 
         //Persistimos las distribuciones
         em.persist(primeraDistribucion);
         em.persist(segundaDistribucion);
-        em.persist(terceraDistribucion);
+        //em.persist(terceraDistribucion);
 
         //DONACION DE DINERO
 

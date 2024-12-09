@@ -14,6 +14,7 @@ import javax.persistence.*;
 public abstract class Rol{
 
     @Id
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private int id;
 
     @ManyToOne

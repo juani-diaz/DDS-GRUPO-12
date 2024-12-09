@@ -30,7 +30,9 @@ public class VistasJavalin {
             initTemplateEngine();
 
             Demo.main(null);
-            //Demo.personas(null);
+            Demo.personas(null);
+            Demo.colaboraciones(null);
+            Demo.servicios(null);
 
             JavalinJackson.defaultMapper();
 

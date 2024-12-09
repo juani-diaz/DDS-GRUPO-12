@@ -14,6 +14,7 @@ import java.time.LocalDate;
 public abstract class Colaboracion{
 
     @Id
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private int id;
 
     @ManyToOne
