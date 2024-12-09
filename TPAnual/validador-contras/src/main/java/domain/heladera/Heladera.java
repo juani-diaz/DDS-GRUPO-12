@@ -1,6 +1,8 @@
 package domain.heladera;
 
 import com.mysql.cj.xdevapi.FetchResult;
+import domain.incidente.Incidente;
+import domain.incidente.IncidenteAlarma;
 import lombok.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -40,6 +42,11 @@ public class Heladera extends EntidadPersistente {
 
   @OneToMany(mappedBy = "heladera", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
   private List<Vianda> viandasEnHeladera; //=new ArrayList<>()
+
+  @OneToMany(mappedBy = "heladera", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+  private List<Incidente> incidentesAlarma;
+
+
 
   @Column
   private Float temperaturaMinima;
