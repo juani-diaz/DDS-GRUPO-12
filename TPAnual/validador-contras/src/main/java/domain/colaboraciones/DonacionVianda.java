@@ -1,6 +1,7 @@
 package domain.colaboraciones;
 
 import domain.heladera.Heladera;
+import domain.persona.PersonaFisica;
 import domain.registro.SingletonSeguidorEstadistica;
 import domain.rol.Colaborador;
 import domain.rol.Tarjeta;
@@ -34,14 +35,19 @@ public class DonacionVianda extends Colaboracion {
         this.destino = destino;
     }
 
-    public void ejecutar(){
-        destino.ingresarViandas(Collections.singletonList(vianda));
+    public void ejecutar() {
+        Colaborador colaborador = getColaborador();
+        if (!(colaborador.getPersona() instanceof PersonaFisica)) {
+            throw new IllegalArgumentException("El colaborador debe ser una persona humana");
+        } else {
+            destino.ingresarViandas(Collections.singletonList(vianda));
 
-        SingletonSeguidorEstadistica se = SingletonSeguidorEstadistica.getInstance();
-        se.getDonacionViandas().add(this);
+            SingletonSeguidorEstadistica se = SingletonSeguidorEstadistica.getInstance();
+            se.getDonacionViandas().add(this);
+        }
     }
-
     public Float puntosObtenidos(){
+
         return multiplicador;
     }
 

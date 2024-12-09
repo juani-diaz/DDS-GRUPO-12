@@ -26,7 +26,7 @@ public class RepoColaborador {
                                                 "JOIN c.persona p  )"
         );
 
-        Query query2 = em.createQuery("SELECT p.id, COUNT (DISTINCT d) FROM DonacionVianda d JOIN d.colaborador c JOIN ersona pGROUP BY p")
+        Query query2 = em.createQuery("SELECT p.id, COUNT (DISTINCT d) FROM DonacionVianda d JOIN d.colaborador c JOIN ersona pGROUP BY p");
 
 
         System.out.println("Query creada: " + query2);

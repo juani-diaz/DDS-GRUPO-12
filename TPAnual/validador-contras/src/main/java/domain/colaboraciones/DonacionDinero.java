@@ -1,5 +1,7 @@
 package domain.colaboraciones;
 
+import domain.persona.PersonaFisica;
+import domain.registro.SingletonSeguidorEstadistica;
 import domain.rol.Colaborador;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -35,11 +37,14 @@ public class DonacionDinero extends Colaboracion {
     }
 
     public void ejecutar(){
-        //TODO
+        /*Crea un donacionDinero?? que hace esto??
+        No es necesario que realice nada, solo tiene que quedar sentada la donacion
+        para asi cuando queremos calcular los puntos funciones todo bien */
 
     }
 
     public Float puntosObtenidos(){
-        return multiplicador * monto;
+        return multiplicador *monto ;
+
     }
 }

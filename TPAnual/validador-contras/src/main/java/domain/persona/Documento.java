@@ -22,4 +22,9 @@ public class Documento implements Serializable {;
 
   @Column
   private String numero;
+
+  public Documento(String tipo, String numero) {
+    this.tipo = tipo;
+    this.numero = numero;
+  }
 }

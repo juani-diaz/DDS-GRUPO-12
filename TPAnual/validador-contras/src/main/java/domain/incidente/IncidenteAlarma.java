@@ -2,6 +2,7 @@ package domain.incidente;
 
 import domain.heladera.EnumEstadoHeladera;
 import domain.heladera.Heladera;
+import domain.registro.SingletonSeguidorEstadistica;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,6 +23,13 @@ public class IncidenteAlarma extends Incidente{
     super(heladera, fecha, new ArrayList<VisitasTecnicas>(), EnumEstadoDeIncidente.PENDIENTE_A_SOLUCIONAR);
     this.enumTipoDeFalla = falla;
     heladera.setEstado(EnumEstadoHeladera.INACTIVA_POR_ALERTA);
+    SingletonSeguidorEstadistica se = SingletonSeguidorEstadistica.getInstance();
+    se.getIncidentes().add(this);
+  }
+
+  // Si no esta este metodo tira error el JPA/Hibernate
+  public IncidenteAlarma() {
+
   }
 
   @Override

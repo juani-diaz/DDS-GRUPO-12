@@ -5,6 +5,7 @@ import domain.contra.TAMANIO;
 import domain.contra.TOP10000;
 import domain.contra.Usuario;
 import domain.persona.*;
+import domain.rol.Colaborador;
 import org.junit.jupiter.api.Assertions;
 import domain.vianda.Vianda;
 import org.junit.jupiter.api.Test;
@@ -37,12 +38,19 @@ public class test {
   Heladera heladera_origen = new Heladera("healdera_origen", ubicacion, 100, fechaFuncionamiento, 12F, 20F, EnumEstadoHeladera.DISPONIBLE);
   Heladera heladera_destino = new Heladera("heladera_destino", ubicacion, 50, fechaFuncionamiento, 4F, 21F, EnumEstadoHeladera.DISPONIBLE);
 
-  Sensor sensor1 = new SensorDeTemperatura(heladera_origen);
+  Sensor sensor1 = new SensorApertura(heladera_origen);
   Sensor sensor2 = new SensorDeTemperatura(heladera_destino);
   Sensor sensor3 = new SensorDeMovimiento(heladera_origen);
 
-  DistribucionVianda distribucionVianda = new DistribucionVianda(heladera_origen, heladera_destino, Collections.singletonList(0), DESPERFECTO_HELADERA);
-  DistribucionVianda distribucionViandaVacia = new DistribucionVianda(heladera_origen, heladera_destino, new ArrayList<>(), DESPERFECTO_HELADERA);
+  Email emailManuel = new Email("manubocha@gmail.com");
+  String direccionManuel = "Montes De Oca 2671";
+  Documento documentoManuel = new Documento("DNI", "47112068");
+  LocalDate fechaNacimientoManuel = LocalDate.of(2000, 10, 12);
+  PersonaFisica manuelBochini = new PersonaFisica("Manuel", emailManuel,direccionManuel,documentoManuel, "Bochini","Hombre","Masculino", fechaNacimientoManuel);
+  Colaborador colaboradorManuel = new Colaborador(manuelBochini, null,0f,null,null);
+
+  DistribucionVianda distribucionVianda = new DistribucionVianda(colaboradorManuel,LocalDate.now(),heladera_origen, heladera_destino, 4, DESPERFECTO_HELADERA);
+  DistribucionVianda distribucionViandaVacia = new DistribucionVianda(colaboradorManuel,LocalDate.now(),heladera_origen, heladera_destino, 0, DESPERFECTO_HELADERA);
 
   List<String> email = Arrays.asList("juanmartin@gmail.com");
   List<String> telefono = Arrays.asList("1100001111");

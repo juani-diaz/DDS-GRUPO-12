@@ -20,7 +20,7 @@ public class ViandaRecogida extends EntidadPersistente {
   @OneToOne
   private Heladera heraderaDeVianda;
   @OneToOne(mappedBy = "viandaRecogida")
-  private Vianda vianda;
+  private Vianda viandaRecogida;
   @Column(columnDefinition = "DATE")
   private Date fechaDeRecogida;
 }

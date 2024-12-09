@@ -24,6 +24,7 @@ public class Catalogo {
         if(Float.parseFloat(o.getPuntosNecesarios()) <= colaborador.getCantidadPuntos()){
             //TODO hacer lo que corresponda (mail, envio)
             colaborador.setCantidadPuntos(colaborador.getCantidadPuntos() - Float.parseFloat(o.getPuntosNecesarios()));
+            // hay q remover la oferta de la lista del catalogo?
             return true;
         }
         return false;

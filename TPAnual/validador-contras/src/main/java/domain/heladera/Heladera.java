@@ -1,5 +1,7 @@
 package domain.heladera;
 
+import domain.persona.PersonaJuridica;
+import domain.rol.Colaborador;
 import com.mysql.cj.xdevapi.FetchResult;
 import domain.incidente.Incidente;
 import domain.incidente.IncidenteAlarma;
@@ -10,12 +12,13 @@ import lombok.Setter;
 
 import domain.vianda.*;
 import persistence.EntidadPersistente;
+import persistence.Repos.RepoHeladera;
 
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -57,14 +60,31 @@ public class Heladera extends EntidadPersistente {
   @Enumerated(value = EnumType.STRING)
   private EnumEstadoHeladera estado;
 
+  @OneToOne
+  private Colaborador responsable = null;
 
   public void ingresarViandas(List<Vianda> viandas) {
     this.viandasEnHeladera.addAll(viandas);
   }
 
-  public Vianda sacarVianda(int indice) {
+  public Vianda sacarViandaPorIndice(int indice) {
     viandasEnHeladera=new LinkedList<>(viandasEnHeladera);
     return viandasEnHeladera.remove(indice);
+  }
+
+  public void sacarViandas(List<Vianda> viandas){
+    viandasEnHeladera.removeAll(viandas);
+  }
+
+  public void setResponsable(Colaborador responsable) {
+    if (!(responsable.getPersona() instanceof PersonaJuridica)) {
+    throw new IllegalArgumentException("El responsable debe ser una persona juridica");
+    }
+      this.responsable = responsable;
+  }
+
+  public Integer cantidadViandas(){
+    return viandasEnHeladera.size();
   }
 
   public Heladera (String nombre,
@@ -84,6 +104,8 @@ public class Heladera extends EntidadPersistente {
     this.temperaturaMaxima = temperaturaMaxima;
     this.estado = estado;
   }
-
+  public LocalDate getFechaFuncionamiento(){
+        return fechaFuncionamiento;
+  }
 }
 

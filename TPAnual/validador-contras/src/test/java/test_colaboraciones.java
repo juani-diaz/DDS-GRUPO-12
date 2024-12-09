@@ -26,7 +26,7 @@ public class test_colaboraciones {
     List<Vianda> viandaEsperada= Arrays.asList(viandaDonada);
     Heladera heladera2 = new Heladera("ss", new Ubicacion(), 2, LocalDate.now(), 0F, 0F, DISPONIBLE);
 
-    DistribucionVianda donacionVianda1 = new DistribucionVianda(colaborador1, LocalDate.now(), heladera2, heladeraADonar, List.of(0), DESPERFECTO_HELADERA);
+    //DistribucionVianda donacionVianda1 = new DistribucionVianda(colaborador1, LocalDate.now(), heladera2, heladeraADonar, List.of(0), DESPERFECTO_HELADERA);
 
     DonacionVianda aDonarVianda = new DonacionVianda(colaborador1,LocalDate.now(),viandaDonada,heladeraADonar);
     ResponsableHeladera sereResponsable = new ResponsableHeladera(colaborador1,LocalDate.now(),heladera2);
@@ -56,7 +56,7 @@ public class test_colaboraciones {
         colaboraciones.add(donacion1);
         colaborador1.setColaboraciones(colaboraciones);
         colaborador1.realizarColaboracion(donacion1);
-        donacionVianda1.ejecutar();
+        //donacionVianda1.ejecutar();
         Assertions.assertEquals(viandaEsperada, heladeraADonar.getViandasEnHeladera());
     }
 

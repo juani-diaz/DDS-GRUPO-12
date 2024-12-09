@@ -11,7 +11,7 @@ import javax.persistence.*;
 
 @Getter @Setter @NoArgsConstructor
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class Sensor extends EntidadPersistente{
 
 

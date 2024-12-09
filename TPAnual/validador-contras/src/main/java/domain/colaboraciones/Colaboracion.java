@@ -25,4 +25,9 @@ public abstract class Colaboracion{
     public abstract void ejecutar();
 
     public abstract Float puntosObtenidos();
+
+    public Colaborador getColaborador() {
+        return colaborador;
+    }
+
 }
