@@ -110,9 +110,10 @@ public class VistasJavalin {
             app.post("/registrar-persona", UIregistrarPersona::agregarPersona);
 
 //======================
-            app.get("/reportes", ctx -> {
-                ctx.render("reportes.hbs");
-            });
+
+            UI_Reportes UIReportes = new UI_Reportes();
+
+            app.get("/reportes", UIReportes);
 
 //======================
             app.get("/api/localizacion", ctx -> {
