@@ -41,14 +41,12 @@ public class VistasJavalin {
                 config.staticFiles.add("/front/rentrega4");
             }).start(port);
 
-
             app.get("/", ctx -> {
-                ctx.render("index.hbs");
+                ctx.redirect("/index");
             });
 
-            app.get("/index", ctx -> {
-                ctx.render("index.hbs");
-            });
+            UI_Index UIndex = new UI_Index();
+            app.get("/index", UIndex);
 
 //======================VIANDA================================
             UI_Vianda UIVianda = new UI_Vianda();
@@ -97,10 +95,11 @@ public class VistasJavalin {
             app.get("/ofertas", ctx -> {
                 ctx.render("ofertas.hbs");
             });
-//======================
-            app.get("/page-login", ctx -> {
-                ctx.render("page-login.hbs");
-            });
+//====================== LOGIN
+            UI_Login UILogin = new UI_Login();
+
+            app.get("/page-login", UILogin);
+            app.post("/login", UILogin::login);
 //======================
             app.get("/page-register", ctx -> {
                 ctx.render("page-register.hbs");

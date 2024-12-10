@@ -43,14 +43,14 @@
                             <div class="card-body pt-5">
                                 <a class="text-center" href="index"> <h4>Bienvenido a AlimentAR</h4></a>
         
-                                <form class="mt-5 mb-5 login-input" action="index">
+                                <form class="mt-5 mb-5 login-input" action="/login" method="post">
                                     <div class="form-group">
-                                        <input type="text" required class="form-control" placeholder="Usuario">
+                                        <input type="text" required name="usuario" class="form-control" placeholder="Usuario">
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" required class="form-control" placeholder="Contraseña">
+                                        <input type="password" required name="contra" class="form-control" placeholder="Contraseña">
                                     </div>
-                                    <button class="btn login-form__btn submit w-100">Iniciar Sesión</button>
+                                    <button type="submit" class="btn login-form__btn submit w-100">Iniciar Sesión</button>
                                 </form>
                                 <p class="mt-5 login-form__footer">Todavía no te registraste? <a href="page-register" class="text-primary">Registrate</a></p>
                             </div>

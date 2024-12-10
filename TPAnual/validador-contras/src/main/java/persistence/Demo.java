@@ -2,6 +2,7 @@ package persistence;
 
 import domain.api.ListadoLocalidades;
 import domain.api.LocalidadCantidad;
+import domain.auth.Usuario;
 import domain.colaboraciones.*;
 import domain.heladera.EnumEstadoHeladera;
 import domain.heladera.Heladera;
@@ -174,6 +175,8 @@ public class Demo {
 
         //em.persist(vulnerable4);
         BDUtils.commit(em);
+
+        usuarios();
     }
 
     public static void personas(String[] args) {
@@ -681,5 +684,22 @@ public class Demo {
 
         BDUtils.commit(em);
 
+    }
+
+    private static void usuarios(){
+        EntityManager em = BDUtils.getEntityManager();
+        BDUtils.comenzarTransaccion(em);
+
+        Usuario admin = new Usuario("admin", "fc43");
+        Usuario colabF = new Usuario("juan", "123");
+        Usuario colabO = new Usuario("utn", "123");
+        Usuario tec = new Usuario("heimer", "123");
+
+        em.persist(admin);
+        em.persist(colabF);
+        em.persist(colabO);
+        em.persist(tec);
+
+        BDUtils.commit(em);
     }
 }
