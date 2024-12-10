@@ -24,4 +24,5 @@ public class UI_HeladerasP implements Handler{
         ctx.render("heladeras-p.hbs", model);
     }
 
+
 }

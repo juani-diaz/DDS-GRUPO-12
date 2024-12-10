@@ -60,6 +60,7 @@ public class VistasJavalin {
             UI_Traslado UITraslado = new UI_Traslado();
 
             app.get("/traslado", UITraslado);
+            app.post("/traslado", UITraslado::trasladarCantViandas);
 
 //======================DINERO================================
             UI_Dinero UIDinero = new UI_Dinero();
