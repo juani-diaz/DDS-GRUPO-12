@@ -85,6 +85,7 @@ public class VistasJavalin {
             UI_HeladerasP UIHeladerasP = new UI_HeladerasP();
 
             app.get("/heladeras-p", UIHeladerasP);
+            app.post("/heladeras-p", UIHeladerasP::botonesInfo);
 //======================
             app.get("/landing", ctx -> {
                 ctx.render("landing.hbs");
