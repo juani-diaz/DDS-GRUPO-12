@@ -2,6 +2,9 @@ package domain.heladera;
 
 import domain.persona.PersonaJuridica;
 import domain.rol.Colaborador;
+import com.mysql.cj.xdevapi.FetchResult;
+import domain.incidente.Incidente;
+import domain.incidente.IncidenteAlarma;
 import lombok.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,6 +12,7 @@ import lombok.Setter;
 
 import domain.vianda.*;
 import persistence.EntidadPersistente;
+import persistence.Repos.RepoHeladera;
 
 
 import javax.persistence.*;
@@ -41,6 +45,11 @@ public class Heladera extends EntidadPersistente {
 
   @OneToMany(mappedBy = "heladera", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
   private List<Vianda> viandasEnHeladera; //=new ArrayList<>()
+
+  @OneToMany(mappedBy = "heladera", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+  private List<Incidente> incidentesAlarma;
+
+
 
   @Column
   private Float temperaturaMinima;
@@ -98,5 +107,6 @@ public class Heladera extends EntidadPersistente {
   public LocalDate getFechaFuncionamiento(){
         return fechaFuncionamiento;
   }
+
 }
 

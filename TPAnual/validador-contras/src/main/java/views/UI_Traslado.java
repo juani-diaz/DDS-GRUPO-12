@@ -24,4 +24,28 @@ public class UI_Traslado implements Handler{
     ctx.render("traslado.hbs", model);
   }
 
+  public void trasladarCantViandas(Context ctx){
+    System.out.println("estoy en UI_Traslado::trasladarCantViandas");
+
+    // Obtener parámetros del formulario (datos enviados en la solicitud)
+    String cantidad = ctx.formParam("cantidad");
+    System.out.println("cantidad= "+cantidad);
+    String heladeraId = ctx.formParam("heladeraID");
+    System.out.println("heladeraId= "+heladeraId);
+
+    // Convertir parámetros necesarios
+    Integer heladeraID = Integer.parseInt(heladeraId);
+
+    // Busca la heladera en la BD
+    RepoHeladera hela = new RepoHeladera();
+    Heladera heladera = hela.findById_Heladera(heladeraID);
+    System.out.println("HelaName= "+heladera.getNombre());
+
+    // Crea Traslado
+    // Funcion de traslado @Todo
+
+    ctx.render("index.hbs");
+  }
+
+
 }

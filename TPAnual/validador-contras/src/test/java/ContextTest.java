@@ -12,8 +12,8 @@ public class ContextTest extends AbstractPersistenceTest implements WithGlobalEn
 
   @Test
   public void contextUp() {
-    //EntityManager em = BDUtils.getEntityManager();
-    //BDUtils.comenzarTransaccion(em);
+    EntityManager em = BDUtils.getEntityManager();
+    BDUtils.comenzarTransaccion(em);
     assertNotNull(entityManager());
   }
 

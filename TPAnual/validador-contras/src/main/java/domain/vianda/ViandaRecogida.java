@@ -8,10 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import persistence.EntidadPersistente;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.util.Date;
 
 
@@ -22,7 +19,7 @@ public class ViandaRecogida extends EntidadPersistente {
   private Vulnerable necesitado;
   @OneToOne
   private Heladera heraderaDeVianda;
-  @OneToOne
+  @OneToOne(mappedBy = "viandaRecogida")
   private Vianda viandaRecogida;
   @Column(columnDefinition = "DATE")
   private Date fechaDeRecogida;

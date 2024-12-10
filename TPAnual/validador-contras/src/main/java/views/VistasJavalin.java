@@ -10,6 +10,7 @@ import domain.registro.SingletonSeguidorEstadistica;
 import io.javalin.Javalin;
 import io.javalin.config.JavalinConfig;
 import io.javalin.http.HttpStatus;
+import io.javalin.json.JavalinJackson;
 import io.javalin.rendering.JavalinRenderer;
 
 
@@ -29,6 +30,11 @@ public class VistasJavalin {
             initTemplateEngine();
 
             Demo.main(null);
+            //Demo.personas(null);
+            //Demo.colaboraciones(null);
+            //Demo.servicios(null);
+
+            JavalinJackson.defaultMapper();
 
             Integer port = Integer.parseInt(System.getProperty("port", "8001"));
             Javalin app = Javalin.create(config -> {
@@ -54,6 +60,7 @@ public class VistasJavalin {
             UI_Traslado UITraslado = new UI_Traslado();
 
             app.get("/traslado", UITraslado);
+            app.post("/traslado", UITraslado::trasladarCantViandas);
 
 //======================DINERO================================
             UI_Dinero UIDinero = new UI_Dinero();
@@ -109,11 +116,9 @@ public class VistasJavalin {
             app.get("/registrar-persona", UIregistrarPersona);
             app.post("/registrar-persona", UIregistrarPersona::agregarPersona);
 
-//======================
-
-            UI_Reportes UIReportes = new UI_Reportes();
-
-            app.get("/reportes", UIReportes);
+//====================== REPORTES
+            UI_Reporte repo = new UI_Reporte();
+            app.get("/reportes",repo);
 
 //======================
             app.get("/api/localizacion", ctx -> {

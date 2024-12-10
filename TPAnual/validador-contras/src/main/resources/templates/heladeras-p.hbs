@@ -266,9 +266,12 @@
                     {{#each hela}}
                         <div class="card">
                             <div class="card-body heladera-item">
-                                <h3>{{this.nombre}} <span class="label label-pill label-success">Funcionando</span></h3>
+                                <h3>{{this.nombre}} <span class="label label-pill label-success">{{estadoString this}}</span></h3>
                                 <i class="icon-cup menu-icon"></i><span style="margin-left: 5px;">{{viandas_del_total this}} viandas</span><br><br>
-                                <button type="button" class="btn mb-1 btn-primary">Donar</button>
+                                <a class="btn" href="vianda" aria-expanded="false">
+                                    <button type="button" class="btn mb-1 btn-primary">Donar</button>
+                                </a>
+
                                 <button type="button" class="btn mb-1 btn-danger" style="margin-left: 5px;">Reportar falla</button>
                                 <button type="button" class="btn mb-1 btn-outline-danger" style="margin-left: 5px;">Suscribirse</button>
                             </div>

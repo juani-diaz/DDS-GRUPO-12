@@ -3,12 +3,18 @@ package domain.servicios;
 import domain.colaboraciones.PresentacionOferta;
 import domain.rol.Colaborador;
 import lombok.Getter;
+import persistence.EntidadPersistente;
 
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-public class Catalogo {
+@Entity
+public class Catalogo extends EntidadPersistente {
+
+    @OneToMany
     private static final List<PresentacionOferta> ofertas = new ArrayList<>();
 
     public static void agregarAlCatalogo(PresentacionOferta p){

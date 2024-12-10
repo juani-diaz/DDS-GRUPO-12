@@ -34,6 +34,10 @@ public class Vianda extends EntidadPersistente {
   @Enumerated(value = EnumType.STRING)
   private EnumEstadoVianda estado;
 
+  @OneToOne
+  @JoinColumn(name = "id")
+  private ViandaRecogida viandaRecogida;
+
   public void setHeladera(Heladera heladera) {
     this.heladera = heladera;
   }
