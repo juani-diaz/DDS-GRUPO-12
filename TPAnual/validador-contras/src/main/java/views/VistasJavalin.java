@@ -42,8 +42,10 @@ public class VistasJavalin {
             }).start(port);
 
             app.get("/", ctx -> {
-                ctx.redirect("/index");
+                ctx.redirect("/page-login");
             });
+
+//======================INDEX================================
 
             UI_Index UIndex = new UI_Index();
             app.get("/index", UIndex);
@@ -75,11 +77,11 @@ public class VistasJavalin {
             app.get("/heladeras-a", ctx -> {
                 ctx.render("heladeras-a.hbs");
             });
-//======================
+//====================== HELADERAS-O================================
             app.get("/heladeras-o", ctx -> {
                 ctx.render("heladeras-o.hbs");
             });
-//======================
+//====================== HELADERAS-P================================
             UI_HeladerasP UIHeladerasP = new UI_HeladerasP();
 
             app.get("/heladeras-p", UIHeladerasP);
