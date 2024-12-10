@@ -107,5 +107,6 @@ public class Heladera extends EntidadPersistente {
   public LocalDate getFechaFuncionamiento(){
         return fechaFuncionamiento;
   }
+
 }
 

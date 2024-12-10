@@ -14,6 +14,20 @@ public class HelperSource {
     public String viandas_del_total(Heladera h){
         return h.getViandasEnHeladera().size()+"/"+h.getTamanioEnViandas();
     }
+    public String estadoString(Heladera h){
+
+        switch (h.getEstado()) {
+            case DISPONIBLE:
+                return "Disponible";
+            case INACTIVA_POR_FALLA:
+                return "Falla";
+            case INACTIVA_POR_ALERTA:
+                return "Alerta";
+            default:
+                return "Funcionando";
+
+        }
+    }
 
 }
 
