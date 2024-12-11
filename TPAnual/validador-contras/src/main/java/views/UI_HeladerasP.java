@@ -9,15 +9,20 @@ import persistence.Repos.RepoHeladera;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UI_HeladerasP implements Handler{
+public class UI_HeladerasP extends UI_Navegable implements Handler{
 
     @Override
     public void handle(Context ctx) throws Exception {
-        RepoHeladera hela = new RepoHeladera();
 
-        Map<String, Object> model = new HashMap<>();
-        model.put("hela", hela.getAll_Heladera());
-        ctx.render("heladeras-p.hbs", model);
+        this.validarUsuario(ctx);
+        if (this.sesionValida()) {
+
+            RepoHeladera hela = new RepoHeladera();
+
+            model.put("hela", hela.getAll_Heladera());
+            ctx.render("heladeras-p.hbs", this.model);
+
+        }
     }
 
     public void botonesInfo(Context ctx) {
@@ -49,11 +54,13 @@ public class UI_HeladerasP implements Handler{
     }
 
     private void falla(Heladera hela) {
-        System.out.println("estoy en UI_HeladerasP::falla con la heladera -> "+ hela.getNombre());
+
+        System.out.println("estoy en UI_HeladerasP::falla con la heladera -> "+ hela.getNombre() + " con el User rol: "+ this.getUsuario().getRol().getPersona().getNombre());
     }
 
     private void subscribir(Heladera hela) {
-        System.out.println("estoy en UI_HeladerasP::subscribir con la heladera -> "+ hela.getNombre());
+
+        System.out.println("estoy en UI_HeladerasP::subscribir con la heladera -> "+ hela.getNombre() + " con el User rol: "+ this.getUsuario().getRol().getPersona().getNombre());
     }
 
     private Heladera extracted(String heladeraId) {

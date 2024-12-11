@@ -13,25 +13,26 @@ import java.util.List;
 import java.util.Map;
 
 
-public class UI_Reporte implements Handler {
+public class UI_Reporte extends UI_Navegable implements Handler {
 
 
     @Override
     public void handle(Context ctx) throws Exception {
-        RepoHeladera hela = new RepoHeladera();
-        RepoColaborador cola = new RepoColaborador();
 
-        Map<String, Object> model = new HashMap<>();
-        model.put("helaFallos", hela.obtenerFallasxHeladera());
-        model.put("colaboradorDatos", cola.obtenerDonacionesxColaborador());
+        this.validarUsuario(ctx);
+        if (this.sesionValida()) {
+            RepoHeladera hela = new RepoHeladera();
+            RepoColaborador cola = new RepoColaborador();
 
-        System.out.println(model);
-        ctx.render("reportes.hbs", model);
+            Map<String, Object> model = new HashMap<>();
+            model.put("helaFallos", hela.obtenerFallasxHeladera());
+            model.put("colaboradorDatos", cola.obtenerDonacionesxColaborador());
+
+            System.out.println(model);
+            ctx.render("reportes.hbs", this.model);
+        }
+
     }
-
-
-
-
 
     public void obtener(Context ctx) {
 

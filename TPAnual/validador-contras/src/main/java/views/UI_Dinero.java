@@ -13,12 +13,17 @@ import persistence.BDUtils;
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
 
-public class UI_Dinero implements Handler{
+public class UI_Dinero extends UI_Navegable implements Handler{
 
   @Override
   public void handle(Context ctx) throws Exception {
-    System.out.println("estoy en UI_Dinero");
-    ctx.render("dinero.hbs");
+
+    this.validarUsuario(ctx);
+    if (this.sesionValida()) {
+      System.out.println("estoy en UI_Dinero");
+      ctx.render("dinero.hbs");
+    }
+
   }
 
   public void agregarDonacion(Context ctx) {

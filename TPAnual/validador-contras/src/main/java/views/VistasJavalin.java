@@ -42,7 +42,7 @@ public class VistasJavalin {
             }).start(port);
 
             app.get("/", ctx -> {
-                ctx.redirect("/index");
+                ctx.redirect("/page-login");
             });
 
 //======================INDEX================================

@@ -14,15 +14,20 @@ import io.javalin.http.Handler;
 import persistence.Repos.RepoHeladera;
 import persistence.Repos.RepoVianda;
 
-public class UI_Vianda implements Handler{
+public class UI_Vianda extends UI_Navegable implements Handler{
 
   @Override
   public void handle(Context ctx) throws Exception {
-    RepoHeladera hela = new RepoHeladera();
 
-    Map<String, Object> model = new HashMap<>();
-    model.put("hela", hela.getAll_Heladera());
-    ctx.render("vianda.hbs", model);
+    this.validarUsuario(ctx);
+    if (this.sesionValida()) {
+      RepoHeladera hela = new RepoHeladera();
+
+      this.model.put("hela", hela.getAll_Heladera());
+      ctx.render("vianda.hbs", this.model);
+    }
+
+
   }
 
   // Metodo para agregar una vianda a la heladera

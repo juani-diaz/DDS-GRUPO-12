@@ -13,11 +13,14 @@ import lombok.NoArgsConstructor;
 import persistence.Repos.RepoUsuarios;
 
 @NoArgsConstructor
-public class UI_Login implements Handler {
+public class UI_Login  implements Handler {
 
     public void handle(Context ctx) throws Exception {
+
         Map<String, Object> model = new HashMap();
         ctx.render("page-login.hbs", model);
+
+
     }
 
     public void login(Context ctx) throws Exception {

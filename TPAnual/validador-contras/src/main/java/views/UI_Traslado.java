@@ -13,18 +13,24 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UI_Traslado implements Handler{
+public class UI_Traslado extends UI_Navegable implements Handler{
 
   @Override
   public void handle(Context ctx) throws Exception {
-    RepoHeladera hela = new RepoHeladera();
 
-    Map<String, Object> model = new HashMap<>();
-    model.put("hela", hela.getAll_Heladera());
-    ctx.render("traslado.hbs", model);
+    this.validarUsuario(ctx);
+    if (this.sesionValida()) {
+
+      RepoHeladera hela = new RepoHeladera();
+
+      model.put("hela", hela.getAll_Heladera());
+      ctx.render("traslado.hbs", this.model);
+
+    }
   }
 
   public void trasladarCantViandas(Context ctx){
+
     System.out.println("estoy en UI_Traslado::trasladarCantViandas");
 
     // Obtener parámetros del formulario (datos enviados en la solicitud)
@@ -43,6 +49,8 @@ public class UI_Traslado implements Handler{
 
     // Crea Traslado
     // Funcion de traslado @Todo
+    // a la funcion de traslado se le puede pasar el usuario de la secion activa con
+    // this.getUsuario()
 
     ctx.render("index.hbs");
   }
