@@ -16,23 +16,30 @@ public class JwtUtil {
     private static final long EXPIRATION_TIME = 86400000L;
     private static List<String> blacklist = new ArrayList<String>();
 
-    public static String generateToken(String username) {
-        return Jwts.builder().setSubject(username).setIssuedAt(new Date()).setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME)).signWith(SECRET_KEY).compact();
+    public static String generateToken(String username,Integer roleId) {
+        return Jwts.builder().setSubject(username).claim("usuario", username)
+                .claim("roleId", roleId).setIssuedAt(new Date()).setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME)).signWith(SECRET_KEY).compact();
     }
 
     public static String validateToken(String token) {
-        String usu = null;
-
         try {
-            if(blacklist.contains(token))
-                throw new RuntimeException();
-            usu = ((Claims)Jwts.parserBuilder().setSigningKey(SECRET_KEY).build().parseClaimsJws(token).getBody()).getSubject();
-        } catch (Exception var3) {
-            System.out.println("Problema con sesion");
-        }
+            if (blacklist.contains(token)) {
+                throw new RuntimeException("Token en lista negra");
+            }
 
-        return usu;
+            Claims claims = Jwts.parserBuilder()
+                    .setSigningKey(SECRET_KEY)
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+
+            return claims.getSubject();
+        } catch (Exception e) {
+            System.out.println("Problema con sesión: " + e.getMessage());
+            return null;
+        }
     }
+
 
     public static void invalidateToken(String token) {
         blacklist.add(token);
@@ -42,6 +49,19 @@ public class JwtUtil {
         String usu = validateToken(token);
         RepoUsuarios r = new RepoUsuarios();
         return r.findByUsuario(usu);
+    }
+
+    public static Claims getClaimsFromToken(String token) {
+        try {
+            return Jwts.parserBuilder()
+                    .setSigningKey(SECRET_KEY)
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+        } catch (Exception e) {
+            System.out.println("Error al extraer claims: " + e.getMessage());
+            return null;
+        }
     }
 
     static {

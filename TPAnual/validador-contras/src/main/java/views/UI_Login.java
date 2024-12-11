@@ -8,9 +8,11 @@ import io.javalin.http.Handler;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import io.jsonwebtoken.Jwts;
 import lombok.NoArgsConstructor;
 import persistence.Repos.RepoUsuarios;
 
@@ -30,7 +32,7 @@ public class UI_Login  implements Handler {
         RepoUsuarios r = new RepoUsuarios();
         Usuario u = r.findByUsuario(usuario);
         if (u != null && u.getContra().equals(contra)) {
-            String token = JwtUtil.generateToken(usuario);
+            String token = JwtUtil.generateToken(usuario,u.getRol().getId());
             String encodedToken = URLEncoder.encode(token, StandardCharsets.UTF_8);
             ctx.cookie("Auth", "Bearer" + encodedToken);
             ctx.redirect("/index");
