@@ -17,7 +17,7 @@ public class UI_RegistrarPersona extends UI_Navegable implements Handler{
   @Override
   public void handle(Context ctx) throws Exception {
     this.validarUsuario(ctx);
-    if (this.sesionValida()) {
+    if (this.sesionValida(ctx)) {
       System.out.println("estoy en UI_RegistrarPersona");
       ctx.render("registrar-persona.hbs");
     }

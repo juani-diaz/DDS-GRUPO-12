@@ -5,12 +5,16 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import java.security.Key;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 import persistence.Repos.RepoUsuarios;
 
 public class JwtUtil {
     private static final Key SECRET_KEY;
     private static final long EXPIRATION_TIME = 86400000L;
+    private static List<String> blacklist = new ArrayList<String>();
 
     public static String generateToken(String username) {
         return Jwts.builder().setSubject(username).setIssuedAt(new Date()).setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME)).signWith(SECRET_KEY).compact();
@@ -20,12 +24,18 @@ public class JwtUtil {
         String usu = null;
 
         try {
+            if(blacklist.contains(token))
+                throw new RuntimeException();
             usu = ((Claims)Jwts.parserBuilder().setSigningKey(SECRET_KEY).build().parseClaimsJws(token).getBody()).getSubject();
         } catch (Exception var3) {
             System.out.println("Problema con sesion");
         }
 
         return usu;
+    }
+
+    public static void invalidateToken(String token) {
+        blacklist.add(token);
     }
 
     public static Usuario validateTokenAndGetUser(String token) {

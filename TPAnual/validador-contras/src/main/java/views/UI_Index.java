@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 public class UI_Index extends UI_Navegable implements Handler {
     public void handle(Context ctx) throws Exception {
         this.validarUsuario(ctx);
-        if (this.sesionValida()) {
+        if (this.sesionValida(ctx)) {
             ctx.render("index.hbs", this.model);
         }
 

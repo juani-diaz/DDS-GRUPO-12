@@ -130,7 +130,11 @@
                                         </li>
                                         
                                         <hr class="my-2">
-                                        <li><a href="page-login"><i class="icon-key"></i> <span>Cerrar sesión</span></a></li>
+                                        <li>
+                                            <a href="#" onclick="document.getElementById('logout-form').submit(); return false;"><i class="icon-key"></i> <span>Cerrar sesión</span></a>
+
+                                            <form id="logout-form" action="/logout" method="POST" style="display: none;"></form>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>

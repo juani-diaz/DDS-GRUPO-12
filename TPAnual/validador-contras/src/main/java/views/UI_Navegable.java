@@ -29,7 +29,13 @@ public class UI_Navegable {
 
     }
 
-    boolean sesionValida() {
-        return this.model.get("usuario") != null;
+    boolean sesionValida(Context ctx) {
+        String token = ctx.cookie("Auth");
+        if (token != null) {
+            token = token.replace("Bearer", "");
+            String decodedToken = URLDecoder.decode(token, StandardCharsets.UTF_8);
+            return JwtUtil.validateToken(decodedToken) != null;
+        }
+        return false;
     }
 }

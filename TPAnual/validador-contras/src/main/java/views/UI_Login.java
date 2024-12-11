@@ -4,6 +4,8 @@ import domain.auth.JwtUtil;
 import domain.auth.Usuario;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
+
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
@@ -40,9 +42,13 @@ public class UI_Login  implements Handler {
     }
 
     public void logout(Context ctx) {
-        System.out.println(ctx.cookie("Auth"));
+        String token = ctx.cookie("Auth");
+        if(token != null) {
+            token = token.replace("Bearer", "");
+            String decodedToken = URLDecoder.decode(token, StandardCharsets.UTF_8);
+            JwtUtil.invalidateToken(decodedToken);
+        }
         ctx.removeCookie("Auth");
-        System.out.println(ctx.cookie("Auth"));
         ctx.redirect("/page-login");
     }
 }

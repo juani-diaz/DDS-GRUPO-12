@@ -20,7 +20,7 @@ public class UI_Vianda extends UI_Navegable implements Handler{
   public void handle(Context ctx) throws Exception {
 
     this.validarUsuario(ctx);
-    if (this.sesionValida()) {
+    if (this.sesionValida(ctx)) {
       RepoHeladera hela = new RepoHeladera();
 
       this.model.put("hela", hela.getAll_Heladera());
