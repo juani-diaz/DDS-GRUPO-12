@@ -100,6 +100,7 @@ public class VistasJavalin {
 
             app.get("/page-login", UILogin);
             app.post("/login", UILogin::login);
+            app.post("/logout", UILogin::logout);
 //======================
             app.get("/page-register", ctx -> {
                 ctx.render("page-register.hbs");

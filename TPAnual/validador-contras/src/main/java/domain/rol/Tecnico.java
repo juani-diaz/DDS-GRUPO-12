@@ -23,6 +23,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
@@ -46,6 +47,13 @@ public class Tecnico extends Rol {
     this.areaCobertura = ac;
     this.incidentesARevisar = iAr;
     this.visitasRealizadas = vT;
+  }
+
+  public Tecnico(Persona p){
+    this.persona = p;
+    this.areaCobertura = new ArrayList<String>();
+    this.incidentesARevisar = new ArrayList<Incidente>();
+    this.visitasRealizadas = new ArrayList<VisitasTecnicas>();
   }
 
 

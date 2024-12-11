@@ -690,14 +690,44 @@ public class Demo {
         EntityManager em = BDUtils.getEntityManager();
         BDUtils.comenzarTransaccion(em);
 
-        Usuario admin = new Usuario("admin", "fc43");
-        Usuario colabF = new Usuario("juan", "123");
-        Usuario colabO = new Usuario("utn", "123");
-        Usuario tec = new Usuario("heimer", "123");
+        Documento dni1 = new Documento("dni","43403588");
+        PersonaFisica tomas = new PersonaFisica("tomas", null, "nogoya 6367", dni1, "cerezo", "m", "m", LocalDate.of(2001, 6, 28));
+        Administrador a = new Administrador(tomas);
+        Usuario admin = new Usuario("admin", "fc43", a);
 
+        Documento dni2 = new Documento("dni","21328838");
+        PersonaFisica sergio = new PersonaFisica("sergio", null, "nogoya 6367", dni2, "cerezo", "m", "m", LocalDate.of(1970, 5, 28));
+        Colaborador s = new Colaborador(sergio);
+        Usuario ser = new Usuario("sergio", "fc43", s);
+
+        Documento cuit1 = new Documento("cuit","67");
+        PersonaJuridica utn = new PersonaJuridica("utn", EnumTipoPersonaJuridica.ONG, "uni", "mozart 2300", cuit1, null);
+        Colaborador u = new Colaborador(utn);
+        Usuario utnfrba = new Usuario("utn", "fc43", u);
+
+        Documento cuit2 = new Documento("cuit","69");
+        PersonaFisica hei = new PersonaFisica("heimer", null, "nogoya 6367", cuit2, "dinger", "m", "m", LocalDate.of(1000, 5, 28));
+        Tecnico t = new Tecnico(hei);
+        Usuario tec = new Usuario("heimer", "fc43", t);
+
+        em.persist(dni1);
+        em.persist(tomas);
+        em.persist(a);
         em.persist(admin);
-        em.persist(colabF);
-        em.persist(colabO);
+
+        em.persist(dni2);
+        em.persist(sergio);
+        em.persist(s);
+        em.persist(ser);
+
+        em.persist(cuit1);
+        em.persist(utn);
+        em.persist(u);
+        em.persist(utnfrba);
+
+        em.persist(cuit2);
+        em.persist(hei);
+        em.persist(t);
         em.persist(tec);
 
         BDUtils.commit(em);

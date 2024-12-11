@@ -15,6 +15,7 @@ import java.util.Map;
 @NoArgsConstructor @Getter @Setter
 public class UI_Navegable {
     Map<String, Object> model = new HashMap();
+    private Usuario usuario;
 
     void validarUsuario(Context ctx) {
         String token = ctx.cookie("Auth");
@@ -23,6 +24,7 @@ public class UI_Navegable {
             String decodedToken = URLDecoder.decode(token, StandardCharsets.UTF_8);
             Usuario u = JwtUtil.validateTokenAndGetUser(decodedToken);
             this.model.put("usuario", u);
+            this.usuario = u;
         }
 
     }

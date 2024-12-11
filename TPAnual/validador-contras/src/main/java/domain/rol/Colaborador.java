@@ -20,6 +20,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.swing.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
@@ -49,6 +50,14 @@ public class Colaborador extends Rol {
     this.cantidadPuntos = cp;
     this.tarjetasParaEntregar = te;
     this.tarjetaColaborador = t;
+  }
+
+  public Colaborador(Persona p){
+    this.persona = p;
+    this.colaboraciones = new ArrayList<Colaboracion>();
+    this.cantidadPuntos = 0F;
+    this.tarjetasParaEntregar = new ArrayList<Tarjeta>();
+    this.tarjetaColaborador = null; // TODO esto?
   }
 
   public void realizarColaboracion(Colaboracion colaboracion){

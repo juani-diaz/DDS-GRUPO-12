@@ -35,4 +35,11 @@ public class UI_Login implements Handler {
         }
 
     }
+
+    public void logout(Context ctx) {
+        System.out.println(ctx.cookie("Auth"));
+        ctx.removeCookie("Auth");
+        System.out.println(ctx.cookie("Auth"));
+        ctx.redirect("/page-login");
+    }
 }
