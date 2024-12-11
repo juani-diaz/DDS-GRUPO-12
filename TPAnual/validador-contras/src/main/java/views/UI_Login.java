@@ -22,7 +22,6 @@ public class UI_Login  implements Handler {
         Map<String, Object> model = new HashMap();
         ctx.render("page-login.hbs", model);
 
-
     }
 
     public void login(Context ctx) throws Exception {

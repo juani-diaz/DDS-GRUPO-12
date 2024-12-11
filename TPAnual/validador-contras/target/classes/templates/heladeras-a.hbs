@@ -144,7 +144,11 @@
                                         </li>
                                         
                                         <hr class="my-2">
-                                        <li><a href="page-login"><i class="icon-key"></i> <span>Cerrar sesión</span></a></li>
+                                        <li>
+                                            <a href="#" onclick="document.getElementById('logout-form').submit(); return false;"><i class="icon-key"></i> <span>Cerrar sesión</span></a>
+
+                                            <form id="logout-form" action="/logout" method="POST" style="display: none;"></form>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -249,34 +253,38 @@
             <div style="display: flex;">
                 <div class="col-lg-8" style="padding: 0;">
                     <gmp-map
-                        center="-34.649518, -58.552020"
-                        zoom="10"
-                        map-id="DEMO_MAP_ID"
-                        class="mapa">
-                        <gmp-advanced-marker
-                            position="-34.598584, -58.420238"
-                            title="UTN Medrano"
-                        ></gmp-advanced-marker>
-                        <gmp-advanced-marker
-                            position="-34.610504, -58.412421"
-                            title="Ejército de Salvación Central"
-                        ></gmp-advanced-marker>
-                        <gmp-advanced-marker
-                            position="-34.610837, -58.416817"
-                            title="Colegio Mariano Moreno"
-                        ></gmp-advanced-marker>
-                        <gmp-advanced-marker
-                            position="-34.607565, -58.437518"
-                            title="Parque Centenario 1"
-                        ></gmp-advanced-marker>
-                        
+                            center="-34.649518, -58.552020"
+                            zoom="10"
+                            map-id="DEMO_MAP_ID"
+                            class="mapa">
+                        {{#each hela}}
+                            <gmp-advanced-marker
+                                    position={{lat_lon this.direccion}}
+                                    title={{this.nombre}}
+                            ></gmp-advanced-marker>
+                        {{/each}}
+
                     </gmp-map>
                 </div>
                 <div class="col-lg-4 lista-heladera">
+                    {{#each hela}}
+                        <div class="card">
+                            <form action="/heladeras-a" method="post">
+                                <div class="card-body heladera-item">
+                                    <h3>{{this.nombre}} <span class="label label-pill label-success">{{estadoString this}}</span></h3>
+                                    <i class="icon-cup menu-icon"></i><span style="margin-left: 5px;">{{viandas_del_total this}} viandas</span><br><br>
+
+                                    <button type="submit" name="buton_contactar" value="{{this.id}}" class="btn mb-1 btn-primary">Contactar dueño</button>
+                                    <span style="margin-left: 10px">Provista por: </span><span style="font-weight: bold;">this.responsable.id</span>
+
+                                </div>
+                            </form>
+                        </div>
+                    {{/each}}
 
                     <div class="card">
                         <div class="card-body heladera-item">
-                            <h3>UTN Medrano <span class="label label-pill label-success">Funcionando</span></h3>
+                            <h3>UTN Medrano HADRCODEADO<span class="label label-pill label-success">Funcionando</span></h3>
                             <i class="icon-cup menu-icon"></i><span style="margin-left: 5px;">20/54 viandas</span><br><br>
                             <button type="button" class="btn mb-1 btn-primary">Contactar dueño</button>
                             <span style="margin-left: 10px">Provista por: </span><span style="font-weight: bold;">UTN</span>

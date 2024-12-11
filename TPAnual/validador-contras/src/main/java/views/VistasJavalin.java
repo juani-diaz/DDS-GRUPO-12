@@ -46,8 +46,8 @@ public class VistasJavalin {
             });
 
 //======================INDEX================================
-
             UI_Index UIndex = new UI_Index();
+
             app.get("/index", UIndex);
 
 //======================VIANDA================================
@@ -74,13 +74,16 @@ public class VistasJavalin {
             });
 
 //======================HELADERAS-A================================
-            app.get("/heladeras-a", ctx -> {
-                ctx.render("heladeras-a.hbs");
-            });
+            UI_HeladerasA UIHeladerasA = new UI_HeladerasA();
+
+            app.get("/heladeras-a", UIHeladerasA);
+            app.post("/heladeras-a", UIHeladerasA::botonInfo);
+
 //====================== HELADERAS-O================================
-            app.get("/heladeras-o", ctx -> {
-                ctx.render("heladeras-o.hbs");
-            });
+            UI_HeladerasO UIHeladerasO = new UI_HeladerasO();
+
+            app.get("/heladeras-o", UIHeladerasO);
+
 //====================== HELADERAS-P================================
             UI_HeladerasP UIHeladerasP = new UI_HeladerasP();
 

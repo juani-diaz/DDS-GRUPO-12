@@ -61,7 +61,7 @@ public class Heladera extends EntidadPersistente {
   private EnumEstadoHeladera estado;
 
   @OneToOne
-  private Colaborador responsable = null;
+  private Colaborador responsable = null;//Tendria que se una persona
 
   public void ingresarViandas(List<Vianda> viandas) {
     this.viandasEnHeladera.addAll(viandas);
