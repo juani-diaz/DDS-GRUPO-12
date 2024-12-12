@@ -108,9 +108,10 @@ public class VistasJavalin {
             app.post("/login", UILogin::login);
             app.post("/logout", UILogin::logout);
 //======================
-            app.get("/page-register", ctx -> {
-                ctx.render("page-register.hbs");
-            });
+            UI_Registrar UIRegistrar = new UI_Registrar();
+
+            app.get("/page-register", UIRegistrar);
+            app.post("/registrar-p", UIRegistrar::registrarPersona);
 //======================
             app.get("/puntos", ctx -> {
                 ctx.render("puntos.hbs");

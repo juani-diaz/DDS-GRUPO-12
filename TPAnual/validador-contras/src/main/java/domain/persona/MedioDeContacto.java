@@ -7,23 +7,25 @@ import lombok.Setter;
 import org.hibernate.annotations.Cache;
 import persistence.EntidadPersistente;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.util.List;
 @Setter@Getter
 @Entity
-public abstract class MedioDeContacto extends EntidadPersistente {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class MedioDeContacto {
 
   @Column
-  private String email;
+  private Medio medio;
 
   @Column
-  private String telefono;
+  private String contacto; // Ejemplo: "email@example.com"
 
-  @Column
-  private String celular;
+  @ManyToOne
+  private Persona persona;
 
-  protected String direccion;//@Juani Diaz
+  @Id
+  @GeneratedValue(strategy = GenerationType.TABLE)
+  private int id;
 
   public void notificar(String header,String mensaje){};
 

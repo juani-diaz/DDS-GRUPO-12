@@ -10,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import java.util.List;
 
 @Getter
 @Setter
@@ -27,8 +28,8 @@ public class PersonaJuridica extends Persona{
     @Column
     private String rubro;
 
-    public PersonaJuridica(String razonSocial, EnumTipoPersonaJuridica tipo, String rubro, String direccion, Documento documento, MedioDeContacto medioDeContacto) {
-        super(razonSocial,direccion, documento, medioDeContacto);
+    public PersonaJuridica(String razonSocial, EnumTipoPersonaJuridica tipo, String rubro, String direccion, Documento documento, List<MedioDeContacto> mediosDeContacto) {
+        super(razonSocial,direccion, documento, mediosDeContacto);
         this.razonSocial = razonSocial;
         this.tipo = tipo;
         this.rubro = rubro;

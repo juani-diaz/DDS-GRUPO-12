@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -68,7 +69,7 @@ public class LectorCsv {
             Email medioDeContacto = new Email();
             LocalDate fechaNacimiento = LocalDate.parse(linea[5], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
-            Persona p = new PersonaFisica(nombre, medioDeContacto, null, documento, apellido, null, null, fechaNacimiento);
+            Persona p = new PersonaFisica(nombre, Arrays.asList(medioDeContacto), null, documento, apellido, null, null, fechaNacimiento);
             Colaborador colaborador = new Colaborador(p, new ArrayList<>(), null, null, null);
 
             return colaborador;
@@ -93,7 +94,10 @@ public class LectorCsv {
                 "Gracias por unirte a nuestro sistema. ¡Estamos encantados de tenerte con nosotros!\n\n" +
                 "Saludos,\nEl equipo.";
 
-       colaborador.getPersona().getMedioDeContacto().notificar(header,body);
+       for(MedioDeContacto m : colaborador.getPersona().getMediosDeContacto()){
+           if(m.getClass() == Email.class)
+               m.notificar(header,body);
+       }
 
     }
 }

@@ -38,26 +38,115 @@
             <div class="row justify-content-center h-100">
                 <div class="col-xl-6">
                     <div class="form-input-content">
-                        <div class="card login-form mb-0">
+                        <div class="card login-form mb-0" style="width: 800px">
                             <div class="card-body pt-5">
-                                
-                                    <a class="text-center" href="index"> <h4>Bienvenido a AlimentAR</h4></a>
-        
-                                <form class="mt-5 mb-5 login-input" action="page-login">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control"  placeholder="Usuario" required>
+                                <a class="text-center" href="index"> <h4>Bienvenido a AlimentAR</h4></a>
+
+                                <div class="form-group">
+                                    <label>Registrate como:</label>
+                                    <div class="btn-group w-100" role="group">
+                                        <button type="button" class="btn btn-outline-primary" style="width: 33%" id="persona-btn" onclick="showForm('persona-form')">Persona</button>
+                                        <button type="button" class="btn btn-outline-primary" style="width: 33%" id="org-btn" onclick="showForm('org-form')">Organización</button>
+                                        <button type="button" class="btn btn-outline-primary" style="width: 33%" id="tecnico-btn" onclick="showForm('tecnico-form')">Técnico</button>
                                     </div>
-                                    <div class="form-group">
-                                        <input type="password" class="form-control" placeholder="Contraseña" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="password" class="form-control" placeholder="Repetí tu contraseña" required>
-                                    </div>
-                                    <button class="btn login-form__btn submit w-100">Registrate</button>
-                                </form>
-                                    <p class="mt-5 login-form__footer">Ya tenés una cuenta? <a href="page-login" class="text-primary">Iniciá sesión</a></p>
-                                    </p>
                                 </div>
+
+                                <form class="mt-5 mb-5 login-input" id="persona-form" action="/registrar-p" method="post" style="display: none;">
+                                    <div class="d-flex">
+                                        <!-- Primera Columna: Datos personales -->
+                                        <div class="w-50 pe-3">
+                                            <!-- Nombre y Apellido -->
+                                            <div class="form-group d-flex gap-3">
+                                                <input type="text" class="form-control" placeholder="Nombre" required name="nombre">
+                                                <input type="text" class="form-control" placeholder="Apellido" style="margin-left:20px" name="apellido">
+                                            </div>
+
+                                            <!-- Selector de Sexo y Selector de Género -->
+                                            <div class="form-group d-flex gap-3">
+                                                <select class="form-control" required name="sexo">
+                                                    <option value="" disabled selected>Sexo</option>
+                                                    <option value="F">Femenino</option>
+                                                    <option value="M">Masculino</option>
+                                                    <option value="O">Otro</option>
+                                                </select>
+                                                <select class="form-control" required style="margin-left:20px" name="genero">
+                                                    <option value="" disabled selected>Género</option>
+                                                    <option value="F">Femenino</option>
+                                                    <option value="M">Masculino</option>
+                                                    <option value="NB">No binario</option>
+                                                    <option value="O">Otro</option>
+                                                </select>
+                                            </div>
+
+                                            <!-- Fecha de nacimiento -->
+                                            <div class="form-group">
+                                                <input type="date" class="form-control" placeholder="Fecha de Nacimiento" required  name="fecha">
+                                            </div>
+
+                                            <!-- Dirección -->
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" placeholder="Dirección" required  name="direccion">
+                                            </div>
+
+                                            <!-- Tipo de Documento y Documento -->
+                                            <div class="form-group d-flex gap-3">
+                                                <select class="form-control" required name="tipoDocumento">
+                                                    <option value="" disabled selected>Tipo de Documento</option>
+                                                    <option value="DNI">DNI</option>
+                                                    <option value="CUIT">CUIT</option>
+                                                    <option value="CUIL">CUIL</option>
+                                                    <option value="OTRO">Otro</option>
+                                                </select>
+                                                <input type="text" class="form-control" placeholder="Documento" required style="margin-left:20px"  name="documento">
+                                            </div>
+                                        </div>
+
+                                        <!-- Línea divisora personalizada -->
+                                        <div class="mx-3" style="border-left: 2px solid #eee; height: auto;"></div>
+
+                                        <!-- Segunda Columna: Usuario y Contraseñas -->
+                                        <div class="w-50 ps-3">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" placeholder="Usuario" required name="usuario">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="password" class="form-control" placeholder="Contraseña" required  name="contra">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="password" class="form-control" placeholder="Repetí tu contraseña" required name="repetirContra">
+                                            </div>
+
+                                            <!-- Medios de Contacto -->
+                                            <div class="form-group">
+                                                <label>Medios de Contacto</label>
+                                                <div id="contact-fields"></div>
+                                                <button type="button" class="btn btn-outline-primary btn-sm mt-2 w-100" id="add-contact-btn">
+                                                    Agregar Medio de Contacto
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Botón de envío -->
+                                    <div class="form-group mt-3">
+                                        <button type="submit" class="btn login-form__btn submit w-100">Registrarse</button>
+                                    </div>
+                                </form>
+
+                                <form class="mt-5 mb-5 login-input" id="org-form" action="register-google" style="display: none;">
+                                    <div class="form-group">
+                                        <p>You will be redirected to Google to complete registration.</p>
+                                    </div>
+                                    <button type="submit" class="btn login-form__btn submit w-100">Register with Google</button>
+                                </form>
+
+                                <form class="mt-5 mb-5 login-input" id="tecnico-form" action="register-facebook" style="display: none;">
+                                    <div class="form-group">
+                                        <p>You will be redirected to Facebook to complete registration.</p>
+                                    </div>
+                                    <button type="submit" class="btn login-form__btn submit w-100">Register with Facebook</button>
+                                </form>
+                                <p class="mt-5 login-form__footer">Ya tenés una cuenta? <a href="page-login" class="text-primary">Iniciá sesión</a></p>
                             </div>
                         </div>
                     </div>
@@ -77,6 +166,76 @@
     <script src="js/settings.js"></script>
     <script src="js/gleek.js"></script>
     <script src="js/styleSwitcher.js"></script>
+
+    <script>
+        function showForm(formId) {
+            // Hide all forms
+            document.querySelectorAll('form').forEach(form => {
+                form.style.display = 'none';
+            });
+
+            // Show the selected form
+            document.getElementById(formId).style.display = 'block';
+
+            // Clear selection from all buttons
+            document.querySelectorAll('.btn-group .btn').forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Mark the corresponding button as active
+            document.querySelector(`button[onclick="showForm('${formId}')"]`).classList.add('active');
+        }
+
+        showForm('persona-form');
+    </script>
+
+    <script>
+        const maxContacts = 5;
+        const contactFieldsContainer = document.getElementById('contact-fields');
+        const addContactButton = document.getElementById('add-contact-btn');
+        let contactCount = 0;
+
+        addContactButton.addEventListener('click', () => {
+            if (contactCount < maxContacts) {
+                const contactField = document.createElement('div');
+                contactField.className = 'd-flex gap-3 mb-2';
+
+                contactField.innerHTML = `
+                    <select class="form-control" name="contact[${contactCount}][type]" required>
+                        <option value="" disabled selected>Tipo</option>
+                        <option value="email">Email</option>
+                        <option value="telefono">Teléfono</option>
+                        <option value="whatsapp">WhatsApp</option>
+                    </select>
+                    <input type="text" class="form-control" name="contact[${contactCount}][value]" placeholder="Ingrese el contacto" required style="margin-left:20px">
+                    <button type="button" class="btn btn-danger btn-sm remove-contact-btn" style="width: 28px;height: 28px;margin-top: 7px;">X</button>
+                `;
+
+                contactFieldsContainer.appendChild(contactField);
+                contactCount++;
+
+                // Add event listener to remove button
+                contactField.querySelector('.remove-contact-btn').addEventListener('click', () => {
+                    contactField.remove();
+                    updateContactNames();
+                });
+            } else {
+                alert('Puedes agregar hasta 5 medios de contacto.');
+            }
+        });
+
+        function updateContactNames() {
+            const contactFields = contactFieldsContainer.children;
+            contactCount = 0; // Reset counter
+            Array.from(contactFields).forEach((contactField) => {
+                const select = contactField.querySelector('select');
+                const input = contactField.querySelector('input');
+                select.name = `contact[${contactCount}][type]`;
+                input.name = `contact[${contactCount}][value]`;
+                contactCount++;
+            });
+        }
+    </script>
 </body>
 </html>
 

@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -29,7 +30,7 @@ public class PersonaFisica extends Persona {
 
     public PersonaFisica(
         String nombre,
-        MedioDeContacto medioContacto,
+        List<MedioDeContacto> mediosContacto,
         String direccion,
         Documento documento,
         String apellido,
@@ -37,7 +38,7 @@ public class PersonaFisica extends Persona {
         String genero,
         LocalDate fechaNacimiento
         ){
-        super(nombre, direccion, documento, medioContacto);
+        super(nombre, direccion, documento, mediosContacto);
         this.apellido = apellido;
         this.sexo = sexo;
         this.genero = genero;

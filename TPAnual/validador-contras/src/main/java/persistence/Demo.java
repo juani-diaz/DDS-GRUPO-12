@@ -189,7 +189,7 @@ public class Demo {
         String direccionManuel = "Montes De Oca 2671";
         Documento documentoManuel = new Documento("DNI", "47112068");
         LocalDate fechaNacimientoManuel = LocalDate.of(2000, 10, 12);
-        PersonaFisica manuelBochini = new PersonaFisica("Manuel", emailManuel,direccionManuel,documentoManuel, "Bochini","Hombre","Masculino", fechaNacimientoManuel);
+        PersonaFisica manuelBochini = new PersonaFisica("Manuel", Arrays.asList(emailManuel),direccionManuel,documentoManuel, "Bochini","Hombre","Masculino", fechaNacimientoManuel);
 
         em.persist(emailManuel);
         em.persist(documentoManuel);
@@ -200,7 +200,7 @@ public class Demo {
         String direccionRuffini = "Corrientes 2015";
         Documento documentoRuffini = new Documento("DNI", "25710420");
         LocalDate fechaNacimientoRuffini = LocalDate.of(2018, 12, 9);
-        PersonaFisica ruffini = new PersonaFisica("ruffini", emailRuffini,direccionRuffini,documentoRuffini, "Perez","Hombre","Masculino", fechaNacimientoRuffini);
+        PersonaFisica ruffini = new PersonaFisica("ruffini", Arrays.asList(emailRuffini),direccionRuffini,documentoRuffini, "Perez","Hombre","Masculino", fechaNacimientoRuffini);
 
         em.persist(emailRuffini);
         em.persist(documentoRuffini);
@@ -211,7 +211,7 @@ public class Demo {
         String direccionEmma = "Rivadavia 5790";
         Documento documentoEmma = new Documento("DNI", "22190485");
         LocalDate fechaNacimientoEmma = LocalDate.of(2014, 9, 20);
-        PersonaFisica emma = new PersonaFisica("Emma", emailEmma,direccionEmma,documentoEmma, "Gonzalez","Mujer","Femenino", fechaNacimientoEmma);
+        PersonaFisica emma = new PersonaFisica("Emma", Arrays.asList(emailEmma),direccionEmma,documentoEmma, "Gonzalez","Mujer","Femenino", fechaNacimientoEmma);
 
         em.persist(emailEmma);
         em.persist(documentoEmma);
@@ -222,7 +222,7 @@ public class Demo {
         String direccionAdriana = "Marcelo T. De Alvear 1542";
         Documento documentoAdriana = new Documento("DNI", "37187059");
         LocalDate fechaNacimientoAdriana = LocalDate.of(1958, 7, 24);
-        PersonaFisica adrianaCirulli = new PersonaFisica("Adriana", emailAdriana,direccionAdriana,documentoAdriana, "Cirulli","Mujer","Femenino", fechaNacimientoAdriana);
+        PersonaFisica adrianaCirulli = new PersonaFisica("Adriana", Arrays.asList(emailAdriana),direccionAdriana,documentoAdriana, "Cirulli","Mujer","Femenino", fechaNacimientoAdriana);
 
         em.persist(emailAdriana);
         em.persist(documentoAdriana);
@@ -260,7 +260,7 @@ public class Demo {
         Email emailKiosco = new Email("kiosco25hs@yahoo.com");
         String direccionKiosco = "Huego 349";
         Documento estatutoKiosco = new Documento("CUIT", "42823012");
-        PersonaJuridica kiosco = new PersonaJuridica("Kiosco SRL", EnumTipoPersonaJuridica.EMPRESA,"Comercio", direccionKiosco, estatutoKiosco, emailKiosco);
+        PersonaJuridica kiosco = new PersonaJuridica("Kiosco SRL", EnumTipoPersonaJuridica.EMPRESA,"Comercio", direccionKiosco, estatutoKiosco, Arrays.asList(emailKiosco));
 
         em.persist(emailKiosco);
         em.persist(estatutoKiosco);
@@ -269,7 +269,7 @@ public class Demo {
         Email emailONG = new Email("AyudasONG@yahoo.com");
         String direccionONG = "Gurruchaga 2345";
         Documento estatutoONG = new Documento("CUIT", "42823024");
-        PersonaJuridica ong = new PersonaJuridica("ONG", EnumTipoPersonaJuridica.ONG,"Ayuda", direccionONG, estatutoONG, emailONG);
+        PersonaJuridica ong = new PersonaJuridica("ONG", EnumTipoPersonaJuridica.ONG,"Ayuda", direccionONG, estatutoONG, Arrays.asList(emailONG));
 
         em.persist(emailONG);
         em.persist(estatutoONG);
@@ -285,7 +285,7 @@ public class Demo {
         String direccionTecnico1 = "Serrano 741";
         Documento documentoTecnico1 = new Documento("DNI", "25814920");
         LocalDate fechaNacimientoTecnico1 = LocalDate.of(1987, 5, 8);
-        PersonaFisica albertoTecnico = new PersonaFisica("Alberto", emailTecnico1,direccionTecnico1, documentoTecnico1, "Fernandez", "Hombre", "Masculino", fechaNacimientoTecnico1);
+        PersonaFisica albertoTecnico = new PersonaFisica("Alberto", Arrays.asList(emailTecnico1),direccionTecnico1, documentoTecnico1, "Fernandez", "Hombre", "Masculino", fechaNacimientoTecnico1);
 
 
         em.persist(emailTecnico1);
@@ -298,7 +298,7 @@ public class Demo {
         String direccionTecnico2 = "Santa Fe 4405";
         Documento documentoTecnico2 = new Documento("DNI", "27123547");
         LocalDate fechaNacimientoTecnico2 = LocalDate.of(1989, 1, 28);
-        PersonaFisica marioTecnico = new PersonaFisica("Mario", emailTecnico2,direccionTecnico2, documentoTecnico2, "Ruiz", "Hombre", "Masculino", fechaNacimientoTecnico2);
+        PersonaFisica marioTecnico = new PersonaFisica("Mario", Arrays.asList(emailTecnico2),direccionTecnico2, documentoTecnico2, "Ruiz", "Hombre", "Masculino", fechaNacimientoTecnico2);
 
         em.persist(emailTecnico2);
         em.persist(documentoTecnico2);
@@ -337,7 +337,7 @@ public class Demo {
         String direccionElsa = "San Mateo 1200";
         Documento documentoElsa = new Documento("DNI", "14294741");
         LocalDate fechaNacimientoElsa = LocalDate.of(1960, 12, 24);
-        PersonaFisica elsa = new PersonaFisica("Elsa", emailElsa,direccionElsa,documentoElsa, "Pato","Mujer","Femenino", fechaNacimientoElsa);
+        PersonaFisica elsa = new PersonaFisica("Elsa", Arrays.asList(emailElsa),direccionElsa,documentoElsa, "Pato","Mujer","Femenino", fechaNacimientoElsa);
         Colaborador colaboradorElsa = new Colaborador(elsa, null,0f,tarjetasParaEntregarElsa,null);
 
         em.persist(emailElsa);
@@ -350,7 +350,7 @@ public class Demo {
         String direccionJuan = "Medrano 1480";
         Documento documentoJuan = new Documento("DNI", "30156290");
         LocalDate fechaNacimientoJuan = LocalDate.of(1990, 8, 30);
-        PersonaFisica juan = new PersonaFisica("Juan", emailJuan,direccionJuan, documentoJuan, "Bores", "Hombre", "Masculino", fechaNacimientoJuan);
+        PersonaFisica juan = new PersonaFisica("Juan", Arrays.asList(emailJuan),direccionJuan, documentoJuan, "Bores", "Hombre", "Masculino", fechaNacimientoJuan);
         Vulnerable vulnerableJuan = new Vulnerable(juan, LocalDate.now(), EnumSituacionCalle.POSEE_HOGAR, 0, null, null, null);
 
         em.persist(emailJuan);
@@ -368,7 +368,7 @@ public class Demo {
         String direccionIñaki = "Federico Lacroze 3273";
         Documento documentoIñaki = new Documento("DNI", "42871305");
         LocalDate fechaNacimientoIñaki = LocalDate.of(2000, 10, 20);
-        PersonaFisica iñaki = new PersonaFisica("Iñaki", emailIñaki,direccionIñaki, documentoIñaki, "Ansa", "Hombre", "Masculino", fechaNacimientoIñaki);
+        PersonaFisica iñaki = new PersonaFisica("Iñaki", Arrays.asList(emailIñaki),direccionIñaki, documentoIñaki, "Ansa", "Hombre", "Masculino", fechaNacimientoIñaki);
         Vulnerable vulnerableIñaki = new Vulnerable(iñaki, LocalDate.now(), EnumSituacionCalle.POSEE_HOGAR, 0, null, null, null);
 
         em.persist(emailIñaki);
@@ -386,7 +386,7 @@ public class Demo {
         String direccionTomas = "Azul 50";
         Documento documentoTomas = new Documento("DNI", "21420492");
         LocalDate fechaNacimientoTomas = LocalDate.of(1980, 11, 15);
-        PersonaFisica tomas = new PersonaFisica("Tomas", emailTomas,direccionTomas, documentoTomas, "Martinez", "Hombre", "Masculino", fechaNacimientoTomas);
+        PersonaFisica tomas = new PersonaFisica("Tomas", Arrays.asList(emailTomas),direccionTomas, documentoTomas, "Martinez", "Hombre", "Masculino", fechaNacimientoTomas);
         Vulnerable vulnerableTomas = new Vulnerable(tomas, LocalDate.now(), EnumSituacionCalle.NO_POSEE_HOGAR, 0, null, null, null);
 
         em.persist(emailTomas);
@@ -404,7 +404,7 @@ public class Demo {
         String direccionLuciana = "Thames 2580";
         Documento documentoLuciana = new Documento("DNI", "42872158");
         LocalDate fechaNacimientoLuciana = LocalDate.of(2000, 11, 3);
-        PersonaFisica luciana = new PersonaFisica("Lucio", emailLuciana,direccionLuciana, documentoLuciana, "Gonzalez", "Mujer", "Femenino", fechaNacimientoLuciana);
+        PersonaFisica luciana = new PersonaFisica("Lucio", Arrays.asList(emailLuciana),direccionLuciana, documentoLuciana, "Gonzalez", "Mujer", "Femenino", fechaNacimientoLuciana);
         Vulnerable vulnerableLuciana = new Vulnerable(luciana, LocalDate.now(), EnumSituacionCalle.POSEE_HOGAR, 0, null, null, null);
 
         em.persist(emailLuciana);
@@ -603,7 +603,7 @@ public class Demo {
         String direccionEdgar= "San Mateo 1220";
         Documento documentoEdgar = new Documento("DNI", "143948541");
         LocalDate fechaNacimientoEdgar = LocalDate.of(1962, 12, 24);
-        PersonaFisica edgar = new PersonaFisica("Edgar", emailEdgar,direccionEdgar,documentoEdgar, "Pato","Masculino","Masculino", fechaNacimientoEdgar);
+        PersonaFisica edgar = new PersonaFisica("Edgar", Arrays.asList(emailEdgar),direccionEdgar,documentoEdgar, "Pato","Masculino","Masculino", fechaNacimientoEdgar);
         Colaborador colaboradorEdgar = new Colaborador(edgar, null,250000f,tarjetasParaEntregarEdgar,null);
 
         em.persist(emailEdgar);
@@ -650,7 +650,7 @@ public class Demo {
         em.persist(emailEzequiel);
 
         //Lo hago colaborador
-        PersonaFisica ezequiel_colapinto = new PersonaFisica("Ezequiel", emailEzequiel,direccionEzequiel,documentoEzequiel, "Colapinto","Hombre","Masculino", fechaNacimientoEzequiel);
+        PersonaFisica ezequiel_colapinto = new PersonaFisica("Ezequiel", Arrays.asList(emailEzequiel),direccionEzequiel,documentoEzequiel, "Colapinto","Hombre","Masculino", fechaNacimientoEzequiel);
         Colaborador colaboradorEzequiel = new Colaborador(ezequiel_colapinto, null,0f,null,null);
 
         em.persist(ezequiel_colapinto);
