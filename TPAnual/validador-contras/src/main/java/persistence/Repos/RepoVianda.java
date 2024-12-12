@@ -5,6 +5,7 @@ import domain.vianda.Vianda;
 import persistence.BDUtils;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -51,6 +52,22 @@ public class RepoVianda {
     return vianda;
   }
 
+  public void cambiarHeladera(Heladera heladeraNueva, Integer viandaID){
+
+    Vianda vianda = this.findById_Vianda(viandaID);
+    vianda.setHeladera(heladeraNueva);
+
+    EntityTransaction transaction = em.getTransaction();
+    transaction.begin();
+
+    // Merging the updated entity
+    em.merge(vianda);
+
+    transaction.commit();
+    //em.close();
+
+  }
+
   public List<Vianda> getAll_Vianda() {
     CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
     CriteriaQuery<Vianda> criteriaQuery = criteriaBuilder.createQuery(Vianda.class);
@@ -61,4 +78,6 @@ public class RepoVianda {
     Query query = em.createQuery(criteriaQuery);
     return query.getResultList();
   }
+
+
 }

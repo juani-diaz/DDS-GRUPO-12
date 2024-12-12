@@ -48,6 +48,7 @@ public class RegistroPersonaVulnerable extends  Colaboracion{
         vulnerable.setearTarjeta(tarjetaEntregada);
         this.tarjetaEntregada= tarjetaEntregada;
 
+        colaborador.setCantidadPuntos(colaborador.getCantidadPuntos() + puntosObtenidos());
     }
 
     public Float puntosObtenidos(){

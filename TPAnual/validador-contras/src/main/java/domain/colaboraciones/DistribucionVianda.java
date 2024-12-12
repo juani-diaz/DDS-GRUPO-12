@@ -70,13 +70,13 @@ public class DistribucionVianda extends Colaboracion {
             SingletonSeguidorEstadistica se = SingletonSeguidorEstadistica.getInstance();
             se.getDistribucionViandas().add(this);
 
+            colaborador.setCantidadPuntos(colaborador.getCantidadPuntos() + puntosObtenidos());
+
 
     }
     public void entregarTarjetas(List<Tarjeta> list_tarjetas){ //osea recibe tarjetas
         this.colaborador.recibirTarjetas(list_tarjetas);
     }
 
-    public Float puntosObtenidos(){
-        return multiplicador;
-    }
+    public Float puntosObtenidos(){ return multiplicador * viandasMovidas.size(); }
 }
