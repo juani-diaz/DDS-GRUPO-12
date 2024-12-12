@@ -8,6 +8,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import domain.persona.MedioDeContacto;
 import lombok.NoArgsConstructor;
 import persistence.BDUtils;
 
@@ -19,7 +20,11 @@ public class RepoUsuarios {
         BDUtils.comenzarTransaccion(this.em);
 
         try {
-            this.em.persist(usuario);
+            em.persist(usuario.getRol().getPersona().getDocumento());
+            em.persist(usuario.getRol().getPersona());
+            em.persist(usuario.getRol());
+            em.persist(usuario);
+
             BDUtils.commit(this.em);
         } catch (Exception e) {
             System.out.println("Error al agregar el USUARIO: " + usuario + e);
