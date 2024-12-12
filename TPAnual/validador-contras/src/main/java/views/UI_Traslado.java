@@ -1,6 +1,7 @@
 package views;
 
 
+import domain.colaboraciones.DistribucionVianda;
 import domain.heladera.Heladera;
 import domain.vianda.EnumEstadoVianda;
 import domain.vianda.Vianda;
@@ -63,6 +64,11 @@ public class UI_Traslado extends UI_Navegable implements Handler{
     System.out.println("Cantidad de viandas de heladera2= "+ heladera.cantidadViandas());
     RepoVianda repoVianda = new RepoVianda();
 
+
+    if (heladera == heladeraHacia)
+    {
+      throw new IllegalArgumentException("No se puede mover a la misma heladera");
+    }
 
     if(cantidadViandas<=heladera.cantidadViandas())
     {

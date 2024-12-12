@@ -63,7 +63,7 @@ public class Colaborador extends Rol {
   public void realizarColaboracion(Colaboracion colaboracion){
     colaboracion.ejecutar();
     this.colaboraciones.add(colaboracion);
-    this.actualizarPuntos();
+    // this.actualizarPuntos(); AHORA CUANDO REALIZAS UNA COLABORACION SE SUMAN LOS PUNTOS
   }
 
   public void actualizarPuntos(){

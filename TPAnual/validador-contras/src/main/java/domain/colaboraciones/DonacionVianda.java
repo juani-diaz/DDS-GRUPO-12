@@ -45,6 +45,7 @@ public class DonacionVianda extends Colaboracion {
             SingletonSeguidorEstadistica se = SingletonSeguidorEstadistica.getInstance();
             se.getDonacionViandas().add(this);
         }
+        colaborador.setCantidadPuntos(colaborador.getCantidadPuntos() + puntosObtenidos());
     }
     public Float puntosObtenidos(){
 

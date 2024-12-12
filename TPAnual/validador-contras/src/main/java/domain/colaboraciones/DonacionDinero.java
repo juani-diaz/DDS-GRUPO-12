@@ -37,10 +37,8 @@ public class DonacionDinero extends Colaboracion {
     }
 
     public void ejecutar(){
-        /*Crea un donacionDinero?? que hace esto??
-        No es necesario que realice nada, solo tiene que quedar sentada la donacion
-        para asi cuando queremos calcular los puntos funciones todo bien */
 
+        colaborador.setCantidadPuntos(colaborador.getCantidadPuntos() + puntosObtenidos());
     }
 
     public Float puntosObtenidos(){
