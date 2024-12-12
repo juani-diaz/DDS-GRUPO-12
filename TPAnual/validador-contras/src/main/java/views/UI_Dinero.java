@@ -1,19 +1,25 @@
 package views;
 
+import domain.auth.JwtUtil;
 import domain.colaboraciones.DonacionDinero;
 import domain.colaboraciones.MedioDePago;
 import domain.persona.Documento;
 import domain.persona.PersonaFisica;
+import domain.rol.Colaborador;
 import domain.rol.EnumSituacionCalle;
 import domain.rol.Vulnerable;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
+import io.jsonwebtoken.Claims;
 import persistence.BDUtils;
+import persistence.Repos.RepoColaborador;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
 
 public class UI_Dinero extends UI_Navegable implements Handler{
+
+  EntityManager em = BDUtils.getEntityManager();
 
   @Override
   public void handle(Context ctx) throws Exception {
@@ -55,18 +61,28 @@ public class UI_Dinero extends UI_Navegable implements Handler{
     medioDePago.setMesVencimiento(mesVencimiento);
     medioDePago.setCodSeguridad(codSeguridad);
 
+
+
+    String token = ctx.cookie("Auth");
+    Claims claims=JwtUtil.getClaimsFromToken(token);
+    RepoColaborador repoColaborador=new RepoColaborador(em);
+    Colaborador cola=repoColaborador.obtenerColaborador((Integer) claims.get("roleId"));
+
     // Crea Donacion
     DonacionDinero dona = new DonacionDinero();
     dona.setMonto(montoFloat);
     dona.setMedioDePago(medioDePago);
+    dona.setColaborador(cola);
 
+    dona.ejecutar();
 
     //ORM
-    EntityManager em = BDUtils.getEntityManager();
+
     BDUtils.comenzarTransaccion(em);
 
     em.persist(medioDePago);
     em.persist(dona);
+
 
     BDUtils.commit(em);
 

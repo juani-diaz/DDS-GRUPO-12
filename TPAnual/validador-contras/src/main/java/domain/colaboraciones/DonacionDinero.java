@@ -38,6 +38,8 @@ public class DonacionDinero extends Colaboracion {
 
     public void ejecutar(){
 
+        System.out.println(colaborador);
+
         colaborador.setCantidadPuntos(colaborador.getCantidadPuntos() + puntosObtenidos());
     }
 

@@ -4,6 +4,10 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.ArrayList;
 import java.util.Date;
@@ -53,10 +57,14 @@ public class JwtUtil {
 
     public static Claims getClaimsFromToken(String token) {
         try {
+            if (token.startsWith("Bearer")) {
+                token = token.substring(6).trim();
+            }
+            String decodedUrl=URLDecoder.decode(token, StandardCharsets.UTF_8);
             return Jwts.parserBuilder()
                     .setSigningKey(SECRET_KEY)
                     .build()
-                    .parseClaimsJws(token)
+                    .parseClaimsJws(decodedUrl)
                     .getBody();
         } catch (Exception e) {
             System.out.println("Error al extraer claims: " + e.getMessage());
