@@ -49,6 +49,13 @@ public class Tecnico extends Rol {
     this.visitasRealizadas = vT;
   }
 
+  public Tecnico(Persona p, List<String> ac){
+    this.persona = p;
+    this.areaCobertura = ac;
+    this.incidentesARevisar = new ArrayList<>();
+    this.visitasRealizadas = new ArrayList<>();
+  }
+
   public Tecnico(Persona p){
     this.persona = p;
     this.areaCobertura = new ArrayList<String>();

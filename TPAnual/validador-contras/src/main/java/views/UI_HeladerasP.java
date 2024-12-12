@@ -51,6 +51,7 @@ public class UI_HeladerasP extends UI_Navegable implements Handler{
             this.falla(heladera);
         }
         ctx.render("index.hbs");
+
     }
 
     private void falla(Heladera hela) {

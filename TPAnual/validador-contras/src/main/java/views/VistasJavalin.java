@@ -112,6 +112,8 @@ public class VistasJavalin {
 
             app.get("/page-register", UIRegistrar);
             app.post("/registrar-p", UIRegistrar::registrarPersona);
+            app.post("/registrar-o", UIRegistrar::registrarOrg);
+            app.post("/registrar-t", UIRegistrar::registrarTecnico);
 //======================
 
             UI_Puntos UIPuntos = new UI_Puntos();

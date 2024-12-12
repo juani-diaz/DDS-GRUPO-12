@@ -68,6 +68,25 @@ public class RepoVianda {
 
   }
 
+  public void cambiarHeladeraPlural(Heladera heladeraNueva, List<Vianda> viandas){
+    Integer i=0;
+
+    for (i=0 ; i<viandas.size(); i++)
+    {
+      Vianda vianda = viandas.get(i);
+      vianda.setHeladera(heladeraNueva);
+      EntityTransaction transaction = em.getTransaction();
+      transaction.begin();
+
+      // Merging the updated entity
+      em.merge(vianda);
+
+      transaction.commit();
+      //em.close();
+    }
+
+  }
+
   public List<Vianda> getAll_Vianda() {
     CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
     CriteriaQuery<Vianda> criteriaQuery = criteriaBuilder.createQuery(Vianda.class);
