@@ -11,10 +11,7 @@ import persistence.Repos.RepoHeladera;
 import persistence.Repos.RepoVianda;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class UI_Traslado extends UI_Navegable implements Handler{
 
@@ -72,15 +69,20 @@ public class UI_Traslado extends UI_Navegable implements Handler{
 
     if(cantidadViandas<=heladera.cantidadViandas())
     {
-        for(i=0;i<cantidadViandas;i++)
-        {
-        viandaHeladera = heladera.sacarViandaPorIndice(i);
-        viandasMover.add(viandaHeladera);
-        repoVianda.cambiarHeladera(heladeraHacia,viandaHeladera.getId());
-        }
+        List<Vianda> shuffledList = new ArrayList<>(heladera.getViandasEnHeladera());
+        Collections.shuffle(shuffledList);
+        viandasMover = shuffledList.subList(0, cantidadViandas);
+        heladera.sacarViandas(viandasMover);
+        heladeraHacia.ingresarViandas(viandasMover);
+
+
+        repoVianda.cambiarHeladeraPlural(heladeraHacia,viandasMover);
+
 
         heladeraHacia.ingresarViandas(viandasMover);
         System.out.println("Se movieron las viandas con exito hacia la heladera" + heladeraHacia.getNombre());
+
+
     }else  System.out.println("La heladera no puede mover mas viandas de las que tiene");
 
     // Crea Traslado
