@@ -277,10 +277,11 @@
                                     <form action="/traslado" method="post">
                                     <div style="display: flex;">
                                         <div class="form-group" style="width: 120px; margin-right: 10px;">
+                                            <input name="heladeraID" value={{hela.id}} style="display:none">
                                             <input type="number" name="cantidad" class="form-control" placeholder="Cantidad">
                                         </div>
                                         <div class="form-group">
-                                            <select class="form-control" name="heladeraID" required>
+                                            <select class="form-control" name="heladeraIDHacia" required>
                                                 <option selected disabled>Selecciona una heladera...</option>
                                                 {{#each ../hela as |heladeras_t|}}
                                                     <option value="{{heladeras_t.id}}">{{heladeras_t.nombre}}</option>
