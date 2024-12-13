@@ -1,0 +1,37 @@
+package views;
+
+import domain.colaboraciones.PresentacionOferta;
+import io.javalin.http.Context;
+import io.javalin.http.Handler;
+import io.javalin.http.UploadedFile;
+import persistence.ArchivosUtils;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+public class UI_Oferta extends UI_Navegable implements Handler {
+    @Override
+    public void handle(Context ctx) throws Exception {
+        this.validarUsuario(ctx);
+        if (this.sesionValida(ctx)) {
+            ctx.render("oferta.hbs");
+        }
+    }
+
+    public void nuevaOferta(Context ctx) throws Exception {
+        String nombre = ctx.formParam("nombre");
+        String descripcion = ctx.formParam("descripcion");
+        String rubro = ctx.formParam("rubro");
+        Float puntosNecesarios = Float.parseFloat(ctx.formParam("puntosNecesarios"));
+
+        UploadedFile uploadedFile = ctx.uploadedFile("imagen");
+
+        String imagen = null;
+        if (uploadedFile != null) {
+            imagen = ArchivosUtils.getInstance().guardarArchivo("ofertas", uploadedFile);
+        } else {
+            System.out.println("No se subio una imagen");
+        }
+    }
+}

@@ -30,7 +30,7 @@ public class test_colaboraciones {
 
     DonacionVianda aDonarVianda = new DonacionVianda(colaborador1,LocalDate.now(),viandaDonada,heladeraADonar);
     ResponsableHeladera sereResponsable = new ResponsableHeladera(colaborador1,LocalDate.now(),heladera2);
-    PresentacionOferta ofertaPresentada = new PresentacionOferta(colaborador1,LocalDate.now(),"empresa","Playmovil","150","IMAGEN");
+    PresentacionOferta ofertaPresentada = new PresentacionOferta(colaborador1,LocalDate.now(),"empresa","Playmovil","una oferta",150F,"IMAGEN");
     Catalogo catalogo1 = new Catalogo();
     @Test
     public void crearColaboracionDonacion() {

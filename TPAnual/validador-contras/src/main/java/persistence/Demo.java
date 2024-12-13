@@ -564,10 +564,10 @@ public class Demo {
         // PRESENTACION OFERTAS
         Catalogo catalogo = new Catalogo();
 
-        Colaboracion presentarOfertaMartillo = new PresentacionOferta(colaboradorElsa,LocalDate.now(), "Metalurgica","Martillo","200","imagenMartillo");
+        Colaboracion presentarOfertaMartillo = new PresentacionOferta(colaboradorElsa,LocalDate.now(), "Metalurgica","Martillo","una oferta",200F,"imagenMartillo");
         presentarOfertaMartillo.ejecutar();
 
-        Colaboracion presentarOfertaPelota = new PresentacionOferta(colaboradorElsa,LocalDate.now(), "Deporte","Pelota Jabulani","250","imagenJabulani");
+        Colaboracion presentarOfertaPelota = new PresentacionOferta(colaboradorElsa,LocalDate.now(), "Deporte","Pelota Jabulani","una oferta",250F,"imagenJabulani");
         presentarOfertaPelota.ejecutar();
 
         // Persistimos las ofertas
@@ -617,10 +617,10 @@ public class Demo {
         //persisto el catalogo
         em.persist(catalogo);
 
-        Colaboracion presentarOfertaDestornillador = new PresentacionOferta(colaboradorEdgar,LocalDate.now(), "Metalurgica","Martillo","200","imagenMartillo");
+        Colaboracion presentarOfertaDestornillador = new PresentacionOferta(colaboradorEdgar,LocalDate.now(), "Metalurgica","Martillo","una oferta",200F,"imagenMartillo");
         presentarOfertaDestornillador.ejecutar();
 
-        Colaboracion presentarOfertaBotines = new PresentacionOferta(colaboradorEdgar,LocalDate.now(), "Deporte","Pelota Jabulani","250","imagenJabulani");
+        Colaboracion presentarOfertaBotines = new PresentacionOferta(colaboradorEdgar,LocalDate.now(), "Deporte","Pelota Jabulani","una oferta",250F,"imagenJabulani");
         presentarOfertaBotines.ejecutar();
 
         catalogo.otorgar(0,colaboradorEdgar);

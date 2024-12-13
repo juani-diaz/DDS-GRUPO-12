@@ -20,17 +20,20 @@ public class PresentacionOferta extends Colaboracion{
     @Column
     private String nombre;
     @Column
-    private String puntosNecesarios;
+    private String descripcion;
+    @Column
+    private Float puntosNecesarios;
     @Column
     private String imagen;
 
     public PresentacionOferta(Colaborador colaborador, LocalDate fecha,
-                              String rubro, String nombre, String  puntosNecesarios, String imagen){
+                              String rubro, String nombre, String descripcion, Float puntosNecesarios, String imagen){
         this.colaborador = colaborador;
         this.fecha = fecha;
         this.rubro = rubro;
         this.nombre = nombre;
-        this. puntosNecesarios = puntosNecesarios;
+        this.descripcion = descripcion;
+        this.puntosNecesarios = puntosNecesarios;
         this.imagen = imagen;
     }
 

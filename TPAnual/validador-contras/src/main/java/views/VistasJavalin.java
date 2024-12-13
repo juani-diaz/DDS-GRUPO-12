@@ -89,24 +89,35 @@ public class VistasJavalin {
 
             app.get("/heladeras-p", UIHeladerasP);
             app.post("/heladeras-p", UIHeladerasP::botonesInfo);
+
 //======================
             app.get("/landing", ctx -> {
                 ctx.render("landing.hbs");
             });
+
 //======================
             app.get("/migracion", ctx -> {
                 ctx.render("migracion.hbs");
             });
+
+//====================== OFERTAS
+            UI_Ofertas UIOfertas = new UI_Ofertas();
+
+            app.get("/ofertas", UIOfertas);
+
 //======================
-            app.get("/ofertas", ctx -> {
-                ctx.render("ofertas.hbs");
-            });
+            UI_Oferta UIOferta = new UI_Oferta();
+
+            app.get("/oferta", UIOferta);
+            app.post("/nueva-oferta", UIOferta::nuevaOferta);
+
 //====================== LOGIN
             UI_Login UILogin = new UI_Login();
 
             app.get("/page-login", UILogin);
             app.post("/login", UILogin::login);
             app.post("/logout", UILogin::logout);
+
 //======================
             UI_Registrar UIRegistrar = new UI_Registrar();
 
@@ -114,8 +125,8 @@ public class VistasJavalin {
             app.post("/registrar-p", UIRegistrar::registrarPersona);
             app.post("/registrar-o", UIRegistrar::registrarOrg);
             app.post("/registrar-t", UIRegistrar::registrarTecnico);
-//======================
 
+//======================
             UI_Puntos UIPuntos = new UI_Puntos();
 
             app.get("/puntos",UIPuntos);
@@ -136,6 +147,7 @@ public class VistasJavalin {
                 ctx.result(Localizacion.localizar(ctx));
             });
         }
+
         private static void initTemplateEngine() {
             Handlebars handlebars = new Handlebars();
 

@@ -27,9 +27,9 @@ public class Catalogo extends EntidadPersistente {
 
     public static boolean otorgar(Integer indiceCatalogo, Colaborador colaborador){
         PresentacionOferta o = ofertas.get(indiceCatalogo);
-        if(Float.parseFloat(o.getPuntosNecesarios()) <= colaborador.getCantidadPuntos()){
+        if(o.getPuntosNecesarios() <= colaborador.getCantidadPuntos()){
             //TODO hacer lo que corresponda (mail, envio)
-            colaborador.setCantidadPuntos(colaborador.getCantidadPuntos() - Float.parseFloat(o.getPuntosNecesarios()));
+            colaborador.setCantidadPuntos(colaborador.getCantidadPuntos() - o.getPuntosNecesarios());
             // hay q remover la oferta de la lista del catalogo?
             return true;
         }
