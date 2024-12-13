@@ -23,8 +23,8 @@ public class UI_Reporte extends UI_Navegable implements Handler {
         this.validarUsuario(ctx);
         System.out.println(ctx);
         if (this.sesionValida(ctx)) {
-            RepoHeladera hela = new RepoHeladera();
-            RepoColaborador cola = new RepoColaborador(em);
+            RepoHeladera hela = RepoHeladera.getInstance();
+            RepoColaborador cola = RepoColaborador.getInstance();
 
             Map<String, Object> model = new HashMap<>();
             model.put("helaFallos", hela.obtenerFallasxHeladera());

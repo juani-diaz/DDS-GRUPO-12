@@ -2,6 +2,7 @@ package persistence.Repos;
 
 import domain.heladera.Heladera;
 import io.javalin.http.Context;
+import lombok.Getter;
 import persistence.BDUtils;
 
 import javax.persistence.EntityManager;
@@ -16,11 +17,28 @@ import java.util.Map;
 
 //NO SE PERSISTE
 public class RepoHeladera{
+  @Getter
+  private List<Heladera> heladeras = new ArrayList<>();
+
+  private static RepoHeladera instance;
+
+  private RepoHeladera(){
+    this.heladeras = getHeladerass_BD();
+  }
+
+  public static RepoHeladera getInstance(){
+    if(instance == null){
+      instance = new RepoHeladera();
+    }
+    return instance;
+  }
 
   //Se crea el EntityManager
   private EntityManager em = BDUtils.getEntityManager();
 
-  public void add_Heladera(Heladera hela) {
+    public void add_Heladera(Heladera hela) {
+    heladeras.add(hela);
+
     BDUtils.comenzarTransaccion(em);
     try {
       em.persist(hela);
@@ -31,6 +49,8 @@ public class RepoHeladera{
   }
 
   public void remove_Heladera(Heladera hela) {
+    heladeras.remove(hela);
+
     BDUtils.comenzarTransaccion(em);
     try {
       em.remove(hela);
@@ -41,20 +61,18 @@ public class RepoHeladera{
   }
 
   public Heladera findById_Heladera(Integer heladeraID) {
-    //BDUtils.comenzarTransaccion(this.em);
-
     Heladera heladera = null;
 
     try {
-      heladera = this.em.getReference(Heladera.class, heladeraID);
+      heladera = heladeras.stream().filter(h -> h.getId() == heladeraID).findFirst().get();
     } catch (Exception e) {
-      System.out.println("Error al agregar la heladera: " + e + " en HeladeraController.obtenerHeladera");
+      System.out.println("Error al agregar la heladera: " + e);
     }
 
     return heladera;
   }
 
-  public List<Heladera> getAll_Heladera() {
+  public List<Heladera> getHeladerass_BD() {
     CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
     CriteriaQuery<Heladera> criteriaQuery = criteriaBuilder.createQuery(Heladera.class);
     Root<Heladera> heladeraRoot = criteriaQuery.from(Heladera.class);

@@ -14,9 +14,9 @@ public class UI_HeladerasA extends UI_Navegable implements Handler{
         this.validarUsuario(ctx);
         if (this.sesionValida(ctx)) {
 
-            RepoHeladera hela = new RepoHeladera();
+            RepoHeladera hela = RepoHeladera.getInstance();
 
-            model.put("hela", hela.getAll_Heladera());
+            model.put("hela", hela.getHeladeras());
             ctx.render("heladeras-a.hbs", this.model);
 
         }

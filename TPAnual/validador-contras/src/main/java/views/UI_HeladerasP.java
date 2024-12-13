@@ -17,9 +17,9 @@ public class UI_HeladerasP extends UI_Navegable implements Handler{
         this.validarUsuario(ctx);
         if (this.sesionValida(ctx)) {
 
-            RepoHeladera hela = new RepoHeladera();
+            RepoHeladera hela = RepoHeladera.getInstance();
 
-            model.put("hela", hela.getAll_Heladera());
+            model.put("hela", hela.getHeladeras());
             ctx.render("heladeras-p.hbs", this.model);
 
         }
@@ -69,7 +69,7 @@ public class UI_HeladerasP extends UI_Navegable implements Handler{
         Integer heladeraID = Integer.parseInt(heladeraId);
 
         // Busca la heladera en la BD
-        RepoHeladera hela = new RepoHeladera();
+        RepoHeladera hela = RepoHeladera.getInstance();
         Heladera heladera = hela.findById_Heladera(heladeraID);
         System.out.println("HelaName= "+heladera.getNombre());
         return heladera;

@@ -12,10 +12,12 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import domain.persona.MedioDeContacto;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import persistence.BDUtils;
 
 public class RepoUsuarios {
+    @Getter
     private List<Usuario> usuarios = new ArrayList<>();
 
     private static RepoUsuarios instance;

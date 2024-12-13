@@ -31,9 +31,9 @@ public class UI_Vianda extends UI_Navegable implements Handler{
 
     this.validarUsuario(ctx);
     if (this.sesionValida(ctx)) {
-      RepoHeladera hela = new RepoHeladera();
+      RepoHeladera hela = RepoHeladera.getInstance();
 
-      this.model.put("hela", hela.getAll_Heladera());
+      this.model.put("hela", hela.getHeladeras());
       ctx.render("vianda.hbs", this.model);
     }
 
@@ -60,7 +60,7 @@ public class UI_Vianda extends UI_Navegable implements Handler{
     EnumEstadoVianda estado = EnumEstadoVianda.NO_ENTREGADO;
 
     // Busca la heladera en la BD
-    RepoHeladera hela = new RepoHeladera();
+    RepoHeladera hela = RepoHeladera.getInstance();
     Heladera heladera = hela.findById_Heladera(heladeraID);
     System.out.println("HelaName= "+heladera.getNombre());
 
@@ -70,13 +70,13 @@ public class UI_Vianda extends UI_Navegable implements Handler{
     vianda.setHeladera(heladera);
 
 
-    RepoVianda vian = new RepoVianda();
+    RepoVianda vian = RepoVianda.getInstance();
     vian.add_Vianda(vianda);
 
 
     String token = ctx.cookie("Auth");
     Claims claims= JwtUtil.getClaimsFromToken(token);
-    RepoColaborador repoColaborador=new RepoColaborador(em);
+    RepoColaborador repoColaborador = RepoColaborador.getInstance();
 
     DonacionVianda dona = new DonacionVianda(vianda,heladera);
     Colaborador cola=repoColaborador.obtenerColaborador((Integer) claims.get("roleId"));

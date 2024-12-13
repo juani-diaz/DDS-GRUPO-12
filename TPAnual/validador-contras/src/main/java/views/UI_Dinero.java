@@ -65,7 +65,7 @@ public class UI_Dinero extends UI_Navegable implements Handler{
 
     String token = ctx.cookie("Auth");
     Claims claims=JwtUtil.getClaimsFromToken(token);
-    RepoColaborador repoColaborador=new RepoColaborador(em);
+    RepoColaborador repoColaborador = RepoColaborador.getInstance();
     Colaborador cola=repoColaborador.obtenerColaborador((Integer) claims.get("roleId"));
 
     // Crea Donacion

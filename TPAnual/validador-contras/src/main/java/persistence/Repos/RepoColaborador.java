@@ -1,25 +1,38 @@
 package persistence.Repos;
 
+import domain.auth.Usuario;
 import domain.rol.Colaborador;
+import lombok.Getter;
 import persistence.BDUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class RepoColaborador {
+    @Getter
+    private List<Colaborador> colaboradores = new ArrayList<>();
 
-    EntityManager em;
+    private static RepoColaborador instance;
 
-    public RepoColaborador(EntityManager em) {
-        this.em = em;
+    private RepoColaborador(){
+        this.colaboradores = getAll_Colaboradores_BD();
     }
 
+    public static RepoColaborador getInstance(){
+        if(instance == null){
+            instance = new RepoColaborador();
+        }
+        return instance;
+    }
 
-
+    EntityManager em = BDUtils.getEntityManager();
 
     public List<Map<String, Object>> obtenerDonacionesxColaborador() {
         System.out.println("Estoy en obtenerDonaciones");
@@ -66,17 +79,15 @@ public class RepoColaborador {
     }
 
     public Colaborador obtenerColaborador(Integer colaboradorId){
-
         Colaborador colaborador=null;
+
         try {
-             colaborador = this.em.find(Colaborador.class, colaboradorId);
+            colaborador = colaboradores.stream().filter(c -> c.getId() == colaboradorId).findFirst().get();
         } catch (Exception e) {
-            System.out.println("Error al obtener el colaborador: " + e + " en HeladeraController.obtenerHeladera");
+            System.out.println("Error al obtener el colaborador: " + e);
         }
 
         return colaborador;
-
-
     }
 
     public Float obtenerPuntosxColaborador(Integer colaboradorId){
@@ -93,6 +104,15 @@ public class RepoColaborador {
 
         return colaborador.getCantidadPuntos();
 
+    }
+
+    public List<Colaborador> getAll_Colaboradores_BD() {
+        CriteriaBuilder criteriaBuilder = this.em.getCriteriaBuilder();
+        CriteriaQuery<Colaborador> criteriaQuery = criteriaBuilder.createQuery(Colaborador.class);
+        Root<Colaborador> colaboradorRoot = criteriaQuery.from(Colaborador.class);
+        criteriaQuery.select(colaboradorRoot);
+        Query query = this.em.createQuery(criteriaQuery);
+        return query.getResultList();
     }
 
 }

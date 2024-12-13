@@ -2,6 +2,7 @@ package persistence.Repos;
 
 import domain.heladera.Heladera;
 import domain.vianda.Vianda;
+import lombok.Getter;
 import persistence.BDUtils;
 
 import javax.persistence.EntityManager;
@@ -10,15 +11,33 @@ import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.util.ArrayList;
 import java.util.List;
 
 //NO SE PERSISTE
 public class RepoVianda {
+  @Getter
+  private List<Vianda> viandas = new ArrayList<>();
+
+  private static RepoVianda instance;
+
+  private RepoVianda(){
+    this.viandas = getAll_Viandas_BD();
+  }
+
+  public static RepoVianda getInstance(){
+    if(instance == null){
+      instance = new RepoVianda();
+    }
+    return instance;
+  }
 
   //Se crea el EntityManager
   private EntityManager em = BDUtils.getEntityManager();
 
   public void add_Vianda(Vianda vian) {
+    viandas.add(vian);
+
     BDUtils.comenzarTransaccion(em);
     try {
       System.out.println("add_Vianda: " + vian.getComida());
@@ -30,6 +49,8 @@ public class RepoVianda {
   }
 
   public void remove_Vianda(Vianda vian) {
+    viandas.remove(vian);
+
     BDUtils.comenzarTransaccion(em);
     try {
       em.remove(vian);
@@ -44,9 +65,9 @@ public class RepoVianda {
     Vianda vianda = null;
 
     try {
-      vianda = this.em.getReference(Vianda.class, viandaID);
+      vianda = viandas.stream().filter(v -> v.getId() == viandaID).findFirst().get();
     } catch (Exception e) {
-      System.out.println("Error al agregar la Vianda: " + e + " en ViandaController.obtenerVianda");
+      System.out.println("Error al agregar la Vianda: " + e);
     }
 
     return vianda;
@@ -87,7 +108,7 @@ public class RepoVianda {
 
   }
 
-  public List<Vianda> getAll_Vianda() {
+  public List<Vianda> getAll_Viandas_BD() {
     CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
     CriteriaQuery<Vianda> criteriaQuery = criteriaBuilder.createQuery(Vianda.class);
     Root<Vianda> viandaRoot = criteriaQuery.from(Vianda.class);

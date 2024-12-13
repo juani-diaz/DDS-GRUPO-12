@@ -26,7 +26,7 @@ public class UI_Puntos extends UI_Navegable implements Handler {
         if (this.sesionValida(ctx)) {
             String token = ctx.cookie("Auth");
             Claims claims= JwtUtil.getClaimsFromToken(token);
-            RepoColaborador cola = new RepoColaborador(em);
+            RepoColaborador cola = RepoColaborador.getInstance();
 
             Float puntos=cola.obtenerPuntosxColaborador((Integer) claims.get("roleId"));
             Map<String, Object> model = new HashMap<>();
@@ -42,7 +42,7 @@ public class UI_Puntos extends UI_Navegable implements Handler {
         if (this.sesionValida(ctx)) {
             String token = ctx.cookie("Auth");
             Claims claims= JwtUtil.getClaimsFromToken(token);
-            RepoColaborador cola = new RepoColaborador(em);
+            RepoColaborador cola = RepoColaborador.getInstance();
 
             Colaborador colaborador=cola.obtenerColaborador((Integer) claims.get("roleId"));
             //necesito el id del catalogo que no esta implementado, implementar catalogo

@@ -1,6 +1,7 @@
 package persistence.Repos;
 
 import domain.rol.Vulnerable;
+import lombok.Getter;
 import persistence.BDUtils;
 
 import javax.persistence.EntityManager;
@@ -8,10 +9,26 @@ import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.util.ArrayList;
 import java.util.List;
 
 //NO SE PERSISTE
 public class RepoVulnerable {
+  @Getter
+  private List<Vulnerable> vulnerables = new ArrayList<>();
+
+  private static RepoVulnerable instance;
+
+  private RepoVulnerable(){
+    this.vulnerables = getAll_Vulnerables_BD();
+  }
+
+  public static RepoVulnerable getInstance(){
+    if(instance == null){
+      instance = new RepoVulnerable();
+    }
+    return instance;
+  }
 
   //Se crea el EntityManager
   private EntityManager em = BDUtils.getEntityManager();
@@ -49,7 +66,7 @@ public class RepoVulnerable {
     return vulnerable;
   }
 
-  public List<Vulnerable> getAll_Vulnerable() {
+  public List<Vulnerable> getAll_Vulnerables_BD() {
     CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
     CriteriaQuery<Vulnerable> criteriaQuery = criteriaBuilder.createQuery(Vulnerable.class);
     Root<Vulnerable> vulnerableRoot = criteriaQuery.from(Vulnerable.class);

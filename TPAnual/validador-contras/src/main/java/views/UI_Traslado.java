@@ -21,9 +21,9 @@ public class UI_Traslado extends UI_Navegable implements Handler{
     this.validarUsuario(ctx);
     if (this.sesionValida(ctx)) {
 
-      RepoHeladera hela = new RepoHeladera();
+      RepoHeladera hela = RepoHeladera.getInstance();
 
-      model.put("hela", hela.getAll_Heladera());
+      model.put("hela", hela.getHeladeras());
       ctx.render("traslado.hbs", this.model);
 
     }
@@ -47,11 +47,10 @@ public class UI_Traslado extends UI_Navegable implements Handler{
     Integer heladeraIDVa = Integer.parseInt(heladeraIdHacia);
 
     // Busca la heladera en la BD
-    RepoHeladera hela = new RepoHeladera();
+    RepoHeladera hela = RepoHeladera.getInstance();
     Heladera heladera = hela.findById_Heladera(heladeraID);
     System.out.println("HelaName= "+heladera.getNombre());
-    RepoHeladera hela2 = new RepoHeladera();
-    Heladera heladeraHacia = hela2.findById_Heladera(heladeraIDVa);
+    Heladera heladeraHacia = hela.findById_Heladera(heladeraIDVa);
     System.out.println("Hela2Name= "+heladeraHacia.getNombre());
 
 
@@ -59,7 +58,7 @@ public class UI_Traslado extends UI_Navegable implements Handler{
     Vianda viandaHeladera;
     List<Vianda> viandasMover= new ArrayList<>();
     System.out.println("Cantidad de viandas de heladera2= "+ heladera.cantidadViandas());
-    RepoVianda repoVianda = new RepoVianda();
+    RepoVianda repoVianda = RepoVianda.getInstance();
 
 
     if (heladera == heladeraHacia)
