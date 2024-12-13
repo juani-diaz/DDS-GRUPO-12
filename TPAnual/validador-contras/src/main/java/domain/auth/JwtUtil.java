@@ -51,7 +51,7 @@ public class JwtUtil {
 
     public static Usuario validateTokenAndGetUser(String token) {
         String usu = validateToken(token);
-        RepoUsuarios r = new RepoUsuarios();
+        RepoUsuarios r = RepoUsuarios.getInstance();
         return r.findByUsuario(usu);
     }
 

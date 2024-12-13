@@ -57,7 +57,7 @@ public class UI_Registrar implements Handler {
         Colaborador nuevoColaborador = new Colaborador(nuevaPersona);
         Usuario nuevoUsuario = new Usuario(usuario, contra, nuevoColaborador);
 
-        RepoUsuarios r = new RepoUsuarios();
+        RepoUsuarios r = RepoUsuarios.getInstance();
         r.add_Usuario(nuevoUsuario);
 
         ctx.redirect("/page-login");
@@ -107,7 +107,7 @@ public class UI_Registrar implements Handler {
         Colaborador nuevoColaborador = new Colaborador(nuevaOrg);
         Usuario nuevoUsuario = new Usuario(usuario, contra, nuevoColaborador);
 
-        RepoUsuarios r = new RepoUsuarios();
+        RepoUsuarios r = RepoUsuarios.getInstance();
         r.add_Usuario(nuevoUsuario);
 
         ctx.redirect("/page-login");
@@ -152,7 +152,7 @@ public class UI_Registrar implements Handler {
         Tecnico nuevoTecnico = new Tecnico(nuevaPersona, area);
         Usuario nuevoUsuario = new Usuario(usuario, contra, nuevoTecnico);
 
-        RepoUsuarios r = new RepoUsuarios();
+        RepoUsuarios r = RepoUsuarios.getInstance();
         r.add_Usuario(nuevoUsuario);
 
         ctx.redirect("/page-login");

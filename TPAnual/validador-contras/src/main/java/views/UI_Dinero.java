@@ -73,6 +73,7 @@ public class UI_Dinero extends UI_Navegable implements Handler{
     dona.setMonto(montoFloat);
     dona.setMedioDePago(medioDePago);
     dona.setColaborador(cola);
+    dona.setFecha(LocalDate.now());
 
     dona.ejecutar();
 

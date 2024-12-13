@@ -29,7 +29,7 @@ public class UI_Login  implements Handler {
     public void login(Context ctx) throws Exception {
         String usuario = ctx.formParam("usuario");
         String contra = ctx.formParam("contra");
-        RepoUsuarios r = new RepoUsuarios();
+        RepoUsuarios r = RepoUsuarios.getInstance();
         Usuario u = r.findByUsuario(usuario);
         if (u != null && u.getContra().equals(contra)) {
             String token = JwtUtil.generateToken(usuario,u.getRol().getId());

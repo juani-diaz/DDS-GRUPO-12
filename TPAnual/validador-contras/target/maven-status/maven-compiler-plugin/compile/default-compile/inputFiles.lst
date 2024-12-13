@@ -3,6 +3,7 @@ C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\d
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\service\Router.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\suscripcion\Publicador.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\rol\Rol.java
+C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\views\UI_Registrar.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\servicios\ApiUbicacionesAdapter.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\registro\ReporteMovimientoViandas.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\persistence\BDUtils.java
@@ -18,6 +19,7 @@ C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\v
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\views\UI_Index.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\views\UI_Vianda.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\heladera\Heladera.java
+C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\views\UI_HeladerasA.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\servicios\Broker.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\colaboraciones\ResponsableHeladera.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\views\UI_Dinero.java
@@ -28,12 +30,16 @@ C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\d
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\incidente\Incidente.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\contra\TAMANIO.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\persona\Persona.java
+C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\views\UI_HeladerasO.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\heladera\RecomendadorUbicacion.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\suscripcion\Suscripcion.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\registro\RegistroApertura.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\persistence\EntidadPersistente.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\views\UI_HeladerasP.java
+C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\persona\WhatsApp.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\seguridad\log_In.java
+C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\rol\LocalidadTecnico.java
+C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\rol\Administrador.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\persona\PersonaFisica.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\registro\ReporteDonacionesViandas.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\rol\Colaborador.java
@@ -60,6 +66,7 @@ C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\p
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\persona\MedioDeContacto.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\persona\PersonaJuridica.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\persistence\converters\LocalDateTimeAttributeConverter.java
+C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\views\UI_Puntos.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\colaboraciones\DonacionDinero.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\persona\EnumTipoPersonaJuridica.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\heladera\SensorDeTemperatura.java
@@ -80,6 +87,7 @@ C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\d
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\contra\Requisitos.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\colaboraciones\EnumMotivosMovimientoVianda.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\mensajes\MensajeSugerenciaDistribucion.java
+C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\persona\Telefono.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\heladera\PedidoApertura.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\incidente\VisitasTecnicas.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\persistence\Repos\RepoUsuarios.java
@@ -87,12 +95,14 @@ C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\d
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\views\UI_Login.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\registro\RegistroSensor.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\rol\Vulnerable.java
+C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\rol\LocalidadesTecnico.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\servicios\AdapterUbicacionesInterface.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\persistence\Repos\RepoColaborador.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\suscripcion\PocasViandas.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\vianda\EnumEstadoVianda.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\registro\DonacionesColaborador.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\rol\Tarjeta.java
+C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\persona\Medio.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\colaboraciones\MedioDePago.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\rol\EnumSituacionCalle.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\persistence\Repos\RepoVianda.java
