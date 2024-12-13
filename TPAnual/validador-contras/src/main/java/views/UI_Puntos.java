@@ -1,6 +1,7 @@
 package views;
 
 import domain.auth.JwtUtil;
+import domain.rol.Colaborador;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import io.jsonwebtoken.Claims;
@@ -35,6 +36,23 @@ public class UI_Puntos extends UI_Navegable implements Handler {
             ctx.render("puntos.hbs", model);
         }
     }
+
+    public void canjearPuntos(Context ctx) throws Exception {
+        this.validarUsuario(ctx);
+        if (this.sesionValida(ctx)) {
+            String token = ctx.cookie("Auth");
+            Claims claims= JwtUtil.getClaimsFromToken(token);
+            RepoColaborador cola = new RepoColaborador(em);
+
+            Colaborador colaborador=cola.obtenerColaborador((Integer) claims.get("roleId"));
+            //necesito el id del catalogo que no esta implementado, implementar catalogo
+            colaborador.realizarCanje(0); //pongo 0 asi no rompe
+
+
+            ctx.render("puntos.hbs", model);
+        }
+    }
+
 
 
 

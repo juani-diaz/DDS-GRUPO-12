@@ -119,6 +119,7 @@ public class VistasJavalin {
             UI_Puntos UIPuntos = new UI_Puntos();
 
             app.get("/puntos",UIPuntos);
+            app.post("/puntos/canje",UIPuntos::canjearPuntos);
 
 //======================REGISTRAR PERSONAS ================================
             UI_RegistrarPersona UIregistrarPersona = new UI_RegistrarPersona();
