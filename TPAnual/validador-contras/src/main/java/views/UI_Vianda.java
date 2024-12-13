@@ -84,11 +84,10 @@ public class UI_Vianda extends UI_Navegable implements Handler{
     EntityManager em = BDUtils.getEntityManager();
     BDUtils.comenzarTransaccion(em);
 
-    dona.ejecutar();
+    cola.realizarColaboracion(dona);
 
     em.persist(dona);
 
-    em.refresh(cola);
 
     BDUtils.commit(em);
     ctx.render("index.hbs");

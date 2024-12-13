@@ -75,8 +75,7 @@ public class UI_Dinero extends UI_Navegable implements Handler{
     dona.setColaborador(cola);
     dona.setFecha(LocalDate.now());
 
-    dona.ejecutar();
-
+    cola.realizarColaboracion(dona);
     //ORM
 
     BDUtils.comenzarTransaccion(em);
