@@ -59,6 +59,8 @@ public class UI_Registrar implements Handler {
 
         RepoUsuarios r = new RepoUsuarios();
         r.add_Usuario(nuevoUsuario);
+
+        ctx.redirect("/page-login");
     }
 
     public void registrarOrg(Context ctx) throws Exception {
