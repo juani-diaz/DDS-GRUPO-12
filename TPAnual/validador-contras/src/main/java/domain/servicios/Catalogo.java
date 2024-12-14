@@ -10,10 +10,10 @@ import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
 @Entity
 public class Catalogo extends EntidadPersistente {
 
+    @Getter
     @OneToMany
     private static final List<PresentacionOferta> ofertas = new ArrayList<>();
 
@@ -30,7 +30,6 @@ public class Catalogo extends EntidadPersistente {
         if(o.getPuntosNecesarios() <= colaborador.getCantidadPuntos()){
             //TODO hacer lo que corresponda (mail, envio)
             colaborador.setCantidadPuntos(colaborador.getCantidadPuntos() - o.getPuntosNecesarios());
-            // hay q remover la oferta de la lista del catalogo?
             return true;
         }
         return false;

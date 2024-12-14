@@ -19,11 +19,10 @@ public class UI_Dinero extends UI_Navegable implements Handler{
 
   @Override
   public void handle(Context ctx) throws Exception {
-
     this.validarUsuario(ctx);
     if (this.sesionValida(ctx)) {
       System.out.println("estoy en UI_Dinero");
-      ctx.render("dinero.hbs");
+      ctx.render("dinero.hbs", this.model);
     }
 
   }

@@ -9,6 +9,7 @@ C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\d
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\persistence\BDUtils.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\api\Localizacion.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\api\LocalidadCantidad.java
+C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\views\UI_Ofertas.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\registro\ReporteFallas.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\incidente\IncidenteAlarma.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\colaboraciones\DistribucionVianda.java
@@ -41,6 +42,7 @@ C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\s
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\rol\LocalidadTecnico.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\rol\Administrador.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\persona\PersonaFisica.java
+C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\views\UI_Oferta.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\registro\ReporteDonacionesViandas.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\rol\Colaborador.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\views\UI_Reporte.java
@@ -50,6 +52,7 @@ C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\d
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\persistence\converters\LocalDateAttributeConverter.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\persona\Documento.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\registro\RegistroMovimiento.java
+C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\persistence\ArchivosUtils.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\heladera\EnumEstadoHeladera.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\archivos\LectorArchivo.java
 C:\Users\W11\IdeaProjects\DDS-GRUPO-12\TPAnual\validador-contras\src\main\java\domain\colaboraciones\DonacionVianda.java

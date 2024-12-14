@@ -1,3 +1,4 @@
+persistence\ArchivosUtils.class
 domain\heladera\EnumMotivoApertura.class
 domain\heladera\Sensor.class
 domain\rol\UsoDeTarjeta.class
@@ -12,16 +13,19 @@ domain\heladera\RecomendadorUbicacion.class
 persistence\converters\LocalDateTimeAttributeConverter.class
 domain\persona\MedioDeContacto.class
 domain\rol\Tarjeta.class
+domain\persona\WhatsApp.class
 domain\suscripcion\PocasViandas.class
 domain\registro\ReporteFallas.class
 domain\api\Localizacion.class
 domain\auth\JwtUtil.class
+views\UI_Puntos.class
 views\UI_Reporte.class
 domain\servicios\ApiUbicacionesAdapter.class
 domain\registro\ReporteMovimientoViandas.class
 domain\colaboraciones\DonacionVianda.class
 domain\vianda\Vianda.class
 domain\registro\RegistroMovimiento.class
+domain\rol\Administrador.class
 domain\contra\Usuario.class
 domain\heladera\Ubicacion.class
 views\UI_Vianda.class
@@ -30,13 +34,17 @@ views\UI_Dinero.class
 domain\contra\Requisitos.class
 domain\rol\Rol.class
 domain\colaboraciones\ResponsableHeladera.class
+domain\persona\Medio.class
 domain\servicios\Catalogo.class
+domain\persona\Telefono.class
 domain\registro\DonacionesColaborador.class
 views\UI_Login.class
 domain\rol\EnumSituacionCalle.class
 domain\mensajes\MensajeSimple.class
+views\UI_Registrar.class
 seguridad\log_In.class
 domain\heladera\EnumEstadoHeladera.class
+domain\rol\LocalidadTecnico.class
 persistence\BDUtils.class
 domain\rol\Colaborador.class
 domain\servicios\Mailer$1.class
@@ -59,8 +67,10 @@ domain\servicios\AdapterUbicacionesInterface.class
 domain\incidente\VisitasTecnicas.class
 domain\archivos\LectorArchivo.class
 persistence\Repos\RepoVianda.class
+views\UI_Ofertas.class
 domain\incidente\Incidente.class
 views\UI_RegistrarPersona.class
+views\UI_HeladerasA.class
 domain\colaboraciones\DistribucionVianda.class
 domain\heladera\SensorApertura.class
 domain\servicios\LectorCsv.class
@@ -70,6 +80,7 @@ domain\servicios\Mailer.class
 persistence\Demo.class
 views\VistasJavalin.class
 domain\colaboraciones\DonacionDinero.class
+views\UI_Oferta.class
 domain\api\ListadoLocalidades.class
 domain\suscripcion\Publicador.class
 domain\colaboraciones\EnumMotivosMovimientoVianda.class
@@ -78,6 +89,7 @@ views\UI_Traslado.class
 domain\registro\RegistroTemperatura.class
 domain\persona\Persona.class
 persistence\EntidadPersistente.class
+domain\rol\LocalidadesTecnico.class
 domain\vianda\EnumEstadoVianda.class
 domain\heladera\EnumPedidoApertura.class
 domain\persona\PersonaFisica.class
@@ -90,6 +102,7 @@ domain\colaboraciones\MedioDePago.class
 domain\heladera\Heladera.class
 domain\rol\Vulnerable.class
 domain\servicios\Broker.class
+views\UI_HeladerasO.class
 domain\vianda\ViandaRecogida.class
 domain\registro\FallaHeladera.class
 persistence\converters\LocalDateAttributeConverter.class

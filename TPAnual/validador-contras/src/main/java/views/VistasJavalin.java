@@ -15,12 +15,16 @@ import io.javalin.rendering.JavalinRenderer;
 
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.function.Consumer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import persistence.ArchivosUtils;
 import persistence.Demo;
 
 
@@ -40,6 +44,17 @@ public class VistasJavalin {
             Javalin app = Javalin.create(config -> {
                 config.staticFiles.add("/front/rentrega4");
             }).start(port);
+
+            app.get("/uploads/*", ctx -> {
+                String subpath = ctx.path().substring("/uploads".length());
+                Path imagePath = Paths.get(ArchivosUtils.getInstance().getUploadsPath(), subpath);
+                if (Files.exists(imagePath)) {
+                    ctx.contentType("image/");
+                    ctx.result(Files.newInputStream(imagePath));
+                } else {
+                    ctx.status(404).result("Archivo no encontrado");
+                }
+            });
 
             app.get("/", ctx -> {
                 ctx.redirect("/page-login");

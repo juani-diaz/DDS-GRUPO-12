@@ -13,15 +13,11 @@ public class UI_HeladerasP extends UI_Navegable implements Handler{
 
     @Override
     public void handle(Context ctx) throws Exception {
-
         this.validarUsuario(ctx);
         if (this.sesionValida(ctx)) {
-
             RepoHeladera hela = RepoHeladera.getInstance();
-
             model.put("hela", hela.getHeladeras());
             ctx.render("heladeras-p.hbs", this.model);
-
         }
     }
 

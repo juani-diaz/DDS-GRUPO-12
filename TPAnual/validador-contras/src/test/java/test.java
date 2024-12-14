@@ -46,7 +46,7 @@ public class test {
   String direccionManuel = "Montes De Oca 2671";
   Documento documentoManuel = new Documento("DNI", "47112068");
   LocalDate fechaNacimientoManuel = LocalDate.of(2000, 10, 12);
-  PersonaFisica manuelBochini = new PersonaFisica("Manuel", emailManuel,direccionManuel,documentoManuel, "Bochini","Hombre","Masculino", fechaNacimientoManuel);
+  PersonaFisica manuelBochini = new PersonaFisica("Manuel", Arrays.asList(emailManuel),direccionManuel,documentoManuel, "Bochini","Hombre","Masculino", fechaNacimientoManuel);
   Colaborador colaboradorManuel = new Colaborador(manuelBochini, null,0f,null,null);
 
   DistribucionVianda distribucionVianda = new DistribucionVianda(colaboradorManuel,LocalDate.now(),heladera_origen, heladera_destino, 4, DESPERFECTO_HELADERA);
@@ -131,7 +131,7 @@ public class test {
   @Test
   public void crearPersonaFisica(){
   Assertions.assertEquals("Juan_Martin",personaFisica1.getNombre());
-  Assertions.assertEquals(medioDePersona,personaFisica1.getMedioDeContacto());
+  Assertions.assertEquals(Arrays.asList(medioDePersona),personaFisica1.getMediosDeContacto());
   Assertions.assertEquals("Avenida_Libertador_1820",personaFisica1.getDireccion());
   Assertions.assertEquals(documento,personaFisica1.getDocumento());
   Assertions.assertEquals("Terrizzi",personaFisica1.getApellido());

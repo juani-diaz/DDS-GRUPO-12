@@ -1,21 +1,25 @@
 package views;
 
 import domain.colaboraciones.PresentacionOferta;
+import domain.rol.Colaborador;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import io.javalin.http.UploadedFile;
 import persistence.ArchivosUtils;
+import persistence.Repos.RepoColaborador;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class UI_Oferta extends UI_Navegable implements Handler {
+
     @Override
     public void handle(Context ctx) throws Exception {
         this.validarUsuario(ctx);
         if (this.sesionValida(ctx)) {
-            ctx.render("oferta.hbs");
+            ctx.render("oferta.hbs", this.model);
         }
     }
 
@@ -33,5 +37,13 @@ public class UI_Oferta extends UI_Navegable implements Handler {
         } else {
             System.out.println("No se subio una imagen");
         }
+
+        Colaborador c = RepoColaborador.getInstance().findByUsuario(getUsuario().getUsuario());
+
+        PresentacionOferta po = new PresentacionOferta(c, LocalDate.now(), rubro, nombre, descripcion, puntosNecesarios, imagen);
+
+        c.realizarColaboracion(po);
+
+        ctx.redirect("/ofertas");
     }
 }

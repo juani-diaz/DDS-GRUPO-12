@@ -24,9 +24,17 @@ public class UI_Navegable {
             String decodedToken = URLDecoder.decode(token, StandardCharsets.UTF_8);
             Usuario u = JwtUtil.validateTokenAndGetUser(decodedToken);
             this.model.put("usuario", u);
+            String urlUploads = getUrlUploads(ctx);
+            this.model.put("urlUploads", urlUploads);
             this.usuario = u;
         }
 
+    }
+
+    String getUrlUploads(Context ctx){
+        String urlBase = ctx.scheme() + "://" + ctx.host();
+        urlBase = urlBase + "/uploads";
+        return urlBase;
     }
 
     boolean sesionValida(Context ctx) {

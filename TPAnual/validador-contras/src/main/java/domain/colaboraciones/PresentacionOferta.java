@@ -39,7 +39,6 @@ public class PresentacionOferta extends Colaboracion{
 
     public void ejecutar(){
         Catalogo.agregarAlCatalogo(this);
-
     }
 
     public Float puntosObtenidos(){

@@ -32,7 +32,7 @@ public class testSuscripcion {
 
         Heladera heladera1 = new Heladera("heladera1",ubicacion, 100, fechaFuncionamiento,12F,20F, EnumEstadoHeladera.DISPONIBLE);
         MedioDeContacto medioDeContacto1= new Email();
-        medioDeContacto1.setDireccion("juanidiaz8260@gmail.com");
+        medioDeContacto1.setContacto("juanidiaz8260@gmail.com");
 
         Suscripcion suscripcion1=new ExcesoViandas(heladera1,medioDeContacto1,1);
         Suscripcion suscripcion2=new PocasViandas(heladera1,medioDeContacto1,1);

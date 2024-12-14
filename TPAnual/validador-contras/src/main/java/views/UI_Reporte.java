@@ -15,32 +15,19 @@ import java.util.Map;
 
 public class UI_Reporte extends UI_Navegable implements Handler {
 
-
-    EntityManager em = BDUtils.getEntityManager();
     @Override
     public void handle(Context ctx) throws Exception {
-
         this.validarUsuario(ctx);
         System.out.println(ctx);
         if (this.sesionValida(ctx)) {
             RepoHeladera hela = RepoHeladera.getInstance();
             RepoColaborador cola = RepoColaborador.getInstance();
 
-            Map<String, Object> model = new HashMap<>();
             model.put("helaFallos", hela.obtenerFallasxHeladera());
             model.put("colaboradorDatos", cola.obtenerDonacionesxColaborador());
 
             System.out.println(model);
             ctx.render("reportes.hbs", this.model);
         }
-
     }
-
-
 }
-
-
-
-
-
-

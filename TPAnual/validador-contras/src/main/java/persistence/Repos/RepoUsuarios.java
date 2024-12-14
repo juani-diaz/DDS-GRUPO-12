@@ -12,6 +12,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import domain.persona.MedioDeContacto;
+import domain.rol.Colaborador;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import persistence.BDUtils;

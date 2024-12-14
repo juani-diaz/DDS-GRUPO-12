@@ -23,7 +23,7 @@ public class UI_RegistrarPersona extends UI_Navegable implements Handler{
     this.validarUsuario(ctx);
     if (this.sesionValida(ctx)) {
       System.out.println("estoy en UI_RegistrarPersona");
-      ctx.render("registrar-persona.hbs");
+      ctx.render("registrar-persona.hbs", this.model);
     }
 
   }

@@ -1,5 +1,6 @@
 package persistence.Repos;
 
+import domain.auth.Usuario;
 import domain.rol.Colaborador;
 import lombok.Getter;
 import persistence.BDUtils;
@@ -36,6 +37,8 @@ public class RepoColaborador extends BDUtils{
 
     public List<Map<String, Object>> obtenerDonacionesxColaborador() {
         System.out.println("Estoy en obtenerDonaciones");
+
+
 
         Query query1 = this.em.createQuery(
                 "SELECT p.id, p.nombre, p.apellido FROM PersonaFisica p  WHERE p.id IN(SELECT p.id "  +
@@ -99,6 +102,7 @@ public class RepoColaborador extends BDUtils{
         System.out.println(colaborador.getColaboraciones());
 
         return colaborador.getCantidadPuntos();
+
     }
 
     public List<Colaborador> getAll_Colaboradores_BD() {
@@ -108,6 +112,15 @@ public class RepoColaborador extends BDUtils{
         criteriaQuery.select(colaboradorRoot);
         Query query = em.createQuery(criteriaQuery);
         return query.getResultList();
+    }
+
+    public Colaborador findByUsuario(String usuario){
+        RepoUsuarios ru = RepoUsuarios.getInstance();
+        Usuario u = ru.findByUsuario(usuario);
+        if(u != null && u.getRol().getClass() == Colaborador.class){
+            return (Colaborador) u.getRol();
+        }
+        return null;
     }
 
 }

@@ -2,6 +2,7 @@ package views;
 
 import domain.auth.JwtUtil;
 import domain.rol.Colaborador;
+import domain.servicios.Catalogo;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import io.jsonwebtoken.Claims;
@@ -15,8 +16,6 @@ import java.util.Map;
 
 public class UI_Puntos extends UI_Navegable implements Handler {
 
-
-    EntityManager em = BDUtils.getEntityManager();
     @Override
     public void handle(Context ctx) throws Exception {
         this.validarUsuario(ctx);
@@ -26,8 +25,8 @@ public class UI_Puntos extends UI_Navegable implements Handler {
             RepoColaborador cola = RepoColaborador.getInstance();
 
             Float puntos=cola.obtenerPuntosxColaborador((Integer) claims.get("roleId"));
-            Map<String, Object> model = new HashMap<>();
             model.put("colaPuntos", puntos);
+            this.model.put("ofertas", Catalogo.getOfertas());
 
             System.out.println(model);
             ctx.render("puntos.hbs", model);
