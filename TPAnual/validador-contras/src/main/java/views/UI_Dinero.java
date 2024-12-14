@@ -3,11 +3,7 @@ package views;
 import domain.auth.JwtUtil;
 import domain.colaboraciones.DonacionDinero;
 import domain.colaboraciones.MedioDePago;
-import domain.persona.Documento;
-import domain.persona.PersonaFisica;
 import domain.rol.Colaborador;
-import domain.rol.EnumSituacionCalle;
-import domain.rol.Vulnerable;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import io.jsonwebtoken.Claims;
@@ -66,7 +62,7 @@ public class UI_Dinero extends UI_Navegable implements Handler{
     String token = ctx.cookie("Auth");
     Claims claims=JwtUtil.getClaimsFromToken(token);
     RepoColaborador repoColaborador = RepoColaborador.getInstance();
-    Colaborador cola=repoColaborador.obtenerColaborador((Integer) claims.get("roleId"));
+    Colaborador cola=repoColaborador.findById_Colaborador((Integer) claims.get("roleId"));
 
     // Crea Donacion
     DonacionDinero dona = new DonacionDinero();

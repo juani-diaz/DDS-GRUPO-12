@@ -15,8 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//NO SE PERSISTE
-public class RepoHeladera{
+public class RepoHeladera extends BDUtils{
   @Getter
   private List<Heladera> heladeras = new ArrayList<>();
 
@@ -34,7 +33,8 @@ public class RepoHeladera{
   }
 
   //Se crea el EntityManager
-  private EntityManager em = BDUtils.getEntityManager();
+  //private EntityManager em = BDUtils.getEntityManager();
+  EntityManager em = getEm();
 
     public void add_Heladera(Heladera hela) {
     heladeras.add(hela);

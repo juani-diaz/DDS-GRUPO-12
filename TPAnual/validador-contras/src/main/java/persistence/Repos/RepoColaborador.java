@@ -1,6 +1,5 @@
 package persistence.Repos;
 
-import domain.auth.Usuario;
 import domain.rol.Colaborador;
 import lombok.Getter;
 import persistence.BDUtils;
@@ -15,7 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class RepoColaborador {
+public class RepoColaborador extends BDUtils{
     @Getter
     private List<Colaborador> colaboradores = new ArrayList<>();
 
@@ -32,12 +31,11 @@ public class RepoColaborador {
         return instance;
     }
 
-    EntityManager em = BDUtils.getEntityManager();
+    //Se crea el EntityManager
+    EntityManager em = getEm();
 
     public List<Map<String, Object>> obtenerDonacionesxColaborador() {
         System.out.println("Estoy en obtenerDonaciones");
-
-
 
         Query query1 = this.em.createQuery(
                 "SELECT p.id, p.nombre, p.apellido FROM PersonaFisica p  WHERE p.id IN(SELECT p.id "  +
@@ -78,7 +76,7 @@ public class RepoColaborador {
         return resultado;
     }
 
-    public Colaborador obtenerColaborador(Integer colaboradorId){
+    public Colaborador findById_Colaborador(Integer colaboradorId){
         Colaborador colaborador=null;
 
         try {
@@ -94,24 +92,21 @@ public class RepoColaborador {
 
         System.out.println("Estoy en obtenerPuntos");
 
-        Colaborador colaborador = this.obtenerColaborador(colaboradorId);
-
-
+        Colaborador colaborador = this.findById_Colaborador(colaboradorId);
 
         System.out.println("puntos");
 
         System.out.println(colaborador.getColaboraciones());
 
         return colaborador.getCantidadPuntos();
-
     }
 
     public List<Colaborador> getAll_Colaboradores_BD() {
-        CriteriaBuilder criteriaBuilder = this.em.getCriteriaBuilder();
+        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
         CriteriaQuery<Colaborador> criteriaQuery = criteriaBuilder.createQuery(Colaborador.class);
         Root<Colaborador> colaboradorRoot = criteriaQuery.from(Colaborador.class);
         criteriaQuery.select(colaboradorRoot);
-        Query query = this.em.createQuery(criteriaQuery);
+        Query query = em.createQuery(criteriaQuery);
         return query.getResultList();
     }
 

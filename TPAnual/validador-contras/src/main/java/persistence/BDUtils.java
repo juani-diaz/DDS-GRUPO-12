@@ -8,12 +8,22 @@ import javax.persistence.Persistence;
 public class BDUtils {
 
     private static final EntityManagerFactory factory;
+    private static EntityManager em;
+
+
+    public static EntityManager getEm(){
+        if(em == null){
+            em = getEntityManager();
+        }
+        return em;
+    }
 
     static {
         factory = Persistence.createEntityManagerFactory("db");
     }
 
     public static EntityManager getEntityManager() {
+
         EntityManager em = factory.createEntityManager();
         return em;
     }
@@ -38,5 +48,6 @@ public class BDUtils {
             tx.rollback();
         }
     }
+
 
 }

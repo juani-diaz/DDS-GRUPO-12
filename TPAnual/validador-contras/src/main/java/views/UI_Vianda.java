@@ -2,8 +2,6 @@ package views;
 
 
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
 
 import domain.auth.JwtUtil;
 import domain.colaboraciones.DonacionVianda;
@@ -78,16 +76,20 @@ public class UI_Vianda extends UI_Navegable implements Handler{
     Claims claims= JwtUtil.getClaimsFromToken(token);
     RepoColaborador repoColaborador = RepoColaborador.getInstance();
 
-    DonacionVianda dona = new DonacionVianda(vianda,heladera);
-    Colaborador cola=repoColaborador.obtenerColaborador((Integer) claims.get("roleId"));
+    DonacionVianda dona = new DonacionVianda();
+    dona.setVianda(vianda);
+    dona.setDestino(heladera);
+    dona.setFecha(LocalDate.now());
+
+    Colaborador cola = repoColaborador.findById_Colaborador((Integer) claims.get("roleId"));
     dona.setColaborador(cola);
-    EntityManager em = BDUtils.getEntityManager();
-    BDUtils.comenzarTransaccion(em);
 
     cola.realizarColaboracion(dona);
 
-    em.persist(dona);
+    EntityManager em = BDUtils.getEntityManager();
+    BDUtils.comenzarTransaccion(em);
 
+    em.persist(dona);
 
     BDUtils.commit(em);
     ctx.render("index.hbs");

@@ -6,7 +6,6 @@ import domain.colaboraciones.DistribucionVianda;
 import domain.colaboraciones.EnumMotivosMovimientoVianda;
 import domain.heladera.Heladera;
 import domain.rol.Colaborador;
-import domain.vianda.EnumEstadoVianda;
 import domain.vianda.Vianda;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
@@ -87,7 +86,7 @@ public class UI_Traslado extends UI_Navegable implements Handler{
         String token = ctx.cookie("Auth");
         Claims claims= JwtUtil.getClaimsFromToken(token);
         RepoColaborador repoColaborador = RepoColaborador.getInstance();
-        Colaborador colapinto=repoColaborador.obtenerColaborador((Integer) claims.get("roleId"));
+        Colaborador colapinto=repoColaborador.findById_Colaborador((Integer) claims.get("roleId"));
 
         DistribucionVianda distribucion = new DistribucionVianda(colapinto,LocalDate.now(),heladera,heladeraHacia, cantidadViandas, EnumMotivosMovimientoVianda.FALTA_DE_VIANDAS);
 

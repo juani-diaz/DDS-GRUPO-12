@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //NO SE PERSISTE
-public class RepoVianda {
+public class RepoVianda extends BDUtils{
   @Getter
   private List<Vianda> viandas = new ArrayList<>();
 
@@ -33,16 +33,17 @@ public class RepoVianda {
   }
 
   //Se crea el EntityManager
-  private EntityManager em = BDUtils.getEntityManager();
+  //private EntityManager em = BDUtils.getEntityManager();
+  private EntityManager em = getEm();
 
   public void add_Vianda(Vianda vian) {
     viandas.add(vian);
 
-    BDUtils.comenzarTransaccion(em);
+    comenzarTransaccion(em);
     try {
       System.out.println("add_Vianda: " + vian.getComida());
       em.persist(vian);
-      BDUtils.commit(em);
+      commit(em);
     } catch (Exception e) {
       System.out.println("Error al agregar la Vianda: " + vian + e);
     }
@@ -51,17 +52,16 @@ public class RepoVianda {
   public void remove_Vianda(Vianda vian) {
     viandas.remove(vian);
 
-    BDUtils.comenzarTransaccion(em);
+    comenzarTransaccion(em);
     try {
       em.remove(vian);
-      BDUtils.commit(em);
+      commit(em);
     } catch (Exception e) {
       System.out.println("Error al remover la Vianda: " + vian + e);
     }
   }
 
   public Vianda findById_Vianda(Integer viandaID) {
-
     Vianda vianda = null;
 
     try {
@@ -78,15 +78,12 @@ public class RepoVianda {
     Vianda vianda = this.findById_Vianda(viandaID);
     vianda.setHeladera(heladeraNueva);
 
-    EntityTransaction transaction = em.getTransaction();
-    transaction.begin();
+    comenzarTransaccion(em);
 
     // Merging the updated entity
     em.merge(vianda);
 
-    transaction.commit();
-    //em.close();
-
+    commit(em);
   }
 
   public void cambiarHeladeraPlural(Heladera heladeraNueva, List<Vianda> viandas){
@@ -96,14 +93,13 @@ public class RepoVianda {
     {
       Vianda vianda = viandas.get(i);
       vianda.setHeladera(heladeraNueva);
-      EntityTransaction transaction = em.getTransaction();
-      transaction.begin();
+
+      comenzarTransaccion(em);
 
       // Merging the updated entity
       em.merge(vianda);
 
-      transaction.commit();
-      //em.close();
+      commit(em);
     }
 
   }

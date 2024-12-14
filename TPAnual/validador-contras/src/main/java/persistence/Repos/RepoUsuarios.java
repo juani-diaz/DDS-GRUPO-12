@@ -16,7 +16,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import persistence.BDUtils;
 
-public class RepoUsuarios {
+public class RepoUsuarios extends BDUtils {
     @Getter
     private List<Usuario> usuarios = new ArrayList<>();
 
@@ -33,12 +33,12 @@ public class RepoUsuarios {
         return instance;
     }
 
-    private EntityManager em = BDUtils.getEntityManager();
+    EntityManager em = getEm();
 
     public void add_Usuario(Usuario usuario) {
         this.usuarios.add(usuario);
 
-        BDUtils.comenzarTransaccion(this.em);
+        comenzarTransaccion(em);
 
         try {
             em.persist(usuario.getRol().getPersona().getDocumento());
@@ -46,7 +46,7 @@ public class RepoUsuarios {
             em.persist(usuario.getRol());
             em.persist(usuario);
 
-            BDUtils.commit(this.em);
+            commit(em);
         } catch (Exception e) {
             System.out.println("Error al agregar el USUARIO: " + usuario + e);
         }
