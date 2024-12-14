@@ -1,12 +1,16 @@
 package views;
 
+import domain.auth.JwtUtil;
 import domain.persona.Documento;
 import domain.persona.PersonaFisica;
+import domain.rol.Colaborador;
 import domain.rol.EnumSituacionCalle;
 import domain.rol.Vulnerable;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
+import io.jsonwebtoken.Claims;
 import persistence.BDUtils;
+import persistence.Repos.RepoColaborador;
 import persistence.Repos.RepoVulnerable;
 
 import javax.persistence.EntityManager;
@@ -77,6 +81,8 @@ public class UI_RegistrarPersona extends UI_Navegable implements Handler{
     em.persist(docu);
     em.persist(persona);
     em.persist(vulnerable);
+    //A CHEQUEAR FUNCIONAMIENTO DE ESTO
+    em.persist(vulnerable.getTarjeta());
 
     BDUtils.commit(em);
   }

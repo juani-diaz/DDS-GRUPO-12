@@ -1,12 +1,17 @@
 package views;
 
 
+import domain.auth.JwtUtil;
 import domain.colaboraciones.DistribucionVianda;
+import domain.colaboraciones.EnumMotivosMovimientoVianda;
 import domain.heladera.Heladera;
+import domain.rol.Colaborador;
 import domain.vianda.EnumEstadoVianda;
 import domain.vianda.Vianda;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
+import io.jsonwebtoken.Claims;
+import persistence.Repos.RepoColaborador;
 import persistence.Repos.RepoHeladera;
 import persistence.Repos.RepoVianda;
 
@@ -74,17 +79,22 @@ public class UI_Traslado extends UI_Navegable implements Handler{
         heladera.sacarViandas(viandasMover);
         heladeraHacia.ingresarViandas(viandasMover);
 
-
         repoVianda.cambiarHeladeraPlural(heladeraHacia,viandasMover);
 
-
-        heladeraHacia.ingresarViandas(viandasMover);
+        //heladeraHacia.ingresarViandas(viandasMover); XQ ESTA DOS VECES ESTO?
         System.out.println("Se movieron las viandas con exito hacia la heladera" + heladeraHacia.getNombre());
 
+        String token = ctx.cookie("Auth");
+        Claims claims= JwtUtil.getClaimsFromToken(token);
+        RepoColaborador repoColaborador = RepoColaborador.getInstance();
+        Colaborador colapinto=repoColaborador.obtenerColaborador((Integer) claims.get("roleId"));
 
+        DistribucionVianda distribucion = new DistribucionVianda(colapinto,LocalDate.now(),heladera,heladeraHacia, cantidadViandas, EnumMotivosMovimientoVianda.FALTA_DE_VIANDAS);
+
+        //colapinto.realizarColaboracion(distribucion);
     }else  System.out.println("La heladera no puede mover mas viandas de las que tiene");
 
-    // Crea Traslado
+      // Crea Traslado
     // Funcion de traslado @Todo
     // a la funcion de traslado se le puede pasar el usuario de la secion activa con
     // this.getUsuario()
