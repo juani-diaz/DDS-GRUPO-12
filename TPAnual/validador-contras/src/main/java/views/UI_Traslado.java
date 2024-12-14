@@ -75,12 +75,10 @@ public class UI_Traslado extends UI_Navegable implements Handler{
         List<Vianda> shuffledList = new ArrayList<>(heladera.getViandasEnHeladera());
         Collections.shuffle(shuffledList);
         viandasMover = shuffledList.subList(0, cantidadViandas);
-        heladera.sacarViandas(viandasMover);
-        heladeraHacia.ingresarViandas(viandasMover);
+        //heladera.sacarViandas(viandasMover);
+        //heladeraHacia.ingresarViandas(viandasMover);
 
-        repoVianda.cambiarHeladeraPlural(heladeraHacia,viandasMover);
 
-        //heladeraHacia.ingresarViandas(viandasMover); XQ ESTA DOS VECES ESTO?
         System.out.println("Se movieron las viandas con exito hacia la heladera" + heladeraHacia.getNombre());
 
         String token = ctx.cookie("Auth");
@@ -90,7 +88,11 @@ public class UI_Traslado extends UI_Navegable implements Handler{
 
         DistribucionVianda distribucion = new DistribucionVianda(colapinto,LocalDate.now(),heladera,heladeraHacia, cantidadViandas, EnumMotivosMovimientoVianda.FALTA_DE_VIANDAS);
 
-        //colapinto.realizarColaboracion(distribucion);
+        colapinto.realizarColaboracion(distribucion);
+        repoVianda.cambiarHeladeraPlural(heladeraHacia,viandasMover);
+
+
+
     }else  System.out.println("La heladera no puede mover mas viandas de las que tiene");
 
       // Crea Traslado
