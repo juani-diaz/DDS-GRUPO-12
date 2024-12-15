@@ -1,7 +1,9 @@
 package persistence.Repos;
 
 import domain.auth.Usuario;
+import domain.heladera.Heladera;
 import domain.rol.Colaborador;
+import domain.vianda.Vianda;
 import lombok.Getter;
 import persistence.BDUtils;
 
@@ -123,4 +125,13 @@ public class RepoColaborador extends BDUtils{
         return null;
     }
 
+    public void actualizarColaborador(Colaborador colaborador){
+
+        comenzarTransaccion(em);
+
+        // Merging the updated entity
+        em.merge(colaborador);
+
+        commit(em);
+    }
 }

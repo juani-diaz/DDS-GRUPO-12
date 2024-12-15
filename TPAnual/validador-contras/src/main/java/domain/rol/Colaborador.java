@@ -16,6 +16,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import persistence.Repos.RepoColaborador;
 
 import javax.persistence.*;
 import javax.swing.*;
@@ -51,6 +52,13 @@ public class Colaborador extends Rol {
     this.tarjetasParaEntregar = te;
     this.tarjetaColaborador = t;
   }
+  public  Colaborador(Persona p, List<Tarjeta> te){
+    this.persona = p;
+    this.colaboraciones = new ArrayList<Colaboracion>();
+    this.cantidadPuntos = 0F;
+    this.tarjetasParaEntregar = te;
+    this.tarjetaColaborador = null;
+  }
 
   public Colaborador(Persona p){
     this.persona = p;
@@ -77,9 +85,12 @@ public class Colaborador extends Rol {
     return Catalogo.otorgar(indiceOferta, this);
   }
 
-  public boolean entregarTarjeta(Vulnerable destinatario){
+  public boolean entregarTarjeta(Vulnerable vulnerable){
     if(!tarjetasParaEntregar.isEmpty()) {
-      destinatario.setTarjeta(tarjetasParaEntregar.remove(0));
+      Tarjeta tarjetaVulnerable = tarjetasParaEntregar.get(0);
+      this.tarjetasParaEntregar.remove(tarjetaVulnerable);
+      vulnerable.setTarjeta(tarjetaVulnerable);
+
       return true;
     }
     return false;

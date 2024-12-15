@@ -40,6 +40,19 @@ public class UI_RegistrarPersona extends UI_Navegable implements Handler{
     String documento = ctx.formParam("documento");
     String numMenoresACargo =ctx.formParam("numMenoresACargo");
 
+    System.out.println("mi nombre es: " + nombre);
+    System.out.println("naci: " + fechaNacimiento);
+    System.out.println("mi tipo de doc es: " + tipoDocumento);
+    System.out.println("mi doc es: " + documento);
+    System.out.println("tengo "+ numMenoresACargo + " menores a cargo");
+
+
+    System.out.println("tarjetas de colapa: "+colapinto.getTarjetasParaEntregar());
+
+    if(colapinto.getTarjetasParaEntregar().isEmpty()){
+      throw new IllegalArgumentException("El colaborador no tiene tarjetas para entregar");
+    }
+
     // Convertir parámetros necesarios
     LocalDate fechaNacimientoParsed = LocalDate.parse(fechaNacimiento);
     Integer numMenoresACargoInt = Integer.parseInt(numMenoresACargo);
@@ -82,7 +95,7 @@ public class UI_RegistrarPersona extends UI_Navegable implements Handler{
     em.persist(persona);
     em.persist(vulnerable);
     //A CHEQUEAR FUNCIONAMIENTO DE ESTO
-    em.persist(vulnerable.getTarjeta());
+    em.merge(vulnerable.getTarjeta());
 
     BDUtils.commit(em);
   }

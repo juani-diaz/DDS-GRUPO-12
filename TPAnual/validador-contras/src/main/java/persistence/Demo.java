@@ -695,9 +695,31 @@ public class Demo {
         Administrador a = new Administrador(tomas);
         Usuario admin = new Usuario("admin", "fc43", a);
 
+        //creo tarjetas para sergio
+        Tarjeta tarjetaParaVulnerable = new Tarjeta("0001");
+        Tarjeta tarjetaParaVulnerable2 = new Tarjeta("0002");
+
+        List<Tarjeta> tarjetasSergio= new ArrayList<>();
+        tarjetasSergio.add(tarjetaParaVulnerable);
+        tarjetasSergio.add(tarjetaParaVulnerable2);
+
+
         Documento dni2 = new Documento("dni","21328838");
         PersonaFisica sergio = new PersonaFisica("sergio", null, "nogoya 6367", dni2, "cerezo", "m", "m", LocalDate.of(1970, 5, 28));
+        //Colaborador s = new Colaborador(sergio,tarjetasSergio);
         Colaborador s = new Colaborador(sergio);
+        s.setTarjetasParaEntregar(tarjetasSergio);
+
+        // le pongo tarjetas a sergio
+        //Tarjeta tarjetaParaVulnerable = new Tarjeta("0001");
+        //Tarjeta tarjetaParaVulnerable2 = new Tarjeta("0002");
+
+        //List<Tarjeta> tarjetasSergio= new ArrayList<>();
+        //tarjetasSergio.add(tarjetaParaVulnerable);
+        //tarjetasSergio.add(tarjetaParaVulnerable2);
+
+        //s.recibirTarjetas(tarjetasSergio);
+
         Usuario ser = new Usuario("sergio", "fc43", s);
 
         Documento cuit1 = new Documento("cuit","67");
@@ -714,6 +736,9 @@ public class Demo {
         em.persist(tomas);
         em.persist(a);
         em.persist(admin);
+
+        em.persist(tarjetaParaVulnerable);
+        em.persist(tarjetaParaVulnerable2);
 
         em.persist(dni2);
         em.persist(sergio);
