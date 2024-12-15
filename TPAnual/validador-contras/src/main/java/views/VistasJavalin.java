@@ -33,7 +33,7 @@ public class VistasJavalin {
 
             initTemplateEngine();
 
-            //Demo.main(null);
+            Demo.main(null);
             //Demo.personas(null);
             //Demo.colaboraciones(null);
             //Demo.servicios(null);
@@ -45,7 +45,7 @@ public class VistasJavalin {
                 config.staticFiles.add("/front/rentrega4");
             }).start(port);
 
-            app.get("/uploads/*", ctx -> {
+/*            app.get("/uploads/*", ctx -> {
                 String subpath = ctx.path().substring("/uploads".length());
                 Path imagePath = Paths.get(ArchivosUtils.getInstance().getUploadsPath(), subpath);
                 if (Files.exists(imagePath)) {
@@ -54,7 +54,7 @@ public class VistasJavalin {
                 } else {
                     ctx.status(404).result("Archivo no encontrado");
                 }
-            });
+            });*/
 
             app.get("/", ctx -> {
                 ctx.redirect("/page-login");
