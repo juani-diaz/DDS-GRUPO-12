@@ -1,17 +1,12 @@
 package views;
 
-import domain.auth.JwtUtil;
 import domain.persona.Documento;
 import domain.persona.PersonaFisica;
-import domain.rol.Colaborador;
 import domain.rol.EnumSituacionCalle;
 import domain.rol.Vulnerable;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
-import io.jsonwebtoken.Claims;
 import persistence.BDUtils;
-import persistence.Repos.RepoColaborador;
-import persistence.Repos.RepoVulnerable;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDate;

@@ -1,11 +1,8 @@
 package seguridad;
 
-import lombok.experimental.StandardException;
-
-import java.io.File;  // Import the File class
-import java.io.FileNotFoundException;  // Import this class to handle errors
-//import java.util.Arrays;
-import java.util.Scanner; // Import the Scanner class to read text files
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 public class log_In {
 
     private static String N_Usuario;

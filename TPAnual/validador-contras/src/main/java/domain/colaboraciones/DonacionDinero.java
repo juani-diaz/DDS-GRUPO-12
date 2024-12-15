@@ -1,7 +1,5 @@
 package domain.colaboraciones;
 
-import domain.persona.PersonaFisica;
-import domain.registro.SingletonSeguidorEstadistica;
 import domain.rol.Colaborador;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,8 +8,6 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import java.time.LocalDate;
 

@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.extern.slf4j.XSlf4j;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

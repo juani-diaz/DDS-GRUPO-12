@@ -1,9 +1,8 @@
 package domain.colaboraciones;
-import domain.rol.Colaborador;
 
+import domain.rol.Colaborador;
 import lombok.Getter;
 import lombok.Setter;
-import persistence.EntidadPersistente;
 
 import javax.persistence.*;
 import java.time.LocalDate;

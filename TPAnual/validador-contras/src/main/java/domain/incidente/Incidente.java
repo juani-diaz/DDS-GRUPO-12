@@ -1,22 +1,11 @@
 package domain.incidente;
 
 import domain.heladera.EnumEstadoHeladera;
-import domain.heladera.*;
-import lombok.AllArgsConstructor;
+import domain.heladera.Heladera;
 import lombok.Getter;
 import lombok.Setter;
-import persistence.EntidadPersistente;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 

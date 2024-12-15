@@ -1,7 +1,6 @@
 package views;
 
 
-import domain.heladera.Heladera;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import persistence.Repos.RepoHeladera;

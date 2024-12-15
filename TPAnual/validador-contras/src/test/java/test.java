@@ -1,17 +1,19 @@
 import domain.colaboraciones.DistribucionVianda;
-import domain.heladera.*;
 import domain.contra.Requisitos;
 import domain.contra.TAMANIO;
 import domain.contra.TOP10000;
 import domain.contra.Usuario;
+import domain.heladera.*;
 import domain.persona.*;
 import domain.rol.Colaborador;
-import org.junit.jupiter.api.Assertions;
 import domain.vianda.Vianda;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static domain.colaboraciones.EnumMotivosMovimientoVianda.DESPERFECTO_HELADERA;
 

@@ -3,23 +3,11 @@ import domain.heladera.Heladera;
 import domain.heladera.Ubicacion;
 import domain.persona.Email;
 import domain.persona.MedioDeContacto;
-import domain.persona.Persona;
-import domain.rol.Colaborador;
-import domain.servicios.LectorCsv;
-import domain.servicios.Mailer;
 import domain.suscripcion.*;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class testSuscripcion {
 

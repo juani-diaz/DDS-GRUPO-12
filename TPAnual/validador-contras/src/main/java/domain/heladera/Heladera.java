@@ -1,23 +1,17 @@
 package domain.heladera;
 
+import domain.incidente.Incidente;
 import domain.persona.PersonaJuridica;
 import domain.rol.Colaborador;
-import com.mysql.cj.xdevapi.FetchResult;
-import domain.incidente.Incidente;
-import domain.incidente.IncidenteAlarma;
-import lombok.*;
+import domain.vianda.Vianda;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-//import sun.management.Sensor;
-
-import domain.vianda.*;
 import persistence.EntidadPersistente;
-import persistence.Repos.RepoHeladera;
-
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;

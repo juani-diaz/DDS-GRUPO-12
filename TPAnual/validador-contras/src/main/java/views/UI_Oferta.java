@@ -8,9 +8,6 @@ import io.javalin.http.UploadedFile;
 import persistence.ArchivosUtils;
 import persistence.Repos.RepoColaborador;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.time.LocalDate;
 
 public class UI_Oferta extends UI_Navegable implements Handler {

@@ -1,9 +1,10 @@
 package domain.contra;
+
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import lombok.Setter;
-import lombok.Getter;
 
 
 @Setter @Getter

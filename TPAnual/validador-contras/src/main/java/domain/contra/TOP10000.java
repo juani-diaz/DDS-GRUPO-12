@@ -1,5 +1,6 @@
 package domain.contra;
-import domain.archivos.*;
+
+import domain.archivos.LectorArchivo;
 import lombok.Getter;
 import lombok.Setter;
 @Getter

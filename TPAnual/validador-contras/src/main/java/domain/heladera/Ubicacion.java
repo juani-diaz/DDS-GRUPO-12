@@ -1,13 +1,13 @@
 package domain.heladera;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import persistence.EntidadPersistente;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @Entity

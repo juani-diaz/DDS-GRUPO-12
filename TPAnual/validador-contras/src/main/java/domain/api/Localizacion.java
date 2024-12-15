@@ -4,10 +4,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import domain.registro.SingletonSeguidorEstadistica;
+import io.javalin.http.Context;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import io.javalin.http.Context;
 
 public class Localizacion {
     public static String localizar(Context ctx){

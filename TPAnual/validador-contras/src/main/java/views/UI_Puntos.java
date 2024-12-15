@@ -6,12 +6,7 @@ import domain.servicios.Catalogo;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import io.jsonwebtoken.Claims;
-import persistence.BDUtils;
 import persistence.Repos.RepoColaborador;
-
-import javax.persistence.EntityManager;
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class UI_Puntos extends UI_Navegable implements Handler {
@@ -26,7 +21,7 @@ public class UI_Puntos extends UI_Navegable implements Handler {
 
             Float puntos=cola.obtenerPuntosxColaborador((Integer) claims.get("roleId"));
             model.put("colaPuntos", puntos);
-            this.model.put("ofertas", Catalogo.getOfertas());
+            this.model.put("ofertas", Catalogo.getInstance().getOfertas());
 
             System.out.println(model);
             ctx.render("puntos.hbs", model);

@@ -1,6 +1,5 @@
 package domain.colaboraciones;
 
-import domain.registro.SingletonSeguidorEstadistica;
 import domain.rol.Colaborador;
 import domain.servicios.Catalogo;
 import lombok.AllArgsConstructor;
@@ -38,7 +37,7 @@ public class PresentacionOferta extends Colaboracion{
     }
 
     public void ejecutar(){
-        Catalogo.agregarAlCatalogo(this);
+        Catalogo.getInstance().agregarAlCatalogo(this);
     }
 
     public Float puntosObtenidos(){

@@ -1,6 +1,5 @@
 package views;
 
-import domain.api.ListadoLocalidades;
 import domain.auth.Usuario;
 import domain.persona.*;
 import domain.rol.Colaborador;
@@ -8,10 +7,8 @@ import domain.rol.LocalidadesTecnico;
 import domain.rol.Tecnico;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
-import persistence.BDUtils;
 import persistence.Repos.RepoUsuarios;
 
-import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.util.*;
 

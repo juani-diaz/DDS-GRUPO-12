@@ -1,12 +1,10 @@
 package domain.rol;
 
-import domain.colaboraciones.*;
+import domain.colaboraciones.Colaboracion;
 import domain.heladera.Heladera;
-import domain.incidente.Incidente;
 import domain.incidente.IncidenteFallaTecnica;
 import domain.persona.MedioDeContacto;
 import domain.persona.Persona;
-import domain.registro.FallaHeladera;
 import domain.registro.SingletonSeguidorEstadistica;
 import domain.servicios.Catalogo;
 import domain.suscripcion.ExcesoViandas;
@@ -18,12 +16,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.swing.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Logger;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @Entity
@@ -74,7 +69,7 @@ public class Colaborador extends Rol {
   }
 
   public boolean realizarCanje(Integer indiceOferta){
-    return Catalogo.otorgar(indiceOferta, this);
+    return Catalogo.getInstance().otorgar(indiceOferta, this);
   }
 
   public boolean entregarTarjeta(Vulnerable destinatario){

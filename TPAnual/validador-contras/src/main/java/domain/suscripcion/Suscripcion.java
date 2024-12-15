@@ -2,7 +2,6 @@ package domain.suscripcion;
 
 import domain.heladera.Heladera;
 import domain.persona.MedioDeContacto;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import persistence.EntidadPersistente;
@@ -10,7 +9,6 @@ import persistence.EntidadPersistente;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Getter @Setter

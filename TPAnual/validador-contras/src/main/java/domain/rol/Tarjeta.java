@@ -1,11 +1,13 @@
 package domain.rol;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import persistence.EntidadPersistente;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor

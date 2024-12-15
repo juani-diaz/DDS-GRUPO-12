@@ -1,7 +1,5 @@
 package persistence;
 
-import domain.api.ListadoLocalidades;
-import domain.api.LocalidadCantidad;
 import domain.auth.Usuario;
 import domain.colaboraciones.*;
 import domain.heladera.EnumEstadoHeladera;
@@ -11,13 +9,11 @@ import domain.incidente.EnumTipoDeFalla;
 import domain.incidente.IncidenteAlarma;
 import domain.incidente.IncidenteFallaTecnica;
 import domain.persona.*;
-import domain.registro.SingletonSeguidorEstadistica;
 import domain.rol.*;
 import domain.servicios.Catalogo;
 import domain.vianda.EnumEstadoVianda;
 import domain.vianda.Vianda;
 import domain.vianda.ViandaRecogida;
-//import org.hibernate.type.LocalDateTimeType;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
@@ -562,7 +558,7 @@ public class Demo {
         em.persist(donacionDinero);
 
         // PRESENTACION OFERTAS
-        Catalogo catalogo = new Catalogo();
+        Catalogo catalogo = Catalogo.getInstance();
 
         Colaboracion presentarOfertaMartillo = new PresentacionOferta(colaboradorElsa,LocalDate.now(), "Metalurgica","Martillo","una oferta",200F,"imagenMartillo");
         presentarOfertaMartillo.ejecutar();
@@ -612,7 +608,7 @@ public class Demo {
         //persisto el colaborador
         em.persist(colaboradorEdgar);
 
-        Catalogo catalogo = new Catalogo();
+        Catalogo catalogo = Catalogo.getInstance();
 
         //persisto el catalogo
         em.persist(catalogo);

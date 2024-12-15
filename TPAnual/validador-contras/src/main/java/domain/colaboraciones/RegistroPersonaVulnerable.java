@@ -1,11 +1,8 @@
 package domain.colaboraciones;
 
 import domain.persona.PersonaFisica;
-import domain.persona.PersonaJuridica;
-import domain.registro.SingletonSeguidorEstadistica;
 import domain.rol.Colaborador;
 import domain.rol.Tarjeta;
-
 import domain.rol.Vulnerable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

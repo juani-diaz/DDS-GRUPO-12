@@ -3,29 +3,19 @@ package views;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Template;
-import domain.api.ListadoLocalidades;
 import domain.api.Localizacion;
-import domain.heladera.Ubicacion;
-import domain.registro.SingletonSeguidorEstadistica;
 import io.javalin.Javalin;
 import io.javalin.config.JavalinConfig;
 import io.javalin.http.HttpStatus;
 import io.javalin.json.JavalinJackson;
 import io.javalin.rendering.JavalinRenderer;
-
+import persistence.ArchivosUtils;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.function.Consumer;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
-import persistence.ArchivosUtils;
-import persistence.Demo;
 
 
 public class VistasJavalin {

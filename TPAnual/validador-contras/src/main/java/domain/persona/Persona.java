@@ -1,7 +1,9 @@
 package domain.persona;
 
-import domain.heladera.Ubicacion;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import persistence.EntidadPersistente;
 
 import javax.persistence.*;

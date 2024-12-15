@@ -10,7 +10,7 @@ public class UI_Ofertas extends UI_Navegable implements Handler {
     public void handle(Context ctx) throws Exception {
         this.validarUsuario(ctx);
         if (this.sesionValida(ctx)) {
-            this.model.put("ofertas", Catalogo.getOfertas());
+            this.model.put("ofertas", Catalogo.getInstance().getOfertas());
             ctx.render("ofertas.hbs", this.model);
         }
     }

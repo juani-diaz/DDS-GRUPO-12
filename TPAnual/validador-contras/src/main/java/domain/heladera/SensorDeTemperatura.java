@@ -1,7 +1,9 @@
 package domain.heladera;
 
-import domain.registro.*;
-import lombok.*;
+import domain.registro.RegistroSensor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Entity;
 

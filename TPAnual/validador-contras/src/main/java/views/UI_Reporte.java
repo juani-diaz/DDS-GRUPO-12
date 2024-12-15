@@ -2,15 +2,8 @@ package views;
 
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
-import persistence.BDUtils;
 import persistence.Repos.RepoColaborador;
 import persistence.Repos.RepoHeladera;
-
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 
 public class UI_Reporte extends UI_Navegable implements Handler {

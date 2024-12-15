@@ -5,11 +5,10 @@ import com.nulabinc.zxcvbn.Zxcvbn;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.io.File;  // Import the File class
+import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;   // Import the FileWriter class
-import java.io.IOException;  // Import the IOException class to handle errors
-
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 @Getter
