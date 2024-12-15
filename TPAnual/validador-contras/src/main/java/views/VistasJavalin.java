@@ -126,7 +126,7 @@ public class VistasJavalin {
             app.get("/oferta", UIOferta);
             app.post("/nueva-oferta", UIOferta::nuevaOferta);
 
-//====================== LOGIN
+//====================== LOGIN ================================
             UI_Login UILogin = new UI_Login();
 
             app.get("/page-login", UILogin);
@@ -141,13 +141,13 @@ public class VistasJavalin {
             app.post("/registrar-o", UIRegistrar::registrarOrg);
             app.post("/registrar-t", UIRegistrar::registrarTecnico);
 
-//======================
+//====================== PUNTOS ================================
             UI_Puntos UIPuntos = new UI_Puntos();
 
             app.get("/puntos",UIPuntos);
             app.post("/puntos/canje",UIPuntos::canjearPuntos);
 
-//======================REGISTRAR PERSONAS ================================
+//====================== REGISTRAR PERSONAS ================================
             UI_RegistrarPersona UIregistrarPersona = new UI_RegistrarPersona();
 
             app.get("/registrar-persona", UIregistrarPersona);
