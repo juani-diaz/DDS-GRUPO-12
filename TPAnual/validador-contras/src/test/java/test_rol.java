@@ -1,23 +1,18 @@
 import domain.colaboraciones.Colaboracion;
-import domain.colaboraciones.DistribucionVianda;
 import domain.colaboraciones.DonacionDinero;
-import domain.colaboraciones.EnumMotivosMovimientoVianda;
 import domain.heladera.Heladera;
 import domain.incidente.EnumTipoDeFalla;
 import domain.incidente.Incidente;
 import domain.incidente.IncidenteAlarma;
 import domain.persona.*;
-import domain.persona.Persona;
-import domain.persona.PersonaFisica;
-import domain.persona.PersonaJuridica;
-import domain.rol.*;
-import domain.vianda.Vianda;
+import domain.rol.Colaborador;
+import domain.rol.Tarjeta;
+import domain.rol.Tecnico;
+import domain.rol.UsoDeTarjeta;
 import domain.vianda.ViandaRecogida;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;

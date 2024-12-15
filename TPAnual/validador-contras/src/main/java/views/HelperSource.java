@@ -1,8 +1,5 @@
 package views;
 
-import com.github.jknack.handlebars.Helper;
-import com.github.jknack.handlebars.Options;
-import domain.heladera.EnumEstadoHeladera;
 import domain.heladera.Heladera;
 import domain.heladera.Ubicacion;
 

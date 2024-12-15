@@ -3,7 +3,6 @@ package domain.rol;
 import domain.persona.Persona;
 import lombok.Getter;
 import lombok.Setter;
-import persistence.EntidadPersistente;
 
 import javax.persistence.*;
 

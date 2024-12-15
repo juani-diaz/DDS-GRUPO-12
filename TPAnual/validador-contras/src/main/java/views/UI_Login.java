@@ -4,17 +4,14 @@ import domain.auth.JwtUtil;
 import domain.auth.Usuario;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
+import lombok.NoArgsConstructor;
+import persistence.Repos.RepoUsuarios;
 
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
-import io.jsonwebtoken.Jwts;
-import lombok.NoArgsConstructor;
-import persistence.Repos.RepoUsuarios;
 
 @NoArgsConstructor
 public class UI_Login  implements Handler {

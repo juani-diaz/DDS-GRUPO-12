@@ -1,21 +1,17 @@
 package persistence.Repos;
 
 import domain.auth.Usuario;
+import lombok.Getter;
+import persistence.BDUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-
-import domain.persona.MedioDeContacto;
-import domain.rol.Colaborador;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import persistence.BDUtils;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class RepoUsuarios extends BDUtils {
     @Getter
@@ -57,11 +53,11 @@ public class RepoUsuarios extends BDUtils {
     public void remove_Usuario(Usuario usuario) {
         usuarios.remove(usuario);
 
-        BDUtils.comenzarTransaccion(this.em);
+        comenzarTransaccion(em);
 
         try {
             this.em.remove(usuario);
-            BDUtils.commit(this.em);
+            commit(em);
         } catch (Exception e) {
             System.out.println("Error al remover el USUARIO: " + usuario + e);
         }

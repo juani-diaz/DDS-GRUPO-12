@@ -1,9 +1,5 @@
 package domain.heladera;
 
-import domain.rol.Colaborador;
-
-import java.util.*;
-
 import domain.rol.Tarjeta;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,10 +9,12 @@ import org.apache.commons.lang3.time.DateUtils;
 import persistence.EntidadPersistente;
 
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter

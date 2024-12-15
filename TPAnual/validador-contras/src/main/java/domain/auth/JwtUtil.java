@@ -4,16 +4,14 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import persistence.Repos.RepoUsuarios;
 
 import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import persistence.Repos.RepoUsuarios;
 
 public class JwtUtil {
     private static final Key SECRET_KEY;

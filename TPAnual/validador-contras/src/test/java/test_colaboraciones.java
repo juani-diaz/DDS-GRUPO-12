@@ -1,21 +1,17 @@
 import domain.colaboraciones.*;
 import domain.heladera.Heladera;
-import domain.heladera.EnumEstadoHeladera;
 import domain.heladera.Ubicacion;
 import domain.rol.Colaborador;
 import domain.servicios.Catalogo;
 import domain.vianda.Vianda;
-import net.bytebuddy.asm.Advice;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.awt.event.HierarchyListener;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static domain.colaboraciones.EnumMotivosMovimientoVianda.DESPERFECTO_HELADERA;
 import static domain.heladera.EnumEstadoHeladera.DISPONIBLE;
 
 public class test_colaboraciones {
@@ -31,7 +27,7 @@ public class test_colaboraciones {
     DonacionVianda aDonarVianda = new DonacionVianda(colaborador1,LocalDate.now(),viandaDonada,heladeraADonar);
     ResponsableHeladera sereResponsable = new ResponsableHeladera(colaborador1,LocalDate.now(),heladera2);
     PresentacionOferta ofertaPresentada = new PresentacionOferta(colaborador1,LocalDate.now(),"empresa","Playmovil","una oferta",150F,"IMAGEN");
-    Catalogo catalogo1 = new Catalogo();
+    Catalogo catalogo1 = Catalogo.getInstance();
     @Test
     public void crearColaboracionDonacion() {
         DonacionDinero donacion1 = new DonacionDinero(colaborador1, LocalDate.now(), 100F,null);

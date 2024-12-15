@@ -6,9 +6,6 @@ import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import persistence.Repos.RepoHeladera;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class UI_HeladerasP extends UI_Navegable implements Handler{
 
     @Override

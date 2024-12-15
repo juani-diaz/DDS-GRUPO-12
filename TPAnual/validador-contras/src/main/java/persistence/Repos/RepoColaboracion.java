@@ -2,7 +2,6 @@ package persistence.Repos;
 
 import domain.colaboraciones.Colaboracion;
 import domain.colaboraciones.DonacionVianda;
-import domain.heladera.Heladera;
 import lombok.Getter;
 import persistence.BDUtils;
 
