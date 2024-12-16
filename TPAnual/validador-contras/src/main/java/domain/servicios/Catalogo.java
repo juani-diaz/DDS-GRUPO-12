@@ -75,6 +75,7 @@ public class Catalogo extends EntidadPersistente {
         if(o.getPuntosNecesarios() <= colaborador.getCantidadPuntos()){
             //TODO hacer lo que corresponda (mail, envio)
             colaborador.setCantidadPuntos(colaborador.getCantidadPuntos() - o.getPuntosNecesarios());
+            System.out.println("funco canje");
             return true;
         }
         return false;

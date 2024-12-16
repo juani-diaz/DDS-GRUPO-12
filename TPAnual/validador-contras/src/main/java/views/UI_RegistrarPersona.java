@@ -1,12 +1,17 @@
 package views;
 
+import domain.auth.JwtUtil;
+import domain.colaboraciones.RegistroPersonaVulnerable;
 import domain.persona.Documento;
 import domain.persona.PersonaFisica;
+import domain.rol.Colaborador;
 import domain.rol.EnumSituacionCalle;
 import domain.rol.Vulnerable;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
+import io.jsonwebtoken.Claims;
 import persistence.BDUtils;
+import persistence.Repos.RepoColaborador;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
@@ -18,6 +23,17 @@ public class UI_RegistrarPersona extends UI_Navegable implements Handler{
     this.validarUsuario(ctx);
     if (this.sesionValida(ctx)) {
       System.out.println("estoy en UI_RegistrarPersona");
+      String token = ctx.cookie("Auth");
+      Claims claims= JwtUtil.getClaimsFromToken(token);
+      RepoColaborador repoColaborador = RepoColaborador.getInstance();
+      Colaborador colapinto=repoColaborador.findById_Colaborador((Integer) claims.get("roleId"));
+
+      Integer tarjetasDisponibles=colapinto.getTarjetasParaEntregar().size();
+
+
+      System.out.println("tarjetas de colapa: "+ tarjetasDisponibles);
+      model.put("tarjetasDisponibles",tarjetasDisponibles);
+      model.put("botonDeshabilitado", tarjetasDisponibles <= 0);
       ctx.render("registrar-persona.hbs", this.model);
     }
 
@@ -41,8 +57,13 @@ public class UI_RegistrarPersona extends UI_Navegable implements Handler{
     System.out.println("mi doc es: " + documento);
     System.out.println("tengo "+ numMenoresACargo + " menores a cargo");
 
+    String token = ctx.cookie("Auth");
+    Claims claims= JwtUtil.getClaimsFromToken(token);
+    RepoColaborador repoColaborador = RepoColaborador.getInstance();
+    Colaborador colapinto=repoColaborador.findById_Colaborador((Integer) claims.get("roleId"));
 
-    System.out.println("tarjetas de colapa: "+colapinto.getTarjetasParaEntregar());
+
+    System.out.println("tarjetas de colapa: "+colapinto.getTarjetasParaEntregar().size());
 
     if(colapinto.getTarjetasParaEntregar().isEmpty()){
       throw new IllegalArgumentException("El colaborador no tiene tarjetas para entregar");
@@ -76,8 +97,21 @@ public class UI_RegistrarPersona extends UI_Navegable implements Handler{
       vulnerable.setSituacionCalle(EnumSituacionCalle.NO_POSEE_HOGAR);
     }
 
+
+    RegistroPersonaVulnerable registroPersonaVulnerable=new RegistroPersonaVulnerable(colapinto.getTarjetasParaEntregar().get(0),vulnerable);
+    registroPersonaVulnerable.setColaborador(colapinto);
+    registroPersonaVulnerable.ejecutar();
+
     //ORM
     persistirEntidades(docu, persona, vulnerable);
+
+    EntityManager em = BDUtils.getEntityManager();
+    BDUtils.comenzarTransaccion(em);
+
+    // lo hago a parte porque no hice la de persistirEntidades y me da cosa cambiarla xd
+    em.persist(registroPersonaVulnerable);
+
+    BDUtils.commit(em);
 
     ctx.render("index.hbs");
   }

@@ -10,6 +10,7 @@ import io.javalin.http.HttpStatus;
 import io.javalin.json.JavalinJackson;
 import io.javalin.rendering.JavalinRenderer;
 import persistence.ArchivosUtils;
+import persistence.Demo;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -135,7 +136,7 @@ public class VistasJavalin {
             UI_Puntos UIPuntos = new UI_Puntos();
 
             app.get("/puntos",UIPuntos);
-            app.post("/puntos/canje",UIPuntos::canjearPuntos);
+            app.post("/puntos",UIPuntos::canjearPuntos);
 
 //====================== REGISTRAR PERSONAS ================================
             UI_RegistrarPersona UIregistrarPersona = new UI_RegistrarPersona();

@@ -32,17 +32,19 @@ public class UI_Puntos extends UI_Navegable implements Handler {
         this.validarUsuario(ctx);
         if (this.sesionValida(ctx)) {
             String token = ctx.cookie("Auth");
-            Claims claims= JwtUtil.getClaimsFromToken(token);
+            Claims claims = JwtUtil.getClaimsFromToken(token);
             RepoColaborador cola = RepoColaborador.getInstance();
 
-            Colaborador colaborador=cola.findById_Colaborador((Integer) claims.get("roleId"));
-            //necesito el id del catalogo que no esta implementado, implementar catalogo
-            colaborador.realizarCanje(0); //pongo 0 asi no rompe
+            Colaborador colaborador = cola.findById_Colaborador((Integer) claims.get("roleId"));
 
+            int ofertaId = Integer.parseInt(ctx.formParam("ofertaId"));
 
-            ctx.render("puntos.hbs", model);
+            colaborador.realizarCanje(ofertaId);
+
+            ctx.render("index.hbs", model);
         }
     }
+
 
 
 

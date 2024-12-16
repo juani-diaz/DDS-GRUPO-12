@@ -575,7 +575,7 @@ public class Demo {
     }
 
     public static void servicios(String[] args){
-        EntityManager em = BDUtils.getEntityManager();
+        EntityManager em = BDUtils.getEm();
         BDUtils.comenzarTransaccion(em);
 
         Tarjeta tarjeta1 = new Tarjeta("Tarjeta1");
@@ -611,7 +611,7 @@ public class Demo {
         Catalogo catalogo = Catalogo.getInstance();
 
         //persisto el catalogo
-        em.persist(catalogo);
+        //em.persist(catalogo);
 
         Colaboracion presentarOfertaDestornillador = new PresentacionOferta(colaboradorEdgar,LocalDate.now(), "Metalurgica","Martillo","una oferta",200F,"imagenMartillo");
         presentarOfertaDestornillador.ejecutar();
