@@ -100,7 +100,7 @@ public class UI_RegistrarPersona extends UI_Navegable implements Handler{
 
     RegistroPersonaVulnerable registroPersonaVulnerable=new RegistroPersonaVulnerable(colapinto.getTarjetasParaEntregar().get(0),vulnerable);
     registroPersonaVulnerable.setColaborador(colapinto);
-    registroPersonaVulnerable.ejecutar();
+    colapinto.realizarColaboracion(registroPersonaVulnerable);
 
     //ORM
     persistirEntidades(docu, persona, vulnerable);
