@@ -65,7 +65,7 @@ public class LectorCsv {
             documento.setNumero(linea[1]);
             String nombre = linea[2];
             String apellido = linea[3];
-            Email medioDeContacto = new Email();
+            EmailOld medioDeContacto = new EmailOld();
             LocalDate fechaNacimiento = LocalDate.parse(linea[5], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
             Persona p = new PersonaFisica(nombre, Arrays.asList(medioDeContacto), null, documento, apellido, null, null, fechaNacimiento);
@@ -94,7 +94,7 @@ public class LectorCsv {
                 "Saludos,\nEl equipo.";
 
        for(MedioDeContacto m : colaborador.getPersona().getMediosDeContacto()){
-           if(m.getClass() == Email.class)
+           if(m.getClass() == EmailOld.class)
                m.notificar(header,body);
        }
 

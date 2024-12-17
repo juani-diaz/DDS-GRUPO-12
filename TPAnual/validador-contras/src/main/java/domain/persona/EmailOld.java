@@ -11,9 +11,9 @@ import javax.persistence.Entity;
 @Getter @Setter @AllArgsConstructor
 @Entity
 @DiscriminatorValue("email")
-public class Email extends MedioDeContacto {
+public class EmailOld extends MedioDeContacto {
 
-    public Email(String mail) {
+    public EmailOld(String mail) {
         this.setContacto(mail);
         this.setMedio(Medio.EMAIL);
     }

@@ -44,11 +44,11 @@ public class test {
   Sensor sensor2 = new SensorDeTemperatura(heladera_destino);
   Sensor sensor3 = new SensorDeMovimiento(heladera_origen);
 
-  Email emailManuel = new Email("manubocha@gmail.com");
+  EmailOld emailOldManuel = new EmailOld("manubocha@gmail.com");
   String direccionManuel = "Montes De Oca 2671";
   Documento documentoManuel = new Documento("DNI", "47112068");
   LocalDate fechaNacimientoManuel = LocalDate.of(2000, 10, 12);
-  PersonaFisica manuelBochini = new PersonaFisica("Manuel", Arrays.asList(emailManuel),direccionManuel,documentoManuel, "Bochini","Hombre","Masculino", fechaNacimientoManuel);
+  PersonaFisica manuelBochini = new PersonaFisica("Manuel", Arrays.asList(emailOldManuel),direccionManuel,documentoManuel, "Bochini","Hombre","Masculino", fechaNacimientoManuel);
   Colaborador colaboradorManuel = new Colaborador(manuelBochini, null,0f,null,null);
 
   DistribucionVianda distribucionVianda = new DistribucionVianda(colaboradorManuel,LocalDate.now(),heladera_origen, heladera_destino, 4, DESPERFECTO_HELADERA);
@@ -57,7 +57,7 @@ public class test {
   List<String> email = Arrays.asList("juanmartin@gmail.com");
   List<String> telefono = Arrays.asList("1100001111");
   List<String> whatsap = Arrays.asList("1100001111");
-  MedioDeContacto medioDePersona = new Email();
+  MedioDeContacto medioDePersona = new EmailOld();
 
   Documento documento;// =new Documento("dni","450123456");
 
