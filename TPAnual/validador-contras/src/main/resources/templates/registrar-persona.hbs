@@ -199,6 +199,18 @@
                     <div class="card-body">
                         <h4 class="card-title">Datos de la persona</h4>
                         <div class="basic-form">
+                            <form action="/solicitar-tarjeta" method="post">
+                                <div style="display: flex; justify-content: flex-end; align-items: center;">
+                                    <div class="form-group" style="width: 120px; margin-right: 10px;">
+                                        <input type="number" min="1" name="cantidad" class="form-control" placeholder="Cantidad"
+                                               style="height: 35px; padding: 5px;">
+                                    </div>
+                                    <button type="submit" class="btn mb-1 btn-primary"
+                                            style="height: 35px; line-height: 1; background-color: #90EE90; color: #000000; padding: 5px 10px; margin: 0;">
+                                        Solicitar Tarjetas
+                                    </button>
+                                </div>
+                            </form>
                             <form action="/registrar-persona" method="post">
                                 <div class="form-group">
                                     <label>Nombre completo</label>
@@ -244,6 +256,15 @@
                                     <input type="number" name="numMenoresACargo" class="form-control"
                                            placeholder="Cantidad de menores a cargo" required>
                                 </div>
+                               <!-- <div class="form-group">
+                                    <label>Tarjeta a entregar</label>
+                                    <select class="form-control" name="tarjeta" required>
+                                        <option selected disabled>Selecciona una tarjeta...</option>
+                                        {{#each ../tarj as |tarj_t|}}
+                                            <option value="{{tarj_t.id}}">{{tarj_t.nombre}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>-->
                                 <div class="form-group"
                                      style="display: flex; align-items: center; justify-content: space-between; margin-top: 20px;">
                                     <button

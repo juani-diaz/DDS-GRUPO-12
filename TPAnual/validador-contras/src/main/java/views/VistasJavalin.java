@@ -108,6 +108,8 @@ public class VistasJavalin {
 
             app.get("/registrar-persona", UIregistrarPersona);
             app.post("/registrar-persona", UIregistrarPersona::agregarPersona);
+            app.post("/solicitar-tarjeta", UIregistrarPersona::solicitarTarjeta);
+            acceso.agregarRuta(new PermisosMetodo("solicitar-tarjeta", true, false, false, false));
             acceso.agregarRuta(new LinkMenu(
                     "registrar-persona",
                     "Registrar Personas",

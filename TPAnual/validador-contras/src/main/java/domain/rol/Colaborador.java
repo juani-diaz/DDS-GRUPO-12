@@ -98,6 +98,14 @@ public class Colaborador extends Rol {
     }
     tarjetasParaEntregar.addAll(tarjetas);
   }
+  public void recibirUnaTarjeta(Tarjeta tarjeta) {
+    if(this.persona.getDireccion() == null){
+      System.out.println(this.persona.getNombre()+ " no tiene una direccion para enviarle las tarjetas");
+      return;
+    }
+    tarjetasParaEntregar.add(tarjeta);
+  }
+
 
 
 

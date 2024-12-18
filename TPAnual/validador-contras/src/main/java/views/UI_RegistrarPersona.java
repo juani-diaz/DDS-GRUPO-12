@@ -16,6 +16,7 @@ import persistence.Repos.RepoColaborador;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
+import java.util.Random;
 
 public class UI_RegistrarPersona extends UI_Navegable implements Handler{
 
@@ -124,6 +125,36 @@ public class UI_RegistrarPersona extends UI_Navegable implements Handler{
     ctx.render("index.hbs");
   }
 
+  public void solicitarTarjeta(Context ctx) {
+    System.out.println("estoy en solicitarTarjetas");
+
+
+    // Agarro al colaborador actual
+    String token = ctx.cookie("Auth");
+    Claims claims= JwtUtil.getClaimsFromToken(token);
+    RepoColaborador repoColaborador = RepoColaborador.getInstance();
+    Colaborador colapinto=repoColaborador.findById_Colaborador((Integer) claims.get("roleId"));
+
+    // Obtener parámetros del formulario (datos enviados en la solicitud)
+    String cantidadTarjetas = ctx.formParam("cantidad");
+    Integer tarjetas = Integer.parseInt(cantidadTarjetas);
+
+
+    System.out.println("La cantidad de tarjetas es: " + tarjetas);
+    Random random= new Random();
+
+    for (Integer i=0; i<tarjetas; i++)
+    {
+      int numeroAleatorio = random.nextInt(1000000000);
+      Tarjeta tarjeta = new Tarjeta(Integer.toString(numeroAleatorio));
+      colapinto.recibirUnaTarjeta(tarjeta);
+      persistirColabTarj(colapinto,tarjeta);
+
+    }
+    ctx.render("registrar-persona.hbs");
+  }
+
+
   private static void persistirEntidades(Documento docu, PersonaFisica persona, Vulnerable vulnerable) {
     EntityManager em = BDUtils.getEntityManager();
     BDUtils.comenzarTransaccion(em);
@@ -136,5 +167,16 @@ public class UI_RegistrarPersona extends UI_Navegable implements Handler{
 
     BDUtils.commit(em);
   }
+  private static void persistirColabTarj(Colaborador colab, Tarjeta tarjeta){
+    EntityManager em = BDUtils.getEntityManager();
+    BDUtils.comenzarTransaccion(em);
 
+    em.persist(tarjeta);
+
+    //A CHEQUEAR FUNCIONAMIENTO DE ESTO
+    em.merge(colab);
+
+    BDUtils.commit(em);
+
+  }
 }
