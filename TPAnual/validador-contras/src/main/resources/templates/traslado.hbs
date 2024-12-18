@@ -214,7 +214,7 @@
                                     <div style="display: flex;">
                                         <div class="form-group" style="width: 120px; margin-right: 10px;">
                                             <input name="heladeraID" value={{hela.id}} style="display:none">
-                                            <input type="number" name="cantidad" class="form-control" placeholder="Cantidad">
+                                            <input type="number" min="1" max="{{viandas_en_heladera hela}}" name="cantidad" class="form-control" placeholder="Cantidad">
                                         </div>
                                         <div class="form-group">
                                             <select class="form-control" name="heladeraIDHacia" required>
@@ -222,6 +222,13 @@
                                                 {{#each ../hela as |heladeras_t|}}
                                                     <option value="{{heladeras_t.id}}">{{heladeras_t.nombre}}</option>
                                                 {{/each}}
+                                            </select>
+                                        </div>
+                                        <div class="form-group d-flex gap-3">
+                                            <select class="form-control" required name="motivoTraslado">
+                                                <option selected disabled>Seleccione un motivo...</option>
+                                                <option value="DESPERFECTO_HELADERA">Desperfecto de heladera</option>
+                                                <option value="FALTA_DE_VIANDAS">Falta de viandas</option>
                                             </select>
                                         </div>
                                         <button type="submit" class="btn mb-1 btn-primary" style="height: 37px; margin-top: 5px; margin-left: 10px;">Trasladar</button>

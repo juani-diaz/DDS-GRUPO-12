@@ -191,15 +191,22 @@
                     <div class="card-body">
                         <h4 class="card-title">Carga de Archivos CSV</h4>
                         <div class="basic-form">
-                            <form>
+                            <form action="/migracion" method="POST" enctype="multipart/form-data">
+                                <div class="form-group"
+                                     style="display: flex; align-items: center; justify-content: space-between; margin-top: 20px;">
                                 <div class="form-group">
-                                    <input type="file" class="form-control-file">
+                                    <label for="archivoCsv">Seleccione un archivo CSV</label>
+                                    <input type="file" name="archivo" class="form-control-file" id="archivoCsv" required>
+                                </div>
+                                <button type="submit" class="btn btn-success" style="align-self: flex-end">Cargar</button>
                                 </div>
                             </form>
                         </div>
                     </div>
+
                 </div>
             </div>
+
 
             <div class="col-lg-12" style="margin-top: 15px;">
                 <div class="card">
@@ -208,199 +215,22 @@
                         <div class="table-responsive">
                             <table class="table table-striped zero-configuration">
                                 <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Tipo Doc</th>
-                                        <th>Documento</th>
-                                        <th>Nombre</th>
-                                        <th>Apellido</th>
-                                        <th>Mail</th>
-                                        <th>Fecha de Colaboración</th>
-                                        <th>Forma de Colaboración</th>
-                                        <th>Cantidad</th>
-                                    </tr>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Tipo Doc</th>
+                                    <th>Documento</th>
+                                    <th>Nombre</th>
+                                    <th>Apellido</th>
+                                    <th>Mail</th>
+                                    <th>Fecha de Colaboración</th>
+                                    <th>Forma de Colaboración</th>
+                                    <th>Cantidad</th>
+                                </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <th>1</th>
-                                        <td>DNI</td>
-                                        <td>1234567890</td>
-                                        <td>Juan</td>
-                                        <td>Pérez</td>
-                                        <td>juan.perez@example.com</td>
-                                        <td>02/09/2023</td>
-                                        <td>DINERO</td>
-                                        <td>6000</td>
-                                    </tr>
-                                    <tr>
-                                        <th>2</th>
-                                        <td>DNI</td>
-                                        <td>0987654321</td>
-                                        <td>Maria</td>
-                                        <td>Gómez</td>
-                                        <td>maria.gomez@example.com</td>
-                                        <td>15/08/2023</td>
-                                        <td>REDISTRIBUCION_VIANDAS</td>
-                                        <td>20</td>
-                                    </tr>
-                                    <tr>
-                                        <th>3</th>
-                                        <td>DNI</td>
-                                        <td>1234567890</td>
-                                        <td>Juan</td>
-                                        <td>Pérez</td>
-                                        <td>juan.perez@example.com</td>
-                                        <td>02/09/2023</td>
-                                        <td>DINERO</td>
-                                        <td>6000</td>
-                                    </tr>
-                                    <tr>
-                                        <th>4</th>
-                                        <td>DNI</td>
-                                        <td>0987654321</td>
-                                        <td>Maria</td>
-                                        <td>Gómez</td>
-                                        <td>maria.gomez@example.com</td>
-                                        <td>15/08/2023</td>
-                                        <td>REDISTRIBUCION_VIANDAS</td>
-                                        <td>20</td>
-                                    </tr>
-                                    <tr>
-                                        <th>5</th>
-                                        <td>DNI</td>
-                                        <td>1234567890</td>
-                                        <td>Juan</td>
-                                        <td>Pérez</td>
-                                        <td>juan.perez@example.com</td>
-                                        <td>02/09/2023</td>
-                                        <td>DINERO</td>
-                                        <td>6000</td>
-                                    </tr>
-                                    <tr>
-                                        <th>6</th>
-                                        <td>DNI</td>
-                                        <td>0987654321</td>
-                                        <td>Maria</td>
-                                        <td>Gómez</td>
-                                        <td>maria.gomez@example.com</td>
-                                        <td>15/08/2023</td>
-                                        <td>REDISTRIBUCION_VIANDAS</td>
-                                        <td>20</td>
-                                    </tr>
-                                    <tr>
-                                        <th>7</th>
-                                        <td>DNI</td>
-                                        <td>1234567890</td>
-                                        <td>Juan</td>
-                                        <td>Pérez</td>
-                                        <td>juan.perez@example.com</td>
-                                        <td>02/09/2023</td>
-                                        <td>DINERO</td>
-                                        <td>6000</td>
-                                    </tr>
-                                    <tr>
-                                        <th>8</th>
-                                        <td>DNI</td>
-                                        <td>0987654321</td>
-                                        <td>Maria</td>
-                                        <td>Gómez</td>
-                                        <td>maria.gomez@example.com</td>
-                                        <td>15/08/2023</td>
-                                        <td>REDISTRIBUCION_VIANDAS</td>
-                                        <td>20</td>
-                                    </tr>
-                                    <tr>
-                                        <th>9</th>
-                                        <td>DNI</td>
-                                        <td>1234567890</td>
-                                        <td>Juan</td>
-                                        <td>Pérez</td>
-                                        <td>juan.perez@example.com</td>
-                                        <td>02/09/2023</td>
-                                        <td>DINERO</td>
-                                        <td>6000</td>
-                                    </tr>
-                                    <tr>
-                                        <th>10</th>
-                                        <td>DNI</td>
-                                        <td>0987654321</td>
-                                        <td>Maria</td>
-                                        <td>Gómez</td>
-                                        <td>maria.gomez@example.com</td>
-                                        <td>15/08/2023</td>
-                                        <td>REDISTRIBUCION_VIANDAS</td>
-                                        <td>20</td>
-                                    </tr>
-                                    <tr>
-                                        <th>11</th>
-                                        <td>DNI</td>
-                                        <td>1234567890</td>
-                                        <td>Juan</td>
-                                        <td>Pérez</td>
-                                        <td>juan.perez@example.com</td>
-                                        <td>02/09/2023</td>
-                                        <td>DINERO</td>
-                                        <td>6000</td>
-                                    </tr>
-                                    <tr>
-                                        <th>12</th>
-                                        <td>DNI</td>
-                                        <td>0987654321</td>
-                                        <td>Maria</td>
-                                        <td>Gómez</td>
-                                        <td>maria.gomez@example.com</td>
-                                        <td>15/08/2023</td>
-                                        <td>REDISTRIBUCION_VIANDAS</td>
-                                        <td>20</td>
-                                    </tr>
-                                    <tr>
-                                        <th>13</th>
-                                        <td>DNI</td>
-                                        <td>1234567890</td>
-                                        <td>Juan</td>
-                                        <td>Pérez</td>
-                                        <td>juan.perez@example.com</td>
-                                        <td>02/09/2023</td>
-                                        <td>DINERO</td>
-                                        <td>6000</td>
-                                    </tr>
-                                    <tr>
-                                        <th>14</th>
-                                        <td>DNI</td>
-                                        <td>0987654321</td>
-                                        <td>Maria</td>
-                                        <td>Gómez</td>
-                                        <td>maria.gomez@example.com</td>
-                                        <td>15/08/2023</td>
-                                        <td>REDISTRIBUCION_VIANDAS</td>
-                                        <td>20</td>
-                                    </tr>
-                                    <tr>
-                                        <th>15</th>
-                                        <td>DNI</td>
-                                        <td>1234567890</td>
-                                        <td>Juan</td>
-                                        <td>Pérez</td>
-                                        <td>juan.perez@example.com</td>
-                                        <td>02/09/2023</td>
-                                        <td>DINERO</td>
-                                        <td>6000</td>
-                                    </tr>
-                                    <tr>
-                                        <th>16</th>
-                                        <td>DNI</td>
-                                        <td>0987654321</td>
-                                        <td>Maria</td>
-                                        <td>Gómez</td>
-                                        <td>maria.gomez@example.com</td>
-                                        <td>15/08/2023</td>
-                                        <td>REDISTRIBUCION_VIANDAS</td>
-                                        <td>20</td>
-                                    </tr>
+                                <tbody id="previewTableBody">
                                 </tbody>
                             </table>
                         </div>
-                        
                     </div>
                 </div>
             </div>
@@ -435,6 +265,7 @@
     <script src="js/settings.js"></script>
     <script src="js/gleek.js"></script>
     <script src="js/styleSwitcher.js"></script>
+    <script src="./js/csvReader.js"></script>
 
     <!-- Chartjs -->
     <script src="./plugins/chart.js/Chart.bundle.min.js"></script>
@@ -457,6 +288,7 @@
 
 
     <script src="./js/dashboard/dashboard-1.js"></script>
+
 
     <script src="./plugins/tables/js/jquery.dataTables.min.js"></script>
     <script src="./plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>

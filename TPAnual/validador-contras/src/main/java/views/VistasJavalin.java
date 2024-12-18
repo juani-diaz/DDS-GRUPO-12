@@ -241,6 +241,13 @@ public class VistasJavalin {
                     false,
                     true
             ));
+//======================
+            UI_Migracion UI_Migracion = new UI_Migracion();
+            app.get("/migracion",UI_Migracion);
+            app.post("/migracion", UI_Migracion::cargarArchivoCSV);
+
+//====================== OFERTAS
+            UI_Ofertas UIOfertas = new UI_Ofertas();
 
 //====================== FALLAS
             app.get("/fallas", ctx -> {
@@ -285,6 +292,7 @@ public class VistasJavalin {
                         template = handlebars.compile("templates/" + path.replace(".hbs", ""));
                         return template.apply(model);
                     } catch (IOException e) {
+                        //
                         e.printStackTrace();
                         context.status(HttpStatus.NOT_FOUND);
                         return "No se encuentra la pagina indicada...";

@@ -12,6 +12,9 @@ public class HelperSource {
         return h.getViandasEnHeladera().size()+"/"+h.getTamanioEnViandas();
     }
 
+    public String viandas_en_heladera (Heladera h){
+        return String.valueOf(h.getViandasEnHeladera().size()) ;
+    }
     public String estadoString(Heladera h){
         switch (h.getEstado()) {
             case DISPONIBLE:
