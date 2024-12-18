@@ -27,6 +27,7 @@ domain\vianda\Vianda.class
 domain\registro\RegistroMovimiento.class
 domain\rol\Administrador.class
 domain\contra\Usuario.class
+persistence\Repos\RepoColaboracion.class
 domain\heladera\Ubicacion.class
 views\UI_Vianda.class
 domain\colaboraciones\RegistroPersonaVulnerable.class

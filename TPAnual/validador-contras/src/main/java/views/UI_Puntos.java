@@ -14,18 +14,17 @@ public class UI_Puntos extends UI_Navegable implements Handler {
     @Override
     public void handle(Context ctx) throws Exception {
         this.validarUsuario(ctx);
-        if (this.sesionValida(ctx)) {
-            String token = ctx.cookie("Auth");
-            Claims claims= JwtUtil.getClaimsFromToken(token);
-            RepoColaborador cola = RepoColaborador.getInstance();
 
-            Float puntos=cola.obtenerPuntosxColaborador((Integer) claims.get("roleId"));
-            model.put("colaPuntos", puntos);
-            this.model.put("ofertas", Catalogo.getInstance().getOfertas());
+        String token = ctx.cookie("Auth");
+        Claims claims= JwtUtil.getClaimsFromToken(token);
+        RepoColaborador cola = RepoColaborador.getInstance();
 
-            System.out.println(model);
-            ctx.render("puntos.hbs", model);
-        }
+        Float puntos=cola.obtenerPuntosxColaborador((Integer) claims.get("roleId"));
+        model.put("colaPuntos", puntos);
+        this.model.put("ofertas", Catalogo.getInstance().getOfertas());
+
+        System.out.println(model);
+        ctx.render("puntos.hbs", model);
     }
 
     public void canjearPuntos(Context ctx) throws Exception {

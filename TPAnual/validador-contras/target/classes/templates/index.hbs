@@ -84,7 +84,7 @@ x">
                             </a>
                             <div class="drop-down animated fadeIn dropdown-menu dropdown-notfication">
                                 <div class="dropdown-content-heading d-flex justify-content-between">
-                                    <span class="">2 New Notifications</span>  
+                                    <span class="">2 New Notifications</span>
                                     <a href="javascript:void()" class="d-inline-block">
                                         <span class="badge badge-pill gradient-2">5</span>
                                     </a>
@@ -96,7 +96,7 @@ x">
                                                 <span class="mr-3 avatar-icon bg-success-lighten-2"><i class="icon-present"></i></span>
                                                 <div class="notification-content">
                                                     <h6 class="notification-heading">Events near you</h6>
-                                                    <span class="notification-text">Within next 5 days</span> 
+                                                    <span class="notification-text">Within next 5 days</span>
                                                 </div>
                                             </a>
                                         </li>
@@ -105,7 +105,7 @@ x">
                                                 <span class="mr-3 avatar-icon bg-danger-lighten-2"><i class="icon-present"></i></span>
                                                 <div class="notification-content">
                                                     <h6 class="notification-heading">Event Started</h6>
-                                                    <span class="notification-text">One hour ago</span> 
+                                                    <span class="notification-text">One hour ago</span>
                                                 </div>
                                             </a>
                                         </li>
@@ -123,12 +123,12 @@ x">
                                                 <span class="mr-3 avatar-icon bg-danger-lighten-2"><i class="icon-present"></i></span>
                                                 <div class="notification-content">
                                                     <h6 class="notification-heading">Events to Join</h6>
-                                                    <span class="notification-text">After two days</span> 
+                                                    <span class="notification-text">After two days</span>
                                                 </div>
                                             </a>
                                         </li>
                                     </ul>
-                                    
+
                                 </div>
                             </div>
                         </li>
@@ -168,77 +168,13 @@ x">
         <div class="nk-sidebar">           
             <div class="nk-nav-scroll">
                 <ul class="metismenu" id="menu">
-                    <li class="nav-label">(Personas)</li>
-                    <li>
-                        <a href="vianda" aria-expanded="false">
-                            <i class="icon-cup menu-icon"></i><span class="nav-text">Donar Vianda</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="traslado" aria-expanded="false">
-                            <i class="icon-direction menu-icon"></i><span class="nav-text">Traslados</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="registrar-persona" aria-expanded="false">
-                            <i class="icon-user-follow menu-icon"></i><span class="nav-text">Registrar Personas</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="dinero" aria-expanded="false">
-                            <i class="icon-wallet menu-icon"></i><span class="nav-text">Donar Dinero</span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="heladeras-p" aria-expanded="false">
-                            <i class="icon-heladera menu-icon"></i><span class="nav-text">Heladeras</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="puntos" aria-expanded="false">
-                            <i class="icon-diamond menu-icon"></i><span class="nav-text">Puntos</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-label">(Organizaciones)</li>
-                    <li>
-                        <a href="heladeras-o" aria-expanded="false">
-                            <i class="icon-heladera menu-icon"></i><span class="nav-text">Heladeras</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="ofertas" aria-expanded="false">
-                            <i class="icon-present menu-icon"></i><span class="nav-text">Ofertas</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="dinero" aria-expanded="false">
-                            <i class="icon-wallet menu-icon"></i><span class="nav-text">Donar Dinero</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="puntosl" aria-expanded="false">
-                            <i class="icon-diamond menu-icon"></i><span class="nav-text">Puntos</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-label">(Administrador)</li>
-                    <li>
-                        <a href="migracion" aria-expanded="false">
-                            <i class="icon-cloud-upload menu-icon"></i><span class="nav-text">Migración</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="heladeras-a" aria-expanded="false">
-                            <i class="icon-heladera menu-icon"></i><span class="nav-text">Heladeras</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="reportes" aria-expanded="false">
-                            <i class="icon-chart menu-icon"></i><span class="nav-text">Reportes</span>
-                        </a>
-                    </li>
+                    {{#each menu as | link |}}
+                        <li>
+                            <a href="{{link.href}}" aria-expanded="false">
+                                <i class="{{link.icono}} menu-icon"></i><span class="nav-text">{{link.titulo}}</span>
+                            </a>
+                        </li>
+                    {{/each}}
                 </ul>
             </div>
         </div>

@@ -11,16 +11,14 @@ public class UI_Reporte extends UI_Navegable implements Handler {
     @Override
     public void handle(Context ctx) throws Exception {
         this.validarUsuario(ctx);
-        System.out.println(ctx);
-        if (this.sesionValida(ctx)) {
-            RepoHeladera hela = RepoHeladera.getInstance();
-            RepoColaborador cola = RepoColaborador.getInstance();
 
-            model.put("helaFallos", hela.obtenerFallasxHeladera());
-            model.put("colaboradorDatos", cola.obtenerDonacionesxColaborador());
+        RepoHeladera hela = RepoHeladera.getInstance();
+        RepoColaborador cola = RepoColaborador.getInstance();
 
-            System.out.println(model);
-            ctx.render("reportes.hbs", this.model);
-        }
+        model.put("helaFallos", hela.obtenerFallasxHeladera());
+        model.put("colaboradorDatos", cola.obtenerDonacionesxColaborador());
+
+        System.out.println(model);
+        ctx.render("reportes.hbs", this.model);
     }
 }

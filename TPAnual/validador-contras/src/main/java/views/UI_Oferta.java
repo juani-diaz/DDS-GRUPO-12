@@ -15,9 +15,8 @@ public class UI_Oferta extends UI_Navegable implements Handler {
     @Override
     public void handle(Context ctx) throws Exception {
         this.validarUsuario(ctx);
-        if (this.sesionValida(ctx)) {
-            ctx.render("oferta.hbs", this.model);
-        }
+
+        ctx.render("oferta.hbs", this.model);
     }
 
     public void nuevaOferta(Context ctx) throws Exception {

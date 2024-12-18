@@ -23,11 +23,10 @@ public class UI_Vianda extends UI_Navegable implements Handler{
   @Override
   public void handle(Context ctx) throws Exception {
     this.validarUsuario(ctx);
-    if (this.sesionValida(ctx)) {
-      RepoHeladera hela = RepoHeladera.getInstance();
-      this.model.put("hela", hela.getHeladeras());
-      ctx.render("vianda.hbs", this.model);
-    }
+
+    RepoHeladera hela = RepoHeladera.getInstance();
+    this.model.put("hela", hela.getHeladeras());
+    ctx.render("vianda.hbs", this.model);
   }
 
   // Metodo para agregar una vianda a la heladera

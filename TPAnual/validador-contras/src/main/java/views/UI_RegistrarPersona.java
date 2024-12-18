@@ -21,22 +21,20 @@ public class UI_RegistrarPersona extends UI_Navegable implements Handler{
   @Override
   public void handle(Context ctx) throws Exception {
     this.validarUsuario(ctx);
-    if (this.sesionValida(ctx)) {
-      System.out.println("estoy en UI_RegistrarPersona");
-      String token = ctx.cookie("Auth");
-      Claims claims= JwtUtil.getClaimsFromToken(token);
-      RepoColaborador repoColaborador = RepoColaborador.getInstance();
-      Colaborador colapinto=repoColaborador.findById_Colaborador((Integer) claims.get("roleId"));
 
-      Integer tarjetasDisponibles=colapinto.getTarjetasParaEntregar().size();
+    System.out.println("estoy en UI_RegistrarPersona");
+    String token = ctx.cookie("Auth");
+    Claims claims= JwtUtil.getClaimsFromToken(token);
+    RepoColaborador repoColaborador = RepoColaborador.getInstance();
+    Colaborador colapinto=repoColaborador.findById_Colaborador((Integer) claims.get("roleId"));
+
+    Integer tarjetasDisponibles=colapinto.getTarjetasParaEntregar().size();
 
 
-      System.out.println("tarjetas de colapa: "+ tarjetasDisponibles);
-      model.put("tarjetasDisponibles",tarjetasDisponibles);
-      model.put("botonDeshabilitado", tarjetasDisponibles <= 0);
-      ctx.render("registrar-persona.hbs", this.model);
-    }
-
+    System.out.println("tarjetas de colapa: "+ tarjetasDisponibles);
+    model.put("tarjetasDisponibles",tarjetasDisponibles);
+    model.put("botonDeshabilitado", tarjetasDisponibles <= 0);
+    ctx.render("registrar-persona.hbs", this.model);
   }
 
   public void agregarPersona(Context ctx) {
