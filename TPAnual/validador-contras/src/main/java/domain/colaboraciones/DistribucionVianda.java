@@ -33,7 +33,11 @@ public class DistribucionVianda extends Colaboracion {
 
     private Integer cantidadViandasMovidas;
 
-    @OneToMany
+    @JoinTable(
+            name = "distribucion_vianda_viandas",
+            joinColumns = @JoinColumn(name = "distribucion_vianda_id",referencedColumnName = "id", nullable = false, unique = false),
+            inverseJoinColumns = @JoinColumn(name = "vianda_movida_id",referencedColumnName = "id", nullable = false, unique = false))
+    @ManyToMany
     private List<Vianda> viandasMovidas;
 
     @Enumerated(value = EnumType.STRING)

@@ -27,7 +27,7 @@ public class VistasJavalin {
             //Demo.main(null);
             //Demo.personas(null);
             //Demo.colaboraciones(null);
-            Demo.servicios(null);
+            //Demo.servicios(null);
 
             JavalinJackson.defaultMapper();
 

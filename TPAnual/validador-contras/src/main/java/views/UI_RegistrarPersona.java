@@ -6,6 +6,7 @@ import domain.persona.Documento;
 import domain.persona.PersonaFisica;
 import domain.rol.Colaborador;
 import domain.rol.EnumSituacionCalle;
+import domain.rol.Tarjeta;
 import domain.rol.Vulnerable;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
@@ -42,6 +43,12 @@ public class UI_RegistrarPersona extends UI_Navegable implements Handler{
   public void agregarPersona(Context ctx) {
     System.out.println("estoy en agregarPersona");
 
+    // Agarro al colaborador actual
+    String token = ctx.cookie("Auth");
+    Claims claims= JwtUtil.getClaimsFromToken(token);
+    RepoColaborador repoColaborador = RepoColaborador.getInstance();
+    Colaborador colapinto=repoColaborador.findById_Colaborador((Integer) claims.get("roleId"));
+
     // Obtener parámetros del formulario (datos enviados en la solicitud)
     String nombre = ctx.formParam("nombre");
     String fechaNacimiento = ctx.formParam("fechaNacimiento");
@@ -56,11 +63,6 @@ public class UI_RegistrarPersona extends UI_Navegable implements Handler{
     System.out.println("mi tipo de doc es: " + tipoDocumento);
     System.out.println("mi doc es: " + documento);
     System.out.println("tengo "+ numMenoresACargo + " menores a cargo");
-
-    String token = ctx.cookie("Auth");
-    Claims claims= JwtUtil.getClaimsFromToken(token);
-    RepoColaborador repoColaborador = RepoColaborador.getInstance();
-    Colaborador colapinto=repoColaborador.findById_Colaborador((Integer) claims.get("roleId"));
 
 
     System.out.println("tarjetas de colapa: "+colapinto.getTarjetasParaEntregar().size());
@@ -90,6 +92,12 @@ public class UI_RegistrarPersona extends UI_Navegable implements Handler{
     vulnerable.setPersona(persona);
     vulnerable.setFechaRegistro(LocalDate.now());
     vulnerable.setMenoresACargo(numMenoresACargoInt);
+    //vulnerable.setTarjeta(unaTarjetinha);
+
+    //Asigno tarjeta
+
+    colapinto.entregarTarjeta(vulnerable);
+
 
     if (situacionCalle == null){
       vulnerable.setSituacionCalle(EnumSituacionCalle.POSEE_HOGAR);
@@ -112,6 +120,8 @@ public class UI_RegistrarPersona extends UI_Navegable implements Handler{
     em.persist(registroPersonaVulnerable);
 
     BDUtils.commit(em);
+
+    repoColaborador.actualizarColaborador(colapinto);
 
     ctx.render("index.hbs");
   }

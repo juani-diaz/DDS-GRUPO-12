@@ -98,9 +98,9 @@ public class RepoVianda extends BDUtils{
       // Merging the updated entity
       em.merge(vianda);
 
-      commit(em);
     }
 
+    commit(em);
   }
 
   public List<Vianda> getAll_Viandas_BD() {

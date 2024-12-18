@@ -1,5 +1,6 @@
 package domain.vianda;
 
+import domain.colaboraciones.DistribucionVianda;
 import domain.heladera.Heladera;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,6 +10,7 @@ import persistence.EntidadPersistente;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
 @Entity
@@ -29,6 +31,9 @@ public class Vianda extends EntidadPersistente {
 
   @Column
   private String calorias;
+
+  @ManyToMany (mappedBy = "viandasMovidas")
+  private List<DistribucionVianda> distribucionVianda;
 
   @Column
   private Float peso;

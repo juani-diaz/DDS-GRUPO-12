@@ -5,19 +5,24 @@ import domain.auth.JwtUtil;
 import domain.colaboraciones.DistribucionVianda;
 import domain.colaboraciones.EnumMotivosMovimientoVianda;
 import domain.heladera.Heladera;
+import domain.persona.EnumTipoPersonaJuridica;
 import domain.rol.Colaborador;
 import domain.vianda.Vianda;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import io.jsonwebtoken.Claims;
+import persistence.BDUtils;
+import persistence.EntidadPersistente;
 import persistence.Repos.RepoColaborador;
 import persistence.Repos.RepoHeladera;
 import persistence.Repos.RepoVianda;
 
+import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class UI_Traslado extends UI_Navegable implements Handler{
 
@@ -43,10 +48,26 @@ public class UI_Traslado extends UI_Navegable implements Handler{
     System.out.println("heladeraId= "+heladeraIdProviene);
     String heladeraIdHacia = ctx.formParam("heladeraIDHacia");
     System.out.println("heladeraIDHacia= "+heladeraIdHacia);
+    String motivoMovimiento = ctx.formParam("motivoTraslado");
+    System.out.println("el motivo de traslado es: "+ motivoMovimiento);
+
+    EnumMotivosMovimientoVianda motivo=null;
+    //motivo = EnumMotivosMovimientoVianda.valueOf(motivoMovimiento)
+
+
+      if(Objects.equals(motivoMovimiento, "FALTA_DE_VIANDAS")){
+          motivo = EnumMotivosMovimientoVianda.FALTA_DE_VIANDAS;
+          System.out.println("el motivo enum es: "+ motivo);
+      } else if(Objects.equals(motivoMovimiento, "DESPERFECTO_HELADERA")){
+          motivo = EnumMotivosMovimientoVianda.DESPERFECTO_HELADERA;
+          System.out.println("el motivo enum es: "+ motivo);
+      }
+
 
     // Convertir parámetros necesarios
     Integer heladeraID = Integer.parseInt(heladeraIdProviene);
     Integer heladeraIDVa = Integer.parseInt(heladeraIdHacia);
+    //if(motivoMovimiento = "")
 
     // Busca la heladera en la BD
     RepoHeladera hela = RepoHeladera.getInstance();
@@ -59,7 +80,7 @@ public class UI_Traslado extends UI_Navegable implements Handler{
     Integer i;
     Vianda viandaHeladera;
     List<Vianda> viandasMover= new ArrayList<>();
-    System.out.println("Cantidad de viandas de heladera2= "+ heladera.cantidadViandas());
+    System.out.println("Cantidad de viandas de heladera origen= "+ heladera.cantidadViandas());
     RepoVianda repoVianda = RepoVianda.getInstance();
 
 
@@ -68,8 +89,7 @@ public class UI_Traslado extends UI_Navegable implements Handler{
       throw new IllegalArgumentException("No se puede mover a la misma heladera");
     }
 
-    if(cantidadViandas<=heladera.cantidadViandas())
-    {
+    if(cantidadViandas<=heladera.cantidadViandas()) {
         List<Vianda> shuffledList = new ArrayList<>(heladera.getViandasEnHeladera());
         Collections.shuffle(shuffledList);
         viandasMover = shuffledList.subList(0, cantidadViandas);
@@ -80,14 +100,24 @@ public class UI_Traslado extends UI_Navegable implements Handler{
         System.out.println("Se movieron las viandas con exito hacia la heladera" + heladeraHacia.getNombre());
 
         String token = ctx.cookie("Auth");
-        Claims claims= JwtUtil.getClaimsFromToken(token);
+        Claims claims = JwtUtil.getClaimsFromToken(token);
         RepoColaborador repoColaborador = RepoColaborador.getInstance();
-        Colaborador colapinto=repoColaborador.findById_Colaborador((Integer) claims.get("roleId"));
+        Colaborador colapinto = repoColaborador.findById_Colaborador((Integer) claims.get("roleId"));
 
-        DistribucionVianda distribucion = new DistribucionVianda(colapinto,LocalDate.now(),heladera,heladeraHacia, cantidadViandas, EnumMotivosMovimientoVianda.FALTA_DE_VIANDAS);
+        DistribucionVianda distribucion = new DistribucionVianda(colapinto, LocalDate.now(), heladera, heladeraHacia, cantidadViandas, motivo);
+
 
         colapinto.realizarColaboracion(distribucion);
+
+        EntityManager em = BDUtils.getEm();
+        BDUtils.comenzarTransaccion(em);
+
+        em.persist(distribucion);
+        BDUtils.commit(em);
+
         repoVianda.cambiarHeladeraPlural(heladeraHacia,viandasMover);
+
+
 
 
 
