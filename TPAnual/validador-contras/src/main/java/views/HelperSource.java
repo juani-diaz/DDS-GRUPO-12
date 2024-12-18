@@ -1,7 +1,23 @@
 package views;
 
+import domain.auth.JwtUtil;
+
+import domain.rol.Colaborador;
+
+import domain.rol.Tarjeta;
+
+import io.javalin.http.Context;
+
+import io.jsonwebtoken.Claims;
+
+import persistence.Repos.RepoColaborador;
+
+
 import domain.heladera.Heladera;
 import domain.heladera.Ubicacion;
+
+
+import java.util.List;
 
 public class HelperSource {
     public String lat_lon(Ubicacion u) {
@@ -15,6 +31,7 @@ public class HelperSource {
     public String viandas_en_heladera (Heladera h){
         return String.valueOf(h.getViandasEnHeladera().size()) ;
     }
+
     public String estadoString(Heladera h){
         switch (h.getEstado()) {
             case DISPONIBLE:
