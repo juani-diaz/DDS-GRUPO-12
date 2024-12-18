@@ -229,9 +229,9 @@ public class VistasJavalin {
             ));
 
 //====================== MIGRACIÓN
-            app.get("/migracion", ctx -> {
-                ctx.render("migracion.hbs");
-            });
+            UI_Migracion UI_Migracion = new UI_Migracion();
+            app.get("/migracion",UI_Migracion);
+            app.post("/migracion", UI_Migracion::cargarArchivoCSV);
             acceso.agregarRuta(new LinkMenu(
                     "migracion",
                     "Migración",
@@ -241,13 +241,6 @@ public class VistasJavalin {
                     false,
                     true
             ));
-//======================
-            UI_Migracion UI_Migracion = new UI_Migracion();
-            app.get("/migracion",UI_Migracion);
-            app.post("/migracion", UI_Migracion::cargarArchivoCSV);
-
-//====================== OFERTAS
-            UI_Ofertas UIOfertas = new UI_Ofertas();
 
 //====================== FALLAS
             app.get("/fallas", ctx -> {
