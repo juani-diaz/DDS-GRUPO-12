@@ -102,9 +102,9 @@ public class VistasJavalin {
             });
 
 //======================
-            app.get("/migracion", ctx -> {
-                ctx.render("migracion.hbs");
-            });
+            UI_Migracion UI_Migracion = new UI_Migracion();
+            app.get("/migracion",UI_Migracion);
+            app.post("/migracion", UI_Migracion::cargarArchivoCSV);
 
 //====================== OFERTAS
             UI_Ofertas UIOfertas = new UI_Ofertas();

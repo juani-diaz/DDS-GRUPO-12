@@ -2,6 +2,8 @@ package domain.servicios;
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
+import domain.colaboraciones.DonacionDinero;
+import domain.colaboraciones.DonacionVianda;
 import domain.persona.*;
 import domain.rol.Colaborador;
 
@@ -13,6 +15,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class LectorCsv {
     private InputStream stream;
@@ -55,6 +58,8 @@ public class LectorCsv {
             }
         }
 
+        System.out.println(nuevosColaboradores);
+
         return nuevosColaboradores;
     }
 
@@ -67,9 +72,15 @@ public class LectorCsv {
             String apellido = linea[3];
             EmailOld medioDeContacto = new EmailOld();
             LocalDate fechaNacimiento = LocalDate.parse(linea[5], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            String formaColaboracion = linea[6];
+            Float cantidad = Float.valueOf(linea[7]);
+            
 
             Persona p = new PersonaFisica(nombre, Arrays.asList(medioDeContacto), null, documento, apellido, null, null, fechaNacimiento);
             Colaborador colaborador = new Colaborador(p, new ArrayList<>(), null, null, null);
+
+                colaborador.setCantidadPuntos(cantidad);
+
 
             return colaborador;
         } catch (Exception e) {
@@ -88,15 +99,15 @@ public class LectorCsv {
     }
 
     private void enviarCorreoBienvenida(Colaborador colaborador) {
-        String header = "¡Bienvenido al sistema!";
-        String body = "Hola " + colaborador.getPersona().getNombre() + ",\n\n" +
-                "Gracias por unirte a nuestro sistema. ¡Estamos encantados de tenerte con nosotros!\n\n" +
-                "Saludos,\nEl equipo.";
-
-       for(MedioDeContacto m : colaborador.getPersona().getMediosDeContacto()){
-           if(m.getClass() == EmailOld.class)
-               m.notificar(header,body);
-       }
+//        String header = "¡Bienvenido al sistema!";
+//        String body = "Hola " + colaborador.getPersona().getNombre() + ",\n\n" +
+//                "Gracias por unirte a nuestro sistema. ¡Estamos encantados de tenerte con nosotros!\n\n" +
+//                "Saludos,\nEl equipo.";
+//
+//       for(MedioDeContacto m : colaborador.getPersona().getMediosDeContacto()){
+//           if(m.getClass() == EmailOld.class)
+//               m.notificar(header,body);
+//       }
 
     }
 }
