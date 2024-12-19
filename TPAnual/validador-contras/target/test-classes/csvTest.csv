@@ -1,6 +1,0 @@
-Tipo Doc,Documento,Nombre,Apellido,Mail,Fecha de colaboración,Forma de colaboración,Cantidad
-DNI,1234567890,Juan,Pérez,juan.perez@example.com,01/01/2023,DINERO,1000
-LE,2345678901,María,Gómez,maria.gomez@example.com,02/02/2023,DONACION_VIANDAS,50
-LC,3456789012,Carlos,López,carlos.lopez@example.com,03/03/2023,REDISTRIBUCION_VIANDAS,30
-DNI,4567890123,Ana,Rodríguez,ana.rodriguez@example.com,04/04/2023,ENTREGA_TARJETAS,10
-LE,5678901234,José,Fernández,jose.fernandez@example.com,05/05/2023,DINERO,500
