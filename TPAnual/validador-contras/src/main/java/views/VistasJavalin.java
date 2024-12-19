@@ -186,6 +186,13 @@ public class VistasJavalin {
                     false
             ));
 
+//====================== NUEVA HELADERA
+            UI_NuevaHeladera UINuevaHeladera = new UI_NuevaHeladera();
+
+            app.get("/nueva-heladera", UINuevaHeladera);
+            app.post("/nueva-heladera", UINuevaHeladera::nuevaHeladera);
+            acceso.agregarRuta(new PermisosMetodo("nueva-heladera", false, true, false, false));
+
 //====================== HELADERAS-P
             UI_HeladerasP UIHeladerasP = new UI_HeladerasP();
 

@@ -26,7 +26,6 @@ public class ResponsableHeladera extends Colaboracion{
     }
 
     public void ejecutar(){
-
         this.heladera.setResponsable(this.colaborador);
         colaborador.setCantidadPuntos(colaborador.getCantidadPuntos() + puntosObtenidos());
     }

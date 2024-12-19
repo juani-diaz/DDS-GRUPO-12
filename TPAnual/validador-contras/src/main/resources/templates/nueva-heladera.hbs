@@ -9,9 +9,9 @@
     <!-- theme meta -->
     <meta name="theme-name" content="quixlab" />
   
-    <title>Heladeras</title>
+    <title>Solicitar Heladera</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png" >
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
     <!-- Pignose Calender -->
     <link href="./plugins/pg-calendar/css/pignose.calendar.min.css" rel="stylesheet">
     <!-- Chartist -->
@@ -187,51 +187,72 @@
         <div class="content-body">
             
             <div style="display: flex;">
-                <div class="col-lg-8" style="padding: 0;">
-                    <gmp-map
-                            center="-34.649518, -58.552020"
-                            zoom="10"
-                            map-id="DEMO_MAP_ID"
-                            class="mapa">
-                        {{#each hela}}
-                            <gmp-advanced-marker
-                                    position={{lat_lon this.direccion}}
-                                    title={{this.nombre}}
-                            ></gmp-advanced-marker>
-                        {{/each}}
-
-                    </gmp-map>
+                <div class="col-lg-6" style="margin-top: 15px;">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Datos de la heladera</h4>
+                            <div class="basic-form">
+                                <form action="/nueva-heladera" method="post">
+                                    <div class="form-group">
+                                        <label>Nombre</label>
+                                        <input type="text" name="nombre" class="form-control" placeholder="Nombre de la heladera" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Ciudad</label>
+                                        <input type="text" name="ciudad" class="form-control" placeholder="Ciudad" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Localidad</label>
+                                        <select class="form-control" required name="localidad">
+                                            <option value="" disabled selected>Localidad</option>
+                                            {{#each listadoLocalidades.localidades}}
+                                                <option value="{{this.nombre}}">{{this.titulo}}</option>
+                                            {{/each}}
+                                        </select>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>Calle</label>
+                                            <input type="text" name="calle" class="form-control" placeholder="Calle" required>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Altura</label>
+                                            <input type="number" min="1" name="altura" class="form-control" placeholder="Altura" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Cantidad de viandas</label>
+                                        <input type="number" min="" max="" name="tamanioPedido" class="form-control" placeholder="Cantidad de viandas requerido" required>
+                                        <label style="margin-top: 10px">
+                                            Este número es una guía que tomaremos en cuenta a la hora de instalar la heladera, pero no es definitivo. Nuestras heladeras más chicas pueden tener
+                                            <b>{{estadisticas.heladeraMasChica}}</b> viandas, mientras que las más grandes tienen hasta <b>{{estadisticas.heladeraMasGrande}}</b>.
+                                            Una heladera promedio de <b>{{estadisticas.heladeraPromedio}}</b> viandas hace que unas <b>{{estadisticas.personasPromedio}}</b>
+                                            personas se acerquen a ella en un día.
+                                        </label>
+                                    </div>
+                                    <div class="coordinates">
+                                        <label>
+                                            Latitud:
+                                            <input type="text" id="latitude" name="latitud" readonly />
+                                        </label>
+                                        <label>
+                                            Longitud:
+                                            <input type="text" id="longitude" name="longitud" readonly />
+                                        </label>
+                                    </div>
+                                    <button type="submit" class="btn btn-success">Solicitar</button>
+                                </form>                                
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-lg-4 lista-heladera">
-
-                    <a class="btn w-100" href="nueva-heladera" aria-expanded="false">
-                        <button type="button" class="btn btn-primary w-100" style="margin-bottom: 15px;">Solicitar una nueva heladera</button>
-                    </a>
-
-                    {{#each hela}}
-                        <div class="card">
-                                <div class="card-body heladera-item">
-                                    <h3>{{this.nombre}} <span class="label label-pill label-success">{{estadoString this}}</span></h3>
-                                    <i class="icon-cup menu-icon"></i><span style="margin-left: 5px;">{{viandas_del_total this}} viandas</span><br><br>
-
-                                </div>
-                        </div>
-                    {{/each}}
-
+                <div class="col-lg-6" style="margin-top: 15px;">
                     <div class="card">
-                        <div class="card-body heladera-item">
-                            <h3>Colegio Mariano Moreno HARDOCRE<span class="label label-pill label-warning">Llena</span></h3>
-                            <i class="icon-cup menu-icon"></i><span style="margin-left: 5px;">60/60 viandas</span><br><br>
+                        <div class="card-body" style="padding: 64px 29px;">
+                            <div id="map" class="mapa-nueva-heladera"></div>
+                            <div id="center-marker"></div>
                         </div>
                     </div>
-
-                    <div class="card">
-                        <div class="card-body heladera-item">
-                            <h3>Parque Centenario 1 <span class="label label-pill label-danger">Rota</span></h3>
-                            <i class="icon-cup menu-icon"></i><span style="margin-left: 5px;">20/60 viandas</span><br><br>
-                        </div>
-                    </div>
-
                 </div>
             </div>
 
@@ -284,14 +305,41 @@
     <script src="./plugins/chartist/js/chartist.min.js"></script>
     <script src="./plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"></script>
 
-
-
     <script src="./js/dashboard/dashboard-1.js"></script>
 
     <script
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBjM6Q9EpKanVT0NdUc3k-5xwrgrk2hhE&callback=initMap&libraries=marker&v=beta"
+            async
             defer
     ></script>
+
+    <script>
+        function initMap() {
+            const map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: -34.649518, lng: -58.552020 },
+                zoom: 10,
+            });
+
+            // Elementos de los inputs
+            const latitudeInput = document.getElementById('latitude');
+            const longitudeInput = document.getElementById('longitude');
+
+            // Función para actualizar los inputs
+            const updateCoordinates = () => {
+                const center = map.getCenter();
+                latitudeInput.value = center.lat().toFixed(6); // Limita a 6 decimales
+                longitudeInput.value = center.lng().toFixed(6);
+            };
+
+            // Listener para capturar las coordenadas del centro
+            map.addListener('center_changed', updateCoordinates);
+
+            // Inicializar inputs con la posición inicial del mapa
+            updateCoordinates();
+        }
+
+        initMap();
+    </script>
 
 </body>
 

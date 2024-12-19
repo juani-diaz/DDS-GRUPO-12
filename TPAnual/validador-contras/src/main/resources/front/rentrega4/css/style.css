@@ -14772,6 +14772,10 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
   height: calc(100vh - 131px)
 }
 
+.mapa-nueva-heladera {
+  height: 640px;
+}
+
 .heladera-item {
   margin-top: 15px;
   h3 {
@@ -14811,4 +14815,22 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
 .lista-localidades {
     height: 480px;
     overflow-y: auto;
+}
+
+#center-marker {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    background-color: var(--primary);
+    border-radius: 50%;
+    border: 2px solid black;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 10;
+}
+
+.coordinates {
+    display: none;
 }
