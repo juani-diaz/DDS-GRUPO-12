@@ -316,18 +316,18 @@ public class Demo {
         Tarjeta tarjeta1 = new Tarjeta("Tarjeta1");
         Tarjeta tarjeta2 = new Tarjeta("Tarjeta2");
         Tarjeta tarjeta3 = new Tarjeta("Tarjeta3");
-        Tarjeta tarjeta4 = new Tarjeta("Tarjeta4");
+        Tarjeta card4 = new Tarjeta("Card4");
 
         em.persist(tarjeta1);
         em.persist(tarjeta2);
         em.persist(tarjeta3);
-        em.persist(tarjeta4);
+        em.persist(card4);
 
         List<Tarjeta> tarjetasParaEntregarElsa = new ArrayList();
         tarjetasParaEntregarElsa.add(tarjeta1);
         tarjetasParaEntregarElsa.add(tarjeta2);
         tarjetasParaEntregarElsa.add(tarjeta3);
-        tarjetasParaEntregarElsa.add(tarjeta4);
+        tarjetasParaEntregarElsa.add(card4);
 
         EmailOld emailOldElsa = new EmailOld("elsa_pato@hotmail.com");
         String direccionElsa = "San Mateo 1200";
@@ -692,19 +692,19 @@ public class Demo {
         Usuario admin = new Usuario("admin", "fc43", a);
 
         //creo tarjetas para sergio
-        Tarjeta tarjetaParaVulnerable = new Tarjeta("0001");
-        Tarjeta tarjetaParaVulnerable2 = new Tarjeta("0002");
+        //Tarjeta tarjetaParaVulnerable = new Tarjeta("0001");
+        //Tarjeta tarjetaParaVulnerable2 = new Tarjeta("0002");
 
-        List<Tarjeta> tarjetasSergio= new ArrayList<>();
-        tarjetasSergio.add(tarjetaParaVulnerable);
-        tarjetasSergio.add(tarjetaParaVulnerable2);
+        //List<Tarjeta> tarjetasSergio= new ArrayList<>();
+        //tarjetasSergio.add(tarjetaParaVulnerable);
+        //tarjetasSergio.add(tarjetaParaVulnerable2);
 
 
         Documento dni2 = new Documento("dni","21328838");
         PersonaFisica sergio = new PersonaFisica("sergio", null, "nogoya 6367", dni2, "cerezo", "m", "m", LocalDate.of(1970, 5, 28));
         //Colaborador s = new Colaborador(sergio,tarjetasSergio);
         Colaborador s = new Colaborador(sergio);
-        s.setTarjetasParaEntregar(tarjetasSergio);
+        //s.setTarjetasParaEntregar(tarjetasSergio);
 
         // le pongo tarjetas a sergio
         //Tarjeta tarjetaParaVulnerable = new Tarjeta("0001");
@@ -733,8 +733,8 @@ public class Demo {
         em.persist(a);
         em.persist(admin);
 
-        em.persist(tarjetaParaVulnerable);
-        em.persist(tarjetaParaVulnerable2);
+        //em.persist(tarjetaParaVulnerable);
+        //em.persist(tarjetaParaVulnerable2);
 
         em.persist(dni2);
         em.persist(sergio);

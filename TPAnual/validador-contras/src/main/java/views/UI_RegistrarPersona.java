@@ -15,6 +15,7 @@ import persistence.BDUtils;
 import persistence.Repos.RepoColaborador;
 
 import javax.persistence.EntityManager;
+import javax.print.Doc;
 import java.time.LocalDate;
 import java.util.Random;
 
@@ -34,6 +35,7 @@ public class UI_RegistrarPersona extends UI_Navegable implements Handler{
 
 
     System.out.println("tarjetas de colapa: "+ tarjetasDisponibles);
+    model.put("tarjetasEntregables", colapinto.getTarjetasParaEntregar());
     model.put("tarjetasDisponibles",tarjetasDisponibles);
     model.put("botonDeshabilitado", tarjetasDisponibles <= 0);
     ctx.render("registrar-persona.hbs", this.model);
@@ -56,15 +58,17 @@ public class UI_RegistrarPersona extends UI_Navegable implements Handler{
     String tipoDocumento = ctx.formParam("tipoDocumento");
     String documento = ctx.formParam("documento");
     String numMenoresACargo =ctx.formParam("numMenoresACargo");
+    String tarjetaIdentificadorVulnerable = ctx.formParam("tarjeta");
 
     System.out.println("mi nombre es: " + nombre);
     System.out.println("naci: " + fechaNacimiento);
     System.out.println("mi tipo de doc es: " + tipoDocumento);
     System.out.println("mi doc es: " + documento);
     System.out.println("tengo "+ numMenoresACargo + " menores a cargo");
-
+    System.out.println("el identificador es: "+ tarjetaIdentificadorVulnerable);
 
     System.out.println("tarjetas de colapa: "+colapinto.getTarjetasParaEntregar().size());
+    System.out.println("tarjetas de colapa 2: "+colapinto.getTarjetasParaEntregar());
 
     if(colapinto.getTarjetasParaEntregar().isEmpty()){
       throw new IllegalArgumentException("El colaborador no tiene tarjetas para entregar");
@@ -95,7 +99,7 @@ public class UI_RegistrarPersona extends UI_Navegable implements Handler{
 
     //Asigno tarjeta
 
-    colapinto.entregarTarjeta(vulnerable);
+    //colapinto.entregarTarjeta(vulnerable);
 
 
     if (situacionCalle == null){
@@ -104,8 +108,20 @@ public class UI_RegistrarPersona extends UI_Navegable implements Handler{
       vulnerable.setSituacionCalle(EnumSituacionCalle.NO_POSEE_HOGAR);
     }
 
+    for(Integer i =0; i<colapinto.getTarjetasParaEntregar().size(); i++){
+      Tarjeta tarjetita = colapinto.getTarjetasParaEntregar().get(i);
+      System.out.println("Las tarjetas de colapa son: " + tarjetita.getIdentificador());
+    }
 
-    RegistroPersonaVulnerable registroPersonaVulnerable=new RegistroPersonaVulnerable(colapinto.getTarjetasParaEntregar().get(0),vulnerable);
+
+    Tarjeta tarjetaVulnerable = colapinto.getTarjetasParaEntregar().stream().filter(t -> t.getIdentificador().equals(tarjetaIdentificadorVulnerable)).findFirst().get();
+    System.out.println("la tarjeta es awkdwakd: " + tarjetaVulnerable.getIdentificador());
+
+
+    RegistroPersonaVulnerable registroPersonaVulnerable=new RegistroPersonaVulnerable(tarjetaVulnerable,vulnerable);
+
+    colapinto.getTarjetasParaEntregar().remove(tarjetaVulnerable);
+
     registroPersonaVulnerable.setColaborador(colapinto);
     colapinto.realizarColaboracion(registroPersonaVulnerable);
 
@@ -118,9 +134,10 @@ public class UI_RegistrarPersona extends UI_Navegable implements Handler{
     // lo hago a parte porque no hice la de persistirEntidades y me da cosa cambiarla xd
     em.persist(registroPersonaVulnerable);
 
+    em.merge(colapinto);
     BDUtils.commit(em);
 
-    repoColaborador.actualizarColaborador(colapinto);
+    //repoColaborador.actualizarColaborador(colapinto);
 
     ctx.render("index.hbs");
   }
@@ -143,14 +160,21 @@ public class UI_RegistrarPersona extends UI_Navegable implements Handler{
     System.out.println("La cantidad de tarjetas es: " + tarjetas);
     Random random= new Random();
 
+    EntityManager em = BDUtils.getEm();
+    BDUtils.comenzarTransaccion(em);
+
     for (Integer i=0; i<tarjetas; i++)
     {
       int numeroAleatorio = random.nextInt(1000000000);
-      Tarjeta tarjeta = new Tarjeta(Integer.toString(numeroAleatorio));
+      Tarjeta tarjeta = new Tarjeta("aa"+Integer.toString(numeroAleatorio));
       colapinto.recibirUnaTarjeta(tarjeta);
-      persistirColabTarj(colapinto,tarjeta);
+      em.persist(tarjeta);
+
 
     }
+    em.merge(colapinto);
+
+    BDUtils.commit(em);
     ctx.render("registrar-persona.hbs");
   }
 
@@ -159,12 +183,12 @@ public class UI_RegistrarPersona extends UI_Navegable implements Handler{
     EntityManager em = BDUtils.getEntityManager();
     BDUtils.comenzarTransaccion(em);
 
+
     em.persist(docu);
     em.persist(persona);
     em.persist(vulnerable);
     //A CHEQUEAR FUNCIONAMIENTO DE ESTO
     em.merge(vulnerable.getTarjeta());
-
     BDUtils.commit(em);
   }
   private static void persistirColabTarj(Colaborador colab, Tarjeta tarjeta){

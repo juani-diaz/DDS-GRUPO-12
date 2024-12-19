@@ -39,7 +39,7 @@ public class RegistroPersonaVulnerable extends  Colaboracion{
         if (!(colaborador.getPersona() instanceof PersonaFisica)) {
             throw new IllegalArgumentException("El que entrega la tarjeta debe ser una persona física");
         }
-        Tarjeta tarjetaEntregada = colaborador.getTarjetasParaEntregar().remove(0);
+        //Tarjeta tarjetaEntregada = colaborador.getTarjetasParaEntregar().remove(0);
 
         // Asignar la tarjeta al vulnerable
         vulnerable.setearTarjeta(tarjetaEntregada);
