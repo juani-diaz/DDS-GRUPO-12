@@ -40,7 +40,7 @@ public class UI_Registrar implements Handler {
             String tipo = ctx.formParam(k);
             String valor = ctx.formParam("contact["+indice+"][value]");
             if(Objects.equals(tipo, "email")){
-                m = new EmailOld(valor);
+                m = new EmailDir(valor);
             } else if(Objects.equals(tipo, "telefono")){
                 m = new Telefono(valor);
             } else if(Objects.equals(tipo, "whatsapp")){
@@ -92,7 +92,7 @@ public class UI_Registrar implements Handler {
             String tipo = ctx.formParam(k);
             String valor = ctx.formParam("contact["+indice+"][value]");
             if(Objects.equals(tipo, "email")){
-                m = new EmailOld(valor);
+                m = new EmailDir(valor);
             } else if(Objects.equals(tipo, "telefono")){
                 m = new Telefono(valor);
             } else if(Objects.equals(tipo, "whatsapp")){
@@ -130,7 +130,7 @@ public class UI_Registrar implements Handler {
             String tipo = ctx.formParam(k);
             String valor = ctx.formParam("contact["+indice+"][value]");
             if(Objects.equals(tipo, "email")){
-                m = new EmailOld(valor);
+                m = new EmailDir(valor);
             } else if(Objects.equals(tipo, "telefono")){
                 m = new Telefono(valor);
             } else if(Objects.equals(tipo, "whatsapp")){

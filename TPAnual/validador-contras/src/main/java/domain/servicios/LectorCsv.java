@@ -2,8 +2,6 @@ package domain.servicios;
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
-import domain.colaboraciones.DonacionDinero;
-import domain.colaboraciones.DonacionVianda;
 import domain.persona.*;
 import domain.rol.Colaborador;
 
@@ -15,7 +13,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 public class LectorCsv {
     private InputStream stream;
@@ -70,7 +67,7 @@ public class LectorCsv {
             documento.setNumero(linea[1]);
             String nombre = linea[2];
             String apellido = linea[3];
-            EmailOld medioDeContacto = new EmailOld();
+            EmailDir medioDeContacto = new EmailDir();
             LocalDate fechaNacimiento = LocalDate.parse(linea[5], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             String formaColaboracion = linea[6];
             Float cantidad = Float.valueOf(linea[7]);

@@ -10,10 +10,10 @@ import javax.persistence.Entity;
 
 @Getter @Setter @AllArgsConstructor
 @Entity
-@DiscriminatorValue("email")
-public class EmailOld extends MedioDeContacto {
+@DiscriminatorValue("emailDir")
+public class EmailDir extends MedioDeContacto {
 
-    public EmailOld(String mail) {
+    public EmailDir(String mail) {
         this.setContacto(mail);
         this.setMedio(Medio.EMAIL);
     }

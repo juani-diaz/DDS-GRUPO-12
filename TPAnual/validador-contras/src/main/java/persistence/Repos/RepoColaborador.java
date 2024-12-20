@@ -134,4 +134,7 @@ public class RepoColaborador extends BDUtils{
 
         commit(em);
     }
+    public void byUsuarioSubscribeHela(String usuario){
+
+    }
 }

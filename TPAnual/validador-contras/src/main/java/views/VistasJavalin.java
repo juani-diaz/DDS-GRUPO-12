@@ -30,8 +30,8 @@ public class VistasJavalin {
 
             initTemplateEngine();
 
-            //Demo.main(null);
-            //Demo.personas(null);
+            Demo.main(null);
+            Demo.personas(null);
             //Demo.colaboraciones(null);
             //Demo.servicios(null);
 

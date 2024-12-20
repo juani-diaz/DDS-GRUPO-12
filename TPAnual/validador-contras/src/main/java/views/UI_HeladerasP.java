@@ -2,9 +2,17 @@ package views;
 
 
 import domain.heladera.Heladera;
+import domain.rol.Colaborador;
+import domain.servicios.TwilioSendGrid;
+import domain.suscripcion.PocasViandas;
+import domain.suscripcion.Suscripcion;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
+import persistence.Repos.RepoColaborador;
 import persistence.Repos.RepoHeladera;
+import persistence.Repos.RepoSuscripcion;
+
+import java.io.IOException;
 
 public class UI_HeladerasP extends UI_Navegable implements Handler{
 
@@ -17,7 +25,7 @@ public class UI_HeladerasP extends UI_Navegable implements Handler{
         ctx.render("heladeras-p.hbs", this.model);
     }
 
-    public void botonesInfo(Context ctx) {
+    public void botonesInfo(Context ctx) throws IOException {
         System.out.println("estoy en UI_HeladerasP::subscribirse");
 
         // Obtener parámetros del formulario (datos enviados en la solicitud)
@@ -51,12 +59,17 @@ public class UI_HeladerasP extends UI_Navegable implements Handler{
         System.out.println("estoy en UI_HeladerasP::falla con la heladera -> "+ hela.getNombre() + " con el User rol: "+ this.getUsuario().getRol().getPersona().getNombre());
     }
 
-    private void subscribir(Heladera hela) {
+    private void subscribir(Heladera hela) throws IOException {
         System.out.println("estoy en UI_HeladerasP::subscribir con la heladera -> "+ hela.getNombre() + " con el User rol: "+ this.getUsuario().getRol().getPersona().getNombre());
-        Integer rolID = this.getUsuario().getRol().getId();
 
+        PocasViandas suscripcion = new PocasViandas(hela);
+        RepoSuscripcion.getInstance().add_Suscripcion(suscripcion);
 
+        Colaborador c = RepoColaborador.getInstance().findByUsuario(getUsuario().getUsuario());
+        c.getSuscripciones().add(suscripcion);
+        RepoColaborador.getInstance().actualizarColaborador(c);
 
+        TwilioSendGrid.senEmail("jpolito@frba.utn.edu.ar", "Subject", "Mensage");
     }
 
     private Heladera extracted(String heladeraId) {
@@ -69,6 +82,7 @@ public class UI_HeladerasP extends UI_Navegable implements Handler{
         System.out.println("HelaName= "+heladera.getNombre());
         return heladera;
     }
+
 }
 
 
