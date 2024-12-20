@@ -10,6 +10,7 @@ import domain.servicios.Catalogo;
 import domain.suscripcion.ExcesoViandas;
 import domain.suscripcion.HeladeraNoFuncional;
 import domain.suscripcion.PocasViandas;
+import domain.suscripcion.Suscripcion;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,6 +40,9 @@ public class Colaborador extends Rol {
 
   @OneToOne
   private Tarjeta tarjetaColaborador;
+
+  @OneToMany
+  private List<Suscripcion> suscripciones;
 
   public Colaborador(Persona p, List<Colaboracion> lc, Float cp, List<Tarjeta> te, Tarjeta t){
     this.persona = p;

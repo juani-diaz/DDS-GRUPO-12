@@ -52,8 +52,11 @@ public class UI_HeladerasP extends UI_Navegable implements Handler{
     }
 
     private void subscribir(Heladera hela) {
-
         System.out.println("estoy en UI_HeladerasP::subscribir con la heladera -> "+ hela.getNombre() + " con el User rol: "+ this.getUsuario().getRol().getPersona().getNombre());
+        Integer rolID = this.getUsuario().getRol().getId();
+
+
+
     }
 
     private Heladera extracted(String heladeraId) {
