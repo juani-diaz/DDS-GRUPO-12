@@ -20,7 +20,7 @@ public class RepoVianda extends BDUtils{
 
   private static RepoVianda instance;
 
-  private RepoVianda(){
+  public RepoVianda(){
     this.viandas = getAll_Viandas_BD();
   }
 
