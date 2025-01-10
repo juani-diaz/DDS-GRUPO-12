@@ -59,13 +59,11 @@ public class HelperSource {
         }
     }
 
-    public String botonSubscribir(Integer user, Heladera h){
+    public String botonSubscribir(Usuario user, Heladera h){
         System.out.println("usuario "+ user);
         System.out.println("heladera "+ h.getNombre());
 
-        RepoUsuarios repoUsuarios = RepoUsuarios.getInstance();
-        Usuario usuario = repoUsuarios.findById_Usuario(user);
-        Colaborador colaborador = (Colaborador) usuario.getRol();
+        Colaborador colaborador = (Colaborador) user.getRol();
 
         if(colaborador.getSuscripciones().stream().anyMatch(s -> s.getHeladera() == h)){
             return "Suscrito";
