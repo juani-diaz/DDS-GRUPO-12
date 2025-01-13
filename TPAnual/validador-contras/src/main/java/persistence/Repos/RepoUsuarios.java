@@ -67,6 +67,8 @@ public class RepoUsuarios extends BDUtils {
     public Usuario findById_Usuario(Integer usuarioID) {
         Usuario usuario = null;
 
+        System.out.println(usuarioID);
+
         try {
             usuario = usuarios.stream().filter(u -> u.getId() == usuarioID).findFirst().get();
         } catch (Exception var4) {

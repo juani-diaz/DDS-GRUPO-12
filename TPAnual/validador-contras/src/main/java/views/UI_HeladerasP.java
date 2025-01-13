@@ -69,7 +69,14 @@ public class UI_HeladerasP extends UI_Navegable implements Handler{
         c.getSuscripciones().add(suscripcion);
         RepoColaborador.getInstance().actualizarColaborador(c);
 
-        TwilioSendGrid.senEmail("jpolito@frba.utn.edu.ar", "Subject", "Mensage");
+        String subject =
+            "Suscripcion a heladera "+ hela.getNombre();
+        String mensaje =
+            "En hora buena "+ this.getUsuario().getRol().getPersona().getNombre() +
+            " acaba de suscribirse a la heladera " + hela.getNombre() +
+            " de ahora en mas podra recibir todas las notificaciones pertinentes a dicha heladera!";
+
+        TwilioSendGrid.senEmail("jpolito@frba.utn.edu.ar", subject, mensaje);
     }
 
     private Heladera extracted(String heladeraId) {

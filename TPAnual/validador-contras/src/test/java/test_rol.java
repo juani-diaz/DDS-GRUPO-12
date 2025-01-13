@@ -18,7 +18,7 @@ import java.util.Date;
 import java.util.List;
 
 public class test_rol {
-    MedioDeContacto medioDeContacto = new Email();
+    MedioDeContacto medioDeContacto = new EmailDir();
 
     PersonaFisica personaFisica1 = new PersonaFisica();
     PersonaJuridica personaJuridica1 = new PersonaJuridica("Pepsi",EnumTipoPersonaJuridica.EMPRESA,"gaseosa");

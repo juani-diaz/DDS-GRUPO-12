@@ -15,6 +15,9 @@ public class PocasViandas extends Suscripcion{
   @Column
   private Integer numeroMinimo;
 
+  public PocasViandas() {
+  }
+
   public PocasViandas(Heladera heladera, MedioDeContacto notificadores, Integer numeroMinimo){
     this.heladera=heladera;
     this.notificadores=notificadores;

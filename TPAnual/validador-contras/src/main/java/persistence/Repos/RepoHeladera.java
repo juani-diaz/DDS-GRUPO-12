@@ -1,6 +1,7 @@
 package persistence.Repos;
 
 import domain.heladera.Heladera;
+import domain.vianda.Vianda;
 import lombok.Getter;
 import persistence.BDUtils;
 
@@ -20,7 +21,7 @@ public class RepoHeladera extends BDUtils{
 
   private static RepoHeladera instance;
 
-  private RepoHeladera(){
+  public RepoHeladera(){
     this.heladeras = getHeladerass_BD();
   }
 
@@ -116,6 +117,17 @@ public class RepoHeladera extends BDUtils{
     }
 
     return resultado;
+  }
+
+  public List<Heladera> getAll_Heladera() {
+    CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+    CriteriaQuery<Heladera> criteriaQuery = criteriaBuilder.createQuery(Heladera.class);
+    Root<Heladera> viandaRoot = criteriaQuery.from(Heladera.class);
+
+    criteriaQuery.select(viandaRoot);
+
+    Query query = em.createQuery(criteriaQuery);
+    return query.getResultList();
   }
 
 }
