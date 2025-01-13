@@ -15,7 +15,7 @@ import java.time.LocalDate;
 
 public class UI_Dinero extends UI_Navegable implements Handler{
 
-  EntityManager em = BDUtils.getEntityManager();
+  EntityManager em = BDUtils.getEm();
 
   @Override
   public void handle(Context ctx) throws Exception {

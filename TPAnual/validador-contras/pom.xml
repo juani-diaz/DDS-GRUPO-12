@@ -108,6 +108,12 @@
       <version>1.18.26</version>
     </dependency>
 
+    <dependency>
+      <groupId>com.squareup.okhttp3</groupId>
+      <artifactId>okhttp</artifactId>
+      <version>4.5.0</version>
+    </dependency>
+
     <!-- https://mvnrepository.com/artifact/com.nulab-inc/zxcvbn -->
     <dependency>
       <groupId>com.nulab-inc</groupId>

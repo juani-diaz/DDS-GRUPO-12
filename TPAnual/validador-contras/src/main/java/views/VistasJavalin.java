@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Template;
 import com.github.jknack.handlebars.io.FileTemplateLoader;
+import controllers.APIControllers;
 import domain.api.Localizacion;
 import domain.auth.AccesoUsuarios;
 import domain.auth.LinkMenu;
@@ -275,6 +276,19 @@ public class VistasJavalin {
             app.get("/api/localizacion", ctx -> {
                 ctx.result(Localizacion.localizar(ctx));
             });
+
+
+//====================== API nuestra que "interactua" con el broker y los servicios que interactuan con nosotros
+
+            APIControllers api = new APIControllers();
+            app.post("/api/temperatura",api::crearIncidenteTemperatura);
+
+            app.post("/api/abrirHeladera", api::solicitarAperturaHeladera);
+
+
+//====================== API del Broker que seria el endpoint para los que interactuan con nosotros. TECNICAMENTE deberia de estar separado, es decir, ser levantado a parte en otro puerto y que sea una aplicacion a parte
+
+
 
 //====================== NO ENCONTRADO
             app.error(404, ctx -> {
