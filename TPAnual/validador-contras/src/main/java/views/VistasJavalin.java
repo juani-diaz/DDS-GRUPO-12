@@ -5,10 +5,12 @@ import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Template;
 import com.github.jknack.handlebars.io.FileTemplateLoader;
 import controllers.APIControllers;
+import controllers.BrokerControllers;
 import domain.api.Localizacion;
 import domain.auth.AccesoUsuarios;
 import domain.auth.LinkMenu;
 import domain.auth.PermisosMetodo;
+import domain.servicios.Broker;
 import io.javalin.Javalin;
 import io.javalin.config.JavalinConfig;
 import io.javalin.http.Handler;
@@ -288,7 +290,10 @@ public class VistasJavalin {
 
 //====================== API del Broker que seria el endpoint para los que interactuan con nosotros. TECNICAMENTE deberia de estar separado, es decir, ser levantado a parte en otro puerto y que sea una aplicacion a parte
 
+            BrokerControllers broker = new BrokerControllers();
+            app.post("/api/temperatura",broker::incidenteTemperatura);
 
+            app.post("/api/abrirHeladera", broker::solicitarAperturaHeladera);
 
 //====================== NO ENCONTRADO
             app.error(404, ctx -> {

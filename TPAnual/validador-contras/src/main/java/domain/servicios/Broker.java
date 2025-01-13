@@ -6,6 +6,7 @@ import domain.heladera.EnumMotivoApertura;
 import domain.rol.Tarjeta;
 import okhttp3.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.awt.*;
 import java.io.IOException;
 import java.util.Optional;
@@ -21,11 +22,12 @@ public class Broker {
         this.gson = new Gson();
     }
 
-    public void setTemperatura(String heladeraId, Float temperatura) {
+    public void setFallaTemperatura(Integer heladeraId, Float temperatura) {
 
         JsonObject requestBody = new JsonObject();
-        requestBody.addProperty("heladeraId", Integer.parseInt(heladeraId));
+        requestBody.addProperty("heladeraId", heladeraId);
         requestBody.addProperty("tipoFalla", "TEMPERATURA");
+        requestBody.addProperty("temperaturaFalla", temperatura);
 
         okhttp3.Request request = new okhttp3.Request.Builder()
                 .url(serverUrl + "/api/temperatura")
@@ -41,12 +43,12 @@ public class Broker {
         }
     }
 
-    public void abrirHeladera(String heladeraId, EnumMotivoApertura motivo, Tarjeta tarjeta) {
+    public void abrirHeladera(Integer heladeraId, Integer motivo, Integer colaboradoId) {
 
         JsonObject requestBody = new JsonObject();
-        requestBody.addProperty("heladeraId", Integer.parseInt(heladeraId));
-        requestBody.addProperty("colaboradorId", tarjeta.getId());
-        requestBody.addProperty("motivoApertura", motivo.name());
+        requestBody.addProperty("heladeraId", heladeraId);
+        requestBody.addProperty("colaboradorId", colaboradoId);
+        requestBody.addProperty("motivoApertura", motivo);
 
         Request request = new Request.Builder()
                 .url(serverUrl + "/api/abrirHeladera")

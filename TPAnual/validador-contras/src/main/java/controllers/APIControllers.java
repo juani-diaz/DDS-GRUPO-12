@@ -22,7 +22,7 @@ public class APIControllers {
      Map<String, Object> body = ctx.bodyAsClass(Map.class);
 
     int heladeraId = (int) body.getOrDefault("heladeraId", -1);
-    String tipoFalla = (String) body.getOrDefault("tipoFalla", "");
+    Integer tipoFalla = (Integer) body.getOrDefault("tipoFalla", "");
 
     Heladera heladera = repoHeladera.getHeladeras().get(heladeraId);
             if (heladera == null) {
@@ -32,7 +32,7 @@ public class APIControllers {
 
     EnumTipoDeFalla enumTipoDeFalla;
             try {
-        enumTipoDeFalla = EnumTipoDeFalla.valueOf(tipoFalla.toUpperCase());
+        enumTipoDeFalla = EnumTipoDeFalla.values()[tipoFalla];
     } catch (IllegalArgumentException e) {
         ctx.status(400).result("Tipo de falla inválido");
         return;
@@ -51,7 +51,7 @@ public class APIControllers {
 
      int heladeraId = (int) body.getOrDefault("heladeraId", -1);
      Integer colaboradorId = (Integer) body.getOrDefault("colaboradorId", "");
-     String motivoApertura = (String) body.getOrDefault("motivoApertura", "");
+     Integer motivoApertura = (Integer) body.getOrDefault("motivoApertura", "");
 
      Heladera heladera = repoHeladera.getHeladeras().get(heladeraId);
      Tarjeta tarjeta = ((Colaborador) repoColaborador.getColaboradores().stream().filter(colaborador -> colaborador.getTarjetaColaborador().getId()==colaboradorId).toArray()[0]).getTarjetaColaborador();
@@ -63,7 +63,7 @@ public class APIControllers {
 
      EnumMotivoApertura enumMotivoApertura;
      try {
-         enumMotivoApertura = EnumMotivoApertura.valueOf(motivoApertura.toUpperCase());
+         enumMotivoApertura = EnumMotivoApertura.values()[motivoApertura];
      } catch (IllegalArgumentException e) {
          ctx.status(400).result("Motivo de apertura inválido");
          return;
