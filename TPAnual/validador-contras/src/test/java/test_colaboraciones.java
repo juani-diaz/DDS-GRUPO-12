@@ -16,7 +16,7 @@ import static domain.heladera.EnumEstadoHeladera.DISPONIBLE;
 
 public class test_colaboraciones {
 
-    Colaborador colaborador1 = new Colaborador(null, null, null,null);
+    Colaborador colaborador1 = new Colaborador();
     Vianda viandaDonada= new Vianda();
     Heladera heladeraADonar= new Heladera();
     List<Vianda> viandaEsperada= Arrays.asList(viandaDonada);
