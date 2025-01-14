@@ -291,9 +291,9 @@ public class VistasJavalin {
 //====================== API del Broker que seria el endpoint para los que interactuan con nosotros. TECNICAMENTE deberia de estar separado, es decir, ser levantado a parte en otro puerto y que sea una aplicacion a parte
 
             BrokerControllers broker = new BrokerControllers();
-            app.post("/api/temperatura",broker::incidenteTemperatura);
+            app.post("/broker/temperatura",broker::incidenteTemperatura);
 
-            app.post("/api/abrirHeladera", broker::solicitarAperturaHeladera);
+            app.post("/broker/abrirHeladera", broker::solicitarAperturaHeladera);
 
 //====================== NO ENCONTRADO
             app.error(404, ctx -> {
