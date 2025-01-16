@@ -7,8 +7,8 @@ import domain.persona.MedioDeContacto;
 import domain.persona.Persona;
 import domain.registro.SingletonSeguidorEstadistica;
 import domain.servicios.Catalogo;
-import domain.suscripcion.ExcesoViandas;
-import domain.suscripcion.HeladeraNoFuncional;
+import domain.suscripcion.MuchasViandas;
+import domain.suscripcion.NoFunciona;
 import domain.suscripcion.PocasViandas;
 import domain.suscripcion.Suscripcion;
 import lombok.AllArgsConstructor;
@@ -127,10 +127,10 @@ public class Colaborador extends Rol {
   }
 
   public void suscribirseDemasiadasViandas(Heladera heladera, MedioDeContacto noti, Integer num) {
-    ExcesoViandas ev = new ExcesoViandas(heladera, noti, num);
+    MuchasViandas ev = new MuchasViandas(heladera, noti, num);
   }
 
   public void suscribirseNoFuncional(Heladera heladera, MedioDeContacto noti) {
-    HeladeraNoFuncional hnf = new HeladeraNoFuncional(heladera, noti);
+    NoFunciona hnf = new NoFunciona(heladera, noti);
   }
 }

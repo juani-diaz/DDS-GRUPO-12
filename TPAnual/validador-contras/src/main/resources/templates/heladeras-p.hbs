@@ -214,8 +214,16 @@
                                     <button type="button" class="btn mb-1 btn-primary">Donar</button>
                                 </a>
                                     <button type="submit"  name="buton_falla" value="{{this.id}}" class="btn mb-1 btn-danger" style="margin-left: 5px;">Reportar falla</button>
-                                    <button type="submit" name="buton_sub" value="{{this.id}}" class="btn mb-1 btn-outline-{{botonSubscribirStyle usuario this}}" style="margin-left: 5px;">
-                                        {{botonSubscribir usuario this}}</button>
+                                <div class="btn-group">
+                                    <button type="submit" name="buton_sub" value="{{this.id}}" class="btn mb-1 btn-outline-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onchange="form.submit()" style="margin-left: 5px;">
+                                        Suscribirse
+                                    </button>
+                                        <div class="dropdown-menu" name="tipo_sub">
+                                            <option value="PocasViandas" type="submit" class="dropdown-item {{botonSubscribirActivo usuario this "PocasViandas"}}" >Pocas Viandas</option>
+                                            <option value="MuchasViandas"type="submit" class="dropdown-item {{botonSubscribirActivo usuario this "MuchasViandas"}}">Muchas Viandas</option>
+                                            <option value="NoFunciona"   type="submit" class="dropdown-item {{botonSubscribirActivo usuario this "NoFunciona"}}"   >No Funciona</option>
+                                        </div>
+                                </div>
                             </div>
                             </form>
                         </div>

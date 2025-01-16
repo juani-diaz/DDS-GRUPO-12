@@ -59,19 +59,20 @@ public class HelperSource {
         }
     }
 
-    public String botonSubscribir(Usuario user, Heladera h){
+    public String botonSubscribirActivo(Usuario user, Heladera h, String tipo_sub){
         System.out.println("usuario "+ user);
         System.out.println("heladera "+ h.getNombre());
 
         Colaborador colaborador = (Colaborador) user.getRol();
 
-        if(colaborador.getSuscripciones().stream().anyMatch(s -> s.getHeladera() == h)){
-            return "Desuscribirse";
-        } else return "Suscribirse";
+        if(colaborador.getSuscripciones().stream().anyMatch(s -> s.getHeladera() == h &&
+                                                            s.getClass().getName()== tipo_sub)){
+            return "active";
+        } else return "";
 
     }
 
-    public String botonSubscribirStyle(Usuario user, Heladera h){
+    public String botonSubscribirStyle(Usuario user, Heladera h){ //Al final no lo uso
         System.out.println("usuario "+ user);
         System.out.println("heladera "+ h.getNombre());
 
