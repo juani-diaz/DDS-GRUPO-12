@@ -66,8 +66,20 @@ public class HelperSource {
         Colaborador colaborador = (Colaborador) user.getRol();
 
         if(colaborador.getSuscripciones().stream().anyMatch(s -> s.getHeladera() == h)){
-            return "Suscrito";
+            return "Desuscribirse";
         } else return "Suscribirse";
+
+    }
+
+    public String botonSubscribirStyle(Usuario user, Heladera h){
+        System.out.println("usuario "+ user);
+        System.out.println("heladera "+ h.getNombre());
+
+        Colaborador colaborador = (Colaborador) user.getRol();
+
+        if(colaborador.getSuscripciones().stream().anyMatch(s -> s.getHeladera() == h)){
+            return "warning";
+        } else return "success";
 
     }
 

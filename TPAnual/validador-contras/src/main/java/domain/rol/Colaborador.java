@@ -41,7 +41,10 @@ public class Colaborador extends Rol {
   @OneToOne
   private Tarjeta tarjetaColaborador;
 
-  @OneToMany
+  @OneToMany(
+      cascade = CascadeType.REMOVE, // Aplica el comportamiento en cascada
+      orphanRemoval = true // Opcional: elimina registros huérfanos
+  )
   private List<Suscripcion> suscripciones;
 
   public Colaborador(Persona p, List<Colaboracion> lc, Float cp, List<Tarjeta> te, Tarjeta t){

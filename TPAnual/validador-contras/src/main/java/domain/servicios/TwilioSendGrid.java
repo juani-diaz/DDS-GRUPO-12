@@ -32,7 +32,7 @@ public class TwilioSendGrid {
       throw ex;
     }
   }
-  public static void senEmail(String dirCorreo, String subject, String mensage) throws IOException {
+  public static void sendEmail(String dirCorreo, String subject, String mensage) throws IOException {
 
     Email to = new Email(dirCorreo);
     Content content = new Content("text/plain", mensage);
