@@ -33,14 +33,15 @@ public class VistasJavalin {
 
             initTemplateEngine();
 
-            //Demo.main(null);
+     //       Demo.main(null);
             //Demo.personas(null);
             //Demo.colaboraciones(null);
             //Demo.servicios(null);
 
             JavalinJackson.defaultMapper();
 
-            Integer port = Integer.parseInt(System.getProperty("port", "8001"));
+            String portEnv = System.getenv("PORT");
+            int port = (portEnv != null) ? Integer.parseInt(portEnv) : 8001;
             Javalin app = Javalin.create(config -> {
                 config.staticFiles.add("/front/rentrega4");
             }).start(port);

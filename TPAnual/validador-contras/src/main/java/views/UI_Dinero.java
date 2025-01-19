@@ -15,7 +15,6 @@ import java.time.LocalDate;
 
 public class UI_Dinero extends UI_Navegable implements Handler{
 
-  EntityManager em = BDUtils.getEm();
 
   @Override
   public void handle(Context ctx) throws Exception {
@@ -69,6 +68,8 @@ public class UI_Dinero extends UI_Navegable implements Handler{
 
     cola.realizarColaboracion(dona);
     //ORM
+
+    EntityManager em = BDUtils.getEntityManager();
 
     BDUtils.comenzarTransaccion(em);
 
