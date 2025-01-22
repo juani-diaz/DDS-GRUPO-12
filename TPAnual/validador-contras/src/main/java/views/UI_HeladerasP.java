@@ -28,37 +28,6 @@ public class UI_HeladerasP extends UI_Navegable implements Handler{
         ctx.render("heladeras-p.hbs", this.model);
     }
 
-/*    public void botonesInfo(Context ctx) throws IOException {
-        System.out.println("estoy en UI_HeladerasP::subscribirse");
-
-        // Obtener parámetros del formulario (datos enviados en la solicitud)
-        String tipo_sub_dropdown = ctx.formParam("buton_sub");
-        System.out.println("tipo_sub_dropdown = " + tipo_sub_dropdown);
-
-        String helaID = ctx.formParam("helaID");
-        System.out.println("helaID = " + helaID);
-
-        String heladeraID_buton_falla = ctx.formParam("buton_falla");
-        System.out.println("heladeraID_buton_falla = " + heladeraID_buton_falla);
-
-
-        if (tipo_sub_dropdown != null) {
-            System.out.println("pasajeSub = " + tipo_sub_dropdown);
-
-            //Heladera heladera = extracted(helaID);
-
-            this.botonSuscribe(helaID, tipo_sub_dropdown);
-        }
-        if (heladeraID_buton_falla != null) {
-            System.out.println("pasajeFalla = " + heladeraID_buton_falla);
-            Heladera heladera = extracted(heladeraID_buton_falla);
-
-            //this.falla(heladera);
-        }
-
-        //ctx.render("index.hbs");
-    }*/
-
     public void falla(Context ctx) throws IOException{
         System.out.println("estoy en UI_HeladerasP::falla");
 
@@ -80,21 +49,11 @@ public class UI_HeladerasP extends UI_Navegable implements Handler{
         String hela = ctx.formParam("helaID");
         System.out.println("helaID = " + hela);
 
-        System.out.println("estoy en UI_HeladerasP::botonSuscribe con la heladeraID -> "+ hela + " con el User rol: "+ this.getUsuario().getRol().getPersona().getNombre());
         Colaborador colaborador = (Colaborador) this.getUsuario().getRol();
 
-        System.out.println(colaborador.getPersona().getNombre() +
-            " tiene alguna suscripcion de tipo "+ tipo_sub+ " en la heladeraID "+hela+"? -> "+
-            colaborador.getSuscripciones().stream().anyMatch(s -> s.getHeladera().getId() == Long.parseLong(hela) && s.getClass().getName()==tipo_sub));//TODO:Esta pregunta responde mal
-
-        System.out.println(colaborador.getPersona().getNombre() +
-            " tiene alguna suscripcion en la heladera con Id "+ hela+"? ->"+ colaborador.getSuscripciones().stream().anyMatch(s->Integer.toString(s.getHeladera().getId())== hela));//TODO:Esta pregunta responde mal
-
-        System.out.println(colaborador.getPersona().getNombre() +
-            " tiene alguna suscripcion en la heladera con Id "+ hela+" de tipo "+tipo_sub+"? ->"+ colaborador.getSuscripciones().stream().anyMatch(s->s.getClass().getName()==tipo_sub));//TODO:Esta pregunta responde mal
-
-
-        if(colaborador.getSuscripciones().stream().anyMatch(s -> Integer.toString(s.getHeladera().getId()) == hela && s.getClass().getName()==tipo_sub)){
+        if(colaborador.getSuscripciones().stream().anyMatch(
+            s -> hela.equals(Integer.toString(s.getHeladera().getId())) &&
+                ("domain.suscripcion."+tipo_sub).equals(s.getClass().getName()))){
             this.desuscribirse(colaborador, hela, tipo_sub);
         } else this.suscribirse(colaborador, hela, tipo_sub);
 
@@ -106,8 +65,6 @@ public class UI_HeladerasP extends UI_Navegable implements Handler{
 
         Suscripcion suscripcion = null;
 
-        System.out.println(extracted(hela).getTamanioEnViandas()/5);
-
         switch (tipo_sub){
             case "PocasViandas":
                 suscripcion = new PocasViandas(extracted(hela));
@@ -118,8 +75,6 @@ public class UI_HeladerasP extends UI_Navegable implements Handler{
             default:
                 suscripcion = new NoFunciona(extracted(hela));
         }
-
-
 
         suscripcion.setColaborador(c);
         RepoSuscripcion.getInstance().add_Suscripcion(suscripcion);
@@ -142,11 +97,11 @@ public class UI_HeladerasP extends UI_Navegable implements Handler{
 
         System.out.println("Estoy en DESUSCRIBIRSE");
 
-        Stream<Suscripcion> suscripcionList = colaborador.getSuscripciones().stream().filter(
-                                                        suscripcion -> suscripcion.getHeladera().getId() == Long.parseLong(hela) &&
-                                                                       suscripcion.getClass().getName()== tipo_sub);
-
-        Suscripcion sus = suscripcionList.toList().get(0); //TODO: Que filtre por tipo de suscripcion
+        Suscripcion sus = colaborador.getSuscripciones().stream().filter(
+            s -> hela.equals(Integer.toString(s.getHeladera().getId())) &&
+                ("domain.suscripcion."+tipo_sub).equals(s.getClass().getName()))
+            .reduce((first, second) -> first)
+            .orElse(null);
 
         System.out.println("suscripcion.getClass().getName()   "+ sus.getClass().getName());
         System.out.println(sus.getHeladera().getNombre() +"  "+ sus.getMensaje());

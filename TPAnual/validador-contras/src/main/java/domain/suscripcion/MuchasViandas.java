@@ -15,6 +15,9 @@ public class MuchasViandas extends Suscripcion{
   @Column
   private Integer numeroMaximo;
 
+  public MuchasViandas() {
+  }
+
   public MuchasViandas(Heladera heladera, MedioDeContacto notificadores, Integer numeroMaximo){
     this.heladera=heladera;
     this.notificadores=notificadores;
@@ -26,7 +29,7 @@ public class MuchasViandas extends Suscripcion{
   public MuchasViandas(Heladera heladera){
     this.heladera=heladera;
     this.notificadores=null;
-    this.numeroMaximo = (int) (heladera.getTamanioEnViandas()*0.8);
+    this.numeroMaximo = (Integer) (heladera.getTamanioEnViandas()*8/10);
     header="Notificacion por suscripcion";
     this.mensaje="Faltan "+numeroMaximo+" viandas para que la heladera esté llena y no se puedan ingresar más viandas";
   }

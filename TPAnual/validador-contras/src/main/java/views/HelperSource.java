@@ -60,16 +60,16 @@ public class HelperSource {
     }
 
     public String botonSubscribirActivo(Usuario user, Heladera h, String tipo_sub){
-        System.out.println("usuario "+ user);
-        System.out.println("heladera "+ h.getNombre());
 
         Colaborador colaborador = (Colaborador) user.getRol();
 
-        if(colaborador.getSuscripciones().stream().anyMatch(s -> s.getHeladera() == h &&
-                                                            s.getClass().getName()== tipo_sub)){
+        String hela = Integer.toString(h.getId());
+
+        if(colaborador.getSuscripciones().stream().anyMatch(
+            s -> hela.equals(Integer.toString(s.getHeladera().getId())) &&
+                ("domain.suscripcion."+tipo_sub).equals(s.getClass().getName()))){
             return "active";
         } else return "";
-
     }
 
     public String botonSubscribirStyle(Usuario user, Heladera h){ //Al final no lo uso
