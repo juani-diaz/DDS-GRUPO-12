@@ -7,7 +7,8 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 
-@Getter @Setter @Entity
+@Getter @Setter
+@Entity
 public class NoFunciona extends Suscripcion {
 
     public NoFunciona() {

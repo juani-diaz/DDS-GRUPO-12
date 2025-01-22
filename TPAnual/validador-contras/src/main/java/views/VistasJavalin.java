@@ -200,7 +200,14 @@ public class VistasJavalin {
             UI_HeladerasP UIHeladerasP = new UI_HeladerasP();
 
             app.get("/heladeras-p", UIHeladerasP);
-            app.post("/heladeras-p", UIHeladerasP::botonesInfo);
+            app.post("/heladeras-p", UIHeladerasP::falla);
+            app.post("/botonSuscribe", UIHeladerasP::botonSuscribe);
+            acceso.agregarRuta(new PermisosMetodo(
+                "botonSuscribe",
+                true,
+                false,
+                false,
+                false));
             acceso.agregarRuta(new LinkMenu(
                     "heladeras-p",
                     "Heladeras",
