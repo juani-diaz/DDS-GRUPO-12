@@ -222,9 +222,9 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Cantidad de viandas</label>
-                                        <input type="number" min="" max="" name="tamanioPedido" class="form-control" placeholder="Cantidad de viandas requerido" required>
+                                        <input type="number" min="{{estadisticas.heladeraMasChica}}" max="{{estadisticas.heladeraMasGrande}}" name="tamanioPedido" class="form-control" placeholder="Cantidad de viandas requerido" required>
                                         <label style="margin-top: 10px">
-                                            Este número es una guía que tomaremos en cuenta a la hora de instalar la heladera, pero no es definitivo. Nuestras heladeras más chicas pueden tener
+                                            Nuestras heladeras más chicas pueden tener
                                             <b>{{estadisticas.heladeraMasChica}}</b> viandas, mientras que las más grandes tienen hasta <b>{{estadisticas.heladeraMasGrande}}</b>.
                                             Una heladera promedio de <b>{{estadisticas.heladeraPromedio}}</b> viandas hace que unas <b>{{estadisticas.personasPromedio}}</b>
                                             personas se acerquen a ella en un día.
@@ -250,7 +250,13 @@
                     <div class="card">
                         <div class="card-body" style="padding: 64px 29px;">
                             <div id="map" class="mapa-nueva-heladera"></div>
-                            <div id="center-marker"></div>
+                            <!-- Slider para radio -->
+                            <div style="margin-top: 20px;">
+                                <label for="radius-slider">Radio de para la sugerencia (metros):</label>
+                                <input type="range" id="radius-slider" min="100" max="5000" value="1000" step="100">
+                                <span id="radius-value">1000</span> metros
+                                <button id="generate-points" class="btn btn-primary" style="margin-left: 10px;">Nueva sugerencia</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -336,9 +342,95 @@
 
             // Inicializar inputs con la posición inicial del mapa
             updateCoordinates();
-        }
 
-        initMap();
+            // Crear un marcador personalizado para el centro
+            const centerMarker = new google.maps.Marker({
+                position: map.getCenter(),
+                map,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE, // Usar un círculo como ícono
+                    fillColor: "#7571f9", // Color de relleno
+                    fillOpacity: 0.8, // Opacidad del relleno
+                    strokeColor: "#000000", // Color del borde
+                    strokeWeight: 2, // Grosor del borde
+                    scale: 10, // Tamaño del círculo
+                },
+                zIndex: 1000, // Asegurar que esté sobre otros elementos
+            });
+
+            // Actualizar la posición del marcador cuando el centro del mapa cambie
+            map.addListener('center_changed', () => {
+                centerMarker.setPosition(map.getCenter());
+            });
+
+            // Obtener el slider y el valor del radio
+            const radiusSlider = document.getElementById('radius-slider');
+            const radiusValue = document.getElementById('radius-value');
+
+            // Crear un círculo inicial
+            const circle = new google.maps.Circle({
+                strokeColor: "#33AA33",
+                strokeOpacity: 0.4,
+                strokeWeight: 2,
+                fillColor: "#33FF33",
+                fillOpacity: 0.15,
+                map,
+                center: map.getCenter(),
+                radius: 1000, // Radio inicial en metros
+            });
+
+            // Actualizar el círculo cuando el centro del mapa cambie
+            map.addListener('center_changed', () => {
+                circle.setCenter(map.getCenter());
+            });
+
+            // Actualizar el círculo cuando el slider cambie
+            radiusSlider.addEventListener('input', () => {
+                const radius = parseInt(radiusSlider.value, 10);
+                circle.setRadius(radius); // Actualizar el radio del círculo
+                radiusValue.textContent = radius; // Actualizar el valor mostrado
+            });
+
+            // Array para almacenar los marcadores de los puntos sugeridos
+            let suggestedMarkers = [];
+
+            // Función para obtener puntos sugeridos desde el servidor
+            const fetchSuggestedPoints = async () => {
+                const center = circle.getCenter();
+                const radius = circle.getRadius();
+
+                // Hacer la llamada API al servidor Javalin
+                const response = await fetch(`/puntos-sugeridos?latitud=${center.lat()}&longitud=${center.lng()}&radio=${radius}`);
+                const puntosSugeridos = await response.json();
+
+                // Eliminar los marcadores anteriores
+                suggestedMarkers.forEach(marker => marker.setMap(null));
+                suggestedMarkers = [];
+
+                // Mostrar los nuevos puntos sugeridos en el mapa
+                puntosSugeridos.forEach(punto => {
+                    const marker = new google.maps.Marker({
+                        position: { lat: punto.latitud, lng: punto.longitud },
+                        map,
+                        icon: {
+                            path: google.maps.SymbolPath.CIRCLE,
+                            fillColor: "#00FF00", // Color verde para los puntos sugeridos
+                            fillOpacity: 0.8,
+                            strokeColor: "#000000",
+                            strokeWeight: 1,
+                            scale: 5, // Tamaño más pequeño para los puntos sugeridos
+                        },
+                    });
+                    suggestedMarkers.push(marker);
+                });
+            };
+
+            // Asignar la función al botón
+            const generatePointsButton = document.getElementById('generate-points');
+            generatePointsButton.addEventListener('click', fetchSuggestedPoints);
+            }
+
+            initMap();
     </script>
 
 </body>

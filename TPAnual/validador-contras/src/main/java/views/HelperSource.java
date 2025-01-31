@@ -42,8 +42,10 @@ public class HelperSource {
                 return "Falla";
             case INACTIVA_POR_ALERTA:
                 return "Alerta";
+            case PENDIENTE_INSTALACION:
+                return "Propuesta";
             default:
-                return "Funcionando";
+                return "?";
         }
     }
     public String estadoStringStyle(Heladera h){
@@ -54,8 +56,10 @@ public class HelperSource {
                 return "warning";
             case INACTIVA_POR_ALERTA:
                 return "danger";
+            case PENDIENTE_INSTALACION:
+                return "dark";
             default:
-                return "danger";
+                return "light";
         }
     }
 
@@ -86,6 +90,14 @@ public class HelperSource {
 
     public String get_archivo(String urlBase, String path) {
         return urlBase + path;
+    }
+
+    public Boolean notEqual(Object o1, Object o2){
+        return !o1.equals(o2);
+    }
+
+    public Boolean equal(Object o1, Object o2){
+        return o1.equals(o2);
     }
 
 }

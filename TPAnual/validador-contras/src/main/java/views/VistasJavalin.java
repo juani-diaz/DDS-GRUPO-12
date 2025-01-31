@@ -174,6 +174,8 @@ public class VistasJavalin {
                     false,
                     true
             ));
+            app.post("/instalar-heladera", UIHeladerasA::instalarHeladera);
+            acceso.agregarRuta(new PermisosMetodo("instalar-heladera", false, false, false, true));
 
 //====================== HELADERAS-O
             UI_HeladerasO UIHeladerasO = new UI_HeladerasO();
@@ -195,6 +197,8 @@ public class VistasJavalin {
             app.get("/nueva-heladera", UINuevaHeladera);
             app.post("/nueva-heladera", UINuevaHeladera::nuevaHeladera);
             acceso.agregarRuta(new PermisosMetodo("nueva-heladera", false, true, false, false));
+            app.get("/puntos-sugeridos", UINuevaHeladera::obtenerPuntosSugeridos);
+            acceso.agregarRuta(new PermisosMetodo("puntos-sugeridos", false, true, false, false));
 
 //====================== HELADERAS-P
             UI_HeladerasP UIHeladerasP = new UI_HeladerasP();

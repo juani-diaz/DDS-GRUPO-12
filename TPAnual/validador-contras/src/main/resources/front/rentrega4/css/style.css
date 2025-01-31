@@ -14817,20 +14817,45 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
     overflow-y: auto;
 }
 
-#center-marker {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 20px;
-    height: 20px;
-    background-color: var(--primary);
-    border-radius: 50%;
-    border: 2px solid black;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    z-index: 10;
-}
-
 .coordinates {
     display: none;
+}
+
+.custom-marker {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  background-color: var(--primary); /* Use the same primary color */
+  border-radius: 50%;
+  border: 2px solid black; /* Same border as #center-marker */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); /* Optional: Add a subtle shadow */
+  cursor: pointer;
+  pointer-events: auto; /* Ensure the marker is interactive */
+  z-index: 10; /* Match the z-index of #center-marker */
+}
+
+.custom-marker:hover {
+  background-color: var(--secondary); /* Optional: Add a hover effect */
+}
+
+.marker-label {
+  display: none;
+  position: absolute;
+  top: -35px; /* Position the label above the marker */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ffffff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  white-space: nowrap;
+  font-size: 14px;
+  color: #333333;
+}
+
+.custom-marker:hover .marker-label {
+  display: block;
 }

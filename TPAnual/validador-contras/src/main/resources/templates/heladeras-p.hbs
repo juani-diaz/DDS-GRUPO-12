@@ -194,55 +194,57 @@
                         map-id="DEMO_MAP_ID"
                         class="mapa">
                         {{#each hela}}
-                            <gmp-advanced-marker
-                                    position={{lat_lon this.direccion}}
-                                    title={{this.nombre}}
-                            ></gmp-advanced-marker>
+                            {{#if (notEqual (estadoString this) "Propuesta")}}
+                                <gmp-advanced-marker position="{{lat_lon this.direccion}}" title="{{this.nombre}}">
+                                    <div class="custom-marker">
+                                        <span class="marker-label">{{this.nombre}}</span>
+                                    </div>
+                                </gmp-advanced-marker>
+                            {{/if}}
                         {{/each}}
-                        
                     </gmp-map>
                 </div>
 
                 <div class="col-lg-4 lista-heladera">
                     {{#each hela}}
-                        <div class="card">
+                        {{#if (notEqual (estadoString this) "Propuesta")}}
+                            <div class="card">
+                                <div class="card-body heladera-item">
+                                    <h3>{{this.nombre}} <span class="label label-pill label-{{estadoStringStyle this}}">{{estadoString this}}</span></h3>
+                                    <i class="icon-cup menu-icon"></i><span style="margin-left: 5px;">{{viandas_del_total this}} viandas</span><br><br>
 
-                            <div class="card-body heladera-item">
-                                <h3>{{this.nombre}} <span class="label label-pill label-{{estadoStringStyle this}}">{{estadoString this}}</span></h3>
-                                <i class="icon-cup menu-icon"></i><span style="margin-left: 5px;">{{viandas_del_total this}} viandas</span><br><br>
+                                    <a class="btn" href="vianda" aria-expanded="false">
+                                        <button type="button" class="btn mb-1 btn-primary">Donar</button>
+                                    </a>
 
-                                <a class="btn" href="vianda" aria-expanded="false">
-                                    <button type="button" class="btn mb-1 btn-primary">Donar</button>
-                                </a>
+                                    <form action="/heladeras-p" method="post">
 
-                                <form action="/heladeras-p" method="post">
-
-                                        <button type="submit"  name="buton_falla" value="{{this.id}}" class="btn mb-1 btn-danger" style="margin-left: 5px;">Reportar falla</button>
-
-                                </form>
-
-                                <div class="btn-group">
-
-                                    <form action="/botonSuscribe" id="{{this.id}}_formulario" method="post">
-
-                                        <input style="display:none" name="helaID" value="{{this.id}}">
-
-                                        <select type="submit" name="buton_sub" onchange="suscri_dropdown({{this.id}})" class="btn mb-1 btn-outline-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left: 5px;">
-                                            Suscribirse
-                                            <div class="dropdown-menu" name="tipo_sub">
-                                                <option selected disabled>Tipo de suscripcion</option>
-                                                <option value="PocasViandas"  class="dropdown-item {{botonSubscribirActivo usuario this "PocasViandas"}}" >Pocas Viandas</option>
-                                                <option value="MuchasViandas" class="dropdown-item {{botonSubscribirActivo usuario this "MuchasViandas"}}">Muchas Viandas</option>
-                                                <option value="NoFunciona"    class="dropdown-item {{botonSubscribirActivo usuario this "NoFunciona"}}"   >No Funciona</option>
-                                            </div>
-                                        </select>
+                                            <button type="submit"  name="buton_falla" value="{{this.id}}" class="btn mb-1 btn-danger" style="margin-left: 5px;">Reportar falla</button>
 
                                     </form>
 
+                                    <div class="btn-group">
+
+                                        <form action="/botonSuscribe" id="{{this.id}}_formulario" method="post">
+
+                                            <input style="display:none" name="helaID" value="{{this.id}}">
+
+                                            <select type="submit" name="buton_sub" onchange="suscri_dropdown({{this.id}})" class="btn mb-1 btn-outline-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left: 5px;">
+                                                Suscribirse
+                                                <div class="dropdown-menu" name="tipo_sub">
+                                                    <option selected disabled>Tipo de suscripcion</option>
+                                                    <option value="PocasViandas"  class="dropdown-item {{botonSubscribirActivo usuario this "PocasViandas"}}" >Pocas Viandas</option>
+                                                    <option value="MuchasViandas" class="dropdown-item {{botonSubscribirActivo usuario this "MuchasViandas"}}">Muchas Viandas</option>
+                                                    <option value="NoFunciona"    class="dropdown-item {{botonSubscribirActivo usuario this "NoFunciona"}}"   >No Funciona</option>
+                                                </div>
+                                            </select>
+
+                                        </form>
+
+                                    </div>
                                 </div>
                             </div>
-
-                        </div>
+                        {{/if}}
                     {{/each}}
                 </div>
 

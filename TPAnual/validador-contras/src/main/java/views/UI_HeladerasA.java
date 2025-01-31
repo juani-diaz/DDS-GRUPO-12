@@ -1,6 +1,8 @@
 package views;
 
 
+import domain.heladera.EnumEstadoHeladera;
+import domain.heladera.Heladera;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import persistence.Repos.RepoHeladera;
@@ -24,6 +26,17 @@ public class UI_HeladerasA extends UI_Navegable implements Handler{
         System.out.println("HeladeraID: " + buton_contactar);
 
         ctx.render("index.hbs");
+    }
+
+    public void instalarHeladera(Context ctx) {
+        RepoHeladera repo = RepoHeladera.getInstance();
+        Integer helaId = Integer.valueOf(ctx.formParam("helaId"));
+        Heladera hela = repo.findById_Heladera(helaId);
+        hela.setEstado(EnumEstadoHeladera.DISPONIBLE);
+
+        repo.updateHeladera(hela);
+
+        ctx.redirect("/heladeras-a");
     }
 }
 

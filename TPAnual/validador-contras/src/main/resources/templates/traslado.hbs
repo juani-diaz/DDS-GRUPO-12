@@ -194,12 +194,14 @@
                         map-id="DEMO_MAP_ID"
                         class="mapa">
                         {{#each hela}}
-                            <gmp-advanced-marker
-                                position={{lat_lon this.direccion}}
-                                title={{this.nombre}}
-                            ></gmp-advanced-marker>
+                            {{#if (notEqual (estadoString this) "Propuesta")}}
+                                <gmp-advanced-marker position="{{lat_lon this.direccion}}" title="{{this.nombre}}">
+                                    <div class="custom-marker">
+                                        <span class="marker-label">{{this.nombre}}</span>
+                                    </div>
+                                </gmp-advanced-marker>
+                            {{/if}}
                         {{/each}}
-                        
                     </gmp-map>
                 </div>
                     <div class="col-lg-4 lista-heladera">

@@ -36,15 +36,29 @@ public class RepoHeladera extends BDUtils{
   //private EntityManager em = BDUtils.getEntityManager();
   EntityManager em = getEm();
 
-    public void add_Heladera(Heladera hela) {
+  public void add_Heladera(Heladera hela) {
     heladeras.add(hela);
 
     BDUtils.comenzarTransaccion(em);
     try {
+      em.persist(hela.getDireccion());
       em.persist(hela);
       BDUtils.commit(em);
     } catch (Exception e) {
       System.out.println("Error al agregar la HELADERA: " + hela + e);
+    }
+  }
+
+  public void updateHeladera(Heladera hela) {
+    BDUtils.comenzarTransaccion(em);
+    try {
+      em.merge(hela.getDireccion());
+      em.merge(hela);
+
+      BDUtils.commit(em);
+    } catch (Exception e) {
+      System.out.println("Error al actualizar la HELADERA: " + hela + e);
+      BDUtils.rollback(em);
     }
   }
 

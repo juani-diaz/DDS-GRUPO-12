@@ -13,6 +13,9 @@ import lombok.NoArgsConstructor;
 import persistence.Repos.RepoHeladera;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 @NoArgsConstructor
 public class UI_NuevaHeladera extends UI_Navegable implements Handler {
@@ -50,5 +53,50 @@ public class UI_NuevaHeladera extends UI_Navegable implements Handler {
         RepoHeladera.getInstance().add_Heladera(nuevaHeladera);
 
         ctx.redirect("/heladeras-o");
+    }
+
+    public void obtenerPuntosSugeridos(Context ctx) {
+        double latitud = Double.parseDouble(ctx.queryParam("latitud"));
+        double longitud = Double.parseDouble(ctx.queryParam("longitud"));
+        double radio = Double.parseDouble(ctx.queryParam("radio"));
+
+        // Generar puntos sugeridos (aquí puedes implementar tu lógica de negocio)
+        List<PuntoSugerido> puntosSugeridos = generarPuntosSugeridos(latitud, longitud, radio);
+
+        // Devolver la lista de puntos en formato JSON
+        ctx.json(puntosSugeridos);
+    }
+
+    private List<PuntoSugerido> generarPuntosSugeridos(double latitud, double longitud, double radio) {
+        List<PuntoSugerido> puntos = new ArrayList<>();
+        Random random = new Random();
+
+        // Generar 6 puntos aleatorios dentro del radio (esto es un ejemplo, puedes cambiarlo)
+        for (int i = 0; i < 6; i++) {
+            double randomLat = latitud + (random.nextDouble() * 2 - 1) * (radio / 111320);
+            double randomLng = longitud + (random.nextDouble() * 2 - 1) * (radio / 111320);
+            puntos.add(new PuntoSugerido(randomLat, randomLng));
+        }
+
+        return puntos;
+    }
+
+    // Clase interna para representar un punto sugerido
+    private static class PuntoSugerido {
+        private double latitud;
+        private double longitud;
+
+        public PuntoSugerido(double latitud, double longitud) {
+            this.latitud = latitud;
+            this.longitud = longitud;
+        }
+
+        public double getLatitud() {
+            return latitud;
+        }
+
+        public double getLongitud() {
+            return longitud;
+        }
     }
 }

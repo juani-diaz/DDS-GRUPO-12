@@ -189,17 +189,19 @@
             <div style="display: flex;">
                 <div class="col-lg-8" style="padding: 0;">
                     <gmp-map
-                            center="-34.649518, -58.552020"
-                            zoom="10"
-                            map-id="DEMO_MAP_ID"
-                            class="mapa">
+                        center="-34.649518, -58.552020"
+                        zoom="10"
+                        map-id="DEMO_MAP_ID"
+                        class="mapa">
                         {{#each hela}}
-                            <gmp-advanced-marker
-                                    position={{lat_lon this.direccion}}
-                                    title={{this.nombre}}
-                            ></gmp-advanced-marker>
+                            {{#if (notEqual (estadoString this) "Propuesta")}}
+                                <gmp-advanced-marker position="{{lat_lon this.direccion}}" title="{{this.nombre}}">
+                                    <div class="custom-marker">
+                                        <span class="marker-label">{{this.nombre}}</span>
+                                    </div>
+                                </gmp-advanced-marker>
+                            {{/if}}
                         {{/each}}
-
                     </gmp-map>
                 </div>
                 <div class="col-lg-4 lista-heladera">
@@ -209,28 +211,16 @@
                     </a>
 
                     {{#each hela}}
-                        <div class="card">
-                                <div class="card-body heladera-item">
-                                    <h3>{{this.nombre}} <span class="label label-pill label-success">{{estadoString this}}</span></h3>
-                                    <i class="icon-cup menu-icon"></i><span style="margin-left: 5px;">{{viandas_del_total this}} viandas</span><br><br>
+                        {{#if (notEqual (estadoString this) "Propuesta")}}
+                            <div class="card">
+                                    <div class="card-body heladera-item">
+                                        <h3>{{this.nombre}} <span class="label label-pill label-{{estadoStringStyle this}}">{{estadoString this}}</span></h3>
+                                        <i class="icon-cup menu-icon"></i><span style="margin-left: 5px;">{{viandas_del_total this}} viandas</span><br><br>
 
-                                </div>
-                        </div>
+                                    </div>
+                            </div>
+                        {{/if}}
                     {{/each}}
-
-                    <div class="card">
-                        <div class="card-body heladera-item">
-                            <h3>Colegio Mariano Moreno HARDOCRE<span class="label label-pill label-warning">Llena</span></h3>
-                            <i class="icon-cup menu-icon"></i><span style="margin-left: 5px;">60/60 viandas</span><br><br>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-body heladera-item">
-                            <h3>Parque Centenario 1 <span class="label label-pill label-danger">Rota</span></h3>
-                            <i class="icon-cup menu-icon"></i><span style="margin-left: 5px;">20/60 viandas</span><br><br>
-                        </div>
-                    </div>
 
                 </div>
             </div>
