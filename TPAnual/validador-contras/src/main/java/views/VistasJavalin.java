@@ -5,6 +5,7 @@ import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Template;
 import com.github.jknack.handlebars.io.FileTemplateLoader;
 import controllers.APIControllers;
+import controllers.AuthController;
 import controllers.BrokerControllers;
 import domain.api.Localizacion;
 import domain.auth.AccesoUsuarios;
@@ -276,6 +277,14 @@ public class VistasJavalin {
             app.get("/page-login", UILogin);
             app.post("/login", UILogin::login);
             app.post("/logout", UILogin::logout);
+
+            app.get("/google-login", AuthController::loginWithGoogle);
+
+            // Ruta de callback para recibir los resultados de Auth0
+            app.get("/auth/callback", AuthController::handleCallback);
+
+            // Ruta de callback para Google (en caso de usar Google OAuth a través de Auth0)
+            app.get("/google/callback", AuthController::handleCallback);
 
 //====================== REGISTRO
             UI_Registrar UIRegistrar = new UI_Registrar();
