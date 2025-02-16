@@ -38,7 +38,9 @@ public class RepoUsuarios extends BDUtils {
         comenzarTransaccion(em);
 
         try {
-            em.persist(usuario.getRol().getPersona().getDocumento());
+            if(usuario.getRol().getPersona().getDocumento()!=null) {
+                em.persist(usuario.getRol().getPersona().getDocumento());
+            }
             em.persist(usuario.getRol().getPersona());
             em.persist(usuario.getRol());
             em.persist(usuario);
