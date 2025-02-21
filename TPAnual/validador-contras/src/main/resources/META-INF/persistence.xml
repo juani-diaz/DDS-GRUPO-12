@@ -8,18 +8,75 @@
     <persistence-unit name="db" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
+        <!-- Listado de todas las entidades -->
+        <class>domain.auth.Usuario</class>
+        <class>domain.colaboraciones.Colaboracion</class>
+        <class>domain.colaboraciones.DistribucionVianda</class>
+        <class>domain.colaboraciones.DonacionDinero</class>
+        <class>domain.colaboraciones.DonacionVianda</class>
+        <class>domain.colaboraciones.MedioDePago</class>
+        <class>domain.colaboraciones.PresentacionOferta</class>
+        <class>domain.colaboraciones.RegistroPersonaVulnerable</class>
+        <class>domain.colaboraciones.ResponsableHeladera</class>
+        <class>domain.heladera.AdministradorSolicitudes</class>
+        <class>domain.heladera.Heladera</class>
+        <class>domain.heladera.PedidoApertura</class>
+        <class>domain.heladera.RecomendadorUbicacion</class>
+        <class>domain.heladera.Sensor</class>
+        <class>domain.heladera.SensorApertura</class>
+        <class>domain.heladera.SensorDeMovimiento</class>
+        <class>domain.heladera.SensorDeTemperatura</class>
+        <class>domain.heladera.SingletonListadoHeladeras</class>
+        <class>domain.heladera.Ubicacion</class>
+        <class>domain.incidente.Incidente</class>
+        <class>domain.incidente.IncidenteAlarma</class>
+        <class>domain.incidente.IncidenteFallaTecnica</class>
+        <class>domain.incidente.VisitasTecnicas</class>
+        <class>domain.mensajes.Mensaje</class>
+        <class>domain.mensajes.MensajeSimple</class>
+        <class>domain.mensajes.MensajeSugerenciaDistribucion</class>
+        <class>domain.persona.Documento</class>
+        <class>domain.persona.EmailDir</class>
+        <class>domain.persona.MedioDeContacto</class>
+        <class>domain.persona.Persona</class>
+        <class>domain.persona.PersonaFisica</class>
+        <class>domain.persona.PersonaJuridica</class>
+        <class>domain.persona.Telefono</class>
+        <class>domain.persona.WhatsApp</class>
+        <class>domain.registro.RegistroApertura</class>
+        <class>domain.registro.RegistroMovimiento</class>
+        <class>domain.registro.RegistroSensor</class>
+        <class>domain.registro.RegistroTemperatura</class>
+        <class>domain.registro.SingletonSeguidorEstadistica</class>
+        <class>domain.rol.Administrador</class>
+        <class>domain.rol.Colaborador</class>
+        <class>domain.rol.Rol</class>
+        <class>domain.rol.Tarjeta</class>
+        <class>domain.rol.Tecnico</class>
+        <class>domain.rol.UsoDeTarjeta</class>
+        <class>domain.rol.Vulnerable</class>
+        <class>domain.suscripcion.PocasViandas</class>
+        <class>domain.suscripcion.Publicador</class>
+        <class>domain.suscripcion.Suscripcion</class>
+        <class>domain.vianda.Vianda</class>
+        <class>domain.vianda.ViandaRecogida</class>
+
         <properties>
-            <property name="hibernate.archive.autodetection" value="class"/>
-            <!--<property name="hibernate.enhancer.enableLazyInitialization" value="false" />-->
+            <!-- Deshabilitar autodetección -->
+            <!--<property name="hibernate.archive.autodetection" value="class"/>-->
 
 
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/dds?serverTimezone=UTC"/>
                 <!--que este en localhost significa que esta en local y no la nuve-->
             <property name="hibernate.connection.username" value="root"/>
-            <property name="hibernate.connection.password" value="dds2024"/>
+            <property name="hibernate.connection.password" value="1234"/>
             <!--<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL57Dialect"/>-->
 
+            <!-- Configuración de generación de esquema -->
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+
+            <!-- Configuración adicional -->
             <property name="hibernate.show_sql" value="true"/>
                 <!-- Enable the logging of all the generated SQL statements to the console -->
 
@@ -27,16 +84,8 @@
                 <!--Format the generated SQL statement to make it more readable-->
 
             <property name="use_sql_comments" value="true"/>
-                <!-- Hibernate will put comments inside all generated SQL statements to hint what’s the generated SQL trying to do -->
-
-            <property name="hibernate.hbm2ddl.auto" value="update" />
-            <!--
-                - validate: validate the schema, makes no changes to the database.
-                - update: update the schema.
-                - create: creates the schema, destroying previous data.
-                - create-drop: drop the schema when the SessionFactory is closed explicitly, typically when the application is stopped.
-                - none: does nothing with the schema, makes no changes to the database
-             -->
+            <property name="hibernate.use_sql_comments" value="true"/>
+            <property name="hibernate.generate_statistics" value="true"/>
         </properties>
     </persistence-unit>
 </persistence>

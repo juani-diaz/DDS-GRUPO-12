@@ -22,7 +22,7 @@ import java.util.List;
 
 public class UI_Migracion extends UI_Navegable implements Handler {
 
-    EntityManager em = BDUtils.getEntityManager();
+
 
     @Override
     public void handle(Context ctx) throws Exception {
@@ -49,6 +49,7 @@ public class UI_Migracion extends UI_Navegable implements Handler {
 
         LectorCsv lector = new LectorCsv(archivoStream, mailer);
         List<Colaborador> colaboradores = lector.cargarArchivo();
+        EntityManager em = BDUtils.getEntityManager();
         BDUtils.comenzarTransaccion(em);
 
 
