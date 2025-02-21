@@ -42,7 +42,7 @@ public class DonacionVianda extends Colaboracion {
             destino.ingresarViandas(Collections.singletonList(vianda));
 
             SingletonSeguidorEstadistica se = SingletonSeguidorEstadistica.getInstance();
-            se.getDonacionViandas().add(this);
+            se.addDonacionVianda(this);
         }
         colaborador.setCantidadPuntos(colaborador.getCantidadPuntos() + puntosObtenidos());
     }

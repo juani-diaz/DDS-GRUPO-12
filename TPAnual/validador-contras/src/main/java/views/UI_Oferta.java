@@ -28,7 +28,7 @@ public class UI_Oferta extends UI_Navegable implements Handler {
         UploadedFile uploadedFile = ctx.uploadedFile("imagen");
 
         String imagen = null;
-        if (uploadedFile != null) {
+        if (uploadedFile != null && uploadedFile.size() > 0) {
             imagen = ArchivosUtils.getInstance().guardarArchivo("ofertas", uploadedFile);
         } else {
             System.out.println("No se subio una imagen");

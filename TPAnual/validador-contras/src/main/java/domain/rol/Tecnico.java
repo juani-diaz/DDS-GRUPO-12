@@ -50,6 +50,9 @@ public class Tecnico extends Rol {
     this.visitasRealizadas = new ArrayList<VisitasTecnicas>();
   }
 
+  public boolean cubreLocalidad(String localidad){
+    return areaCobertura.contains(localidad);
+  }
 
   private void realizarVisitaTecnica(Incidente incidente, LocalDate fecha, String trabajoRealizado, String foto, Boolean solucionado){
 

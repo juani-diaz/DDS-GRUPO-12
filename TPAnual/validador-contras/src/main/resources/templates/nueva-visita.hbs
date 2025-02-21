@@ -9,7 +9,7 @@
     <!-- theme meta -->
     <meta name="theme-name" content="quixlab" />
   
-    <title>Oferta</title>
+    <title>Nueva Visita</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
     <!-- Pignose Calender -->
@@ -190,30 +190,27 @@
                 <div class="col-lg-6" style="margin-top: 15px;">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Datos de la oferta</h4>
+                            <h4 class="card-title">Detalles de la visita para el incidente <b class="text-danger">#{{incidente.id}}</b> de la heladera <b class="text-danger">{{incidente.heladera.nombre}}</b></h4>
                             <div class="basic-form">
-                                <form action="/nueva-oferta" method="post" enctype="multipart/form-data">
+                                <form action="/nueva-visita" method="post" enctype="multipart/form-data">
+
                                     <div class="form-group">
-                                        <label>Nombre</label>
-                                        <input type="text" name="nombre" class="form-control" placeholder="Nombre de la oferta" required>
+                                        <label>Descripción de la visita y el trabajo hecho</label>
+                                        <textarea name="descripcion" class="form-control" placeholder="Descripción detallada" rows="5" required></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <label>Descripción</label>
-                                        <textarea name="descripcion" class="form-control" placeholder="Descripción de la oferta" rows="5" required></textarea>
+                                        <label>Foto</label>
+                                        <input type="file" name="imagen" class="form-control" accept="image/*">
                                     </div>
-                                    <div class="form-group">
-                                        <label>Rubro</label>
-                                        <input type="text" name="rubro" class="form-control" placeholder="Rubro" required>
+                                    <input style="display:none" name="id" value="{{incidente.id}}">
+                                    <div class="form-check" style="margin-bottom: 10px">
+                                        <input class="form-check-input" type="checkbox" name="solucionado" id="solucionado">
+                                        <label class="form-check-label" for="solucionado">
+                                            La heladera fue reparada y está lista para volver a operar
+                                        </label>
                                     </div>
-                                    <div class="form-group">
-                                        <label>Portada</label>
-                                        <input type="file" name="imagen" class="form-control" accept="image/*" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Precio</label>
-                                        <input type="number" name="puntosNecesarios" class="form-control" placeholder="Precio en puntos" required>
-                                    </div>
-                                    <button type="submit" class="btn btn-success">Publicar</button>
+
+                                    <button type="submit" class="btn btn-primary">Terminar</button>
                                 </form>
                                                                                           
                             </div>
@@ -223,7 +220,10 @@
                 <div class="col-lg-6" style="margin-top: 15px;">
                     <div class="card">
                         <div class="card-body" style="padding: 74px 29px;">
-                            <img class="d-block w-100" src="images/reward.png" alt="">
+                            {{#each incidente.evolucionDeIncidente}}
+                                <h3><b>{{this.fechaVisita}}</b></h3>
+                                <p>{{this.descripcion}}</p>
+                            {{/each}}
                         </div>
                     </div>
                 </div>

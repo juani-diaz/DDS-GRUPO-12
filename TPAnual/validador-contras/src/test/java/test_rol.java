@@ -13,6 +13,7 @@ import domain.vianda.ViandaRecogida;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -40,8 +41,7 @@ public class test_rol {
     //Colaborador colaborador2 = new Colaborador(personaJuridica1, Arrays.asList(colab1,colab2), 0f, Arrays.asList(tar1));
     //Vulnerable vulnerable1 = new Vulnerable(LocalDate.now(), EnumSituacionCalle.NO_POSEE_HOGAR,2, Arrays.asList(vianda1),tar1,Arrays.asList(usos1),4);
     List<String> localidades = Arrays.asList("LomasDeZamora","Palermo","Chacarita","Quilmes");
-    Date fecha = new Date();
-    Incidente incidente1 = new IncidenteAlarma(heladera1,fecha, EnumTipoDeFalla.FRAUDE);
+    Incidente incidente1 = new IncidenteAlarma(heladera1, LocalDate.now(), EnumTipoDeFalla.FRAUDE);
     Tecnico tecnico1 = new Tecnico(personaFisica1,localidades,Arrays.asList(incidente1), Arrays.asList());
     @Test
     public void crearColaboradorFisico() { // Se crea colaborador con persona fisica

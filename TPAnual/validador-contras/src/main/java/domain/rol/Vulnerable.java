@@ -60,7 +60,7 @@ public class Vulnerable extends Rol {
       ViandaRecogida vr = new ViandaRecogida(this, heladera, viandaRecogida, new Date());
 
       SingletonSeguidorEstadistica se = SingletonSeguidorEstadistica.getInstance();
-      se.getRetirosViandas().add(vr);
+      se.addViandaRecogida(vr);
 
       viandasTomadas.add(new ViandaRecogida(this, heladera, viandaRecogida, new Date()));
 

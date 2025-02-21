@@ -18,6 +18,7 @@ import lombok.Setter;
 import persistence.Repos.RepoColaborador;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -111,15 +112,6 @@ public class Colaborador extends Rol {
       return;
     }
     tarjetasParaEntregar.add(tarjeta);
-  }
-
-
-
-
-  public void reportarIncidente(Heladera heladera, String descripcion, String foto) {
-    IncidenteFallaTecnica falla = new IncidenteFallaTecnica(heladera, new Date(), this, descripcion, foto);
-    SingletonSeguidorEstadistica se = SingletonSeguidorEstadistica.getInstance();
-    se.getIncidentes().add(falla);
   }
 
   public void suscribirsePocasViandas(Heladera heladera, MedioDeContacto noti, Integer num) {

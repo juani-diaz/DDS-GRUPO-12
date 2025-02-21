@@ -3,10 +3,13 @@ package views;
 import domain.auth.JwtUtil;
 
 import domain.auth.Usuario;
+import domain.incidente.EnumEstadoDeIncidente;
+import domain.incidente.Incidente;
 import domain.rol.Colaborador;
 
 import domain.rol.Tarjeta;
 
+import domain.rol.Tecnico;
 import io.javalin.http.Context;
 
 import io.jsonwebtoken.Claims;
@@ -98,6 +101,61 @@ public class HelperSource {
 
     public Boolean equal(Object o1, Object o2){
         return o1.equals(o2);
+    }
+
+    public Boolean tengoAsignado(Incidente incidente, Usuario usuario){
+        if(incidente == null || incidente.getTecnico() == null)
+            return false;
+        return incidente.getTecnico().getId() == usuario.getRol().getId();
+    }
+
+    public Boolean noTengoAsignado(Incidente incidente, Usuario usuario){
+        return !tengoAsignado(incidente, usuario);
+    }
+
+    public String estadoStringIncidentes(Incidente i){
+        switch (i.getEstadoDeIncidente()) {
+            case SOLUCIONADO:
+                return "Solucionado";
+            case TECNICO_ASIGNADO:
+                return "Asignado";
+            case PENDIENTE_A_SOLUCIONAR:
+                return "Sin asignar";
+            default:
+                return "?";
+        }
+    }
+    public String estadoStringStyleIncidentes(Incidente i){
+        switch (i.getEstadoDeIncidente()) {
+            case SOLUCIONADO:
+                return "success";
+            case TECNICO_ASIGNADO:
+                return "warning";
+            case PENDIENTE_A_SOLUCIONAR:
+                return "danger";
+            default:
+                return "light";
+        }
+    }
+
+    public String nombreTecnico(Incidente i){
+        if(i.getTecnico() == null)
+            return "-";
+        return i.getTecnico().getPersona().getNombre();
+    }
+
+    public String ultimaFechaIncidente(Incidente i){
+        if(i.getEvolucionDeIncidente() == null || i.getEvolucionDeIncidente().isEmpty())
+            return String.valueOf(i.getFecha());
+        return String.valueOf(i.getEvolucionDeIncidente().get(i.getEvolucionDeIncidente().size()-1).getFechaVisita());
+    }
+
+    public Boolean puedoForzarSolucion(Incidente i) {
+        return i.getEstadoDeIncidente() != EnumEstadoDeIncidente.SOLUCIONADO;
+    }
+
+    public Boolean puedoDesasignar(Incidente i) {
+        return i.getEstadoDeIncidente() == EnumEstadoDeIncidente.TECNICO_ASIGNADO;
     }
 
 }

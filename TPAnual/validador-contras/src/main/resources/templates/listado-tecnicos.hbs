@@ -9,7 +9,7 @@
     <!-- theme meta -->
     <meta name="theme-name" content="quixlab" />
   
-    <title>Oferta</title>
+    <title>Incidentes</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
     <!-- Pignose Calender -->
@@ -185,45 +185,75 @@
             Content body start
         ***********************************-->
         <div class="content-body">
-            
-            <div style="display: flex;">
-                <div class="col-lg-6" style="margin-top: 15px;">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Datos de la oferta</h4>
-                            <div class="basic-form">
-                                <form action="/nueva-oferta" method="post" enctype="multipart/form-data">
-                                    <div class="form-group">
-                                        <label>Nombre</label>
-                                        <input type="text" name="nombre" class="form-control" placeholder="Nombre de la oferta" required>
+
+            <div class="col-lg-12">
+                <div class="card" style="margin: 15px;">
+                    <div class="card-body">
+                        <h4 class="card-title">Incidentes</h4>
+                        {{#each incidentes}}
+                            <div class="card accordion">
+                                <div class="card-header">
+                                    <h3>#{{this.id}} - {{this.heladera.nombre}}</h3>
+                                </div>
+                                <div class="card-body">
+                                    <pre>{{this.descripcion}}</pre><br>
+
+                                    <div style="display: inline-flex">
+                                        {{#if (tengoAsignado this usuario)}}
+                                            <a class="btn" href="nueva-visita?id={{this.id}}" aria-expanded="false">
+                                                <button type="button" class="btn mb-1 btn-primary" style="margin-left: 5px;">Nueva visita</button>
+                                            </a>
+                                            <form action="/desasignar" method="post" style="margin-top: 8px">
+                                                <button type="submit" name="incidenteId" value="{{this.id}}" class="btn mb-1 btn-danger">Desasignarse</button>
+                                            </form>
+                                        {{/if}}
+                                        {{#if (noTengoAsignado this usuario)}}
+                                            <form action="/asignar-tecnico" method="post" style="margin-top: 8px">
+                                                <button type="submit" name="incidenteId" value="{{this.id}}" class="btn mb-1 btn-primary">Asignarse</button>
+                                            </form>
+                                        {{/if}}
                                     </div>
-                                    <div class="form-group">
-                                        <label>Descripción</label>
-                                        <textarea name="descripcion" class="form-control" placeholder="Descripción de la oferta" rows="5" required></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Rubro</label>
-                                        <input type="text" name="rubro" class="form-control" placeholder="Rubro" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Portada</label>
-                                        <input type="file" name="imagen" class="form-control" accept="image/*" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Precio</label>
-                                        <input type="number" name="puntosNecesarios" class="form-control" placeholder="Precio en puntos" required>
-                                    </div>
-                                    <button type="submit" class="btn btn-success">Publicar</button>
-                                </form>
-                                                                                          
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6" style="margin-top: 15px;">
-                    <div class="card">
-                        <div class="card-body" style="padding: 74px 29px;">
-                            <img class="d-block w-100" src="images/reward.png" alt="">
+                        {{/each}}
+                        <p class="text-muted"><code></code>
+                        </p>
+                        <div id="accordion-three" class="accordion">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="mb-0" data-toggle="collapse" data-target="#collapseOne4" aria-expanded="true" aria-controls="collapseOne4"><i class="fa" aria-hidden="true"></i>Incidentes fuera de cobertura</h5>
+                                </div>
+                                <div id="collapseOne4" class="collapse" data-parent="#accordion-three">
+                                    <div class="card-body">
+                                        {{#each incidentes-fuera}}
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h3>#{{this.id}} - {{this.heladera.nombre}}</h3>
+                                                </div>
+                                                <div class="card-body">
+                                                    <pre>{{this.descripcion}}</pre><br>
+
+                                                    <div style="display: inline-flex">
+                                                        {{#if (tengoAsignado this usuario)}}
+                                                            <a class="btn" href="nueva-visita?id={{this.id}}" aria-expanded="false">
+                                                                <button type="button" class="btn mb-1 btn-primary" style="margin-left: 5px;">Nueva visita</button>
+                                                            </a>
+                                                            <form action="/desasignar" method="post" style="margin-top: 8px">
+                                                                <button type="submit" name="incidenteId" value="{{this.id}}" class="btn mb-1 btn-danger">Desasignarse</button>
+                                                            </form>
+                                                        {{/if}}
+                                                        {{#if (noTengoAsignado this usuario)}}
+                                                            <form action="/asignar-tecnico" method="post" style="margin-top: 8px">
+                                                                <button type="submit" name="incidenteId" value="{{this.id}}" class="btn mb-1 btn-outline-primary">Asignarse</button>
+                                                            </form>
+                                                        {{/if}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {{/each}}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -282,19 +312,9 @@
 
     <script src="./js/dashboard/dashboard-1.js"></script>
 
-    <script>
-        function toggleDireccion() {
-            var checkbox = document.getElementById('situacionCalle');
-            var direccion = document.getElementById('direccion');
-            direccion.disabled = checkbox.checked;
-        }
-    
-        function toggleDocumento() {
-            var tipoDocumento = document.getElementById('tipoDocumento');
-            var documento = document.getElementById('documento');
-            documento.disabled = tipoDocumento.value === 'No tiene';
-        }
-    </script>
+    <script src="./plugins/tables/js/jquery.dataTables.min.js"></script>
+    <script src="./plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
+    <script src="./plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
 
 </body>
 

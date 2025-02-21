@@ -12,6 +12,7 @@ import io.javalin.http.Context;
 import persistence.Repos.RepoColaborador;
 import persistence.Repos.RepoHeladera;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Map;
 
@@ -38,7 +39,7 @@ public class APIControllers {
         return;
     }
 
-    IncidenteAlarma incidente = new IncidenteAlarma(heladera, new Date(), enumTipoDeFalla);
+    IncidenteAlarma incidente = new IncidenteAlarma(heladera, LocalDate.now(), enumTipoDeFalla);
             ctx.status(201).json(incidente);
 }
 

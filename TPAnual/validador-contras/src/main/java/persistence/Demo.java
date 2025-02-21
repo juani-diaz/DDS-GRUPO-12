@@ -667,12 +667,11 @@ public class Demo {
         //Persisto la heladera
         em.persist(heladeraBanfield);
         em.persist(heladeraBoca);
-        Date fecha = new Date();
 
         //Creamos los incidentes
-        IncidenteFallaTecnica incidenteReportado = new IncidenteFallaTecnica(heladeraBoca, fecha,colaboradorEzequiel,"Se rompio un caño", "imagen");
+        IncidenteFallaTecnica incidenteReportado = new IncidenteFallaTecnica(heladeraBoca, LocalDate.now(),colaboradorEzequiel,"Se rompio un caño", "imagen");
 
-        IncidenteAlarma incidentePorAlarma = new IncidenteAlarma(heladeraBoca, fecha, EnumTipoDeFalla.TEMPERATURA);
+        IncidenteAlarma incidentePorAlarma = new IncidenteAlarma(heladeraBoca, LocalDate.now(), EnumTipoDeFalla.TEMPERATURA);
 
         //Persisto las fallas
         em.persist(incidenteReportado);

@@ -74,7 +74,7 @@ public class DistribucionVianda extends Colaboracion {
             this.destino.ingresarViandas(this.viandasMovidas);
 
             SingletonSeguidorEstadistica se = SingletonSeguidorEstadistica.getInstance();
-            se.getDistribucionViandas().add(this);
+            se.addDistribucionVianda(this);
 
             colaborador.setCantidadPuntos(colaborador.getCantidadPuntos() + puntosObtenidos());
 
