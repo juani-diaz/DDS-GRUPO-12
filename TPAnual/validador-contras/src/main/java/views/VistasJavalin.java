@@ -294,7 +294,9 @@ public class VistasJavalin {
             app.post("/registrar-p", UIRegistrar::registrarPersona);
             app.post("/registrar-o", UIRegistrar::registrarOrg);
             app.post("/registrar-t", UIRegistrar::registrarTecnico);
-
+            app.post("/registrar-p-google", UIRegistrar::registrarPersonaGoogle);
+            app.post("/registrar-o-google", UIRegistrar::registrarOrgGoogle);
+            app.post("/registrar-t-google", UIRegistrar::registrarTecnicoGoogle);
 //====================== API
             app.get("/api/localizacion", ctx -> {
                 ctx.result(Localizacion.localizar(ctx));

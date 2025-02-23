@@ -17,6 +17,13 @@ import java.util.Map;
 public class UI_Login  implements Handler {
 
     public void handle(Context ctx) throws Exception {
+        String token = ctx.cookie("Auth");
+        if(token != null) {
+            token = token.replace("Bearer", "");
+            String decodedToken = URLDecoder.decode(token, StandardCharsets.UTF_8);
+            JwtUtil.invalidateToken(decodedToken);
+        }
+        ctx.removeCookie("Auth");
         Map<String, Object> model = new HashMap();
         ctx.render("page-login.hbs", model);
     }

@@ -4,10 +4,15 @@ import domain.auth.AccesoUsuarios;
 import domain.auth.JwtUtil;
 import domain.auth.LinkMenu;
 import domain.auth.Usuario;
+import domain.rol.Colaborador;
+import domain.rol.Tecnico;
 import io.javalin.http.Context;
+import io.jsonwebtoken.Claims;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import persistence.Repos.RepoColaborador;
+import persistence.Repos.RepoUsuarios;
 
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
@@ -52,11 +57,23 @@ public class UI_Navegable {
         return false;
     }
 
+    boolean vieneDeGoogle(Context ctx) {
+        String token = ctx.cookie("Auth");
+        token = token.replace("Bearer", "");
+        String decodedToken = URLDecoder.decode(token, StandardCharsets.UTF_8);
+        Usuario u = JwtUtil.validateTokenAndGetUser(decodedToken);
+        return u.getRol().getPersona().getDireccion()==null;
+    }
+
      void validarSesion(Context ctx) {
         if(!sesionValida(ctx)){
             ctx.status(403).result("No tenés permiso para acceder a esta página...");
             ctx.redirect("/denegado");
             return;
+        } else if (vieneDeGoogle(ctx)) {
+            ctx.status(403).result("Debes completar tus datos primero...");
+            ctx.redirect("/page-register");
+            return;
         }
-    }
+     }
 }
