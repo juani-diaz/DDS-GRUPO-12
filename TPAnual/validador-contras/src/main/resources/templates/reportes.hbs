@@ -12,6 +12,7 @@
     <title>Reportes</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+
     <!-- Pignose Calender -->
     <link href="./plugins/pg-calendar/css/pignose.calendar.min.css" rel="stylesheet">
     <!-- Chartist -->
@@ -19,6 +20,7 @@
     <link rel="stylesheet" href="./plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css">
     <!-- Custom Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+
 
 </head>
 
@@ -190,14 +192,19 @@
                 <div class="card" style="margin: 15px;">
                     <div class="card-body">
                         <div style="display: flex;">
-                            <h4 class="card-title" style="align-content: center;">Reportes de la semana </h4>
-                            <div class="form-group" style="position: relative; top: 5px; margin-left: 10px;">
-                                <select class="form-control" required>
-                                    <option selected>29/09/2024 - 05/10/2024</option>
-                                    <option>22/09/2024 - 28/09/2024</option>
-                                    <option>15/09/2024 - 21/09/2024</option>
-                                </select>
-                            </div>
+                            <form action="/reporteSemana" method="post">
+                                <h4 class="card-title" style="align-content: center;">Reportes de la semana </h4>
+
+                                <div class="container mt-4">
+
+                                        <div class="input-group">
+                                            <input type="week" name="semana" class="form-control" required>
+                                            <button type="submit" class="btn btn-primary">Buscar reporte</button>
+                                        </div>
+
+                                </div>
+
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -312,8 +319,6 @@
     <!-- ChartistJS -->
     <script src="./plugins/chartist/js/chartist.min.js"></script>
     <script src="./plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"></script>
-
-
 
     <script src="./js/dashboard/dashboard-1.js"></script>
 

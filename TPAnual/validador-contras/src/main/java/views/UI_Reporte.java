@@ -21,4 +21,12 @@ public class UI_Reporte extends UI_Navegable implements Handler {
         System.out.println(model);
         ctx.render("reportes.hbs", this.model);
     }
+
+    public void mostrarReportePorSemana(Context ctx){
+        System.out.println("estoy en mostrarReportePorSemana");
+
+        // Obtener parámetros del formulario (datos enviados en la solicitud)
+        String semana = ctx.formParam("semana");
+        System.out.println("semana: " + semana);
+    }
 }

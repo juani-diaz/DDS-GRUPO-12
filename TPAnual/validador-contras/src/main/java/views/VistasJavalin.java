@@ -240,9 +240,10 @@ public class VistasJavalin {
             ));
 
 //====================== REPORTES
-            UI_Reporte repo = new UI_Reporte();
+            UI_Reporte UIrepo = new UI_Reporte();
 
-            app.get("/reportes",repo);
+            app.get("/reportes",UIrepo);
+            app.post("/reporteSemana", UIrepo::mostrarReportePorSemana);
             acceso.agregarRuta(new LinkMenu(
                     "reportes",
                     "Reportes",
@@ -252,6 +253,7 @@ public class VistasJavalin {
                     false,
                     true
             ));
+
 
 //====================== MIGRACIÓN
             UI_Migracion UI_Migracion = new UI_Migracion();

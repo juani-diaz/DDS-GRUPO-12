@@ -133,6 +133,43 @@ public class RepoHeladera extends BDUtils{
     return resultado;
   }
 
+  public List<Map<String, Object>> obtenerFallasxHeladeraxSemana() {
+    System.out.println("Estoy en obtenerFallasxHeladeraxSemana");
+
+    EntityManager em = BDUtils.getEntityManager();
+
+    Query query = em.createQuery(
+        "SELECT p.id, p.nombre, " +
+            "       COUNT(DISTINCT al) as totalErrores, " +
+            "       COUNT(DISTINCT rv) as totalRecogidas, " +
+            "       COUNT(DISTINCT rv) + COUNT(DISTINCT v) as totalViandas " +
+            "FROM Heladera p " +
+            "LEFT JOIN p.incidentesAlarma al " +
+            "LEFT JOIN p.viandasEnHeladera v " +
+            "LEFT JOIN v.viandaRecogida rv " +
+            "WHERE al.fecha BETWEEN '20250103' and '20250123'" +
+            "GROUP BY p.id, p.nombre"
+    );
+
+
+    System.out.println("Query creada: " + query);
+
+    List<Object[]> heladeras = query.getResultList();
+
+    List<Map<String, Object>> resultado = new ArrayList<>();
+    for (Object[] fila : heladeras) {
+      Map<String, Object> mapa = new HashMap<>();
+      mapa.put("id", fila[0]);
+      mapa.put("nombre", fila[1]);
+      mapa.put("totalErrores", fila[2]);
+      mapa.put("totalRecogidas", fila[3]);
+      mapa.put("totalViandas", fila[4]);
+      resultado.add(mapa);
+    }
+
+    return resultado;
+  }
+
   public List<Heladera> getAll_Heladera() {
     CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
     CriteriaQuery<Heladera> criteriaQuery = criteriaBuilder.createQuery(Heladera.class);
