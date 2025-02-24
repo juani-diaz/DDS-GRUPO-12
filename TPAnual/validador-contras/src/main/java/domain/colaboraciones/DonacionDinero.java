@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import persistence.BDUtils;
+import persistence.Repos.RepoColaborador;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -41,10 +42,6 @@ public class DonacionDinero extends Colaboracion {
 
         BDUtils.comenzarTransaccion(em);
         em.persist(medioDePago);
-        BDUtils.commit(em);
-
-        BDUtils.comenzarTransaccion(em);
-        em.persist(this);
         BDUtils.commit(em);
     }
 

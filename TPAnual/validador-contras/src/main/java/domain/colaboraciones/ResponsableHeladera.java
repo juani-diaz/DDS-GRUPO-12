@@ -35,7 +35,7 @@ public class ResponsableHeladera extends Colaboracion{
         }
         LocalDate fechaActual = LocalDate.now();
         Period periodoFuncionamiento = Period.between(heladera.getFechaFuncionamiento(), fechaActual);
-        return periodoFuncionamiento.getYears() * 12 + periodoFuncionamiento.getMonths(); // Calcula los meses totales
+        return periodoFuncionamiento.getYears() * 12 + periodoFuncionamiento.getMonths() + 1; // Calcula los meses totales (arranca en 1 para puntos)
     }
 
     public Float puntosObtenidos(){

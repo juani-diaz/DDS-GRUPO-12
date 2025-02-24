@@ -1,6 +1,7 @@
 package domain.rol;
 
 import domain.colaboraciones.Colaboracion;
+import domain.colaboraciones.PresentacionOferta;
 import domain.heladera.Heladera;
 import domain.incidente.IncidenteFallaTecnica;
 import domain.persona.MedioDeContacto;
@@ -15,6 +16,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import persistence.Repos.RepoColaboracion;
 import persistence.Repos.RepoColaborador;
 
 import javax.persistence.*;
@@ -34,6 +36,9 @@ public class Colaborador extends Rol {
 
   @Column
   private Float cantidadPuntos;
+
+  @Column
+  private Float puntosGastados;
   //@OneToMany(cascade = CascadeType.ALL)
   //@ElementCollection
   @OneToMany
@@ -54,6 +59,7 @@ public class Colaborador extends Rol {
     this.cantidadPuntos = cp;
     this.tarjetasParaEntregar = te;
     this.tarjetaColaborador = t;
+    this.puntosGastados = 0F;
   }
   public  Colaborador(Persona p, List<Tarjeta> te){
     this.persona = p;
@@ -61,6 +67,7 @@ public class Colaborador extends Rol {
     this.cantidadPuntos = 0F;
     this.tarjetasParaEntregar = te;
     this.tarjetaColaborador = null;
+    this.puntosGastados = 0F;
   }
 
   public Colaborador(Persona p){
@@ -69,11 +76,16 @@ public class Colaborador extends Rol {
     this.cantidadPuntos = 0F;
     this.tarjetasParaEntregar = new ArrayList<Tarjeta>();
     this.tarjetaColaborador = null;
+    this.puntosGastados = 0F;
   }
 
   public void realizarColaboracion(Colaboracion colaboracion){
     colaboracion.ejecutar();
     this.colaboraciones.add(colaboracion);
+
+    RepoColaboracion.getInstance().add_Colaboracion(colaboracion);
+    RepoColaborador.getInstance().actualizarColaborador(this);
+
     actualizarPuntos();
   }
 
@@ -82,11 +94,13 @@ public class Colaborador extends Rol {
     for(Colaboracion col : this.colaboraciones){
       puntosNuevos += col.puntosObtenidos();
     }
-    this.cantidadPuntos = puntosNuevos;
+    if(puntosGastados == null)
+      puntosGastados = 0F;
+    this.cantidadPuntos = puntosNuevos - puntosGastados;
   }
 
-  public boolean realizarCanje(Integer indiceOferta){
-    return Catalogo.getInstance().otorgar(indiceOferta, this);
+  public boolean realizarCanje(PresentacionOferta o){
+    return Catalogo.getInstance().otorgar(o, this);
   }
 
   public boolean entregarTarjeta(Vulnerable vulnerable){

@@ -77,13 +77,6 @@ public class UI_Vianda extends UI_Navegable implements Handler{
 
     cola.realizarColaboracion(dona);
 
-    EntityManager em = BDUtils.getEm();
-    BDUtils.comenzarTransaccion(em);
-
-    em.merge(cola);
-    em.merge(dona);
-
-    BDUtils.commit(em);
     ctx.redirect("/index");
   }
 

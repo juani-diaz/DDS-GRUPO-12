@@ -620,9 +620,9 @@ public class Demo {
         Colaboracion presentarOfertaBotines = new PresentacionOferta(colaboradorEdgar,LocalDate.now(), "Deporte","Pelota Jabulani","una oferta",250F,"imagenJabulani");
         presentarOfertaBotines.ejecutar();
 
-        catalogo.otorgar(0,colaboradorEdgar);
+        //catalogo.otorgar(0,colaboradorEdgar);
 
-        catalogo.otorgar(1,colaboradorEdgar);
+        //catalogo.otorgar(1,colaboradorEdgar);
 
         //persisto las ofertas
         em.persist(presentarOfertaDestornillador);

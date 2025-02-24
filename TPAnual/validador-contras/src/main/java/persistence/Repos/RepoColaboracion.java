@@ -39,13 +39,15 @@ public class RepoColaboracion extends BDUtils{
     colaboraciones.add(cola);
 
     comenzarTransaccion(em);
-    try {
+    em.persist(cola);
+    commit(em);
+    /*try {
       System.out.println("add_Colaboracion: " + cola.getId());
       em.persist(cola);
       commit(em);
     } catch (Exception e) {
       System.out.println("Error al agregar la Colaboracion: " + cola + e);
-    }
+    }*/
   }
   public void add_DonaVianda(DonacionVianda donacionVianda) {
     colaboraciones.add(donacionVianda);

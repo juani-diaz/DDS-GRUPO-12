@@ -4,6 +4,7 @@ import domain.colaboraciones.PresentacionOferta;
 import domain.rol.Colaborador;
 import lombok.Getter;
 import persistence.EntidadPersistente;
+import persistence.Repos.RepoColaborador;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -57,6 +58,10 @@ public class Catalogo extends EntidadPersistente {
         }
     }
 
+    public PresentacionOferta getOfertaById(int id){
+        return ofertas.stream().filter(o -> o.getId() == id).findFirst().get();
+    }
+
     public void retirarDelCatalogoPorId(int id){
         PresentacionOferta p = ofertas.stream().filter(o -> o.getId() == id).findFirst().get();
         retirarDelCatalogo(p);
@@ -75,12 +80,11 @@ public class Catalogo extends EntidadPersistente {
         }
     }
 
-    public boolean otorgar(Integer indiceCatalogo, Colaborador colaborador){
-        PresentacionOferta o = ofertas.get(indiceCatalogo);
+    public boolean otorgar(PresentacionOferta o, Colaborador colaborador){
         if(o.getPuntosNecesarios() <= colaborador.getCantidadPuntos()){
             //TODO hacer lo que corresponda (mail, envio)
-            colaborador.setCantidadPuntos(colaborador.getCantidadPuntos() - o.getPuntosNecesarios());
-            System.out.println("funco canje");
+            colaborador.setPuntosGastados(colaborador.getPuntosGastados() + o.getPuntosNecesarios());
+            RepoColaborador.getInstance().actualizarColaborador(colaborador);
             return true;
         }
         return false;

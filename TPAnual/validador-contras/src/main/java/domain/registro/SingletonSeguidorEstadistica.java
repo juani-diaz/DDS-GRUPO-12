@@ -213,7 +213,7 @@ public class SingletonSeguidorEstadistica extends EntidadPersistente {
   // Métodos para DonacionVianda
   public void addDonacionVianda(DonacionVianda donacionVianda) {
     donacionViandas.add(donacionVianda);
-    persistirEntidad(donacionVianda);
+    //persistirEntidad(donacionVianda);
   }
 
   public void updateDonacionVianda(DonacionVianda donacionVianda) {
@@ -242,7 +242,7 @@ public class SingletonSeguidorEstadistica extends EntidadPersistente {
   // Métodos para DistribucionVianda
   public void addDistribucionVianda(DistribucionVianda distribucionVianda) {
     distribucionViandas.add(distribucionVianda);
-    persistirEntidad(distribucionVianda);
+    //persistirEntidad(distribucionVianda);
   }
 
   public void updateDistribucionVianda(DistribucionVianda distribucionVianda) {
