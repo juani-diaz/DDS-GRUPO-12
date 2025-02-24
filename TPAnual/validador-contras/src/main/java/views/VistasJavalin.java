@@ -206,7 +206,6 @@ public class VistasJavalin {
             UI_HeladerasP UIHeladerasP = new UI_HeladerasP();
 
             app.get("/heladeras-p", UIHeladerasP);
-            app.post("/heladeras-p", UIHeladerasP::falla);
             app.post("/botonSuscribe", UIHeladerasP::botonSuscribe);
             acceso.agregarRuta(new PermisosMetodo(
                 "botonSuscribe",
@@ -223,6 +222,51 @@ public class VistasJavalin {
                     false,
                     false
             ));
+
+//====================== REPORTAR-FALLA
+            UI_ReportarFalla UIReportarFalla = new UI_ReportarFalla();
+
+            app.get("/reportar-falla", UIReportarFalla);
+            app.post("/reportar-falla", UIReportarFalla::reportarFalla);
+            acceso.agregarRuta(new PermisosMetodo("nueva-heladera", true, true, true, true));
+
+//====================== VISITAS-TECNICAS
+            UI_ListadoTecnicos UITecnicos = new UI_ListadoTecnicos();
+
+            app.get("/listado-tecnicos", UITecnicos);
+            acceso.agregarRuta(new LinkMenu(
+                    "listado-tecnicos",
+                    "Incidentes",
+                    "icon-location-pin",
+                    false,
+                    false,
+                    true,
+                    false
+            ));
+            app.post("/asignar-tecnico", UITecnicos::asignarTecnico);
+            acceso.agregarRuta(new PermisosMetodo("asignar-tecnico", false, false, true, true));
+
+            UI_NuevaVisita UINuevaVisita = new UI_NuevaVisita();
+            app.get("/nueva-visita", UINuevaVisita);
+            app.post("/nueva-visita", UINuevaVisita::nuevaVisita);
+            acceso.agregarRuta(new PermisosMetodo("nueva-visita", false, false, true, true));
+
+//====================== INCIDENTES-ADMIN
+            UI_IncidentesAdmin UIIncidentes = new UI_IncidentesAdmin();
+            app.get("/incidentes-a", UIIncidentes);
+            acceso.agregarRuta(new LinkMenu(
+                    "incidentes-a",
+                    "Incidentes",
+                    "icon-location-pin",
+                    false,
+                    false,
+                    false,
+                    true
+            ));
+            app.post("/desasignar", UIIncidentes::desasignar);
+            acceso.agregarRuta(new PermisosMetodo("desasignar", false, false, true, true));
+            app.post("/forzar-solucion", UIIncidentes::forzarSolucion);
+            acceso.agregarRuta(new PermisosMetodo("forzar-solucion", false, false, false, true));
 
 //====================== PUNTOS
             UI_Puntos UIPuntos = new UI_Puntos();

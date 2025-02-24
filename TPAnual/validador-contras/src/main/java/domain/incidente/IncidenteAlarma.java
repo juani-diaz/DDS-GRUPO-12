@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -18,12 +19,12 @@ public class IncidenteAlarma extends Incidente{
   @Enumerated
   private EnumTipoDeFalla enumTipoDeFalla;
 
-  public IncidenteAlarma(Heladera heladera, Date fecha, EnumTipoDeFalla falla){
+  public IncidenteAlarma(Heladera heladera, LocalDate fecha, EnumTipoDeFalla falla){
     super(heladera, fecha, new ArrayList<VisitasTecnicas>(), EnumEstadoDeIncidente.PENDIENTE_A_SOLUCIONAR);
     this.enumTipoDeFalla = falla;
     heladera.setEstado(EnumEstadoHeladera.INACTIVA_POR_ALERTA);
     SingletonSeguidorEstadistica se = SingletonSeguidorEstadistica.getInstance();
-    se.getIncidentes().add(this);
+    se.addIncidente(this);
   }
 
   // Si no esta este metodo tira error el JPA/Hibernate

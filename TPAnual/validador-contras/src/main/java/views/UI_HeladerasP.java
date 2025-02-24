@@ -28,17 +28,6 @@ public class UI_HeladerasP extends UI_Navegable implements Handler{
         ctx.render("heladeras-p.hbs", this.model);
     }
 
-    public void falla(Context ctx) throws IOException{
-        System.out.println("estoy en UI_HeladerasP::falla");
-
-        String heladeraID_buton_falla = ctx.formParam("buton_falla");
-        Heladera hela = extracted(heladeraID_buton_falla);
-
-        System.out.println("estoy en UI_HeladerasP::falla con la heladera -> "+ hela.getNombre() + " con el User rol: "+ this.getUsuario().getRol().getPersona().getNombre());
-
-        ctx.render("index.hbs");
-    }
-
     public void botonSuscribe(Context ctx) throws IOException{
         System.out.println("estoy en UI_HeladerasP::botonSuscribe");
 

@@ -9,7 +9,7 @@
     <!-- theme meta -->
     <meta name="theme-name" content="quixlab" />
   
-    <title>Heladeras</title>
+    <title>Incidentes</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
     <!-- Pignose Calender -->
@@ -186,66 +186,77 @@
         ***********************************-->
         <div class="content-body">
 
-            <div style="display: flex;">
-                <div class="col-lg-8" style="padding: 0;">
-                    <gmp-map
-                        center="-34.649518, -58.552020"
-                        zoom="10"
-                        map-id="DEMO_MAP_ID"
-                        class="mapa">
-                        {{#each hela}}
-                            {{#if (notEqual (estadoString this) "Propuesta")}}
-                                <gmp-advanced-marker position="{{lat_lon this.direccion}}" title="{{this.nombre}}">
-                                    <div class="custom-marker">
-                                        <span class="marker-label">{{this.nombre}}</span>
-                                    </div>
-                                </gmp-advanced-marker>
-                            {{/if}}
-                        {{/each}}
-                    </gmp-map>
-                </div>
+            <div class="col-lg-12">
+                <div class="card" style="margin: 15px;">
+                    <div class="card-body">
+                        <h4 class="card-title">Incidentes</h4>
+                        {{#each incidentes}}
+                            <div class="card accordion">
+                                <div class="card-header">
+                                    <h3>#{{this.id}} - {{this.heladera.nombre}}</h3>
+                                </div>
+                                <div class="card-body">
+                                    <pre>{{this.descripcion}}</pre><br>
 
-                <div class="col-lg-4 lista-heladera">
-                    {{#each hela}}
-                        {{#if (notEqual (estadoString this) "Propuesta")}}
-                            <div class="card">
-                                <div class="card-body heladera-item">
-                                    <h3>{{this.nombre}} <span class="label label-pill label-{{estadoStringStyle this}}">{{estadoString this}}</span></h3>
-                                    <i class="icon-cup menu-icon"></i><span style="margin-left: 5px;">{{viandas_del_total this}} viandas</span><br><br>
-
-                                    <a class="btn" href="vianda" aria-expanded="false">
-                                        <button type="button" class="btn mb-1 btn-primary">Donar</button>
-                                    </a>
-
-                                    <a class="btn" href="reportar-falla?id={{this.id}}" aria-expanded="false">
-                                        <button type="button" class="btn mb-1 btn-danger" style="margin-left: 5px;">Reportar falla</button>
-                                    </a>
-
-                                    <div class="btn-group">
-
-                                        <form action="/botonSuscribe" id="{{this.id}}_formulario" method="post">
-
-                                            <input style="display:none" name="helaID" value="{{this.id}}">
-
-                                            <select type="submit" name="buton_sub" onchange="suscri_dropdown({{this.id}})" class="btn mb-1 btn-outline-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left: 5px;">
-                                                Suscribirse
-                                                <div class="dropdown-menu" name="tipo_sub">
-                                                    <option selected disabled>Tipo de suscripcion</option>
-                                                    <option value="PocasViandas"  class="dropdown-item {{botonSubscribirActivo usuario this "PocasViandas"}}" >Pocas Viandas</option>
-                                                    <option value="MuchasViandas" class="dropdown-item {{botonSubscribirActivo usuario this "MuchasViandas"}}">Muchas Viandas</option>
-                                                    <option value="NoFunciona"    class="dropdown-item {{botonSubscribirActivo usuario this "NoFunciona"}}"   >No Funciona</option>
-                                                </div>
-                                            </select>
-
-                                        </form>
-
+                                    <div style="display: inline-flex">
+                                        {{#if (tengoAsignado this usuario)}}
+                                            <a class="btn" href="nueva-visita?id={{this.id}}" aria-expanded="false">
+                                                <button type="button" class="btn mb-1 btn-primary" style="margin-left: 5px;">Nueva visita</button>
+                                            </a>
+                                            <form action="/desasignar" method="post" style="margin-top: 8px">
+                                                <button type="submit" name="incidenteId" value="{{this.id}}" class="btn mb-1 btn-danger">Desasignarse</button>
+                                            </form>
+                                        {{/if}}
+                                        {{#if (noTengoAsignado this usuario)}}
+                                            <form action="/asignar-tecnico" method="post" style="margin-top: 8px">
+                                                <button type="submit" name="incidenteId" value="{{this.id}}" class="btn mb-1 btn-primary">Asignarse</button>
+                                            </form>
+                                        {{/if}}
                                     </div>
                                 </div>
                             </div>
-                        {{/if}}
-                    {{/each}}
-                </div>
+                        {{/each}}
+                        <p class="text-muted"><code></code>
+                        </p>
+                        <div id="accordion-three" class="accordion">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="mb-0" data-toggle="collapse" data-target="#collapseOne4" aria-expanded="true" aria-controls="collapseOne4"><i class="fa" aria-hidden="true"></i>Incidentes fuera de cobertura</h5>
+                                </div>
+                                <div id="collapseOne4" class="collapse" data-parent="#accordion-three">
+                                    <div class="card-body">
+                                        {{#each incidentes-fuera}}
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h3>#{{this.id}} - {{this.heladera.nombre}}</h3>
+                                                </div>
+                                                <div class="card-body">
+                                                    <pre>{{this.descripcion}}</pre><br>
 
+                                                    <div style="display: inline-flex">
+                                                        {{#if (tengoAsignado this usuario)}}
+                                                            <a class="btn" href="nueva-visita?id={{this.id}}" aria-expanded="false">
+                                                                <button type="button" class="btn mb-1 btn-primary" style="margin-left: 5px;">Nueva visita</button>
+                                                            </a>
+                                                            <form action="/desasignar" method="post" style="margin-top: 8px">
+                                                                <button type="submit" name="incidenteId" value="{{this.id}}" class="btn mb-1 btn-danger">Desasignarse</button>
+                                                            </form>
+                                                        {{/if}}
+                                                        {{#if (noTengoAsignado this usuario)}}
+                                                            <form action="/asignar-tecnico" method="post" style="margin-top: 8px">
+                                                                <button type="submit" name="incidenteId" value="{{this.id}}" class="btn mb-1 btn-outline-primary">Asignarse</button>
+                                                            </form>
+                                                        {{/if}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {{/each}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -301,18 +312,9 @@
 
     <script src="./js/dashboard/dashboard-1.js"></script>
 
-    <script
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpLD7qIQmAy7RyR26CDKPafLsTrZ4oNjc&callback=initMap&libraries=marker&v=beta"
-            defer
-    ></script>
-
-    <script>
-        function suscri_dropdown(helaID){
-            console.log("Estoy en suscri_dropdown con helaID: ");
-            document.getElementById(helaID + "_formulario").submit();
-        }
-    </script>
-
+    <script src="./plugins/tables/js/jquery.dataTables.min.js"></script>
+    <script src="./plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
+    <script src="./plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
 
 </body>
 

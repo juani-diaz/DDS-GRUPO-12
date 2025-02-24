@@ -9,7 +9,7 @@
     <!-- theme meta -->
     <meta name="theme-name" content="quixlab" />
   
-    <title>Heladeras</title>
+    <title>Incidentes</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
     <!-- Pignose Calender -->
@@ -186,68 +186,55 @@
         ***********************************-->
         <div class="content-body">
 
-            <div style="display: flex;">
-                <div class="col-lg-8" style="padding: 0;">
-                    <gmp-map
-                        center="-34.649518, -58.552020"
-                        zoom="10"
-                        map-id="DEMO_MAP_ID"
-                        class="mapa">
-                        {{#each hela}}
-                            {{#if (notEqual (estadoString this) "Propuesta")}}
-                                <gmp-advanced-marker position="{{lat_lon this.direccion}}" title="{{this.nombre}}">
-                                    <div class="custom-marker">
-                                        <span class="marker-label">{{this.nombre}}</span>
-                                    </div>
-                                </gmp-advanced-marker>
-                            {{/if}}
-                        {{/each}}
-                    </gmp-map>
+            <div class="col-lg-12">
+                <div class="card" style="margin: 15px;">
+                    <div class="card-body">
+                        <h4 class="card-title">Incidentes</h4>
+                        <div class="table-responsive">
+                            <table class="table table-striped zero-configuration">
+                                <thead>
+                                    <tr>
+                                        <th>Incidente</th>
+                                        <th>Heladera</th>
+                                        <th>Estado</th>
+                                        <th>Técnico</th>
+                                        <th>Fecha reporte</th>
+                                        <th>Última actualización</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {{#each incidentes}}
+                                    <tr>
+                                        <th>{{this.id}}</th>
+                                        <td>{{this.heladera.nombre}}</td>
+                                        <td>
+                                            <span class="label label-pill label-{{estadoStringStyleIncidentes this}}">{{estadoStringIncidentes this}}</span>
+                                        </td>
+                                        <td>{{nombreTecnico this}}</td>
+                                        <td>{{this.fecha}}</td>
+                                        <td>{{ultimaFechaIncidente this}}</td>
+                                        <td>
+                                            <form action="/desasignar" method="post">
+                                                <button type="submit" name="incidenteId" value="{{this.id}}" class="btn mb-1 btn-outline-danger" {{#unless (puedoDesasignar this)}}disabled{{/unless}}>Desasignar técnico</button>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <form action="/forzar-solucion" method="post">
+                                                <button type="submit" name="incidenteId" value="{{this.id}}" class="btn mb-1 btn-outline-success" {{#unless (puedoForzarSolucion this)}}disabled{{/unless}}>Forzar solución</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                {{/each}}
+                                </tbody>
+
+                            </table>
+                        </div>
+                        
+                    </div>
                 </div>
-
-                <div class="col-lg-4 lista-heladera">
-                    {{#each hela}}
-                        {{#if (notEqual (estadoString this) "Propuesta")}}
-                            <div class="card">
-                                <div class="card-body heladera-item">
-                                    <h3>{{this.nombre}} <span class="label label-pill label-{{estadoStringStyle this}}">{{estadoString this}}</span></h3>
-                                    <i class="icon-cup menu-icon"></i><span style="margin-left: 5px;">{{viandas_del_total this}} viandas</span><br><br>
-
-                                    <a class="btn" href="vianda" aria-expanded="false">
-                                        <button type="button" class="btn mb-1 btn-primary">Donar</button>
-                                    </a>
-
-                                    <a class="btn" href="reportar-falla?id={{this.id}}" aria-expanded="false">
-                                        <button type="button" class="btn mb-1 btn-danger" style="margin-left: 5px;">Reportar falla</button>
-                                    </a>
-
-                                    <div class="btn-group">
-
-                                        <form action="/botonSuscribe" id="{{this.id}}_formulario" method="post">
-
-                                            <input style="display:none" name="helaID" value="{{this.id}}">
-
-                                            <select type="submit" name="buton_sub" onchange="suscri_dropdown({{this.id}})" class="btn mb-1 btn-outline-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left: 5px;">
-                                                Suscribirse
-                                                <div class="dropdown-menu" name="tipo_sub">
-                                                    <option selected disabled>Tipo de suscripcion</option>
-                                                    <option value="PocasViandas"  class="dropdown-item {{botonSubscribirActivo usuario this "PocasViandas"}}" >Pocas Viandas</option>
-                                                    <option value="MuchasViandas" class="dropdown-item {{botonSubscribirActivo usuario this "MuchasViandas"}}">Muchas Viandas</option>
-                                                    <option value="NoFunciona"    class="dropdown-item {{botonSubscribirActivo usuario this "NoFunciona"}}"   >No Funciona</option>
-                                                </div>
-                                            </select>
-
-                                        </form>
-
-                                    </div>
-                                </div>
-                            </div>
-                        {{/if}}
-                    {{/each}}
-                </div>
-
             </div>
-
         </div>
         <!--**********************************
             Content body end
@@ -301,18 +288,9 @@
 
     <script src="./js/dashboard/dashboard-1.js"></script>
 
-    <script
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpLD7qIQmAy7RyR26CDKPafLsTrZ4oNjc&callback=initMap&libraries=marker&v=beta"
-            defer
-    ></script>
-
-    <script>
-        function suscri_dropdown(helaID){
-            console.log("Estoy en suscri_dropdown con helaID: ");
-            document.getElementById(helaID + "_formulario").submit();
-        }
-    </script>
-
+    <script src="./plugins/tables/js/jquery.dataTables.min.js"></script>
+    <script src="./plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
+    <script src="./plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
 
 </body>
 

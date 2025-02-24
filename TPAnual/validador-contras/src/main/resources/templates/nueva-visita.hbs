@@ -9,7 +9,7 @@
     <!-- theme meta -->
     <meta name="theme-name" content="quixlab" />
   
-    <title>Heladeras</title>
+    <title>Nueva Visita</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
     <!-- Pignose Calender -->
@@ -185,67 +185,48 @@
             Content body start
         ***********************************-->
         <div class="content-body">
-
+            
             <div style="display: flex;">
-                <div class="col-lg-8" style="padding: 0;">
-                    <gmp-map
-                        center="-34.649518, -58.552020"
-                        zoom="10"
-                        map-id="DEMO_MAP_ID"
-                        class="mapa">
-                        {{#each hela}}
-                            {{#if (notEqual (estadoString this) "Propuesta")}}
-                                <gmp-advanced-marker position="{{lat_lon this.direccion}}" title="{{this.nombre}}">
-                                    <div class="custom-marker">
-                                        <span class="marker-label">{{this.nombre}}</span>
+                <div class="col-lg-6" style="margin-top: 15px;">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Detalles de la visita para el incidente <b class="text-danger">#{{incidente.id}}</b> de la heladera <b class="text-danger">{{incidente.heladera.nombre}}</b></h4>
+                            <div class="basic-form">
+                                <form action="/nueva-visita" method="post" enctype="multipart/form-data">
+
+                                    <div class="form-group">
+                                        <label>Descripción de la visita y el trabajo hecho</label>
+                                        <textarea name="descripcion" class="form-control" placeholder="Descripción detallada" rows="5" required></textarea>
                                     </div>
-                                </gmp-advanced-marker>
-                            {{/if}}
-                        {{/each}}
-                    </gmp-map>
-                </div>
-
-                <div class="col-lg-4 lista-heladera">
-                    {{#each hela}}
-                        {{#if (notEqual (estadoString this) "Propuesta")}}
-                            <div class="card">
-                                <div class="card-body heladera-item">
-                                    <h3>{{this.nombre}} <span class="label label-pill label-{{estadoStringStyle this}}">{{estadoString this}}</span></h3>
-                                    <i class="icon-cup menu-icon"></i><span style="margin-left: 5px;">{{viandas_del_total this}} viandas</span><br><br>
-
-                                    <a class="btn" href="vianda" aria-expanded="false">
-                                        <button type="button" class="btn mb-1 btn-primary">Donar</button>
-                                    </a>
-
-                                    <a class="btn" href="reportar-falla?id={{this.id}}" aria-expanded="false">
-                                        <button type="button" class="btn mb-1 btn-danger" style="margin-left: 5px;">Reportar falla</button>
-                                    </a>
-
-                                    <div class="btn-group">
-
-                                        <form action="/botonSuscribe" id="{{this.id}}_formulario" method="post">
-
-                                            <input style="display:none" name="helaID" value="{{this.id}}">
-
-                                            <select type="submit" name="buton_sub" onchange="suscri_dropdown({{this.id}})" class="btn mb-1 btn-outline-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left: 5px;">
-                                                Suscribirse
-                                                <div class="dropdown-menu" name="tipo_sub">
-                                                    <option selected disabled>Tipo de suscripcion</option>
-                                                    <option value="PocasViandas"  class="dropdown-item {{botonSubscribirActivo usuario this "PocasViandas"}}" >Pocas Viandas</option>
-                                                    <option value="MuchasViandas" class="dropdown-item {{botonSubscribirActivo usuario this "MuchasViandas"}}">Muchas Viandas</option>
-                                                    <option value="NoFunciona"    class="dropdown-item {{botonSubscribirActivo usuario this "NoFunciona"}}"   >No Funciona</option>
-                                                </div>
-                                            </select>
-
-                                        </form>
-
+                                    <div class="form-group">
+                                        <label>Foto</label>
+                                        <input type="file" name="imagen" class="form-control" accept="image/*">
                                     </div>
-                                </div>
+                                    <input style="display:none" name="id" value="{{incidente.id}}">
+                                    <div class="form-check" style="margin-bottom: 10px">
+                                        <input class="form-check-input" type="checkbox" name="solucionado" id="solucionado">
+                                        <label class="form-check-label" for="solucionado">
+                                            La heladera fue reparada y está lista para volver a operar
+                                        </label>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary">Terminar</button>
+                                </form>
+                                                                                          
                             </div>
-                        {{/if}}
-                    {{/each}}
+                        </div>
+                    </div>
                 </div>
-
+                <div class="col-lg-6" style="margin-top: 15px;">
+                    <div class="card">
+                        <div class="card-body" style="padding: 74px 29px;">
+                            {{#each incidente.evolucionDeIncidente}}
+                                <h3><b>{{this.fechaVisita}}</b></h3>
+                                <p>{{this.descripcion}}</p>
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -301,18 +282,19 @@
 
     <script src="./js/dashboard/dashboard-1.js"></script>
 
-    <script
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpLD7qIQmAy7RyR26CDKPafLsTrZ4oNjc&callback=initMap&libraries=marker&v=beta"
-            defer
-    ></script>
-
     <script>
-        function suscri_dropdown(helaID){
-            console.log("Estoy en suscri_dropdown con helaID: ");
-            document.getElementById(helaID + "_formulario").submit();
+        function toggleDireccion() {
+            var checkbox = document.getElementById('situacionCalle');
+            var direccion = document.getElementById('direccion');
+            direccion.disabled = checkbox.checked;
+        }
+    
+        function toggleDocumento() {
+            var tipoDocumento = document.getElementById('tipoDocumento');
+            var documento = document.getElementById('documento');
+            documento.disabled = tipoDocumento.value === 'No tiene';
         }
     </script>
-
 
 </body>
 
