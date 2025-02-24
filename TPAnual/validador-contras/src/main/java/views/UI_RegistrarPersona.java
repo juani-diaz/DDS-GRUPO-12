@@ -139,7 +139,7 @@ public class UI_RegistrarPersona extends UI_Navegable implements Handler{
 
     //repoColaborador.actualizarColaborador(colapinto);
 
-    ctx.render("index.hbs");
+    ctx.redirect("/index");
   }
 
   public void solicitarTarjeta(Context ctx) {
@@ -175,7 +175,7 @@ public class UI_RegistrarPersona extends UI_Navegable implements Handler{
     em.merge(colapinto);
 
     BDUtils.commit(em);
-    ctx.render("registrar-persona.hbs");
+    ctx.redirect("/registrar-persona");
   }
 
 

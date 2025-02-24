@@ -5,9 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import persistence.BDUtils;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.persistence.ManyToOne;
 import java.time.LocalDate;
 
@@ -25,22 +27,28 @@ public class DonacionDinero extends Colaboracion {
     private MedioDePago medioDePago;
 
     public DonacionDinero(Colaborador colaborador, LocalDate fecha,
-                          Float monto, String frecuencia){
+                          Float monto, String frecuencia, MedioDePago medioDePago){
         this.colaborador = colaborador;
         this.fecha = fecha;
         this.monto = monto;
-        this.frecuencia = frecuencia;
+        this.medioDePago = medioDePago;
     }
 
     public void ejecutar(){
+        // Transf monetaria
 
-        System.out.println(colaborador);
+        EntityManager em = BDUtils.getEntityManager();
 
-        colaborador.setCantidadPuntos(colaborador.getCantidadPuntos() + puntosObtenidos());
+        BDUtils.comenzarTransaccion(em);
+        em.persist(medioDePago);
+        BDUtils.commit(em);
+
+        BDUtils.comenzarTransaccion(em);
+        em.persist(this);
+        BDUtils.commit(em);
     }
 
     public Float puntosObtenidos(){
-        return multiplicador *monto ;
-
+        return multiplicador * monto ;
     }
 }

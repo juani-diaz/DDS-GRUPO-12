@@ -15,7 +15,7 @@ import java.time.Period;
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @Entity
 public class ResponsableHeladera extends Colaboracion{
-    @OneToOne //Hay un unico responsable por heladera?
+    @OneToOne
     private Heladera heladera;
     public final static Float multiplicador = 5F;
 
@@ -27,7 +27,6 @@ public class ResponsableHeladera extends Colaboracion{
 
     public void ejecutar(){
         this.heladera.setResponsable(this.colaborador);
-        colaborador.setCantidadPuntos(colaborador.getCantidadPuntos() + puntosObtenidos());
     }
 
     public int calcularMesesDeFuncionamiento() {
@@ -40,8 +39,6 @@ public class ResponsableHeladera extends Colaboracion{
     }
 
     public Float puntosObtenidos(){
-
         return calcularMesesDeFuncionamiento() *  multiplicador;
-
     }
 }

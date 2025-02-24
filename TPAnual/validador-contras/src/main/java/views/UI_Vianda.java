@@ -84,7 +84,7 @@ public class UI_Vianda extends UI_Navegable implements Handler{
     em.merge(dona);
 
     BDUtils.commit(em);
-    ctx.render("index.hbs");
+    ctx.redirect("/index");
   }
 
 }

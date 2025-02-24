@@ -552,7 +552,7 @@ public class Demo {
 
         //DONACION DE DINERO
 
-        Colaboracion donacionDinero = new DonacionDinero(colaboradorElsa,fechaNacimientoElsa ,3500F, "1 vez por semana");
+        Colaboracion donacionDinero = new DonacionDinero(colaboradorElsa,fechaNacimientoElsa ,3500F, "1 vez por semana", null);
         donacionDinero.ejecutar(); //el ejecutar no hace nada pero bueno
 
         //Persistimos donaciones de dinero

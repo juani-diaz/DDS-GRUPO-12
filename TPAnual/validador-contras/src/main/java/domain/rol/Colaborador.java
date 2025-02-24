@@ -68,12 +68,13 @@ public class Colaborador extends Rol {
     this.colaboraciones = new ArrayList<Colaboracion>();
     this.cantidadPuntos = 0F;
     this.tarjetasParaEntregar = new ArrayList<Tarjeta>();
-    this.tarjetaColaborador = null; // TODO esto?
+    this.tarjetaColaborador = null;
   }
 
   public void realizarColaboracion(Colaboracion colaboracion){
     colaboracion.ejecutar();
     this.colaboraciones.add(colaboracion);
+    actualizarPuntos();
   }
 
   public void actualizarPuntos(){

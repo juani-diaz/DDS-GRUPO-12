@@ -24,8 +24,7 @@ public class RegistroPersonaVulnerable extends  Colaboracion{
     @OneToOne
     private Vulnerable vulnerable;
 
-    public RegistroPersonaVulnerable(Colaborador colaborador, LocalDate fecha,
-                                     Vulnerable vulnerable){
+    public RegistroPersonaVulnerable(Colaborador colaborador, LocalDate fecha, Vulnerable vulnerable){
         this.colaborador = colaborador;
         this.fecha = fecha;
         this.vulnerable = vulnerable;
@@ -44,8 +43,6 @@ public class RegistroPersonaVulnerable extends  Colaboracion{
         // Asignar la tarjeta al vulnerable
         vulnerable.setearTarjeta(tarjetaEntregada);
         this.tarjetaEntregada= tarjetaEntregada;
-
-        colaborador.setCantidadPuntos(colaborador.getCantidadPuntos() + puntosObtenidos());
     }
 
     public Float puntosObtenidos(){
