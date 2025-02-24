@@ -13,10 +13,13 @@ import io.jsonwebtoken.Claims;
 import persistence.Repos.RepoColaborador;
 import persistence.Repos.RepoUsuarios;
 
+import javax.persistence.EntityManager;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.*;
+
+import static persistence.BDUtils.*;
 
 public class UI_Registrar implements Handler {
     public void handle(Context ctx) throws Exception {
@@ -200,16 +203,13 @@ public class UI_Registrar implements Handler {
         token = token.replace("Bearer", "");
         String decodedToken = URLDecoder.decode(token, StandardCharsets.UTF_8);
         Usuario u = JwtUtil.validateTokenAndGetUser(decodedToken);
-        Rol urol=u.getRol();
-        PersonaFisica upersona= (PersonaFisica) urol.getPersona();
-        upersona.setDocumento(nuevoDocumento);
-        upersona.setDireccion(direccion);
-        upersona.setMediosDeContacto(medios);
-        upersona.setSexo(sexo);
-        upersona.setGenero(genero);
-        upersona.setFechaNacimiento(LocalDate.parse(fecha));
+        PersonaFisica nuevaPersona = new PersonaFisica(nombre, medios, direccion, nuevoDocumento, apellido, sexo, genero, LocalDate.parse(fecha));
+        Colaborador nuevoColaborador = new Colaborador(nuevaPersona);
+        u.setRol(nuevoColaborador);
 
         RepoUsuarios r = RepoUsuarios.getInstance();
+        RepoColaborador c = RepoColaborador.getInstance();
+        c.add_Colaborador(nuevoColaborador);
         r.update_Usuario(u);
 
         ctx.redirect("/page-login");
@@ -261,6 +261,12 @@ public class UI_Registrar implements Handler {
         String decodedToken = URLDecoder.decode(token, StandardCharsets.UTF_8);
         Usuario u = JwtUtil.validateTokenAndGetUser(decodedToken);
         u.setRol(nuevoColaborador);
+        EntityManager em = getEm();
+        comenzarTransaccion(em);
+        em.persist(nuevoDocumento);
+        em.persist(nuevaOrg);
+        em.persist(nuevoColaborador);
+        commit(em);
         RepoUsuarios r = RepoUsuarios.getInstance();
         r.update_Usuario(u);
 
@@ -301,6 +307,12 @@ public class UI_Registrar implements Handler {
         Documento nuevoDocumento = new Documento(tipoDocumento, documento);
         PersonaFisica nuevaPersona = new PersonaFisica(nombre, medios, direccion, nuevoDocumento, apellido, sexo, genero, LocalDate.parse(fecha));
         Tecnico nuevoTecnico = new Tecnico(nuevaPersona, area);
+        EntityManager em = getEm();
+        comenzarTransaccion(em);
+        em.persist(nuevoDocumento);
+        em.persist(nuevaPersona);
+        em.persist(nuevoTecnico);
+        commit(em);
         String token = ctx.cookie("Auth");
         token = token.replace("Bearer", "");
         String decodedToken = URLDecoder.decode(token, StandardCharsets.UTF_8);

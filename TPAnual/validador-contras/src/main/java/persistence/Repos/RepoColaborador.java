@@ -34,6 +34,25 @@ public class RepoColaborador extends BDUtils{
         return instance;
     }
 
+    public void add_Colaborador(Colaborador colaborador) {
+        this.colaboradores.add(colaborador);
+
+        comenzarTransaccion(em);
+
+        try {
+            if(colaborador.getPersona().getDocumento()!=null) {
+                em.persist(colaborador.getPersona().getDocumento());
+            }
+            em.persist(colaborador.getPersona());
+            em.persist(colaborador);
+
+            commit(em);
+        } catch (Exception e) {
+            System.out.println("Error al agregar el USUARIO: " + colaborador + e);
+        }
+
+    }
+
     //Se crea el EntityManager
     EntityManager em = getEm();
 
