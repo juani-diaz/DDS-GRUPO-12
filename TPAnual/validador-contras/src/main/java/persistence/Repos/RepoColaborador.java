@@ -100,6 +100,56 @@ public class RepoColaborador extends BDUtils{
         return resultado;
     }
 
+    public List<Map<String, Object>> obtenerDonacionesxColaboradorxSemana(String semana) {
+        System.out.println("Estoy en obtenerDonacionesxSemana");
+
+
+
+        Query query1 = this.em.createQuery(
+                "SELECT p.id, p.nombre, p.apellido FROM PersonaFisica p  WHERE p.id IN(SELECT p.id "  +
+                        "FROM DonacionVianda d "  +
+                        "JOIN d.colaborador c "+
+                        "JOIN c.persona p  " +
+                        "WHERE d.fecha BETWEEN " +
+                        semana +
+                        " )"
+
+        );
+
+        Query query2 = this.em.createQuery("SELECT p.id, COUNT (DISTINCT d) FROM DonacionVianda d JOIN d.colaborador c JOIN c.persona p WHERE d.fecha BETWEEN "+
+                semana+
+                " GROUP BY p");
+
+
+        System.out.println("Query creada: " + query1);
+        System.out.println("Query creada: " + query2);
+
+        List<Object[]> personasFisicas = query1.getResultList();
+        List<Object[]> donaciones = query2.getResultList();
+
+
+        System.out.println(personasFisicas);
+        System.out.println(donaciones);
+
+        List<Map<String, Object>> resultado = new ArrayList<>();
+        for (Object[] fila1 : personasFisicas) {
+            Map<String, Object> mapa = new HashMap<>();
+
+
+            for (Object[] fila2:donaciones){
+                if(fila1[0] == fila2[0]){ //comparo ids y si son iguales los agrego al mapa para devolverlo
+                    mapa.put("nombre", fila1[1]);
+                    mapa.put("apellido", fila1[2]);
+                    mapa.put("donacion",fila2[1]);
+                    resultado.add(mapa);}
+            }
+        }
+
+
+
+        return resultado;
+    }
+
     public Colaborador findById_Colaborador(Integer colaboradorId){
         Colaborador colaborador=null;
 

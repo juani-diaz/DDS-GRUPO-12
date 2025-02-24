@@ -108,7 +108,7 @@ public class RepoHeladera extends BDUtils{
                     "       COUNT(DISTINCT rv) as totalRecogidas, " +
                     "       COUNT(DISTINCT rv) + COUNT(DISTINCT v) as totalViandas " +
                     "FROM Heladera p " +
-                    "LEFT JOIN p.incidentesAlarma al " +
+                    "LEFT JOIN p.incidentes al " +
                     "LEFT JOIN p.viandasEnHeladera v " +
                     "LEFT JOIN v.viandaRecogida rv " +
                     "GROUP BY p.id, p.nombre"
@@ -133,42 +133,83 @@ public class RepoHeladera extends BDUtils{
     return resultado;
   }
 
-  public List<Map<String, Object>> obtenerFallasxHeladeraxSemana() {
+  public List<Map<String, Object>> obtenerFallasxHeladeraxSemana(String semana) {
     System.out.println("Estoy en obtenerFallasxHeladeraxSemana");
 
     EntityManager em = BDUtils.getEntityManager();
 
     Query query = em.createQuery(
-        "SELECT p.id, p.nombre, " +
-            "       COUNT(DISTINCT al) as totalErrores, " +
-            "       COUNT(DISTINCT rv) as totalRecogidas, " +
-            "       COUNT(DISTINCT rv) + COUNT(DISTINCT v) as totalViandas " +
-            "FROM Heladera p " +
-            "LEFT JOIN p.incidentesAlarma al " +
-            "LEFT JOIN p.viandasEnHeladera v " +
-            "LEFT JOIN v.viandaRecogida rv " +
-            "WHERE al.fecha BETWEEN '20250103' and '20250123'" +
-            "GROUP BY p.id, p.nombre"
+            "SELECT p.id, p.nombre, " +
+                    "       COUNT(DISTINCT al) as totalErrores " +
+                    "FROM Heladera p " +
+                    "LEFT JOIN p.incidentes al " +
+                    "WHERE al.fecha BETWEEN " + semana +
+                    " GROUP BY p.id, p.nombre"
     );
 
+    Query query2 = em.createQuery(
+            "SELECT rv.heraderaDeVianda.id, rv.heraderaDeVianda.nombre, " +
+                    "       COUNT(DISTINCT rv) as totalRecogidas " +
+                    "FROM ViandaRecogida rv " +
+                    "WHERE rv.fechaDeRecogida BETWEEN " + semana +
+                    " GROUP BY rv.heraderaDeVianda.id, rv.heraderaDeVianda.nombre"
+    );
 
-    System.out.println("Query creada: " + query);
+    Query query3 = em.createQuery(
+            "SELECT dv.destino.id, dv.destino.nombre, " +
+                    "       COUNT(DISTINCT dv) as totalViandas " +
+                    "FROM DonacionVianda dv " +
+                    "WHERE dv.fecha BETWEEN " + semana +
+                    " GROUP BY dv.destino.id, dv.destino.nombre"
+    );
 
-    List<Object[]> heladeras = query.getResultList();
+    List<Object[]> errores = query.getResultList();
+    List<Object[]> recogidas = query2.getResultList();
+    List<Object[]> viandas = query3.getResultList();
 
-    List<Map<String, Object>> resultado = new ArrayList<>();
-    for (Object[] fila : heladeras) {
-      Map<String, Object> mapa = new HashMap<>();
-      mapa.put("id", fila[0]);
+    // Mapa para almacenar los datos combinados
+    Map<Integer, Map<String, Object>> resultadoMap = new HashMap<>();
+
+    // Procesar errores
+    for (Object[] fila : errores) {
+      Integer idHeladera = (Integer) fila[0];
+      resultadoMap.putIfAbsent(idHeladera, new HashMap<>());
+      Map<String, Object> mapa = resultadoMap.get(idHeladera);
+      mapa.put("id", idHeladera);
       mapa.put("nombre", fila[1]);
       mapa.put("totalErrores", fila[2]);
-      mapa.put("totalRecogidas", fila[3]);
-      mapa.put("totalViandas", fila[4]);
-      resultado.add(mapa);
+      mapa.putIfAbsent("totalRecogidas", 0L);
+      mapa.putIfAbsent("totalViandas", 0L);
     }
 
-    return resultado;
+    // Procesar recogidas
+    for (Object[] fila : recogidas) {
+      Integer idHeladera = (Integer) fila[0];
+      resultadoMap.putIfAbsent(idHeladera, new HashMap<>());
+      Map<String, Object> mapa = resultadoMap.get(idHeladera);
+      mapa.put("id", idHeladera);
+      mapa.put("nombre", fila[1]);
+      mapa.put("totalRecogidas", fila[2]);
+      mapa.putIfAbsent("totalErrores", 0L);
+      mapa.putIfAbsent("totalViandas", 0L);
+    }
+
+    // Procesar viandas
+    for (Object[] fila : viandas) {
+      Integer idHeladera = (Integer) fila[0];
+      resultadoMap.putIfAbsent(idHeladera, new HashMap<>());
+      Map<String, Object> mapa = resultadoMap.get(idHeladera);
+      mapa.put("id", idHeladera);
+      mapa.put("nombre", fila[1]);
+      mapa.put("totalViandas", fila[2]);
+      mapa.putIfAbsent("totalErrores", 0L);
+      mapa.putIfAbsent("totalRecogidas", 0L);
+    }
+
+    // Convertir el mapa a lista
+    return new ArrayList<>(resultadoMap.values());
   }
+
 
   public List<Heladera> getAll_Heladera() {
     CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();

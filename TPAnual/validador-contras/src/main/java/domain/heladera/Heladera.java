@@ -41,7 +41,7 @@ public class Heladera extends EntidadPersistente {
   private List<Vianda> viandasEnHeladera; //=new ArrayList<>()
 
   @OneToMany(mappedBy = "heladera", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
-  private List<Incidente> incidentesAlarma;
+  private List<Incidente> incidentes;
 
 
 
