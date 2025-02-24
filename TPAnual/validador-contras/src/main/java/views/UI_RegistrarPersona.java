@@ -69,7 +69,7 @@ public class UI_RegistrarPersona extends UI_Navegable implements Handler{
 
     System.out.println("tarjetas de colapa: "+colapinto.getTarjetasParaEntregar().size());
     System.out.println("tarjetas de colapa 2: "+colapinto.getTarjetasParaEntregar());
-
+    System.out.println(colapinto.getTarjetasParaEntregar().isEmpty());
     if(colapinto.getTarjetasParaEntregar().isEmpty()){
       throw new IllegalArgumentException("El colaborador no tiene tarjetas para entregar");
     }
@@ -120,10 +120,12 @@ public class UI_RegistrarPersona extends UI_Navegable implements Handler{
 
     RegistroPersonaVulnerable registroPersonaVulnerable=new RegistroPersonaVulnerable(tarjetaVulnerable,vulnerable);
 
-    colapinto.getTarjetasParaEntregar().remove(tarjetaVulnerable);
 
     registroPersonaVulnerable.setColaborador(colapinto);
     colapinto.realizarColaboracion(registroPersonaVulnerable);
+
+    colapinto.getTarjetasParaEntregar().remove(tarjetaVulnerable);
+
 
     //ORM
     persistirEntidades(docu, persona, vulnerable);
