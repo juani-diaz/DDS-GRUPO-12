@@ -57,6 +57,11 @@ public class Catalogo extends EntidadPersistente {
         }
     }
 
+    public void retirarDelCatalogoPorId(int id){
+        PresentacionOferta p = ofertas.stream().filter(o -> o.getId() == id).findFirst().get();
+        retirarDelCatalogo(p);
+    }
+
     public void retirarDelCatalogo(PresentacionOferta p){
         ofertas.remove(p);
 

@@ -68,6 +68,7 @@ public class UI_Navegable {
      void validarSesion(Context ctx) {
         if(!sesionValida(ctx)){
             ctx.status(403).result("No tenés permiso para acceder a esta página...");
+            System.out.println("Denegué en UI_Navegable");
             ctx.redirect("/denegado");
             return;
         } else if (vieneDeGoogle(ctx)) {

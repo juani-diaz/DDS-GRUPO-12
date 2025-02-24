@@ -216,7 +216,9 @@
                                 <div style="display: flex; height: 32px;">
 <!--                                    <p class="card-text d-inline"><small class="text-muted">Veces canjeado: </small>-->
                                     <div style="margin-left: auto;"></div>
-                                    <button class="btn btn-danger btn-sm" style="margin-left: 5px;">Eliminar</button>
+                                    <form action="/eliminar-oferta" method="post">
+                                        <button type="submit" name="ofertaId" value="{{oferta.id}}" class="btn btn-danger btn-sm" style="margin-left: 5px;">Eliminar</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

@@ -51,19 +51,19 @@ public class VistasJavalin {
                 AccesoUsuarios.getInstance().revisarPermiso(ctx);
             });
 
-//            app.get("/uploads/*", ctx -> {
-//                String subpath = ctx.path().substring("/uploads".length());
-//                Path imagePath = Paths.get(ArchivosUtils.getInstance().getUploadsPath(), subpath);
-//                if (Files.exists(imagePath)) {
-//                    ctx.contentType("image/");
-//                    ctx.result(Files.newInputStream(imagePath));
-//                } else {
-//                    ctx.status(404).result("Archivo no encontrado");
-//                }
-//            });
-
             app.get("/", ctx -> {
                 ctx.redirect("/page-login");
+            });
+
+            app.get("/uploads/*", ctx -> {
+                String subpath = ctx.path().substring("/uploads".length());
+                Path imagePath = Paths.get(ArchivosUtils.getInstance().getUploadsPath(), subpath);
+                if (Files.exists(imagePath)) {
+                    ctx.contentType("image/");
+                    ctx.result(Files.newInputStream(imagePath));
+                } else {
+                    ctx.status(404).result("Archivo no encontrado");
+                }
             });
 
             AccesoUsuarios acceso = AccesoUsuarios.getInstance();
@@ -153,6 +153,8 @@ public class VistasJavalin {
                     false,
                     false
             ));
+            app.post("/eliminar-oferta", UIOfertas::eliminarOferta);
+            acceso.agregarRuta(new PermisosMetodo("eliminar-oferta", false, true, false, false));
 
 //====================== NUEVA OFERTA
             UI_Oferta UIOferta = new UI_Oferta();
@@ -313,11 +315,6 @@ public class VistasJavalin {
                     true
             ));
 
-//====================== FALLAS
-            app.get("/fallas", ctx -> {
-                ctx.render("fallas.hbs");
-            });
-
 //====================== LOGIN
             UI_Login UILogin = new UI_Login();
 
@@ -343,6 +340,7 @@ public class VistasJavalin {
             app.post("/registrar-p-google", UIRegistrar::registrarPersonaGoogle);
             app.post("/registrar-o-google", UIRegistrar::registrarOrgGoogle);
             app.post("/registrar-t-google", UIRegistrar::registrarTecnicoGoogle);
+
 //====================== API
             app.get("/api/localizacion", ctx -> {
                 ctx.result(Localizacion.localizar(ctx));
@@ -366,6 +364,7 @@ public class VistasJavalin {
 
 //====================== NO ENCONTRADO
             app.error(404, ctx -> {
+                System.out.println("Denegué en VistasJavalin");
                 ctx.redirect("/denegado");
             });
         }

@@ -220,9 +220,17 @@
                 <div class="col-lg-6" style="margin-top: 15px;">
                     <div class="card">
                         <div class="card-body" style="padding: 74px 29px;">
+                            <h3>Reporte original - <b>{{incidente.fecha}}</b></h3>
+                            <div class="evo-imagen">
+                                <p>{{incidente.descripcion}}</p>
+                                <img src={{get_archivo urlUploads incidente.foto}} alt="">
+                            </div>
                             {{#each incidente.evolucionDeIncidente}}
                                 <h3><b>{{this.fechaVisita}}</b></h3>
-                                <p>{{this.descripcion}}</p>
+                                <div class="evo-imagen">
+                                    <p>{{this.descripcion}}</p>
+                                    <img class="" src={{get_archivo urlUploads this.foto}} alt="">
+                                </div>
                             {{/each}}
                         </div>
                     </div>

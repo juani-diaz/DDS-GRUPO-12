@@ -92,7 +92,9 @@ public class HelperSource {
     }
 
     public String get_archivo(String urlBase, String path) {
-        return urlBase + path;
+        String s = urlBase + path;
+        System.out.println("Busco http: " + s);
+        return s;
     }
 
     public Boolean notEqual(Object o1, Object o2){

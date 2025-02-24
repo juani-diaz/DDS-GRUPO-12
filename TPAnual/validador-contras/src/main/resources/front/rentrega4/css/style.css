@@ -14825,26 +14825,25 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
   position: relative;
   width: 20px;
   height: 20px;
-  background-color: var(--primary); /* Use the same primary color */
   border-radius: 50%;
-  border: 2px solid black; /* Same border as #center-marker */
+  border: 2px solid black;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); /* Optional: Add a subtle shadow */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   cursor: pointer;
-  pointer-events: auto; /* Ensure the marker is interactive */
-  z-index: 10; /* Match the z-index of #center-marker */
+  pointer-events: auto;
+  z-index: 10;
 }
 
 .custom-marker:hover {
-  background-color: var(--secondary); /* Optional: Add a hover effect */
+  background-color: var(--secondary);
 }
 
 .marker-label {
   display: none;
   position: absolute;
-  top: -35px; /* Position the label above the marker */
+  top: -35px;
   left: 50%;
   transform: translateX(-50%);
   background-color: #ffffff;
@@ -14858,4 +14857,17 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
 
 .custom-marker:hover .marker-label {
   display: block;
+}
+
+.evo-imagen {
+    display: flex inline;
+    p {
+        white-space: pre;
+        font-size: 16px;
+    }
+    img {
+        margin-left: 20px;
+        max-height: 300px;
+        max-width: 350px;
+    }
 }

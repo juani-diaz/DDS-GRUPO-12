@@ -682,7 +682,7 @@ public class Demo {
 
     }
 
-    private static void usuarios(){
+    private static void crearAdmin() {
         EntityManager em = BDUtils.getEntityManager();
         BDUtils.comenzarTransaccion(em);
 
@@ -690,6 +690,20 @@ public class Demo {
         PersonaFisica tomas = new PersonaFisica("tomas", null, "nogoya 6367", dni1, "cerezo", "m", "m", LocalDate.of(2001, 6, 28));
         Administrador a = new Administrador(tomas);
         Usuario admin = new Usuario("admin", "fc43", a);
+
+        em.persist(dni1);
+        em.persist(tomas);
+        em.persist(a);
+        em.persist(admin);
+
+        BDUtils.commit(em);
+    }
+
+    private static void usuarios(){
+        crearAdmin();
+
+        EntityManager em = BDUtils.getEntityManager();
+        BDUtils.comenzarTransaccion(em);
 
         //creo tarjetas para sergio
         //Tarjeta tarjetaParaVulnerable = new Tarjeta("0001");
@@ -732,11 +746,6 @@ public class Demo {
         PersonaFisica hei = new PersonaFisica("heimer", null, "nogoya 6367", cuit2, "dinger", "m", "m", LocalDate.of(1000, 5, 28));
         Tecnico t = new Tecnico(hei);
         Usuario tec = new Usuario("heimer", "fc43", t);
-
-        em.persist(dni1);
-        em.persist(tomas);
-        em.persist(a);
-        em.persist(admin);
 
         //em.persist(tarjetaParaVulnerable);
         //em.persist(tarjetaParaVulnerable2);

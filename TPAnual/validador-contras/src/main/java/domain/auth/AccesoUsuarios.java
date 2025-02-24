@@ -39,6 +39,8 @@ public class AccesoUsuarios {
         String path = ctx.path();
         path = path.substring(1);
         PermisosMetodo ruta = rutas.get(path);
+        System.out.println(path);
+        System.out.println(ruta);
         if(ruta != null){
             String token = ctx.cookie("Auth");
             if (token != null) {
@@ -47,6 +49,7 @@ public class AccesoUsuarios {
                 Usuario u = JwtUtil.validateTokenAndGetUser(decodedToken);
                 if(!u.puedeAcceder(ruta)){
                     ctx.status(403).result("No tenés permiso para acceder a esta página...");
+                    System.out.println("Denegué en AccesoUsuarios");
                     ctx.redirect("/denegado");
                     return;
                 }

@@ -196,7 +196,7 @@
                         {{#each hela}}
                             {{#if (notEqual (estadoString this) "Propuesta")}}
                                 <gmp-advanced-marker position="{{lat_lon this.direccion}}" title="{{this.nombre}}">
-                                    <div class="custom-marker">
+                                    <div class="custom-marker bg-{{estadoStringStyle this}}">
                                         <span class="marker-label">{{this.nombre}}</span>
                                     </div>
                                 </gmp-advanced-marker>

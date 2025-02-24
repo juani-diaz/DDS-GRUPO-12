@@ -94,6 +94,10 @@ public class SingletonSeguidorEstadistica extends EntidadPersistente {
   public ListadoLocalidades encontrarLocalidades(boolean soloSinHogar, LocalDate desde, LocalDate hasta){
     List<LocalidadCantidad> localidades = new ArrayList<LocalidadCantidad>();
     for(ViandaRecogida v : retirosViandas){
+
+      if(v.getFechaDeRecogida() == null || v.getNecesitado() == null || v.getNecesitado().getSituacionCalle() == null)
+        continue;
+
       LocalDate targetLocalDate = v.getFechaDeRecogida().toInstant()
               .atZone(ZoneId.systemDefault())
               .toLocalDate();

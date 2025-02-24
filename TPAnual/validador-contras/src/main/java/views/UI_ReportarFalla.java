@@ -41,7 +41,7 @@ public class UI_ReportarFalla extends UI_Navegable implements Handler {
 
         String imagen = null;
         if (uploadedFile != null && uploadedFile.size() > 0) {
-            imagen = ArchivosUtils.getInstance().guardarArchivo("fallas", uploadedFile);
+            imagen = ArchivosUtils.getInstance().guardarArchivo("archivos_fallas", uploadedFile);
         } else {
             System.out.println("No se subio una imagen");
         }
