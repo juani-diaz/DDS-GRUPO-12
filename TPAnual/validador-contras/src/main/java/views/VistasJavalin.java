@@ -77,6 +77,7 @@ public class VistasJavalin {
             UI_Landing UILanding = new UI_Landing();
             app.get("/landing", UILanding);
 
+//====================== PERFIL
             UI_Perfil UIPerfil = new UI_Perfil();
             app.get("/app-profile", UIPerfil);
             acceso.agregarRuta(new PermisosMetodo("app-profile", true, true, true, true));
@@ -86,6 +87,9 @@ public class VistasJavalin {
             acceso.agregarRuta(new PermisosMetodo("actualizar-o", false, true, false, false));
             app.post("/actualizar-t", UIPerfil::actualizarTecnico);
             acceso.agregarRuta(new PermisosMetodo("actualizar-t", false, false, true, false));
+
+            app.post("/solicitar-tarjeta", UIPerfil::solicitarTarjeta);
+            acceso.agregarRuta(new PermisosMetodo("solicitar-tarjeta", true, false, false, false));
 
 //====================== VIANDA
             UI_Vianda UIVianda = new UI_Vianda();
@@ -122,8 +126,6 @@ public class VistasJavalin {
 
             app.get("/registrar-persona", UIregistrarPersona);
             app.post("/registrar-persona", UIregistrarPersona::agregarPersona);
-            app.post("/solicitar-tarjeta", UIregistrarPersona::solicitarTarjeta);
-            acceso.agregarRuta(new PermisosMetodo("solicitar-tarjeta", true, false, false, false));
             acceso.agregarRuta(new LinkMenu(
                     "registrar-persona",
                     "Registrar Personas",

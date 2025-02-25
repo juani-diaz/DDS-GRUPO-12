@@ -4,20 +4,21 @@ import domain.auth.JwtUtil;
 import domain.persona.EnumTipoPersonaJuridica;
 import domain.persona.PersonaFisica;
 import domain.persona.PersonaJuridica;
-import domain.rol.Administrador;
-import domain.rol.Colaborador;
-import domain.rol.LocalidadesTecnico;
-import domain.rol.Tecnico;
+import domain.rol.*;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import io.jsonwebtoken.Claims;
 import lombok.NoArgsConstructor;
+import persistence.BDUtils;
+import persistence.Repos.RepoColaborador;
 import persistence.Repos.RepoUsuarios;
 
+import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
 @NoArgsConstructor
 public class UI_Perfil extends UI_Navegable implements Handler {
@@ -31,8 +32,16 @@ public class UI_Perfil extends UI_Navegable implements Handler {
         String tipoUsuario = "?";
         if (getUsuario().getRol().getClass().equals(Administrador.class)) {
             tipoUsuario = "admin";
+
+            model.put("colaboraciones", null);
         } else if (getUsuario().getRol().getClass().equals(Colaborador.class) && getUsuario().getRol().getPersona().getClass() == PersonaFisica.class) {
             tipoUsuario = "persona";
+
+            Colaborador c = (Colaborador) getUsuario().getRol();
+
+            model.put("colaboraciones", c.getColaboraciones());
+
+            model.put("cantidadTarjetas", c.getTarjetasParaEntregar().size());
         } else if (getUsuario().getRol().getClass().equals(Colaborador.class) && getUsuario().getRol().getPersona().getClass() == PersonaJuridica.class) {
             tipoUsuario = "organizacion";
 
@@ -47,11 +56,17 @@ public class UI_Perfil extends UI_Navegable implements Handler {
                 model.put("tipoJurOriginal", "INSTITUCION");
             }
 
+            Colaborador c = (Colaborador) getUsuario().getRol();
+
+            model.put("colaboraciones", c.getColaboraciones());
+
         } else if (getUsuario().getRol().getClass().equals(Tecnico.class)) {
             tipoUsuario = "tecnico";
 
             Tecnico t = (Tecnico) getUsuario().getRol();
             model.put("localidadesRegistradas", t.getAreaCobertura());
+
+            model.put("colaboraciones", null);
         }
         this.model.put("tipoUsuario", tipoUsuario);
 
@@ -157,6 +172,36 @@ public class UI_Perfil extends UI_Navegable implements Handler {
 
         RepoUsuarios.getInstance().update_Usuario(getUsuario());
 
+        ctx.redirect("/app-profile");
+    }
+
+    public void solicitarTarjeta(Context ctx) {
+
+        // Agarro al colaborador actual
+        String token = ctx.cookie("Auth");
+        Claims claims= JwtUtil.getClaimsFromToken(token);
+        RepoColaborador repoColaborador = RepoColaborador.getInstance();
+        Colaborador colapinto=repoColaborador.findById_Colaborador((Integer) claims.get("roleId"));
+
+        // Obtener parámetros del formulario (datos enviados en la solicitud)
+        String cantidadTarjetas = ctx.formParam("cantidad");
+        Integer tarjetas = Integer.parseInt(cantidadTarjetas);
+
+        Random random= new Random();
+
+        EntityManager em = BDUtils.getEm();
+        BDUtils.comenzarTransaccion(em);
+
+        for (Integer i=0; i<tarjetas; i++)
+        {
+            int numeroAleatorio = random.nextInt(1000000000);
+            Tarjeta tarjeta = new Tarjeta("aa"+Integer.toString(numeroAleatorio));
+            colapinto.recibirUnaTarjeta(tarjeta);
+            em.persist(tarjeta);
+        }
+        em.merge(colapinto);
+
+        BDUtils.commit(em);
         ctx.redirect("/app-profile");
     }
 }
