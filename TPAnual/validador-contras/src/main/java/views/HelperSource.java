@@ -160,5 +160,9 @@ public class HelperSource {
         return i.getEstadoDeIncidente() == EnumEstadoDeIncidente.TECNICO_ASIGNADO;
     }
 
+    public Boolean lt(Float a, Float b) {
+        return a < b;
+    }
+
 }
 

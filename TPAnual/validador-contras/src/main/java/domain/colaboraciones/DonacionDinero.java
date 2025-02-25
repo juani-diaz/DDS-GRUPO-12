@@ -13,6 +13,8 @@ import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.ManyToOne;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.Objects;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @Entity
@@ -33,6 +35,7 @@ public class DonacionDinero extends Colaboracion {
         this.fecha = fecha;
         this.monto = monto;
         this.medioDePago = medioDePago;
+        this.frecuencia = frecuencia;
     }
 
     public void ejecutar(){
@@ -46,6 +49,16 @@ public class DonacionDinero extends Colaboracion {
     }
 
     public Float puntosObtenidos(){
-        return multiplicador * monto ;
+        if(Objects.equals(frecuencia, "unica") || frecuencia == null) {
+            return multiplicador * monto;
+        } else {
+            long vecesUsado = switch (frecuencia) {
+                case "semanal" -> ChronoUnit.WEEKS.between(fecha, LocalDate.now()) + 1;
+                case "mensual" -> ChronoUnit.MONTHS.between(fecha, LocalDate.now()) + 1;
+                case "anual" -> ChronoUnit.YEARS.between(fecha, LocalDate.now()) + 1;
+                default -> 1;
+            };
+            return multiplicador * monto * vecesUsado;
+        }
     }
 }

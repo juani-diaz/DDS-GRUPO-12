@@ -210,11 +210,11 @@
                             </div>
                             <div class="card-footer">
                                 <div style="display: flex; height: 32px;">
-                                    <p class="card-text d-inline"><small class="text-muted">Más información</small></p>
+<!--                                    <p class="card-text d-inline"><small class="text-muted">Más información</small></p>-->
                                     <div style="margin-left: auto;"></div>
                                     <form action="/puntos" method="post" style="margin-left: auto;">
                                         <input type="hidden" name="ofertaId" value="{{oferta.id}}">
-                                        <button type="submit" class="btn btn-primary btn-sm">Canjear</button>
+                                        <button type="submit" class="btn btn-primary btn-sm" {{#if (lt colaPuntos oferta.puntosNecesarios)}}disabled{{/if}}>Canjear</button>
                                     </form>
                                 </div>
                             </div>

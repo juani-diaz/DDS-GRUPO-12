@@ -239,7 +239,7 @@
                                     <label>Tipo de documento</label>
                                     <select class="form-control" name="tipoDocumento" id="tipoDocumento" required
                                             onchange="toggleDocumento()">
-                                        <option selected disabled>Selecciona una opción...</option>
+                                        <option value="" selected disabled>Selecciona una opción...</option>
                                         <option value="no_tiene">No tiene</option>
                                         <option value="DNI">DNI</option>
                                         <option value="Libreta">Libreta</option>
@@ -253,13 +253,13 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Cantidad de menores a cargo</label>
-                                    <input type="number" name="numMenoresACargo" class="form-control"
+                                    <input type="number" min="0" name="numMenoresACargo" class="form-control"
                                            placeholder="Cantidad de menores a cargo" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Tarjeta a entregar</label>
                                     <select class="form-control" name="tarjeta" required>
-                                        <option selected disabled>Selecciona una tarjeta...</option>
+                                        <option value="" selected disabled>Selecciona una tarjeta...</option>
                                         {{#each tarjetasEntregables}}
                                             <option value="{{this.identificador}}">{{this.identificador}}</option>
                                         {{/each}}
@@ -357,7 +357,14 @@
     function toggleDocumento() {
         var tipoDocumento = document.getElementById('tipoDocumento');
         var documento = document.getElementById('documento');
-        documento.disabled = tipoDocumento.value === 'No tiene';
+        documento.disabled = tipoDocumento.value === 'no_tiene';
+        if (documento.disabled) {
+            documento.value = '';
+        }
+    }
+
+    window.onload = function() {
+        toggleDocumento();
     }
 </script>
 
