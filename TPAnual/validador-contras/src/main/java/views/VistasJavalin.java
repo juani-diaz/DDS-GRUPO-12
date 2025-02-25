@@ -80,6 +80,12 @@ public class VistasJavalin {
             UI_Perfil UIPerfil = new UI_Perfil();
             app.get("/app-profile", UIPerfil);
             acceso.agregarRuta(new PermisosMetodo("app-profile", true, true, true, true));
+            app.post("/actualizar-p", UIPerfil::actualizarColaboradorHumano);
+            acceso.agregarRuta(new PermisosMetodo("actualizar-p", true, false, false, false));
+            app.post("/actualizar-o", UIPerfil::actualizarColaboradorJuridico);
+            acceso.agregarRuta(new PermisosMetodo("actualizar-o", false, true, false, false));
+            app.post("/actualizar-t", UIPerfil::actualizarTecnico);
+            acceso.agregarRuta(new PermisosMetodo("actualizar-t", false, false, true, false));
 
 //====================== VIANDA
             UI_Vianda UIVianda = new UI_Vianda();

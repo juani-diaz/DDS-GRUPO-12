@@ -142,7 +142,17 @@
                                                 <input type="text" class="form-control" placeholder="Razón Social" required  name="razonSocial">
                                             </div>
 
-                                            <!-- Tipo -->
+                                            <!-- Rubro y Tipo de ONG -->
+                                            <div class="form-group d-flex gap-3">
+                                                <select class="form-control" required style="margin-right:20px" name="tipoJur">
+                                                    <option value="" disabled selected>Tipo de organización</option>
+                                                    <option value="ONG">ONG</option>
+                                                    <option value="EMPRESA">Empresa</option>
+                                                    <option value="INSTITUCION">Institución</option>
+                                                    <option value="GUBERNAMENTAL">Gubernamental</option>
+                                                </select>
+                                                <input type="text" class="form-control" placeholder="Rubro" required  name="rubro">
+                                            </div>
 
 
                                             <!-- Dirección -->

@@ -117,102 +117,254 @@
             Content body start
         ***********************************-->
         <div class="content-body">
-            <div class="card" style="margin: 20px">
-                <div class="card-header">
-                    <h3>Editar datos personales</h3>
-                </div>
-                <div class="card-body">
-                    {{#if (equal tipoUsuario "admin")}}
-                        <div class="admin"> <!-- Contenido para el admin -->
+            {{#if (notEqual tipoUsuario "admin")}}
+                <div class="card" style="margin: 20px">
+                    <div class="card-header">
+                        <h3>Editar datos personales</h3>
+                    </div>
+                    <div class="card-body">
+                        {{#if (equal tipoUsuario "persona")}}
+                            <div class="persona"> <!-- Contenido para el persona -->
+                                <form class="mt-5 mb-5 login-input" id="persona-form" action="/actualizar-p" method="post">
+                                    <div class="d-flex">
+                                        <div class="w-50 pe-3">
+                                            <div class="form-group d-flex gap-3">
+                                                <input type="text" class="form-control" placeholder="Nombre" required name="nombre" value="{{persona.nombre}}">
+                                                <input type="text" class="form-control" placeholder="Apellido" style="margin-left:20px" name="apellido" value="{{persona.apellido}}">
+                                            </div>
 
-                        </div>
-                    {{else if (equal tipoUsuario "persona")}}
-                        <div class="persona"> <!-- Contenido para el persona -->
-                            <form class="mt-5 mb-5 login-input" id="persona-form" action="/actualizar-p" method="post">
-                                <input type="hidden" name="id" value="{{persona.id}}">
-                                <div class="d-flex">
-                                    <div class="w-50 pe-3">
-                                        <div class="form-group d-flex gap-3">
-                                            <input type="text" class="form-control" placeholder="Nombre" required name="nombre" value="{{persona.nombre}}">
-                                            <input type="text" class="form-control" placeholder="Apellido" style="margin-left:20px" name="apellido" value="{{persona.apellido}}">
+                                            <div class="form-group d-flex gap-3">
+                                                <select class="form-control" required name="sexo">
+                                                    <option value="" disabled>Sexo</option>
+                                                    <option value="F" {{#if (equal persona.sexo "F")}}selected{{/if}}>Femenino</option>
+                                                    <option value="M" {{#if (equal persona.sexo "M")}}selected{{/if}}>Masculino</option>
+                                                    <option value="O" {{#if (equal persona.sexo "O")}}selected{{/if}}>Otro</option>
+                                                </select>
+                                                <select class="form-control" required style="margin-left:20px" name="genero">
+                                                    <option value="" disabled>Género</option>
+                                                    <option value="F" {{#if (equal persona.genero "F")}}selected{{/if}}>Femenino</option>
+                                                    <option value="M" {{#if (equal persona.genero "M")}}selected{{/if}}>Masculino</option>
+                                                    <option value="NB" {{#if (equal persona.genero "NB")}}selected{{/if}}>No binario</option>
+                                                    <option value="O" {{#if (equal persona.genero "O")}}selected{{/if}}>Otro</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <input type="date" class="form-control" placeholder="Fecha de Nacimiento" required name="fecha" value="{{persona.fechaNacimiento}}">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" placeholder="Dirección" required name="direccion" value="{{persona.direccion}}">
+                                            </div>
+
+                                            <div class="form-group d-flex gap-3">
+                                                <select class="form-control" required name="tipoDocumento">
+                                                    <option value="" disabled>Tipo de Documento</option>
+                                                    <option value="DNI" {{#if (equal persona.documento.tipo "DNI")}}selected{{/if}}>DNI</option>
+                                                    <option value="CUIT" {{#if (equal persona.documento.tipo "CUIT")}}selected{{/if}}>CUIT</option>
+                                                    <option value="CUIL" {{#if (equal persona.documento.tipo "CUIL")}}selected{{/if}}>CUIL</option>
+                                                    <option value="OTRO" {{#if (equal persona.documento.tipo "OTRO")}}selected{{/if}}>Otro</option>
+                                                </select>
+                                                <input type="text" class="form-control" placeholder="Documento" required style="margin-left:20px" name="documento" value="{{persona.documento.numero}}">
+                                            </div>
                                         </div>
 
-                                        <div class="form-group d-flex gap-3">
-                                            <select class="form-control" required name="sexo">
-                                                <option value="" disabled>Sexo</option>
-                                                <option value="F" {{#if (equal persona.sexo "F")}}selected{{/if}}>Femenino</option>
-                                                <option value="M" {{#if (equal persona.sexo "M")}}selected{{/if}}>Masculino</option>
-                                                <option value="O" {{#if (equal persona.sexo "O")}}selected{{/if}}>Otro</option>
-                                            </select>
-                                            <select class="form-control" required style="margin-left:20px" name="genero">
-                                                <option value="" disabled>Género</option>
-                                                <option value="F" {{#if (equal persona.genero "F")}}selected{{/if}}>Femenino</option>
-                                                <option value="M" {{#if (equal persona.genero "M")}}selected{{/if}}>Masculino</option>
-                                                <option value="NB" {{#if (equal persona.genero "NB")}}selected{{/if}}>No binario</option>
-                                                <option value="O" {{#if (equal persona.genero "O")}}selected{{/if}}>Otro</option>
-                                            </select>
+                                        <div class="mx-3" style="border-left: 2px solid #eee; height: auto;"></div>
+
+                                        <div class="w-50 ps-3">
+                                            <!-- Medios de Contacto -->
+                                            <div class="form-group">
+                                                <label>Medios de Contacto</label>
+                                                <div id="contact-fields" class="lista-medios"></div>
+                                                <button type="button" class="btn btn-outline-primary btn-sm mt-2 w-100" id="add-contact-btn">
+                                                    Agregar Medio de Contacto
+                                                </button>
+                                            </div>
                                         </div>
 
-                                        <div class="form-group">
-                                            <input type="date" class="form-control" placeholder="Fecha de Nacimiento" required name="fecha" value="{{persona.fechaNacimiento}}">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Dirección" required name="direccion" value="{{persona.direccion}}">
-                                        </div>
-
-                                        <div class="form-group d-flex gap-3">
-                                            <select class="form-control" required name="tipoDocumento">
-                                                <option value="" disabled>Tipo de Documento</option>
-                                                <option value="DNI" {{#if (equal persona.documento.tipo "DNI")}}selected{{/if}}>DNI</option>
-                                                <option value="CUIT" {{#if (equal persona.documento.tipo "CUIT")}}selected{{/if}}>CUIT</option>
-                                                <option value="CUIL" {{#if (equal persona.documento.tipo "CUIL")}}selected{{/if}}>CUIL</option>
-                                                <option value="OTRO" {{#if (equal persona.documento.tipo "OTRO")}}selected{{/if}}>Otro</option>
-                                            </select>
-                                            <input type="text" class="form-control" placeholder="Documento" required style="margin-left:20px" name="documento" value="{{persona.documento.numero}}">
+                                        <div id="contactos-existentes">
+                                            {{#each persona.mediosDeContacto}}
+                                                <input type="hidden" value="{{this.tipo}}" id="mce-t-{{@index}}">
+                                                <input type="hidden" value="{{this.numero}}" id="mce-n-{{@index}}">
+                                            {{/each}}
                                         </div>
                                     </div>
 
-                                    <div class="mx-3" style="border-left: 2px solid #eee; height: auto;"></div>
+                                    <div class="form-group mt-3">
+                                        <button type="submit" class="btn login-form__btn submit w-100">Actualizar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        {{else if (equal tipoUsuario "organizacion")}}
+                            <div class="organizacion"> <!-- Contenido para el organizacion -->
+                                <form class="mt-5 mb-5 login-input" id="org-form" action="/actualizar-o" method="post">
+                                    <div class="d-flex">
+                                        <!-- Primera Columna: Datos de la organización -->
+                                        <div class="w-50 pe-3">
+                                            <!-- Razón Social -->
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" placeholder="Razón Social" required name="razonSocial" value="{{persona.razonSocial}}">
+                                            </div>
 
-                                    <div class="w-50 ps-3">
-                                        <!-- Medios de Contacto -->
-                                        <div class="form-group">
-                                            <label>Medios de Contacto</label>
-                                            <div id="contact-fields" class="lista-medios"></div>
-                                            <button type="button" class="btn btn-outline-primary btn-sm mt-2 w-100" id="add-contact-btn">
-                                                Agregar Medio de Contacto
-                                            </button>
+                                            <!-- Rubro y Tipo de ONG -->
+                                            <div class="form-group d-flex gap-3">
+                                                <select class="form-control" required style="margin-right:20px" name="tipoJur">
+                                                    <option value="" disabled>Tipo de organización</option>
+                                                    <option value="ONG" {{#if (equal tipoJurOriginal "ONG")}}selected{{/if}}>ONG</option>
+                                                    <option value="EMPRESA" {{#if (equal tipoJurOriginal "EMPRESA")}}selected{{/if}}>Empresa</option>
+                                                    <option value="INSTITUCION" {{#if (equal tipoJurOriginal "INSTITUCION")}}selected{{/if}}>Institución</option>
+                                                    <option value="GUBERNAMENTAL" {{#if (equal tipoJurOriginal "GUBERNAMENTAL")}}selected{{/if}}>Gubernamental</option>
+                                                </select>
+                                                <input type="text" class="form-control" placeholder="Rubro" required  name="rubro" value="{{persona.rubro}}">
+                                            </div>
+
+                                            <!-- Dirección -->
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" placeholder="Dirección" required name="direccion" value="{{persona.direccion}}">
+                                            </div>
+
+                                            <!-- Tipo de Documento y Documento -->
+                                            <div class="form-group d-flex gap-3">
+                                                <select class="form-control" required name="tipoDocumento">
+                                                    <option value="" disabled>Tipo de Documento</option>
+                                                    <option value="DNI" {{#if (equal persona.documento.tipo "DNI")}}selected{{/if}}>DNI</option>
+                                                    <option value="CUIT" {{#if (equal persona.documento.tipo "CUIT")}}selected{{/if}}>CUIT</option>
+                                                    <option value="CUIL" {{#if (equal persona.documento.tipo "CUIL")}}selected{{/if}}>CUIL</option>
+                                                    <option value="OTRO" {{#if (equal persona.documento.tipo "OTRO")}}selected{{/if}}>Otro</option>
+                                                </select>
+                                                <input type="text" class="form-control" placeholder="Documento" required style="margin-left:20px" name="documento" value="{{persona.documento.numero}}">
+                                            </div>
+                                        </div>
+
+                                        <!-- Línea divisora personalizada -->
+                                        <div class="mx-3" style="border-left: 2px solid #eee; height: auto;"></div>
+
+                                        <div class="w-50 ps-3">
+                                            <!-- Medios de Contacto -->
+                                            <div class="form-group">
+                                                <label>Medios de Contacto</label>
+                                                <div id="contact-fields-org" class="lista-medios"></div>
+                                                <button type="button" class="btn btn-outline-primary btn-sm mt-2 w-100" id="add-contact-btn-org">
+                                                    Agregar Medio de Contacto
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
 
-                                    <div id="contactos-existentes">
+                                    <!-- Medios de contacto existentes (ocultos) -->
+                                    <div id="contactos-existentes-org">
                                         {{#each persona.mediosDeContacto}}
-                                            a
+                                            <input type="hidden" value="{{this.tipo}}" id="mco-t-{{@index}}">
+                                            <input type="hidden" value="{{this.numero}}" id="mco-n-{{@index}}">
                                         {{/each}}
                                     </div>
-                                </div>
 
-                                <div class="form-group mt-3">
-                                    <button type="submit" class="btn login-form__btn submit w-100">Actualizar</button>
-                                </div>
-                            </form>
-                        </div>
-                    {{else if (equal tipoUsuario "organizacion")}}
-                        <div class="organizacion"> <!-- Contenido para el organizacion -->
+                                    <!-- Botón de envío -->
+                                    <div class="form-group mt-3">
+                                        <button type="submit" class="btn login-form__btn submit w-100">Actualizar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        {{else if (equal tipoUsuario "tecnico")}}
+                            <div class="tecnico"> <!-- Contenido para tecnico -->
+                                <form class="mt-5 mb-5 login-input" id="tecnico-form" action="/actualizar-t" method="post">
+                                    <div class="d-flex">
+                                        <!-- Primera Columna: Datos personales -->
+                                        <div class="w-40 pe-3">
+                                            <!-- Nombre y Apellido -->
+                                            <div class="form-group d-flex gap-3">
+                                                <input type="text" class="form-control" placeholder="Nombre" required name="nombre" value="{{persona.nombre}}">
+                                                <input type="text" class="form-control" placeholder="Apellido" style="margin-left:20px" name="apellido" value="{{persona.apellido}}">
+                                            </div>
 
-                        </div>
-                    {{else if (equal tipoUsuario "tecnico")}}
-                        <div class="tecnico"> <!-- Contenido para tecnico -->
+                                            <!-- Selector de Sexo y Selector de Género -->
+                                            <div class="form-group d-flex gap-3">
+                                                <select class="form-control" required name="sexo">
+                                                    <option value="" disabled>Sexo</option>
+                                                    <option value="F" {{#if (equal persona.sexo "F")}}selected{{/if}}>Femenino</option>
+                                                    <option value="M" {{#if (equal persona.sexo "M")}}selected{{/if}}>Masculino</option>
+                                                    <option value="O" {{#if (equal persona.sexo "O")}}selected{{/if}}>Otro</option>
+                                                </select>
+                                                <select class="form-control" required style="margin-left:20px" name="genero">
+                                                    <option value="" disabled>Género</option>
+                                                    <option value="F" {{#if (equal persona.genero "F")}}selected{{/if}}>Femenino</option>
+                                                    <option value="M" {{#if (equal persona.genero "M")}}selected{{/if}}>Masculino</option>
+                                                    <option value="NB" {{#if (equal persona.genero "NB")}}selected{{/if}}>No binario</option>
+                                                    <option value="O" {{#if (equal persona.genero "O")}}selected{{/if}}>Otro</option>
+                                                </select>
+                                            </div>
 
-                        </div>
-                    {{else}}
-                        <div class="unknown-user">
-                            ?
-                        </div>
-                    {{/if}}
+                                            <!-- Fecha de nacimiento -->
+                                            <div class="form-group">
+                                                <input type="date" class="form-control" placeholder="Fecha de Nacimiento" required name="fecha" value="{{persona.fechaNacimiento}}">
+                                            </div>
+
+                                            <!-- Dirección -->
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" placeholder="Dirección" required name="direccion" value="{{persona.direccion}}">
+                                            </div>
+
+                                            <!-- Tipo de Documento y Documento -->
+                                            <div class="form-group d-flex gap-3">
+                                                <select class="form-control" required name="tipoDocumento">
+                                                    <option value="" disabled>Tipo de Documento</option>
+                                                    <option value="DNI" {{#if (equal persona.documento.tipo "DNI")}}selected{{/if}}>DNI</option>
+                                                    <option value="CUIT" {{#if (equal persona.documento.tipo "CUIT")}}selected{{/if}}>CUIT</option>
+                                                    <option value="CUIL" {{#if (equal persona.documento.tipo "CUIL")}}selected{{/if}}>CUIL</option>
+                                                    <option value="OTRO" {{#if (equal persona.documento.tipo "OTRO")}}selected{{/if}}>Otro</option>
+                                                </select>
+                                                <input type="text" class="form-control" placeholder="Documento" required style="margin-left:20px" name="documento" value="{{persona.documento.numero}}">
+                                            </div>
+                                        </div>
+
+                                        <!-- Línea divisora personalizada -->
+                                        <div class="mx-3" style="border-left: 2px solid #eee; height: auto;"></div>
+
+                                        <div class="w-40 pe-3">
+                                            <!-- Medios de Contacto -->
+                                            <div class="form-group">
+                                                <label>Medios de Contacto</label>
+                                                <div id="contact-fields-tecnico" class="lista-medios"></div>
+                                                <button type="button" class="btn btn-outline-primary btn-sm mt-2 w-100" id="add-contact-btn-tecnico">
+                                                    Agregar Medio de Contacto
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Línea divisora personalizada -->
+                                        <div class="mx-3" style="border-left: 2px solid #eee; height: auto;"></div>
+
+                                        <!-- Tercera Columna: Área de Cobertura -->
+                                        <div class="w-20 pe-3 lista-localidades">
+                                            <div class="form-group">
+                                                <label for="coverage-area">Área de Cobertura</label>
+                                                <div id="coverage-list" class="form-check">
+                                                    {{#each listadoLocalidades.localidades}}
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" name={{this.nombre}} value="si" id={{this.nombre}}
+                                                                {{#if (estaEnListado this.nombre ../localidadesRegistradas)}}checked{{/if}}>
+                                                            <label class="form-check-label" for={{this.nombre}}>{{this.titulo}}</label>
+                                                        </div>
+                                                    {{/each}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Botón de envío -->
+                                    <div class="form-group mt-3">
+                                        <button type="submit" class="btn login-form__btn submit w-100">Actualizar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        {{else}}
+                            <div class="unknown-user">
+                                ?
+                            </div>
+                        {{/if}}
+                    </div>
                 </div>
-            </div>
+            {{/if}}
         </div>
         <!--**********************************
             Content body end
@@ -288,6 +440,102 @@
                 select.name = `contact[${contactCount}][type]`;
                 input.name = `contact[${contactCount}][value]`;
                 contactCount++;
+            });
+        }
+    </script>
+
+    <script>
+        const maxContacts_org = 4;
+        const contactFieldsContainer_org = document.getElementById('contact-fields-org');
+        const addContactButton_org = document.getElementById('add-contact-btn-org');
+        let contactCount_org = 0;
+
+        addContactButton_org.addEventListener('click', () => {
+            if (contactCount_org < maxContacts_org) {
+                const contactField = document.createElement('div');
+                contactField.className = 'd-flex gap-3 mb-2';
+
+                contactField.innerHTML = `
+                    <select class="form-control" name="contact[${contactCount}][type]" required>
+                        <option value="" disabled selected>Tipo</option>
+                        <option value="email">Email</option>
+                        <option value="telefono">Teléfono</option>
+                        <option value="whatsapp">WhatsApp</option>
+                    </select>
+                    <input type="text" class="form-control" name="contact[${contactCount}][value]" placeholder="Ingrese el contacto" required style="margin-left:20px">
+                    <button type="button" class="btn btn-danger btn-sm remove-contact-btn-org" style="width: 28px;height: 28px;margin-top: 7px;">X</button>
+                `;
+
+                contactFieldsContainer_org.appendChild(contactField);
+                contactCount_org++;
+
+                // Add event listener to remove button
+                contactField.querySelector('.remove-contact-btn-org').addEventListener('click', () => {
+                    contactField.remove();
+                    updateContactNames_org();
+                });
+            } else {
+                alert('Puedes agregar hasta 4 medios de contacto.');
+            }
+        });
+
+        function updateContactNames_org() {
+            const contactFields = contactFieldsContainer_org.children;
+            contactCount_org = 0; // Reset counter
+            Array.from(contactFields).forEach((contactField) => {
+                const select = contactField.querySelector('select');
+                const input = contactField.querySelector('input');
+                select.name = `contact[${contactCount}][type]`;
+                input.name = `contact[${contactCount}][value]`;
+                contactCount_org++;
+            });
+        }
+    </script>
+
+    <script>
+        const maxContacts_tecnico = 4;
+        const contactFieldsContainer_tecnico = document.getElementById('contact-fields-tecnico');
+        const addContactButton_tecnico = document.getElementById('add-contact-btn-tecnico');
+        let contactCount_tecnico = 0;
+
+        addContactButton_tecnico.addEventListener('click', () => {
+            if (contactCount_tecnico < maxContacts_tecnico) {
+                const contactField = document.createElement('div');
+                contactField.className = 'd-flex gap-3 mb-2';
+
+                contactField.innerHTML = `
+                    <select class="form-control" name="contact[${contactCount}][type]" required>
+                        <option value="" disabled selected>Tipo</option>
+                        <option value="email">Email</option>
+                        <option value="telefono">Teléfono</option>
+                        <option value="whatsapp">WhatsApp</option>
+                    </select>
+                    <input type="text" class="form-control" name="contact[${contactCount}][value]" placeholder="Ingrese el contacto" required style="margin-left:20px">
+                    <button type="button" class="btn btn-danger btn-sm remove-contact-btn-tecnico" style="width: 28px;height: 28px;margin-top: 7px;">X</button>
+                `;
+
+                contactFieldsContainer_tecnico.appendChild(contactField);
+                contactCount_tecnico++;
+
+                // Add event listener to remove button
+                contactField.querySelector('.remove-contact-btn-tecnico').addEventListener('click', () => {
+                    contactField.remove();
+                    updateContactNames_tecnico();
+                });
+            } else {
+                alert('Puedes agregar hasta 4 medios de contacto.');
+            }
+        });
+
+        function updateContactNames_tecnico() {
+            const contactFields = contactFieldsContainer_tecnico.children;
+            contactCount_tecnico = 0; // Reset counter
+            Array.from(contactFields).forEach((contactField) => {
+                const select = contactField.querySelector('select');
+                const input = contactField.querySelector('input');
+                select.name = `contact[${contactCount}][type]`;
+                input.name = `contact[${contactCount}][value]`;
+                contactCount_tecnico++;
             });
         }
     </script>

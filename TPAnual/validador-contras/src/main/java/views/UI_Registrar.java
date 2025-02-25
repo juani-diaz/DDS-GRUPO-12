@@ -157,9 +157,7 @@ public class UI_Registrar implements Handler {
         }
 
         LocalidadesTecnico lt = new LocalidadesTecnico();
-        System.out.println(ctx.formParamMap().keySet());
         List<String> area = new ArrayList<>(ctx.formParamMap().keySet().stream().filter(param -> lt.nombres().contains(param)).toList());
-        System.out.println(area);
 
         Documento nuevoDocumento = new Documento(tipoDocumento, documento);
         PersonaFisica nuevaPersona = new PersonaFisica(nombre, medios, direccion, nuevoDocumento, apellido, sexo, genero, LocalDate.parse(fecha));

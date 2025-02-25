@@ -5,11 +5,9 @@ import domain.auth.JwtUtil;
 import domain.auth.Usuario;
 import domain.incidente.EnumEstadoDeIncidente;
 import domain.incidente.Incidente;
-import domain.rol.Colaborador;
+import domain.persona.EnumTipoPersonaJuridica;
+import domain.rol.*;
 
-import domain.rol.Tarjeta;
-
-import domain.rol.Tecnico;
 import io.javalin.http.Context;
 
 import io.jsonwebtoken.Claims;
@@ -23,6 +21,7 @@ import persistence.Repos.RepoUsuarios;
 
 
 import java.util.List;
+import java.util.Objects;
 
 public class HelperSource {
     public String lat_lon(Ubicacion u) {
@@ -162,6 +161,10 @@ public class HelperSource {
 
     public Boolean lt(Float a, Float b) {
         return a < b;
+    }
+
+    public Boolean estaEnListado(String a, List<String> l) {
+        return l.contains(a);
     }
 
 }
