@@ -60,7 +60,7 @@ public class UI_NuevaHeladera extends UI_Navegable implements Handler {
         double longitud = Double.parseDouble(ctx.queryParam("longitud"));
         double radio = Double.parseDouble(ctx.queryParam("radio"));
 
-        // Generar puntos sugeridos (aquí puedes implementar tu lógica de negocio)
+        // Generar puntos sugeridos
         List<PuntoSugerido> puntosSugeridos = generarPuntosSugeridos(latitud, longitud, radio);
 
         // Devolver la lista de puntos en formato JSON
@@ -71,7 +71,7 @@ public class UI_NuevaHeladera extends UI_Navegable implements Handler {
         List<PuntoSugerido> puntos = new ArrayList<>();
         Random random = new Random();
 
-        // Generar 6 puntos aleatorios dentro del radio (esto es un ejemplo, puedes cambiarlo)
+        // 6 puntos aleatorios
         for (int i = 0; i < 6; i++) {
             double randomLat = latitud + (random.nextDouble() * 2 - 1) * (radio / 111320);
             double randomLng = longitud + (random.nextDouble() * 2 - 1) * (radio / 111320);
@@ -81,7 +81,6 @@ public class UI_NuevaHeladera extends UI_Navegable implements Handler {
         return puntos;
     }
 
-    // Clase interna para representar un punto sugerido
     private static class PuntoSugerido {
         private double latitud;
         private double longitud;

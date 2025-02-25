@@ -5,6 +5,7 @@ import domain.auth.JwtUtil;
 import domain.colaboraciones.DonacionVianda;
 import domain.heladera.Heladera;
 import domain.rol.Colaborador;
+import domain.suscripcion.Publicador;
 import domain.vianda.EnumEstadoVianda;
 import domain.vianda.Vianda;
 import io.javalin.http.Context;
@@ -16,6 +17,7 @@ import persistence.Repos.RepoHeladera;
 import persistence.Repos.RepoVianda;
 
 import javax.persistence.EntityManager;
+import java.io.IOException;
 import java.time.LocalDate;
 
 public class UI_Vianda extends UI_Navegable implements Handler{
@@ -30,7 +32,7 @@ public class UI_Vianda extends UI_Navegable implements Handler{
   }
 
   // Metodo para agregar una vianda a la heladera
-  public void agregarVianda(Context ctx) {
+  public void agregarVianda(Context ctx) throws IOException {
     System.out.println("estoy en agregarVianda");
 
     // Obtener parámetros del formulario (datos enviados en la solicitud)
@@ -72,19 +74,15 @@ public class UI_Vianda extends UI_Navegable implements Handler{
     dona.setDestino(heladera);
     dona.setFecha(LocalDate.now());
 
+
     Colaborador cola = repoColaborador.findById_Colaborador((Integer) claims.get("roleId"));
     dona.setColaborador(cola);
 
     cola.realizarColaboracion(dona);
+    Publicador pub=new Publicador();
+    pub.notifyObservers();
 
-    EntityManager em = BDUtils.getEm();
-    BDUtils.comenzarTransaccion(em);
-
-    em.merge(cola);
-    em.merge(dona);
-
-    BDUtils.commit(em);
-    ctx.render("index.hbs");
+    ctx.redirect("/index");
   }
 
 }

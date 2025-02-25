@@ -52,9 +52,14 @@ public class UI_Registrar implements Handler {
 
         List<MedioDeContacto> medios = new ArrayList<MedioDeContacto>();
         for(String k : ctx.formParamMap().keySet().stream().filter(param -> param.contains("type")).toList()){
+            System.out.println("falopa");
+            System.out.println(k);
             Integer indice = Integer.valueOf(k.substring(8,9));
+            System.out.println(indice);
             MedioDeContacto m = null;
             String tipo = ctx.formParam(k);
+            System.out.println("tipo: ");
+            System.out.println(tipo);
             String valor = ctx.formParam("contact["+indice+"][value]");
             if(Objects.equals(tipo, "email")){
                 m = new EmailDir(valor);
@@ -203,7 +208,10 @@ public class UI_Registrar implements Handler {
         token = token.replace("Bearer", "");
         String decodedToken = URLDecoder.decode(token, StandardCharsets.UTF_8);
         Usuario u = JwtUtil.validateTokenAndGetUser(decodedToken);
+        System.out.println("medios:");
+        System.out.println(medios);
         PersonaFisica nuevaPersona = new PersonaFisica(nombre, medios, direccion, nuevoDocumento, apellido, sexo, genero, LocalDate.parse(fecha));
+        //medios.stream().<void>map(medio -> medio.setPersona(nuevaPersona));
         Colaborador nuevoColaborador = new Colaborador(nuevaPersona);
         u.setRol(nuevoColaborador);
 

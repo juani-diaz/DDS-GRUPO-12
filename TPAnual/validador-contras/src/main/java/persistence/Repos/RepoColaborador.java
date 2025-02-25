@@ -195,10 +195,8 @@ public class RepoColaborador extends BDUtils{
     }
 
     public void actualizarColaborador(Colaborador colaborador){
-
         comenzarTransaccion(em);
 
-        // Merging the updated entity
         em.merge(colaborador);
 
         commit(em);

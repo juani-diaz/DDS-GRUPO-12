@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import persistence.Repos.RepoVianda;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -61,24 +62,23 @@ public class DistribucionVianda extends Colaboracion {
 
 
     public void ejecutar() {
-
         Colaborador colaborador = getColaborador();
         if (!(colaborador.getPersona() instanceof PersonaFisica)) {
             throw new IllegalArgumentException("El colaborador debe ser una persona humana");
         }
 
-            List<Vianda> shuffledList = new ArrayList<>(this.origen.getViandasEnHeladera());
-            Collections.shuffle(shuffledList);
-            this.viandasMovidas = shuffledList.subList(0, this.cantidadViandasMovidas);
-            this.origen.sacarViandas(this.viandasMovidas);
-            this.destino.ingresarViandas(this.viandasMovidas);
+        List<Vianda> shuffledList = new ArrayList<>(this.origen.getViandasEnHeladera());
+        Collections.shuffle(shuffledList);
+        this.viandasMovidas = shuffledList.subList(0, this.cantidadViandasMovidas);
+        this.origen.sacarViandas(this.viandasMovidas);
+        for(Vianda vianda : viandasMovidas){
+            vianda.setHeladera(destino);
+            RepoVianda.getInstance().updateVianda(vianda);
+        }
+        this.destino.ingresarViandas(this.viandasMovidas);
 
-            SingletonSeguidorEstadistica se = SingletonSeguidorEstadistica.getInstance();
-            se.addDistribucionVianda(this);
-
-            colaborador.setCantidadPuntos(colaborador.getCantidadPuntos() + puntosObtenidos());
-
-
+        SingletonSeguidorEstadistica se = SingletonSeguidorEstadistica.getInstance();
+        se.addDistribucionVianda(this);
     }
     public void entregarTarjetas(List<Tarjeta> list_tarjetas){ //osea recibe tarjetas
         this.colaborador.recibirTarjetas(list_tarjetas);

@@ -25,16 +25,10 @@ public class UI_RegistrarPersona extends UI_Navegable implements Handler{
   public void handle(Context ctx) throws Exception {
     this.validarUsuario(ctx);
 
-    System.out.println("estoy en UI_RegistrarPersona");
-    String token = ctx.cookie("Auth");
-    Claims claims= JwtUtil.getClaimsFromToken(token);
-    RepoColaborador repoColaborador = RepoColaborador.getInstance();
-    Colaborador colapinto=repoColaborador.findById_Colaborador((Integer) claims.get("roleId"));
+    Colaborador colapinto = (Colaborador) getUsuario().getRol();
 
-    Integer tarjetasDisponibles=colapinto.getTarjetasParaEntregar().size();
+    Integer tarjetasDisponibles = colapinto.getTarjetasParaEntregar().size();
 
-
-    System.out.println("tarjetas de colapa: "+ tarjetasDisponibles);
     model.put("tarjetasEntregables", colapinto.getTarjetasParaEntregar());
     model.put("tarjetasDisponibles",tarjetasDisponibles);
     model.put("botonDeshabilitado", tarjetasDisponibles <= 0);
@@ -42,13 +36,8 @@ public class UI_RegistrarPersona extends UI_Navegable implements Handler{
   }
 
   public void agregarPersona(Context ctx) {
-    System.out.println("estoy en agregarPersona");
-
     // Agarro al colaborador actual
-    String token = ctx.cookie("Auth");
-    Claims claims= JwtUtil.getClaimsFromToken(token);
-    RepoColaborador repoColaborador = RepoColaborador.getInstance();
-    Colaborador colapinto=repoColaborador.findById_Colaborador((Integer) claims.get("roleId"));
+    Colaborador colapinto = (Colaborador) getUsuario().getRol();
 
     // Obtener parámetros del formulario (datos enviados en la solicitud)
     String nombre = ctx.formParam("nombre");
@@ -60,16 +49,6 @@ public class UI_RegistrarPersona extends UI_Navegable implements Handler{
     String numMenoresACargo =ctx.formParam("numMenoresACargo");
     String tarjetaIdentificadorVulnerable = ctx.formParam("tarjeta");
 
-    System.out.println("mi nombre es: " + nombre);
-    System.out.println("naci: " + fechaNacimiento);
-    System.out.println("mi tipo de doc es: " + tipoDocumento);
-    System.out.println("mi doc es: " + documento);
-    System.out.println("tengo "+ numMenoresACargo + " menores a cargo");
-    System.out.println("el identificador es: "+ tarjetaIdentificadorVulnerable);
-
-    System.out.println("tarjetas de colapa: "+colapinto.getTarjetasParaEntregar().size());
-    System.out.println("tarjetas de colapa 2: "+colapinto.getTarjetasParaEntregar());
-    System.out.println(colapinto.getTarjetasParaEntregar().isEmpty());
     if(colapinto.getTarjetasParaEntregar().isEmpty()){
       throw new IllegalArgumentException("El colaborador no tiene tarjetas para entregar");
     }
@@ -95,30 +74,16 @@ public class UI_RegistrarPersona extends UI_Navegable implements Handler{
     vulnerable.setPersona(persona);
     vulnerable.setFechaRegistro(LocalDate.now());
     vulnerable.setMenoresACargo(numMenoresACargoInt);
-    //vulnerable.setTarjeta(unaTarjetinha);
-
-    //Asigno tarjeta
-
-    //colapinto.entregarTarjeta(vulnerable);
-
 
     if (situacionCalle == null){
       vulnerable.setSituacionCalle(EnumSituacionCalle.POSEE_HOGAR);
-    }else {
+    } else {
       vulnerable.setSituacionCalle(EnumSituacionCalle.NO_POSEE_HOGAR);
     }
 
-    for(Integer i =0; i<colapinto.getTarjetasParaEntregar().size(); i++){
-      Tarjeta tarjetita = colapinto.getTarjetasParaEntregar().get(i);
-      System.out.println("Las tarjetas de colapa son: " + tarjetita.getIdentificador());
-    }
-
-
     Tarjeta tarjetaVulnerable = colapinto.getTarjetasParaEntregar().stream().filter(t -> t.getIdentificador().equals(tarjetaIdentificadorVulnerable)).findFirst().get();
-    System.out.println("la tarjeta es awkdwakd: " + tarjetaVulnerable.getIdentificador());
 
-
-    RegistroPersonaVulnerable registroPersonaVulnerable=new RegistroPersonaVulnerable(tarjetaVulnerable,vulnerable);
+    RegistroPersonaVulnerable registroPersonaVulnerable = new RegistroPersonaVulnerable(tarjetaVulnerable,vulnerable);
 
 
     registroPersonaVulnerable.setColaborador(colapinto);
@@ -141,12 +106,10 @@ public class UI_RegistrarPersona extends UI_Navegable implements Handler{
 
     //repoColaborador.actualizarColaborador(colapinto);
 
-    ctx.render("index.hbs");
+    ctx.render("/index");
   }
 
   public void solicitarTarjeta(Context ctx) {
-    System.out.println("estoy en solicitarTarjetas");
-
 
     // Agarro al colaborador actual
     String token = ctx.cookie("Auth");
@@ -171,8 +134,6 @@ public class UI_RegistrarPersona extends UI_Navegable implements Handler{
       Tarjeta tarjeta = new Tarjeta("aa"+Integer.toString(numeroAleatorio));
       colapinto.recibirUnaTarjeta(tarjeta);
       em.persist(tarjeta);
-
-
     }
     em.merge(colapinto);
 

@@ -8,8 +8,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import persistence.BDUtils;
 
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.persistence.OneToOne;
 import java.time.LocalDate;
 
@@ -24,8 +26,7 @@ public class RegistroPersonaVulnerable extends  Colaboracion{
     @OneToOne
     private Vulnerable vulnerable;
 
-    public RegistroPersonaVulnerable(Colaborador colaborador, LocalDate fecha,
-                                     Vulnerable vulnerable){
+    public RegistroPersonaVulnerable(Colaborador colaborador, LocalDate fecha, Vulnerable vulnerable){
         this.colaborador = colaborador;
         this.fecha = fecha;
         this.vulnerable = vulnerable;
@@ -43,9 +44,14 @@ public class RegistroPersonaVulnerable extends  Colaboracion{
 
         // Asignar la tarjeta al vulnerable
         vulnerable.setearTarjeta(tarjetaEntregada);
-        this.tarjetaEntregada= tarjetaEntregada;
 
-        colaborador.setCantidadPuntos(colaborador.getCantidadPuntos() + puntosObtenidos());
+        EntityManager em = BDUtils.getEntityManager();
+
+        BDUtils.comenzarTransaccion(em);
+        em.persist(vulnerable.getPersona().getDocumento());
+        em.persist(vulnerable.getPersona());
+        em.persist(vulnerable);
+        BDUtils.commit(em);
     }
 
     public Float puntosObtenidos(){

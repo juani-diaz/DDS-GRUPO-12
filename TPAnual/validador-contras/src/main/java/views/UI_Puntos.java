@@ -1,6 +1,7 @@
 package views;
 
 import domain.auth.JwtUtil;
+import domain.colaboraciones.PresentacionOferta;
 import domain.rol.Colaborador;
 import domain.servicios.Catalogo;
 import io.javalin.http.Context;
@@ -15,12 +16,11 @@ public class UI_Puntos extends UI_Navegable implements Handler {
     public void handle(Context ctx) throws Exception {
         this.validarUsuario(ctx);
 
-        String token = ctx.cookie("Auth");
-        Claims claims= JwtUtil.getClaimsFromToken(token);
-        RepoColaborador cola = RepoColaborador.getInstance();
+        Colaborador cola = (Colaborador) getUsuario().getRol();
 
-        Float puntos=cola.obtenerPuntosxColaborador((Integer) claims.get("roleId"));
-        model.put("colaPuntos", puntos);
+        cola.actualizarPuntos();
+
+        model.put("colaPuntos", cola.getCantidadPuntos());
         this.model.put("ofertas", Catalogo.getInstance().getOfertas());
 
         System.out.println(model);
@@ -29,29 +29,15 @@ public class UI_Puntos extends UI_Navegable implements Handler {
 
     public void canjearPuntos(Context ctx) throws Exception {
         this.validarUsuario(ctx);
-        if (this.sesionValida(ctx)) {
-            String token = ctx.cookie("Auth");
-            Claims claims = JwtUtil.getClaimsFromToken(token);
-            RepoColaborador cola = RepoColaborador.getInstance();
 
-            Colaborador colaborador = cola.findById_Colaborador((Integer) claims.get("roleId"));
+        Colaborador colaborador = (Colaborador) getUsuario().getRol();
 
-            int ofertaId = Integer.parseInt(ctx.formParam("ofertaId"));
+        int ofertaId = Integer.parseInt(ctx.formParam("ofertaId"));
 
-            colaborador.realizarCanje(ofertaId);
+        PresentacionOferta o = Catalogo.getInstance().getOfertaById(ofertaId);
 
-            ctx.render("index.hbs", model);
-        }
+        colaborador.realizarCanje(o);
+
+        ctx.redirect("/puntos");
     }
-
-
-
-
-
 }
-
-
-
-
-
-

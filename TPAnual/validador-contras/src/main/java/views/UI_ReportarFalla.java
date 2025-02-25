@@ -4,6 +4,7 @@ import domain.colaboraciones.PresentacionOferta;
 import domain.heladera.Heladera;
 import domain.incidente.IncidenteFallaTecnica;
 import domain.rol.Colaborador;
+import domain.suscripcion.Publicador;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import io.javalin.http.UploadedFile;
@@ -49,6 +50,8 @@ public class UI_ReportarFalla extends UI_Navegable implements Handler {
         Colaborador c = RepoColaborador.getInstance().findByUsuario(getUsuario().getUsuario());
 
         new IncidenteFallaTecnica(heladera, LocalDate.now(), c, descripcion, imagen);
+        Publicador pub=new Publicador();
+        pub.notifyObservers();
 
         ctx.redirect("/index");
     }

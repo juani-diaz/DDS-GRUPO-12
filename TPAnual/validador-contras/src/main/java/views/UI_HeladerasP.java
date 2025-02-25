@@ -4,10 +4,7 @@ package views;
 import domain.heladera.Heladera;
 import domain.rol.Colaborador;
 import domain.servicios.TwilioSendGrid;
-import domain.suscripcion.MuchasViandas;
-import domain.suscripcion.NoFunciona;
-import domain.suscripcion.PocasViandas;
-import domain.suscripcion.Suscripcion;
+import domain.suscripcion.*;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import persistence.Repos.RepoColaborador;
@@ -15,6 +12,7 @@ import persistence.Repos.RepoHeladera;
 import persistence.Repos.RepoSuscripcion;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class UI_HeladerasP extends UI_Navegable implements Handler{
@@ -79,7 +77,11 @@ public class UI_HeladerasP extends UI_Navegable implements Handler{
                 " de ahora en mas podra recibir todas las notificaciones pertinentes a su suscripcion del tipo "
                 + tipo_sub + "!";
 
-        //TwilioSendGrid.sendEmail("jpolito@frba.utn.edu.ar", subject, mensaje);
+        Publicador publisher= new Publicador();
+        publisher.addObservable(suscripcion);
+        System.out.println(this.getUsuario().getRol().getPersona().getMediosDeContacto());
+        TwilioSendGrid.sendEmail("juanidiaz8260@gmail.com", subject, mensaje);
+
     }
 
     private void desuscribirse(Colaborador colaborador, String hela, String tipo_sub) throws IOException {
@@ -107,7 +109,8 @@ public class UI_HeladerasP extends UI_Navegable implements Handler{
                 " acabas de dessuscribirse de la heladeraID " + hela+
                 " de ahora en mas no recibiras notificaciones de dihca heladera";
 
-        //TwilioSendGrid.sendEmail("jpolito@frba.utn.edu.ar", subject, mensaje);
+        System.out.println(this.getUsuario().getRol().getPersona().getMediosDeContacto().get(0).getContacto());
+        TwilioSendGrid.sendEmail(this.getUsuario().getRol().getPersona().getMediosDeContacto().get(0).getContacto(), subject, mensaje);
     }
 
     private Heladera extracted(String heladeraId) {

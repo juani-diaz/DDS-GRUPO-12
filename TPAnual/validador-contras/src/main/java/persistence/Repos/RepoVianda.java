@@ -1,6 +1,7 @@
 package persistence.Repos;
 
 import domain.heladera.Heladera;
+import domain.incidente.Incidente;
 import domain.vianda.Vianda;
 import lombok.Getter;
 import persistence.BDUtils;
@@ -31,8 +32,6 @@ public class RepoVianda extends BDUtils{
     return instance;
   }
 
-  //Se crea el EntityManager
-  //private EntityManager em = BDUtils.getEntityManager();
   private EntityManager em = getEm();
 
   public void add_Vianda(Vianda vian) {
@@ -45,6 +44,17 @@ public class RepoVianda extends BDUtils{
       commit(em);
     } catch (Exception e) {
       System.out.println("Error al agregar la Vianda: " + vian + e);
+    }
+  }
+
+  public void updateVianda(Vianda v) {
+    BDUtils.comenzarTransaccion(em);
+    try {
+      em.merge(v);
+      BDUtils.commit(em);
+    } catch (Exception e) {
+      System.out.println("Error al actualizar vianda: " + e);
+      BDUtils.rollback(em);
     }
   }
 
@@ -72,37 +82,6 @@ public class RepoVianda extends BDUtils{
     return vianda;
   }
 
-  public void cambiarHeladera(Heladera heladeraNueva, Integer viandaID){
-
-    Vianda vianda = this.findById_Vianda(viandaID);
-    vianda.setHeladera(heladeraNueva);
-
-    comenzarTransaccion(em);
-
-    // Merging the updated entity
-    em.merge(vianda);
-
-    commit(em);
-  }
-
-  public void cambiarHeladeraPlural(Heladera heladeraNueva, List<Vianda> viandas){
-    Integer i=0;
-
-    for (i=0 ; i<viandas.size(); i++)
-    {
-      Vianda vianda = viandas.get(i);
-      vianda.setHeladera(heladeraNueva);
-
-      comenzarTransaccion(em);
-
-      // Merging the updated entity
-      em.merge(vianda);
-
-    }
-
-    commit(em);
-  }
-
   public List<Vianda> getAll_Viandas_BD() {
     CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
     CriteriaQuery<Vianda> criteriaQuery = criteriaBuilder.createQuery(Vianda.class);
@@ -113,6 +92,5 @@ public class RepoVianda extends BDUtils{
     Query query = em.createQuery(criteriaQuery);
     return query.getResultList();
   }
-
 
 }
