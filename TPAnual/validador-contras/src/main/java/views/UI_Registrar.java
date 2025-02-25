@@ -53,14 +53,9 @@ public class UI_Registrar implements Handler {
 
         List<MedioDeContacto> medios = new ArrayList<MedioDeContacto>();
         for(String k : ctx.formParamMap().keySet().stream().filter(param -> param.contains("type")).toList()){
-            System.out.println("falopa");
-            System.out.println(k);
             Integer indice = Integer.valueOf(k.substring(8,9));
-            System.out.println(indice);
             MedioDeContacto m = null;
             String tipo = ctx.formParam(k);
-            System.out.println("tipo: ");
-            System.out.println(tipo);
             String valor = ctx.formParam("contact["+indice+"][value]");
             if(Objects.equals(tipo, "email")){
                 m = new EmailDir(valor);
@@ -74,7 +69,6 @@ public class UI_Registrar implements Handler {
             }
             medios.add(m);
         }
-
 
         Documento nuevoDocumento = new Documento(tipoDocumento, documento);
         nuevaPersona.setNombre(nombre);
