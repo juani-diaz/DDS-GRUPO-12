@@ -6,8 +6,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import persistence.BDUtils;
+import persistence.Repos.RepoHeladera;
 
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.persistence.OneToOne;
 import java.time.LocalDate;
 import java.time.Period;
@@ -27,6 +30,8 @@ public class ResponsableHeladera extends Colaboracion{
 
     public void ejecutar(){
         this.heladera.setResponsable(this.colaborador);
+
+        RepoHeladera.getInstance().add_Heladera(this.heladera);
     }
 
     public int calcularMesesDeFuncionamiento() {

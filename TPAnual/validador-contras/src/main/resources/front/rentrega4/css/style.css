@@ -14765,7 +14765,7 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
 .redes {
   align-content: center;
   text-align: center;
-  height: 80%;
+  min-height: 280px
 }
 
 .mapa {
