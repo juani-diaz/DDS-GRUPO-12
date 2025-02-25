@@ -39,7 +39,6 @@ public class PersonaFisica extends Persona {
         LocalDate fechaNacimiento
         ){
         super(nombre, direccion, documento, mediosContacto);
-        //mediosContacto.stream().<MedioDeContacto>map(medioDeContacto -> medioDeContacto.setPersona(this));
         this.apellido = apellido;
         this.sexo = sexo;
         this.genero = genero;

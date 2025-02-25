@@ -2,6 +2,7 @@ package views;
 
 
 import domain.heladera.Heladera;
+import domain.persona.MedioDeContacto;
 import domain.rol.Colaborador;
 import domain.servicios.TwilioSendGrid;
 import domain.suscripcion.*;
@@ -63,7 +64,12 @@ public class UI_HeladerasP extends UI_Navegable implements Handler{
                 suscripcion = new NoFunciona(extracted(hela));
         }
 
+        List<MedioDeContacto> medios=c.getPersona().getMediosDeContacto();
+
+
         suscripcion.setColaborador(c);
+        MedioDeContacto medioFinal=(MedioDeContacto) medios.toArray()[0];
+        suscripcion.setNotificadores(medioFinal);
         RepoSuscripcion.getInstance().add_Suscripcion(suscripcion);
 
         c.getSuscripciones().add(suscripcion);

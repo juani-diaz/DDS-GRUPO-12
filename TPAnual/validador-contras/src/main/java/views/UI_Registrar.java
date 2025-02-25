@@ -187,6 +187,8 @@ public class UI_Registrar implements Handler {
         String tipoDocumento = ctx.formParam("tipoDocumento");
         String documento = ctx.formParam("documento");
 
+        PersonaFisica nuevaPersona = new PersonaFisica();
+
         List<MedioDeContacto> medios = new ArrayList<MedioDeContacto>();
         for(String k : ctx.formParamMap().keySet().stream().filter(param -> param.contains("type")).toList()){
             Integer indice = Integer.valueOf(k.substring(8,9));
@@ -195,10 +197,13 @@ public class UI_Registrar implements Handler {
             String valor = ctx.formParam("contact["+indice+"][value]");
             if(Objects.equals(tipo, "email")){
                 m = new EmailDir(valor);
+                m.setPersona(nuevaPersona);
             } else if(Objects.equals(tipo, "telefono")){
                 m = new Telefono(valor);
+                m.setPersona(nuevaPersona);
             } else if(Objects.equals(tipo, "whatsapp")){
                 m = new WhatsApp(valor);
+                m.setPersona(nuevaPersona);
             }
             medios.add(m);
         }
@@ -210,8 +215,15 @@ public class UI_Registrar implements Handler {
         Usuario u = JwtUtil.validateTokenAndGetUser(decodedToken);
         System.out.println("medios:");
         System.out.println(medios);
-        PersonaFisica nuevaPersona = new PersonaFisica(nombre, medios, direccion, nuevoDocumento, apellido, sexo, genero, LocalDate.parse(fecha));
-        //medios.stream().<void>map(medio -> medio.setPersona(nuevaPersona));
+
+        nuevaPersona.setNombre(nombre);
+        nuevaPersona.setMediosDeContacto(medios);
+        nuevaPersona.setDireccion(direccion);
+        nuevaPersona.setDocumento(nuevoDocumento);
+        nuevaPersona.setGenero(genero);
+        nuevaPersona.setApellido(apellido);
+        nuevaPersona.setFechaNacimiento(LocalDate.parse(fecha));
+        nuevaPersona.setSexo(sexo);
         Colaborador nuevoColaborador = new Colaborador(nuevaPersona);
         u.setRol(nuevoColaborador);
 
