@@ -24,4 +24,19 @@ public class TwilioWhatsapp {
 
     System.out.println(message.getSid());
   }
+
+  public static void sendWhatsapp(String numTel, String mensaje) {
+    // Find your Account Sid and Token at twilio.com/console
+    String ACCOUNT_SID = "";//key en descripcion de grupo de Whatsapp
+    String AUTH_TOKEN = "";//key en descripcion de grupo de Whatsapp
+
+    Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+    Message message = Message.creator(
+            new com.twilio.type.PhoneNumber("whatsapp:"+numTel),
+            new com.twilio.type.PhoneNumber("whatsapp:+14155238886"),
+            mensaje)
+        .create();
+
+    System.out.println(message.getSid());
+  }
 }
