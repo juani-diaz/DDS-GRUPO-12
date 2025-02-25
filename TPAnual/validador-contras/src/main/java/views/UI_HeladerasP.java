@@ -24,6 +24,7 @@ public class UI_HeladerasP extends UI_Navegable implements Handler{
 
         RepoHeladera hela = RepoHeladera.getInstance();
         model.put("hela", hela.getHeladeras());
+        this.model.put("apiKey",System.getenv("GOOGLE_KEY"));
         ctx.render("heladeras-p.hbs", this.model);
     }
 

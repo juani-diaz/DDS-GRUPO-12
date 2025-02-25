@@ -38,6 +38,9 @@ public class UI_Traslado extends UI_Navegable implements Handler{
 
     this.model.put("hela", heladeras);
     this.model.put("helaDonables", heladeras.stream().filter(Heladera::puedoDonarle).toList());
+    this.model.put("apiKey",System.getenv("GOOGLE_KEY"));
+    System.out.println("GOOGLE_KEY:");
+    System.out.println(System.getenv("GOOGLE_KEY"));
 
     ctx.render("traslado.hbs", this.model);
   }

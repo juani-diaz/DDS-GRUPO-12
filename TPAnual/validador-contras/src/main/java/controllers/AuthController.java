@@ -18,10 +18,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AuthController {
-    private static final String CLIENT_ID = "Rf2Q4KhiZE9Ycm67ka3nsxrfv7Lloln2";
-    private static final String CLIENT_SECRET = "QJnWAB-CfR-e3HWb6VPs7uhSZwAtKDdBw0JFXYnvH8qVH8KSW4hE-ir2svT7CFQs";
-    private static final String DOMAIN = "dev-jly51lbvfz6xm0f4.us.auth0.com";  // Ej: tu-empresa.auth0.com
-    private static final String REDIRECT_URI = "http://localhost:8001/auth/callback";
+    private static final String CLIENT_ID = System.getenv("AUTHO_ID");
+    private static final String CLIENT_SECRET = System.getenv("AUTHO_CLIENT_SECRET");
+    private static final String DOMAIN = System.getenv("AUTHO_DOMAIN");  // Ej: tu-empresa.auth0.com
+    private static final String REDIRECT_URI = System.getenv("AUTHO_REDIRECT_URI");
 
     private static final String AUTH_URL = "https://" + DOMAIN + "/authorize";
     private static final String TOKEN_URL = "https://" + DOMAIN + "/oauth/token";
