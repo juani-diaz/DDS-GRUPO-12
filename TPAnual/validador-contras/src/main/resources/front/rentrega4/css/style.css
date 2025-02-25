@@ -14872,3 +14872,18 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
         max-width: 350px;
     }
 }
+
+.solicitud-tarjetas {
+    display: flex;
+
+    input {
+        width: 200px;
+        margin: 0 20px;
+    }
+
+    p {
+        font-size: 18px;
+        position: relative;
+        top: 10px;
+    }
+}

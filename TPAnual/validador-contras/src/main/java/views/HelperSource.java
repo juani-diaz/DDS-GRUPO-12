@@ -3,6 +3,7 @@ package views;
 import domain.auth.JwtUtil;
 
 import domain.auth.Usuario;
+import domain.colaboraciones.*;
 import domain.incidente.EnumEstadoDeIncidente;
 import domain.incidente.Incidente;
 import domain.persona.EnumTipoPersonaJuridica;
@@ -165,6 +166,64 @@ public class HelperSource {
 
     public Boolean estaEnListado(String a, List<String> l) {
         return l.contains(a);
+    }
+
+    public String tipoColaboracion(Colaboracion c){
+        if(c.getClass() == DistribucionVianda.class){
+            return "Distribución de viandas";
+        } else if(c.getClass() == DonacionDinero.class){
+            return "Donación de dinero";
+        } else if(c.getClass() == DonacionVianda.class){
+            return "Donación de una vianda";
+        } else if(c.getClass() == PresentacionOferta.class){
+            return "Pesentación de oferta para canje";
+        } else if(c.getClass() == RegistroPersonaVulnerable.class){
+            return "Registro de persona vulnerable";
+        } else if(c.getClass() == ResponsableHeladera.class){
+            return "Puesta en marcha de heladera";
+        } else {
+            return "?";
+        }
+    }
+
+    public String detalleColaboracion(Colaboracion c){
+        if(c.getClass() == DistribucionVianda.class){
+
+            DistribucionVianda d = (DistribucionVianda) c;
+            return d.getViandasMovidas().size() + " viandas desde " + d.getOrigen().getNombre() + " hacia " + d.getDestino().getNombre();
+
+        } else if(c.getClass() == DonacionDinero.class){
+
+            DonacionDinero d = (DonacionDinero) c;
+            String s = "$" + d.getMonto();
+            if(d.getFrecuencia() != null){
+                s = s + " (" + d.getFrecuencia() + ")";
+            }
+            return s;
+
+        } else if(c.getClass() == DonacionVianda.class){
+
+            DonacionVianda d = (DonacionVianda) c;
+            return d.getVianda().getComida() + " en la heladera " + d.getDestino().getNombre();
+
+        } else if(c.getClass() == PresentacionOferta.class){
+
+            PresentacionOferta p = (PresentacionOferta) c;
+            return "Pesentación de " + p.getNombre();
+
+        } else if(c.getClass() == RegistroPersonaVulnerable.class){
+
+            RegistroPersonaVulnerable r = (RegistroPersonaVulnerable) c;
+            return "Registro de " + r.getVulnerable().getPersona().getNombre();
+
+        } else if(c.getClass() == ResponsableHeladera.class){
+
+            ResponsableHeladera r = (ResponsableHeladera) c;
+            return "Puesta en marcha de la heladera " + r.getHeladera().getNombre();
+
+        } else {
+            return "?";
+        }
     }
 
 }

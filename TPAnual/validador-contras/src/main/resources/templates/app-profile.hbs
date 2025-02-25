@@ -112,11 +112,56 @@
     <!--**********************************
         Sidebar end
     ***********************************-->
-
         <!--**********************************
             Content body start
         ***********************************-->
         <div class="content-body">
+            {{#if colaboraciones}}
+                <div class="card" style="margin: 20px">
+                    <div class="card-header">
+                        <h3>Colaboraciones</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped zero-configuration">
+                                <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Tipo</th>
+                                    <th>Detalles</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {{#each colaboraciones}}
+                                    <tr>
+                                        <td>{{this.fecha}}</td>
+                                        <td>{{tipoColaboracion this}}</td>
+                                        <td>{{detalleColaboracion this}}</td>
+                                    </tr>
+                                {{/each}}
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            {{/if}}
+            {{#if (equal tipoUsuario "persona")}}
+                <div class="card" style="margin: 20px">
+                    <div class="card-header">
+                        <h3>Solicitud de tarjetas para registro</h3>
+                    </div>
+                    <div class="card-body">
+                        <form action="/solicitar-tarjeta" method="post">
+                            <div class="solicitud-tarjetas">
+                                <p>Contás con <b>{{cantidadTarjetas}}</b> tarjetas, y al solicitar nuevas estas se enviarán a <b>{{persona.direccion}}</b></p>
+                                <input type="number" min="1" name="cantidad" class="form-control" placeholder="Cantidad" required>
+                                <button type="submit" class="btn mb-1 btn-primary">Solicitar Tarjetas</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            {{/if}}
             {{#if (notEqual tipoUsuario "admin")}}
                 <div class="card" style="margin: 20px">
                     <div class="card-header">
