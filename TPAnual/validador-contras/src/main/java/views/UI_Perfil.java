@@ -1,9 +1,7 @@
 package views;
 
 import domain.auth.JwtUtil;
-import domain.persona.EnumTipoPersonaJuridica;
-import domain.persona.PersonaFisica;
-import domain.persona.PersonaJuridica;
+import domain.persona.*;
 import domain.rol.*;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
@@ -70,7 +68,6 @@ public class UI_Perfil extends UI_Navegable implements Handler {
         }
         this.model.put("tipoUsuario", tipoUsuario);
 
-        System.out.println(getUsuario().getRol().getPersona().getMediosDeContacto());
         this.model.put("persona", getUsuario().getRol().getPersona());
 
         ctx.render("app-profile.hbs", this.model);
@@ -98,7 +95,7 @@ public class UI_Perfil extends UI_Navegable implements Handler {
         p.getDocumento().setTipo(tipoDocumento);
         p.getDocumento().setNumero(documento);
 
-        // faltan medios
+        medios(p, ctx);
 
         RepoUsuarios.getInstance().update_Usuario(getUsuario());
 
@@ -134,7 +131,7 @@ public class UI_Perfil extends UI_Navegable implements Handler {
         p.getDocumento().setTipo(tipoDocumento);
         p.getDocumento().setNumero(documento);
 
-        // faltan medios
+        medios(p, ctx);
 
         RepoUsuarios.getInstance().update_Usuario(getUsuario());
 
@@ -163,7 +160,7 @@ public class UI_Perfil extends UI_Navegable implements Handler {
         p.getDocumento().setTipo(tipoDocumento);
         p.getDocumento().setNumero(documento);
 
-        // faltan medios
+        medios(p, ctx);
 
         LocalidadesTecnico lt = new LocalidadesTecnico();
         List<String> area = new ArrayList<>(ctx.formParamMap().keySet().stream().filter(param -> lt.nombres().contains(param)).toList());
@@ -203,5 +200,28 @@ public class UI_Perfil extends UI_Navegable implements Handler {
 
         BDUtils.commit(em);
         ctx.redirect("/app-profile");
+    }
+
+    private void medios(Persona p, Context ctx) {
+        List<MedioDeContacto> medios = new ArrayList<MedioDeContacto>();
+        for(String k : ctx.formParamMap().keySet().stream().filter(param -> param.contains("type")).toList()){
+            Integer indice = Integer.valueOf(k.substring(8,9));
+            MedioDeContacto m = null;
+            String tipo = ctx.formParam(k);
+            String valor = ctx.formParam("contact["+indice+"][value]");
+            if(Objects.equals(tipo, "email")){
+                m = new EmailDir(valor);
+                m.setPersona(p);
+            } else if(Objects.equals(tipo, "telefono")){
+                m = new Telefono(valor);
+                m.setPersona(p);
+            } else if(Objects.equals(tipo, "whatsapp")){
+                m = new WhatsApp(valor);
+                m.setPersona(p);
+            }
+            medios.add(m);
+        }
+
+        p.setMediosDeContacto(medios);
     }
 }

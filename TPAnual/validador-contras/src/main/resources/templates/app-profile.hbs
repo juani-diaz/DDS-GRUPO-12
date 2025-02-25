@@ -163,6 +163,14 @@
                 </div>
             {{/if}}
             {{#if (notEqual tipoUsuario "admin")}}
+                <!-- Medios de contacto existentes (ocultos) -->
+                <div id="contactos-existentes-org">
+                    {{#each persona.mediosDeContacto}}
+                        <input type="hidden" value="{{this.medio}}" id="mco-t-{{@index}}">
+                        <input type="hidden" value="{{this.contacto}}" id="mco-n-{{@index}}">
+                    {{/each}}
+                </div>
+
                 <div class="card" style="margin: 20px">
                     <div class="card-header">
                         <h3>Editar datos personales</h3>
@@ -288,20 +296,12 @@
                                             <!-- Medios de Contacto -->
                                             <div class="form-group">
                                                 <label>Medios de Contacto</label>
-                                                <div id="contact-fields-org" class="lista-medios"></div>
-                                                <button type="button" class="btn btn-outline-primary btn-sm mt-2 w-100" id="add-contact-btn-org">
+                                                <div id="contact-fields" class="lista-medios"></div>
+                                                <button type="button" class="btn btn-outline-primary btn-sm mt-2 w-100" id="add-contact-btn">
                                                     Agregar Medio de Contacto
                                                 </button>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <!-- Medios de contacto existentes (ocultos) -->
-                                    <div id="contactos-existentes-org">
-                                        {{#each persona.mediosDeContacto}}
-                                            <input type="hidden" value="{{this.tipo}}" id="mco-t-{{@index}}">
-                                            <input type="hidden" value="{{this.numero}}" id="mco-n-{{@index}}">
-                                        {{/each}}
                                     </div>
 
                                     <!-- Botón de envío -->
@@ -365,12 +365,12 @@
                                         <!-- Línea divisora personalizada -->
                                         <div class="mx-3" style="border-left: 2px solid #eee; height: auto;"></div>
 
-                                        <div class="w-40 pe-3">
+                                        <div class="w-50 ps-3">
                                             <!-- Medios de Contacto -->
                                             <div class="form-group">
                                                 <label>Medios de Contacto</label>
-                                                <div id="contact-fields-tecnico" class="lista-medios"></div>
-                                                <button type="button" class="btn btn-outline-primary btn-sm mt-2 w-100" id="add-contact-btn-tecnico">
+                                                <div id="contact-fields" class="lista-medios"></div>
+                                                <button type="button" class="btn btn-outline-primary btn-sm mt-2 w-100" id="add-contact-btn">
                                                     Agregar Medio de Contacto
                                                 </button>
                                             </div>
@@ -421,7 +421,7 @@
         ***********************************-->
         <div class="footer">
             <div class="copyright">
-                <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018</p>
+                <p>Trabajo Integrador DDS 2024 Grupo 12</p>
             </div>
         </div>
         <!--**********************************
@@ -447,26 +447,27 @@
         const addContactButton = document.getElementById('add-contact-btn');
         let contactCount = 0;
 
-        addContactButton.addEventListener('click', () => {
+        // Función para agregar un campo de contacto
+        function addContactField(type = '', value = '') {
             if (contactCount < maxContacts) {
                 const contactField = document.createElement('div');
                 contactField.className = 'd-flex gap-3 mb-2';
 
                 contactField.innerHTML = `
                     <select class="form-control" name="contact[${contactCount}][type]" required>
-                        <option value="" disabled selected>Tipo</option>
-                        <option value="email">Email</option>
-                        <option value="telefono">Teléfono</option>
-                        <option value="whatsapp">WhatsApp</option>
+                        <option value="" disabled ${!type ? 'selected' : ''}>Tipo</option>
+                        <option value="email" ${type === 'EMAIL' ? 'selected' : ''}>Email</option>
+                        <option value="telefono" ${type === 'TELEFONO' ? 'selected' : ''}>Teléfono</option>
+                        <option value="whatsapp" ${type === 'WHATSAPP' ? 'selected' : ''}>WhatsApp</option>
                     </select>
-                    <input type="text" class="form-control" name="contact[${contactCount}][value]" placeholder="Ingrese el contacto" required style="margin-left:20px">
+                    <input type="text" class="form-control" name="contact[${contactCount}][value]" placeholder="Ingrese el contacto" value="${value}" required style="margin-left:20px">
                     <button type="button" class="btn btn-danger btn-sm remove-contact-btn" style="width: 28px;height: 28px;margin-top: 7px;">X</button>
                 `;
 
                 contactFieldsContainer.appendChild(contactField);
                 contactCount++;
 
-                // Add event listener to remove button
+                // Agregar evento al botón de eliminar
                 contactField.querySelector('.remove-contact-btn').addEventListener('click', () => {
                     contactField.remove();
                     updateContactNames();
@@ -474,11 +475,12 @@
             } else {
                 alert('Puedes agregar hasta 4 medios de contacto.');
             }
-        });
+        }
 
+        // Función para actualizar los nombres de los campos de contacto
         function updateContactNames() {
             const contactFields = contactFieldsContainer.children;
-            contactCount = 0; // Reset counter
+            contactCount = 0; // Reiniciar contador
             Array.from(contactFields).forEach((contactField) => {
                 const select = contactField.querySelector('select');
                 const input = contactField.querySelector('input');
@@ -487,102 +489,21 @@
                 contactCount++;
             });
         }
-    </script>
 
-    <script>
-        const maxContacts_org = 4;
-        const contactFieldsContainer_org = document.getElementById('contact-fields-org');
-        const addContactButton_org = document.getElementById('add-contact-btn-org');
-        let contactCount_org = 0;
-
-        addContactButton_org.addEventListener('click', () => {
-            if (contactCount_org < maxContacts_org) {
-                const contactField = document.createElement('div');
-                contactField.className = 'd-flex gap-3 mb-2';
-
-                contactField.innerHTML = `
-                    <select class="form-control" name="contact[${contactCount}][type]" required>
-                        <option value="" disabled selected>Tipo</option>
-                        <option value="email">Email</option>
-                        <option value="telefono">Teléfono</option>
-                        <option value="whatsapp">WhatsApp</option>
-                    </select>
-                    <input type="text" class="form-control" name="contact[${contactCount}][value]" placeholder="Ingrese el contacto" required style="margin-left:20px">
-                    <button type="button" class="btn btn-danger btn-sm remove-contact-btn-org" style="width: 28px;height: 28px;margin-top: 7px;">X</button>
-                `;
-
-                contactFieldsContainer_org.appendChild(contactField);
-                contactCount_org++;
-
-                // Add event listener to remove button
-                contactField.querySelector('.remove-contact-btn-org').addEventListener('click', () => {
-                    contactField.remove();
-                    updateContactNames_org();
-                });
-            } else {
-                alert('Puedes agregar hasta 4 medios de contacto.');
+        // Cargar medios de contacto existentes al cargar la página
+        document.addEventListener('DOMContentLoaded', () => {
+            const existingContacts = document.querySelectorAll('#contactos-existentes-org input[type="hidden"]');
+            for (let i = 0; i < existingContacts.length; i += 2) {
+                const type = existingContacts[i].value;
+                const value = existingContacts[i + 1].value;
+                addContactField(type, value);
             }
         });
 
-        function updateContactNames_org() {
-            const contactFields = contactFieldsContainer_org.children;
-            contactCount_org = 0; // Reset counter
-            Array.from(contactFields).forEach((contactField) => {
-                const select = contactField.querySelector('select');
-                const input = contactField.querySelector('input');
-                select.name = `contact[${contactCount}][type]`;
-                input.name = `contact[${contactCount}][value]`;
-                contactCount_org++;
-            });
-        }
-    </script>
-
-    <script>
-        const maxContacts_tecnico = 4;
-        const contactFieldsContainer_tecnico = document.getElementById('contact-fields-tecnico');
-        const addContactButton_tecnico = document.getElementById('add-contact-btn-tecnico');
-        let contactCount_tecnico = 0;
-
-        addContactButton_tecnico.addEventListener('click', () => {
-            if (contactCount_tecnico < maxContacts_tecnico) {
-                const contactField = document.createElement('div');
-                contactField.className = 'd-flex gap-3 mb-2';
-
-                contactField.innerHTML = `
-                    <select class="form-control" name="contact[${contactCount}][type]" required>
-                        <option value="" disabled selected>Tipo</option>
-                        <option value="email">Email</option>
-                        <option value="telefono">Teléfono</option>
-                        <option value="whatsapp">WhatsApp</option>
-                    </select>
-                    <input type="text" class="form-control" name="contact[${contactCount}][value]" placeholder="Ingrese el contacto" required style="margin-left:20px">
-                    <button type="button" class="btn btn-danger btn-sm remove-contact-btn-tecnico" style="width: 28px;height: 28px;margin-top: 7px;">X</button>
-                `;
-
-                contactFieldsContainer_tecnico.appendChild(contactField);
-                contactCount_tecnico++;
-
-                // Add event listener to remove button
-                contactField.querySelector('.remove-contact-btn-tecnico').addEventListener('click', () => {
-                    contactField.remove();
-                    updateContactNames_tecnico();
-                });
-            } else {
-                alert('Puedes agregar hasta 4 medios de contacto.');
-            }
+        // Agregar evento al botón de agregar contacto
+        addContactButton.addEventListener('click', () => {
+            addContactField();
         });
-
-        function updateContactNames_tecnico() {
-            const contactFields = contactFieldsContainer_tecnico.children;
-            contactCount_tecnico = 0; // Reset counter
-            Array.from(contactFields).forEach((contactField) => {
-                const select = contactField.querySelector('select');
-                const input = contactField.querySelector('input');
-                select.name = `contact[${contactCount}][type]`;
-                input.name = `contact[${contactCount}][value]`;
-                contactCount_tecnico++;
-            });
-        }
     </script>
 
 </body>
