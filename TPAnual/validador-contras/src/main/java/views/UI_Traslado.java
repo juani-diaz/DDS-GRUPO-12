@@ -7,6 +7,7 @@ import domain.colaboraciones.EnumMotivosMovimientoVianda;
 import domain.heladera.Heladera;
 import domain.persona.EnumTipoPersonaJuridica;
 import domain.rol.Colaborador;
+import domain.suscripcion.Publicador;
 import domain.vianda.Vianda;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
@@ -18,6 +19,7 @@ import persistence.Repos.RepoHeladera;
 import persistence.Repos.RepoVianda;
 
 import javax.persistence.EntityManager;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -40,7 +42,7 @@ public class UI_Traslado extends UI_Navegable implements Handler{
     ctx.render("traslado.hbs", this.model);
   }
 
-  public void trasladarCantViandas(Context ctx){
+  public void trasladarCantViandas(Context ctx) throws IOException {
     // Obtener parámetros del formulario (datos enviados en la solicitud)
     String cantidad = ctx.formParam("cantidad");
     Integer cantidadViandas= Integer.parseInt(cantidad);
@@ -75,6 +77,8 @@ public class UI_Traslado extends UI_Navegable implements Handler{
 
         colapinto.realizarColaboracion(distribucion);
     } else System.out.println("La heladera no puede mover mas viandas de las que tiene");
+    Publicador pub=new Publicador();
+    pub.notifyObservers();
 
     ctx.redirect("/index");
   }

@@ -51,7 +51,7 @@ public class Colaborador extends Rol {
       cascade = CascadeType.REMOVE, // Aplica el comportamiento en cascada
       orphanRemoval = true // Opcional: elimina registros huérfanos
   )
-  private List<Suscripcion> suscripciones;
+  private List<Suscripcion> suscripciones=new ArrayList<>();
 
   public Colaborador(Persona p, List<Colaboracion> lc, Float cp, List<Tarjeta> te, Tarjeta t){
     this.persona = p;

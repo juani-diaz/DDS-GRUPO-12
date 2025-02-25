@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import java.io.IOException;
 
 @Getter @Setter
 @Entity
@@ -16,6 +17,23 @@ public class MuchasViandas extends Suscripcion{
   private Integer numeroMaximo;
 
   public MuchasViandas() {
+  }
+
+  @Override
+  void notificar() throws IOException {
+    String subject =
+            "Suscripcion a heladeraID "+ this.getHeladera();
+    String mensaje =
+            "La heladera "+ this.getHeladera().getNombre() +
+                    " tiene muchas viandas";
+
+    this.notificadores.notificar(subject,mensaje);
+
+  }
+
+  @Override
+  boolean condicion(Integer cantidad) {
+    return cantidad>=numeroMaximo;
   }
 
   public MuchasViandas(Heladera heladera, MedioDeContacto notificadores, Integer numeroMaximo){

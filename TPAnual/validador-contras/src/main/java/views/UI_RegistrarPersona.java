@@ -90,6 +90,22 @@ public class UI_RegistrarPersona extends UI_Navegable implements Handler{
     colapinto.realizarColaboracion(registroPersonaVulnerable);
 
     colapinto.getTarjetasParaEntregar().remove(tarjetaVulnerable);
+
+
+    //ORM
+    persistirEntidades(docu, persona, vulnerable);
+
+    EntityManager em = BDUtils.getEntityManager();
+    BDUtils.comenzarTransaccion(em);
+
+    // lo hago a parte porque no hice la de persistirEntidades y me da cosa cambiarla xd
+    em.persist(registroPersonaVulnerable);
+
+    em.merge(colapinto);
+    BDUtils.commit(em);
+
+    //repoColaborador.actualizarColaborador(colapinto);
+
     ctx.redirect("/index");
   }
 
@@ -122,6 +138,32 @@ public class UI_RegistrarPersona extends UI_Navegable implements Handler{
     em.merge(colapinto);
 
     BDUtils.commit(em);
-    ctx.redirect("/registrar-persona");
+    ctx.redirect("/registrar-persona.hbs");
+  }
+
+
+  private static void persistirEntidades(Documento docu, PersonaFisica persona, Vulnerable vulnerable) {
+    EntityManager em = BDUtils.getEntityManager();
+    BDUtils.comenzarTransaccion(em);
+
+
+    em.persist(docu);
+    em.persist(persona);
+    em.persist(vulnerable);
+    //A CHEQUEAR FUNCIONAMIENTO DE ESTO
+    em.merge(vulnerable.getTarjeta());
+    BDUtils.commit(em);
+  }
+  private static void persistirColabTarj(Colaborador colab, Tarjeta tarjeta){
+    EntityManager em = BDUtils.getEntityManager();
+    BDUtils.comenzarTransaccion(em);
+
+    em.persist(tarjeta);
+
+    //A CHEQUEAR FUNCIONAMIENTO DE ESTO
+    em.merge(colab);
+
+    BDUtils.commit(em);
+
   }
 }

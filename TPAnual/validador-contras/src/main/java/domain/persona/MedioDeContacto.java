@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.IOException;
+
 @Setter@Getter
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -13,7 +15,7 @@ public abstract class MedioDeContacto {
   private Medio medio;
 
   @Column
-  private String contacto; // Ejemplo: "email@example.com"
+  protected String contacto; // Ejemplo: "email@example.com"
 
   @ManyToOne
   private Persona persona;
@@ -22,7 +24,7 @@ public abstract class MedioDeContacto {
   @GeneratedValue(strategy = GenerationType.TABLE)
   private int id;
 
-  public void notificar(String header,String mensaje){};
+  public void notificar(String header,String mensaje) throws IOException {};
 
 
 }

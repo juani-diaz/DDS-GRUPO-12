@@ -2,12 +2,10 @@ package views;
 
 
 import domain.heladera.Heladera;
+import domain.persona.MedioDeContacto;
 import domain.rol.Colaborador;
 import domain.servicios.TwilioSendGrid;
-import domain.suscripcion.MuchasViandas;
-import domain.suscripcion.NoFunciona;
-import domain.suscripcion.PocasViandas;
-import domain.suscripcion.Suscripcion;
+import domain.suscripcion.*;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import persistence.Repos.RepoColaborador;
@@ -15,6 +13,7 @@ import persistence.Repos.RepoHeladera;
 import persistence.Repos.RepoSuscripcion;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class UI_HeladerasP extends UI_Navegable implements Handler{
@@ -52,35 +51,49 @@ public class UI_HeladerasP extends UI_Navegable implements Handler{
     private void suscribirse(Colaborador c, String hela, String tipo_sub) throws IOException {
         System.out.println("Estoy en UI_HeladerasP::subscribirse");
 
-        Suscripcion suscripcion = null;
+        List<MedioDeContacto> medios = c.getPersona().getMediosDeContacto();
 
-        switch (tipo_sub){
-            case "PocasViandas":
-                suscripcion = new PocasViandas(extracted(hela));
-                break;
-            case "MuchasViandas":
-                suscripcion = new MuchasViandas(extracted(hela));
-                break;
-            default:
-                suscripcion = new NoFunciona(extracted(hela));
+        if (medios.isEmpty()) {
+            System.out.println("El colaborador no tiene medios de contacto.");
+            return;
         }
 
-        suscripcion.setColaborador(c);
-        RepoSuscripcion.getInstance().add_Suscripcion(suscripcion);
+        Publicador publisher = new Publicador();
 
-        c.getSuscripciones().add(suscripcion);
+        for (MedioDeContacto medio : medios) {
+            Suscripcion suscripcion;
+
+            switch (tipo_sub) {
+                case "PocasViandas":
+                    suscripcion = new PocasViandas(extracted(hela));
+                    break;
+                case "MuchasViandas":
+                    suscripcion = new MuchasViandas(extracted(hela));
+                    break;
+                default:
+                    suscripcion = new NoFunciona(extracted(hela));
+            }
+
+            suscripcion.setColaborador(c);
+            suscripcion.setNotificadores(medio);
+
+            RepoSuscripcion.getInstance().add_Suscripcion(suscripcion);
+            c.getSuscripciones().add(suscripcion);
+
+            String subject = "Suscripción a heladeraID " + hela;
+            String mensaje =
+                    "En hora buena " + this.getUsuario().getRol().getPersona().getNombre() +
+                            " acaba de suscribirse a la heladeraID " + hela +
+                            " de ahora en más podrá recibir todas las notificaciones pertinentes a su suscripción del tipo " +
+                            tipo_sub + "!";
+
+            publisher.addObservable(suscripcion);
+            TwilioSendGrid.sendEmail(medio.getContacto(), subject, mensaje);
+        }
+
         RepoColaborador.getInstance().actualizarColaborador(c);
-
-        String subject =
-            "Suscripcion a heladeraID "+ hela;
-        String mensaje =
-            "En hora buena "+ this.getUsuario().getRol().getPersona().getNombre() +
-                " acaba de suscribirse a la heladeraID " + hela +
-                " de ahora en mas podra recibir todas las notificaciones pertinentes a su suscripcion del tipo "
-                + tipo_sub + "!";
-
-        //TwilioSendGrid.sendEmail("jpolito@frba.utn.edu.ar", subject, mensaje);
     }
+
 
     private void desuscribirse(Colaborador colaborador, String hela, String tipo_sub) throws IOException {
 
@@ -107,7 +120,8 @@ public class UI_HeladerasP extends UI_Navegable implements Handler{
                 " acabas de dessuscribirse de la heladeraID " + hela+
                 " de ahora en mas no recibiras notificaciones de dihca heladera";
 
-        //TwilioSendGrid.sendEmail("jpolito@frba.utn.edu.ar", subject, mensaje);
+        System.out.println(this.getUsuario().getRol().getPersona().getMediosDeContacto().get(0).getContacto());
+        TwilioSendGrid.sendEmail(this.getUsuario().getRol().getPersona().getMediosDeContacto().get(0).getContacto(), subject, mensaje);
     }
 
     private Heladera extracted(String heladeraId) {

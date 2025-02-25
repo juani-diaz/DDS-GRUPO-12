@@ -11,6 +11,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import java.io.IOException;
 
 @Getter @Setter
 @Entity
@@ -31,7 +32,9 @@ public abstract class Suscripcion extends EntidadPersistente {
   @Column
   String mensaje;
 
-  void notificar(){
+  void notificar() throws IOException {
     notificadores.notificar(header,mensaje);
   }
+  abstract boolean condicion(Integer cantidad);
+
 }

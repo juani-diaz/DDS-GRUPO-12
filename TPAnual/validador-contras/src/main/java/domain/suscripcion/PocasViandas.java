@@ -2,20 +2,41 @@ package domain.suscripcion;
 
 import domain.heladera.Heladera;
 import domain.persona.MedioDeContacto;
+import domain.servicios.TwilioSendGrid;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import java.io.IOException;
 
 @Getter @Setter
 @Entity
 public class PocasViandas extends Suscripcion{
 
+
+
   @Column
   private Integer numeroMinimo;
 
   public PocasViandas() {
+
+  }
+
+
+  public boolean condicion(Integer cantidadViandas){
+    return cantidadViandas<=numeroMinimo;
+  }
+
+  @Override
+  void notificar() throws IOException {
+      String subject =
+              "Suscripcion a heladeraID " + this.getHeladera();
+      String mensaje =
+              "Hay pocas viandas en la heladera "+ this.getHeladera().getNombre();
+
+      this.notificadores.notificar(subject, mensaje);
+
   }
 
   public PocasViandas(Heladera heladera, MedioDeContacto notificadores, Integer numeroMinimo){
