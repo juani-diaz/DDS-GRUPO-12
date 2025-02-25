@@ -1,11 +1,15 @@
 package views;
 
+import domain.colaboraciones.PresentacionOferta;
 import domain.incidente.EnumEstadoDeIncidente;
 import domain.incidente.Incidente;
 import domain.registro.SingletonSeguidorEstadistica;
+import domain.rol.Colaborador;
 import domain.servicios.Catalogo;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
+
+import java.util.List;
 
 public class UI_Ofertas extends UI_Navegable implements Handler {
 
@@ -13,7 +17,10 @@ public class UI_Ofertas extends UI_Navegable implements Handler {
     public void handle(Context ctx) throws Exception {
         this.validarUsuario(ctx);
 
-        this.model.put("ofertas", Catalogo.getInstance().getOfertas());
+        Colaborador c = (Colaborador) getUsuario().getRol();
+        List<PresentacionOferta> ofertas = Catalogo.getInstance().getOfertas().stream().filter(o -> o.getColaborador().equals(c)).toList();
+
+        this.model.put("ofertas", ofertas);
         ctx.render("ofertas.hbs", this.model);
     }
 

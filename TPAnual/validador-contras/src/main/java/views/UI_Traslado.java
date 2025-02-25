@@ -31,7 +31,12 @@ public class UI_Traslado extends UI_Navegable implements Handler{
     this.validarUsuario(ctx);
 
     RepoHeladera hela = RepoHeladera.getInstance();
-    model.put("hela", hela.getHeladeras());
+
+    List<Heladera> heladeras = hela.getHeladeras();
+
+    this.model.put("hela", heladeras);
+    this.model.put("helaDonables", heladeras.stream().filter(Heladera::puedoDonarle).toList());
+
     ctx.render("traslado.hbs", this.model);
   }
 

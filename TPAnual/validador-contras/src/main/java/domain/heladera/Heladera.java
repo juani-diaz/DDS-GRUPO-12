@@ -24,10 +24,6 @@ public class Heladera extends EntidadPersistente {
   @Column(name = "nombre")
   private String nombre;
 
-  //public String getNombre() {
-  //  return nombre;
-  //}
-
   @ManyToOne
   private Ubicacion direccion;
 
@@ -42,8 +38,6 @@ public class Heladera extends EntidadPersistente {
 
   @OneToMany(mappedBy = "heladera", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
   private List<Incidente> incidentes;
-
-
 
   @Column
   private Float temperaturaMinima;
@@ -100,6 +94,10 @@ public class Heladera extends EntidadPersistente {
   }
   public LocalDate getFechaFuncionamiento(){
         return fechaFuncionamiento;
+  }
+
+  public boolean puedoDonarle(){
+    return estado == EnumEstadoHeladera.DISPONIBLE && viandasEnHeladera.size() < tamanioEnViandas;
   }
 
 }

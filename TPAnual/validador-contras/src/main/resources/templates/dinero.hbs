@@ -192,15 +192,15 @@
                         <div class="card-body">
                             <h4 class="card-title">Nueva Donación</h4>
                             <div class="basic-form">
-                                <form action="/dinero" method="post">
+                                <form action="/dinero" method="post" id="donationForm">
                                     <div class="form-group">
                                         <label>Monto de dinero a donar</label>
-                                        <input type="number" name="monto" class="form-control" placeholder="Monto en ARS" required>
+                                        <input type="number" min="1" name="monto" class="form-control" placeholder="Monto en ARS" required>
                                     </div>
                                     <div class="form-group">
                                         <label>Tipo de tarjeta</label>
                                         <select name="tipoTarjeta" class="form-control" required>
-                                            <option selected disabled>Elige...</option>
+                                            <option selected disabled value="">Elige...</option>
                                             <option value="Visa">Visa</option>
                                             <option value="MasterCard">MasterCard</option>
                                             <option value="Amex">Amex</option>
@@ -217,23 +217,23 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label>Fecha de vencimiento</label>
-                                            <input type="month" name="mesVencimiento" class="form-control" required>
+                                            <input type="month" name="mesVencimiento" class="form-control" placeholder="MM-YY" required>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label>Código de seguridad</label>
                                             <input type="text" name="codSeguridad" class="form-control" placeholder="Código CVV" required>
                                         </div>
                                     </div>
-                                    <!--<div style="display: flex;">
+                                    <div style="display: flex;">
                                         <div class="form-group">
                                             <label>Tipo de donación</label>
                                             <div>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="donationType" id="oneTime" value="oneTime" required>
+                                                    <input class="form-check-input" type="radio" name="tipo" id="oneTime" value="unica" required>
                                                     <label class="form-check-label" for="oneTime">Única</label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="donationType" id="recurring" value="recurring" required>
+                                                    <input class="form-check-input" type="radio" name="tipo" id="recurring" value="recurrente" required>
                                                     <label class="form-check-label" for="recurring">Recurrente</label>
                                                 </div>
                                             </div>
@@ -242,20 +242,20 @@
                                             <label>Frecuencia de la recurrencia</label>
                                             <div class="d-flex justify-content-end">
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="recurrenceFrequency" id="weekly" value="weekly" required>
+                                                    <input class="form-check-input" type="radio" name="recurrencia" id="weekly" value="semanal">
                                                     <label class="form-check-label" for="weekly">Semanal</label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="recurrenceFrequency" id="monthly" value="monthly" required>
+                                                    <input class="form-check-input" type="radio" name="recurrencia" id="monthly" value="mensual">
                                                     <label class="form-check-label" for="monthly">Mensual</label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="recurrenceFrequency" id="yearly" value="yearly" required>
+                                                    <input class="form-check-input" type="radio" name="recurrencia" id="yearly" value="anual">
                                                     <label class="form-check-label" for="yearly">Anual</label>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>-->
+                                    </div>
                                     <button type="submit" class="btn btn-success">Donar</button>
                                 </form>
                             </div>
@@ -325,16 +325,39 @@
     <script src="./js/dashboard/dashboard-1.js"></script>
 
     <script>
-        // Script para mostrar u ocultar la frecuencia de recurrencia
-        document.querySelectorAll('input[name="donationType"]').forEach((elem) => {
+        document.querySelectorAll('input[name="tipo"]').forEach((elem) => {
             elem.addEventListener("change", function(event) {
                 const frequencyDiv = document.getElementById("recurrenceFrequency");
-                if (event.target.value === "recurring") {
+                if (event.target.value === "recurrente") {
                     frequencyDiv.style.display = "block";
                 } else {
                     frequencyDiv.style.display = "none";
                 }
             });
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const oneTimeRadio = document.getElementById('oneTime');
+            const recurringRadio = document.getElementById('recurring');
+            const recurrenceFrequency = document.getElementById('recurrenceFrequency');
+            const recurrenceRadios = document.querySelectorAll('input[name="recurrencia"]');
+
+            function toggleRecurrence() {
+                if (recurringRadio.checked) {
+                    recurrenceFrequency.style.display = 'block';
+                    recurrenceRadios.forEach(radio => radio.setAttribute('required', true));
+                } else {
+                    recurrenceFrequency.style.display = 'none';
+                    recurrenceRadios.forEach(radio => radio.removeAttribute('required'));
+                }
+            }
+
+            oneTimeRadio.addEventListener('change', toggleRecurrence);
+            recurringRadio.addEventListener('change', toggleRecurrence);
+
+            toggleRecurrence();
         });
     </script>
 

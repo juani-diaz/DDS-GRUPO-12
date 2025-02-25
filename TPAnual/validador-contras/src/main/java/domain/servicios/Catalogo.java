@@ -68,16 +68,11 @@ public class Catalogo extends EntidadPersistente {
     }
 
     public void retirarDelCatalogo(PresentacionOferta p){
-        ofertas.remove(p);
-
         comenzarTransaccion(em);
+        em.remove(p);
+        commit(em);
 
-        try {
-            this.em.remove(p);
-            commit(em);
-        } catch (Exception e) {
-            System.out.println("Error al remover la OFERTA: " + p);
-        }
+        ofertas.remove(p);
     }
 
     public boolean otorgar(PresentacionOferta o, Colaborador colaborador){

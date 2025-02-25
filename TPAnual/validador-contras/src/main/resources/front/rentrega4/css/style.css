@@ -14864,6 +14864,7 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
     p {
         white-space: pre;
         font-size: 16px;
+        min-width: 300px
     }
     img {
         margin-left: 20px;

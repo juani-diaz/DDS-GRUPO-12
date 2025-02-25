@@ -210,7 +210,13 @@
                         <button type="button" class="btn btn-primary w-100" style="margin-bottom: 15px;">Solicitar una nueva heladera</button>
                     </a>
 
-                    {{#each hela}}
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Mis heladeras</h3>
+                        </div>
+                    </div>
+
+                    {{#each helaPropia}}
                         {{#if (notEqual (estadoString this) "Propuesta")}}
                             <div class="card">
                                     <div class="card-body heladera-item">

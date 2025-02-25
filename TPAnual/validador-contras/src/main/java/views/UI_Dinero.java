@@ -12,6 +12,7 @@ import persistence.Repos.RepoColaborador;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class UI_Dinero extends UI_Navegable implements Handler{
 
@@ -32,7 +33,14 @@ public class UI_Dinero extends UI_Navegable implements Handler{
     String mesVencimiento = ctx.formParam("mesVencimiento");
     String codSeguridad = ctx.formParam("codSeguridad");
 
-    String frecuencia = "form";
+    String tipo = ctx.formParam("tipo");
+    String recurrencia = ctx.formParam("recurrencia");
+    if(Objects.equals(tipo, "unica"))
+      recurrencia = "unica";
+
+    System.out.println(ctx.formParam("tipo"));
+    System.out.println(ctx.formParam("recurrencia"));
+    System.out.println(recurrencia);
 
     // Convertir parámetros necesarios
     Float montoFloat = Float.parseFloat(monto);
@@ -48,7 +56,7 @@ public class UI_Dinero extends UI_Navegable implements Handler{
     Colaborador cola = (Colaborador) getUsuario().getRol();
 
     // Crea Donacion
-    DonacionDinero dona = new DonacionDinero(cola, LocalDate.now(), montoFloat, frecuencia, medioDePago);
+    DonacionDinero dona = new DonacionDinero(cola, LocalDate.now(), montoFloat, recurrencia, medioDePago);
     cola.realizarColaboracion(dona);
 
     ctx.redirect("/index");

@@ -17,6 +17,7 @@ import persistence.Repos.RepoVianda;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
+import java.util.List;
 
 public class UI_Vianda extends UI_Navegable implements Handler{
 
@@ -25,7 +26,10 @@ public class UI_Vianda extends UI_Navegable implements Handler{
     this.validarUsuario(ctx);
 
     RepoHeladera hela = RepoHeladera.getInstance();
-    this.model.put("hela", hela.getHeladeras());
+
+    List<Heladera> heladeras = hela.getHeladeras();
+
+    this.model.put("hela", heladeras.stream().filter(Heladera::puedoDonarle).toList());
     ctx.render("vianda.hbs", this.model);
   }
 
