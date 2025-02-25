@@ -49,6 +49,7 @@ public class UI_Registrar implements Handler {
         String usuario = ctx.formParam("usuario");
         String contra = ctx.formParam("contra");
         String repetirContra = ctx.formParam("repetirContra");
+        PersonaFisica nuevaPersona = new PersonaFisica();
 
         List<MedioDeContacto> medios = new ArrayList<MedioDeContacto>();
         for(String k : ctx.formParamMap().keySet().stream().filter(param -> param.contains("type")).toList()){
@@ -63,16 +64,27 @@ public class UI_Registrar implements Handler {
             String valor = ctx.formParam("contact["+indice+"][value]");
             if(Objects.equals(tipo, "email")){
                 m = new EmailDir(valor);
+                m.setPersona(nuevaPersona);
             } else if(Objects.equals(tipo, "telefono")){
                 m = new Telefono(valor);
+                m.setPersona(nuevaPersona);
             } else if(Objects.equals(tipo, "whatsapp")){
                 m = new WhatsApp(valor);
+                m.setPersona(nuevaPersona);
             }
             medios.add(m);
         }
 
+
         Documento nuevoDocumento = new Documento(tipoDocumento, documento);
-        PersonaFisica nuevaPersona = new PersonaFisica(nombre, medios, direccion, nuevoDocumento, apellido, sexo, genero, LocalDate.parse(fecha));
+        nuevaPersona.setNombre(nombre);
+        nuevaPersona.setMediosDeContacto(medios);
+        nuevaPersona.setDireccion(direccion);
+        nuevaPersona.setDocumento(nuevoDocumento);
+        nuevaPersona.setGenero(genero);
+        nuevaPersona.setApellido(apellido);
+        nuevaPersona.setFechaNacimiento(LocalDate.parse(fecha));
+        nuevaPersona.setSexo(sexo);
         Colaborador nuevoColaborador = new Colaborador(nuevaPersona);
         Usuario nuevoUsuario = new Usuario(usuario, contra, nuevoColaborador);
 
@@ -146,6 +158,7 @@ public class UI_Registrar implements Handler {
         String repetirContra = ctx.formParam("repetirContra");
 
         List<MedioDeContacto> medios = new ArrayList<MedioDeContacto>();
+        PersonaFisica nuevaPersona = new PersonaFisica();
         for(String k : ctx.formParamMap().keySet().stream().filter(param -> param.contains("type")).toList()){
             Integer indice = Integer.valueOf(k.substring(8,9));
             MedioDeContacto m = null;
@@ -167,7 +180,14 @@ public class UI_Registrar implements Handler {
         System.out.println(area);
 
         Documento nuevoDocumento = new Documento(tipoDocumento, documento);
-        PersonaFisica nuevaPersona = new PersonaFisica(nombre, medios, direccion, nuevoDocumento, apellido, sexo, genero, LocalDate.parse(fecha));
+        nuevaPersona.setNombre(nombre);
+        nuevaPersona.setMediosDeContacto(medios);
+        nuevaPersona.setDireccion(direccion);
+        nuevaPersona.setDocumento(nuevoDocumento);
+        nuevaPersona.setGenero(genero);
+        nuevaPersona.setApellido(apellido);
+        nuevaPersona.setFechaNacimiento(LocalDate.parse(fecha));
+        nuevaPersona.setSexo(sexo);
         Tecnico nuevoTecnico = new Tecnico(nuevaPersona, area);
         Usuario nuevoUsuario = new Usuario(usuario, contra, nuevoTecnico);
 
@@ -302,6 +322,7 @@ public class UI_Registrar implements Handler {
         String direccion = ctx.formParam("direccion");
         String tipoDocumento = ctx.formParam("tipoDocumento");
         String documento = ctx.formParam("documento");
+        PersonaFisica nuevaPersona = new PersonaFisica();
 
         List<MedioDeContacto> medios = new ArrayList<MedioDeContacto>();
         for(String k : ctx.formParamMap().keySet().stream().filter(param -> param.contains("type")).toList()){
@@ -325,7 +346,14 @@ public class UI_Registrar implements Handler {
         System.out.println(area);
 
         Documento nuevoDocumento = new Documento(tipoDocumento, documento);
-        PersonaFisica nuevaPersona = new PersonaFisica(nombre, medios, direccion, nuevoDocumento, apellido, sexo, genero, LocalDate.parse(fecha));
+        nuevaPersona.setNombre(nombre);
+        nuevaPersona.setMediosDeContacto(medios);
+        nuevaPersona.setDireccion(direccion);
+        nuevaPersona.setDocumento(nuevoDocumento);
+        nuevaPersona.setGenero(genero);
+        nuevaPersona.setApellido(apellido);
+        nuevaPersona.setFechaNacimiento(LocalDate.parse(fecha));
+        nuevaPersona.setSexo(sexo);
         Tecnico nuevoTecnico = new Tecnico(nuevaPersona, area);
         EntityManager em = getEm();
         comenzarTransaccion(em);

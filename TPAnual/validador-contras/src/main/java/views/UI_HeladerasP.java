@@ -51,44 +51,49 @@ public class UI_HeladerasP extends UI_Navegable implements Handler{
     private void suscribirse(Colaborador c, String hela, String tipo_sub) throws IOException {
         System.out.println("Estoy en UI_HeladerasP::subscribirse");
 
-        Suscripcion suscripcion = null;
+        List<MedioDeContacto> medios = c.getPersona().getMediosDeContacto();
 
-        switch (tipo_sub){
-            case "PocasViandas":
-                suscripcion = new PocasViandas(extracted(hela));
-                break;
-            case "MuchasViandas":
-                suscripcion = new MuchasViandas(extracted(hela));
-                break;
-            default:
-                suscripcion = new NoFunciona(extracted(hela));
+        if (medios.isEmpty()) {
+            System.out.println("El colaborador no tiene medios de contacto.");
+            return;
         }
 
-        List<MedioDeContacto> medios=c.getPersona().getMediosDeContacto();
+        Publicador publisher = new Publicador();
 
+        for (MedioDeContacto medio : medios) {
+            Suscripcion suscripcion;
 
-        suscripcion.setColaborador(c);
-        MedioDeContacto medioFinal=(MedioDeContacto) medios.toArray()[0];
-        suscripcion.setNotificadores(medioFinal);
-        RepoSuscripcion.getInstance().add_Suscripcion(suscripcion);
+            switch (tipo_sub) {
+                case "PocasViandas":
+                    suscripcion = new PocasViandas(extracted(hela));
+                    break;
+                case "MuchasViandas":
+                    suscripcion = new MuchasViandas(extracted(hela));
+                    break;
+                default:
+                    suscripcion = new NoFunciona(extracted(hela));
+            }
 
-        c.getSuscripciones().add(suscripcion);
+            suscripcion.setColaborador(c);
+            suscripcion.setNotificadores(medio);
+
+            RepoSuscripcion.getInstance().add_Suscripcion(suscripcion);
+            c.getSuscripciones().add(suscripcion);
+
+            String subject = "Suscripción a heladeraID " + hela;
+            String mensaje =
+                    "En hora buena " + this.getUsuario().getRol().getPersona().getNombre() +
+                            " acaba de suscribirse a la heladeraID " + hela +
+                            " de ahora en más podrá recibir todas las notificaciones pertinentes a su suscripción del tipo " +
+                            tipo_sub + "!";
+
+            publisher.addObservable(suscripcion);
+            TwilioSendGrid.sendEmail(medio.getContacto(), subject, mensaje);
+        }
+
         RepoColaborador.getInstance().actualizarColaborador(c);
-
-        String subject =
-            "Suscripcion a heladeraID "+ hela;
-        String mensaje =
-            "En hora buena "+ this.getUsuario().getRol().getPersona().getNombre() +
-                " acaba de suscribirse a la heladeraID " + hela +
-                " de ahora en mas podra recibir todas las notificaciones pertinentes a su suscripcion del tipo "
-                + tipo_sub + "!";
-
-        Publicador publisher= new Publicador();
-        publisher.addObservable(suscripcion);
-        System.out.println(this.getUsuario().getRol().getPersona().getMediosDeContacto());
-        TwilioSendGrid.sendEmail("juanidiaz8260@gmail.com", subject, mensaje);
-
     }
+
 
     private void desuscribirse(Colaborador colaborador, String hela, String tipo_sub) throws IOException {
 
