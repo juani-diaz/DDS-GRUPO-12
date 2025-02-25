@@ -18,4 +18,8 @@ public abstract class Rol{
 
     @ManyToOne
     Persona persona;
+
+    public String getDireccion() {
+        return persona.getDireccion();
+    }
 }

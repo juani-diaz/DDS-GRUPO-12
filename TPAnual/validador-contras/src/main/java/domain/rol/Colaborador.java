@@ -84,9 +84,9 @@ public class Colaborador extends Rol {
     this.colaboraciones.add(colaboracion);
 
     RepoColaboracion.getInstance().add_Colaboracion(colaboracion);
-    RepoColaborador.getInstance().actualizarColaborador(this);
 
     actualizarPuntos();
+    RepoColaborador.getInstance().actualizarColaborador(this);
   }
 
   public void actualizarPuntos(){
