@@ -1,6 +1,7 @@
 package persistence.Repos;
 
 import domain.auth.Usuario;
+import domain.persona.MedioDeContacto;
 import lombok.Getter;
 import persistence.BDUtils;
 
@@ -37,19 +38,17 @@ public class RepoUsuarios extends BDUtils {
 
         comenzarTransaccion(em);
 
-        try {
-            if(usuario.getRol().getPersona().getDocumento()!=null) {
-                em.persist(usuario.getRol().getPersona().getDocumento());
-            }
-            em.persist(usuario.getRol().getPersona());
-            em.persist(usuario.getRol());
-            em.persist(usuario);
-
-            commit(em);
-        } catch (Exception e) {
-            System.out.println("Error al agregar el USUARIO: " + usuario + e);
+        if(usuario.getRol().getPersona().getDocumento()!=null) {
+            em.persist(usuario.getRol().getPersona().getDocumento());
+        }
+        em.persist(usuario.getRol().getPersona());
+        em.persist(usuario.getRol());
+        em.persist(usuario);
+        for(MedioDeContacto m : usuario.getRol().getPersona().getMediosDeContacto()){
+            em.persist(m);
         }
 
+        commit(em);
     }
 
     public void remove_Usuario(Usuario usuario) {

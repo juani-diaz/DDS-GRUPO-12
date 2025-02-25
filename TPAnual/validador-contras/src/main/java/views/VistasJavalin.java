@@ -77,6 +77,10 @@ public class VistasJavalin {
             UI_Landing UILanding = new UI_Landing();
             app.get("/landing", UILanding);
 
+            UI_Perfil UIPerfil = new UI_Perfil();
+            app.get("/app-profile", UIPerfil);
+            acceso.agregarRuta(new PermisosMetodo("app-profile", true, true, true, true));
+
 //====================== VIANDA
             UI_Vianda UIVianda = new UI_Vianda();
 

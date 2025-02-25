@@ -23,7 +23,7 @@ public abstract class Persona extends EntidadPersistente {
     @OneToOne
     private Documento documento;
 
-    @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<MedioDeContacto> mediosDeContacto;
 
     public void agregarMedioDeContacto(MedioDeContacto medioDeContacto) {

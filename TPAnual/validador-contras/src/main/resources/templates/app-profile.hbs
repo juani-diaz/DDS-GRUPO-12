@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equaluiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Mi cuenta</title>
     <!-- Favicon icon -->
@@ -63,64 +63,10 @@
                 </div>
                 <div class="header-right">
                     <ul class="clearfix">
-                        <li class="icons dropdown"><a href="javascript:void(0)" data-toggle="dropdown">
-                                <i class="mdi mdi-bell-outline"></i>
-                                <span class="badge badge-pill gradient-2">3</span>
-                            </a>
-                            <div class="drop-down animated fadeIn dropdown-menu dropdown-notfication">
-                                <div class="dropdown-content-heading d-flex justify-content-between">
-                                    <span class="">2 New Notifications</span>  
-                                    <a href="javascript:void()" class="d-inline-block">
-                                        <span class="badge badge-pill gradient-2">5</span>
-                                    </a>
-                                </div>
-                                <div class="dropdown-content-body">
-                                    <ul>
-                                        <li>
-                                            <a href="javascript:void()">
-                                                <span class="mr-3 avatar-icon bg-success-lighten-2"><i class="icon-present"></i></span>
-                                                <div class="notification-content">
-                                                    <h6 class="notification-heading">Events near you</h6>
-                                                    <span class="notification-text">Within next 5 days</span> 
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void()">
-                                                <span class="mr-3 avatar-icon bg-danger-lighten-2"><i class="icon-present"></i></span>
-                                                <div class="notification-content">
-                                                    <h6 class="notification-heading">Event Started</h6>
-                                                    <span class="notification-text">One hour ago</span> 
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void()">
-                                                <span class="mr-3 avatar-icon bg-success-lighten-2"><i class="icon-present"></i></span>
-                                                <div class="notification-content">
-                                                    <h6 class="notification-heading">Event Ended Successfully</h6>
-                                                    <span class="notification-text">One hour ago</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void()">
-                                                <span class="mr-3 avatar-icon bg-danger-lighten-2"><i class="icon-present"></i></span>
-                                                <div class="notification-content">
-                                                    <h6 class="notification-heading">Events to Join</h6>
-                                                    <span class="notification-text">After two days</span> 
-                                                </div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    
-                                </div>
-                            </div>
-                        </li>
+
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
-                                <span class="activity active"></span>
-                                <img src="images/user/1.png" height="40" width="40" alt="">
+                                 <img src="images/usu.png" height="40" width="40" alt="">
                             </div>
                             <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
                                 <div class="dropdown-content-body">
@@ -171,163 +117,102 @@
             Content body start
         ***********************************-->
         <div class="content-body">
+            <div class="card" style="margin: 20px">
+                <div class="card-header">
+                    <h3>Editar datos personales</h3>
+                </div>
+                <div class="card-body">
+                    {{#if (equal tipoUsuario "admin")}}
+                        <div class="admin"> <!-- Contenido para el admin -->
 
-            <div class="row page-titles mx-0">
-                <div class="col p-md-0">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
-                    </ol>
+                        </div>
+                    {{else if (equal tipoUsuario "persona")}}
+                        <div class="persona"> <!-- Contenido para el persona -->
+                            <form class="mt-5 mb-5 login-input" id="persona-form" action="/actualizar-p" method="post">
+                                <input type="hidden" name="id" value="{{persona.id}}">
+                                <div class="d-flex">
+                                    <div class="w-50 pe-3">
+                                        <div class="form-group d-flex gap-3">
+                                            <input type="text" class="form-control" placeholder="Nombre" required name="nombre" value="{{persona.nombre}}">
+                                            <input type="text" class="form-control" placeholder="Apellido" style="margin-left:20px" name="apellido" value="{{persona.apellido}}">
+                                        </div>
+
+                                        <div class="form-group d-flex gap-3">
+                                            <select class="form-control" required name="sexo">
+                                                <option value="" disabled>Sexo</option>
+                                                <option value="F" {{#if (equal persona.sexo "F")}}selected{{/if}}>Femenino</option>
+                                                <option value="M" {{#if (equal persona.sexo "M")}}selected{{/if}}>Masculino</option>
+                                                <option value="O" {{#if (equal persona.sexo "O")}}selected{{/if}}>Otro</option>
+                                            </select>
+                                            <select class="form-control" required style="margin-left:20px" name="genero">
+                                                <option value="" disabled>Género</option>
+                                                <option value="F" {{#if (equal persona.genero "F")}}selected{{/if}}>Femenino</option>
+                                                <option value="M" {{#if (equal persona.genero "M")}}selected{{/if}}>Masculino</option>
+                                                <option value="NB" {{#if (equal persona.genero "NB")}}selected{{/if}}>No binario</option>
+                                                <option value="O" {{#if (equal persona.genero "O")}}selected{{/if}}>Otro</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="date" class="form-control" placeholder="Fecha de Nacimiento" required name="fecha" value="{{persona.fechaNacimiento}}">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Dirección" required name="direccion" value="{{persona.direccion}}">
+                                        </div>
+
+                                        <div class="form-group d-flex gap-3">
+                                            <select class="form-control" required name="tipoDocumento">
+                                                <option value="" disabled>Tipo de Documento</option>
+                                                <option value="DNI" {{#if (equal persona.documento.tipo "DNI")}}selected{{/if}}>DNI</option>
+                                                <option value="CUIT" {{#if (equal persona.documento.tipo "CUIT")}}selected{{/if}}>CUIT</option>
+                                                <option value="CUIL" {{#if (equal persona.documento.tipo "CUIL")}}selected{{/if}}>CUIL</option>
+                                                <option value="OTRO" {{#if (equal persona.documento.tipo "OTRO")}}selected{{/if}}>Otro</option>
+                                            </select>
+                                            <input type="text" class="form-control" placeholder="Documento" required style="margin-left:20px" name="documento" value="{{persona.documento.numero}}">
+                                        </div>
+                                    </div>
+
+                                    <div class="mx-3" style="border-left: 2px solid #eee; height: auto;"></div>
+
+                                    <div class="w-50 ps-3">
+                                        <!-- Medios de Contacto -->
+                                        <div class="form-group">
+                                            <label>Medios de Contacto</label>
+                                            <div id="contact-fields" class="lista-medios"></div>
+                                            <button type="button" class="btn btn-outline-primary btn-sm mt-2 w-100" id="add-contact-btn">
+                                                Agregar Medio de Contacto
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div id="contactos-existentes">
+                                        {{#each persona.mediosDeContacto}}
+                                            a
+                                        {{/each}}
+                                    </div>
+                                </div>
+
+                                <div class="form-group mt-3">
+                                    <button type="submit" class="btn login-form__btn submit w-100">Actualizar</button>
+                                </div>
+                            </form>
+                        </div>
+                    {{else if (equal tipoUsuario "organizacion")}}
+                        <div class="organizacion"> <!-- Contenido para el organizacion -->
+
+                        </div>
+                    {{else if (equal tipoUsuario "tecnico")}}
+                        <div class="tecnico"> <!-- Contenido para tecnico -->
+
+                        </div>
+                    {{else}}
+                        <div class="unknown-user">
+                            ?
+                        </div>
+                    {{/if}}
                 </div>
             </div>
-            <!-- row -->
-
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-4 col-xl-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="media align-items-center mb-4">
-                                    <img class="mr-3" src="images/avatar/11.png" width="80" height="80" alt="">
-                                    <div class="media-body">
-                                        <h3 class="mb-0">Pikamy Cha</h3>
-                                        <p class="text-muted mb-0">Canada</p>
-                                    </div>
-                                </div>
-                                
-                                <div class="row mb-5">
-                                    <div class="col">
-                                        <div class="card card-profile text-center">
-                                            <span class="mb-1 text-primary"><i class="icon-people"></i></span>
-                                            <h3 class="mb-0">263</h3>
-                                            <p class="text-muted px-4">Following</p>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="card card-profile text-center">
-                                            <span class="mb-1 text-warning"><i class="icon-user-follow"></i></span>
-                                            <h3 class="mb-0">263</h3>
-                                            <p class="text-muted">Followers</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 text-center">
-                                        <button class="btn btn-danger px-5">Follow Now</button>
-                                    </div>
-                                </div>
-
-                                <h4>About Me</h4>
-                                <p class="text-muted">Hi, I'm Pikamy, has been the industry standard dummy text ever since the 1500s.</p>
-                                <ul class="card-profile__info">
-                                    <li class="mb-1"><strong class="text-dark mr-4">Mobile</strong> <span>01793931609</span></li>
-                                    <li><strong class="text-dark mr-4">Email</strong> <span>name@domain.com</span></li>
-                                </ul>
-                            </div>
-                        </div>  
-                    </div>
-                    <div class="col-lg-8 col-xl-9">
-                        <div class="card">
-                            <div class="card-body">
-                                <form action="#" class="form-profile">
-                                    <div class="form-group">
-                                        <textarea class="form-control" name="textarea" id="textarea" cols="30" rows="2" placeholder="Post a new message"></textarea>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <ul class="mb-0 form-profile__icons">
-                                            <li class="d-inline-block">
-                                                <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-user"></i></button>
-                                            </li>
-                                            <li class="d-inline-block">
-                                                <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-paper-plane"></i></button>
-                                            </li>
-                                            <li class="d-inline-block">
-                                                <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-camera"></i></button>
-                                            </li>
-                                            <li class="d-inline-block">
-                                                <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-smile"></i></button>
-                                            </li>
-                                        </ul>
-                                        <button class="btn btn-primary px-3 ml-4">Send</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="media media-reply">
-                                    <img class="mr-3 circle-rounded" src="images/avatar/2.jpg" width="50" height="50" alt="Generic placeholder image">
-                                    <div class="media-body">
-                                        <div class="d-sm-flex justify-content-between mb-2">
-                                            <h5 class="mb-sm-0">Milan Gbah <small class="text-muted ml-3">about 3 days ago</small></h5>
-                                            <div class="media-reply__link">
-                                                <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
-                                                <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-down"></i></button>
-                                                <button class="btn btn-transparent text-dark font-weight-bold p-0 ml-2">Reply</button>
-                                            </div>
-                                        </div>
-                                        
-                                        <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-                                        <ul>
-                                            <li class="d-inline-block"><img class="rounded" width="60" height="60" src="images/blog/2.jpg" alt=""></li>
-                                            <li class="d-inline-block"><img class="rounded" width="60" height="60" src="images/blog/3.jpg" alt=""></li>
-                                            <li class="d-inline-block"><img class="rounded" width="60" height="60" src="images/blog/4.jpg" alt=""></li>
-                                            <li class="d-inline-block"><img class="rounded" width="60" height="60" src="images/blog/1.jpg" alt=""></li>
-                                        </ul>
-
-                                        <div class="media mt-3">
-                                        <img class="mr-3 circle-rounded circle-rounded" src="images/avatar/4.jpg" width="50" height="50" alt="Generic placeholder image">
-                                        <div class="media-body">
-                                            <div class="d-sm-flex justify-content-between mb-2">
-                                                <h5 class="mb-sm-0">Milan Gbah <small class="text-muted ml-3">about 3 days ago</small></h5>
-                                                <div class="media-reply__link">
-                                                    <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
-                                                    <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-down"></i></button>
-                                                    <button class="btn btn-transparent p-0 ml-3 font-weight-bold">Reply</button>
-                                                </div>
-                                            </div>
-                                            <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="media media-reply">
-                                <img class="mr-3 circle-rounded" src="images/avatar/2.jpg" width="50" height="50" alt="Generic placeholder image">
-                                <div class="media-body">
-                                    <div class="d-sm-flex justify-content-between mb-2">
-                                        <h5 class="mb-sm-0">Milan Gbah <small class="text-muted ml-3">about 3 days ago</small></h5>
-                                        <div class="media-reply__link">
-                                            <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
-                                            <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-down"></i></button>
-                                            <button class="btn btn-transparent p-0 ml-3 font-weight-bold">Reply</button>
-                                        </div>
-                                    </div>
-                                    
-                                    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-                                </div>
-                            </div>
-
-                            <div class="media media-reply">
-                                <img class="mr-3 circle-rounded" src="images/avatar/2.jpg" width="50" height="50" alt="Generic placeholder image">
-                                <div class="media-body">
-                                    <div class="d-sm-flex justify-content-between mb-2">
-                                        <h5 class="mb-sm-0">Milan Gbah <small class="text-muted ml-3">about 3 days ago</small></h5>
-                                        <div class="media-reply__link">
-                                            <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
-                                            <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-down"></i></button>
-                                            <button class="btn btn-transparent p-0 ml-3 font-weight-bold">Reply</button>
-                                        </div>
-                                    </div>
-                                    
-                                    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-                                </div>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- #/ container -->
         </div>
         <!--**********************************
             Content body end
@@ -358,6 +243,54 @@
     <script src="js/settings.js"></script>
     <script src="js/gleek.js"></script>
     <script src="js/styleSwitcher.js"></script>
+
+    <script>
+        const maxContacts = 4;
+        const contactFieldsContainer = document.getElementById('contact-fields');
+        const addContactButton = document.getElementById('add-contact-btn');
+        let contactCount = 0;
+
+        addContactButton.addEventListener('click', () => {
+            if (contactCount < maxContacts) {
+                const contactField = document.createElement('div');
+                contactField.className = 'd-flex gap-3 mb-2';
+
+                contactField.innerHTML = `
+                    <select class="form-control" name="contact[${contactCount}][type]" required>
+                        <option value="" disabled selected>Tipo</option>
+                        <option value="email">Email</option>
+                        <option value="telefono">Teléfono</option>
+                        <option value="whatsapp">WhatsApp</option>
+                    </select>
+                    <input type="text" class="form-control" name="contact[${contactCount}][value]" placeholder="Ingrese el contacto" required style="margin-left:20px">
+                    <button type="button" class="btn btn-danger btn-sm remove-contact-btn" style="width: 28px;height: 28px;margin-top: 7px;">X</button>
+                `;
+
+                contactFieldsContainer.appendChild(contactField);
+                contactCount++;
+
+                // Add event listener to remove button
+                contactField.querySelector('.remove-contact-btn').addEventListener('click', () => {
+                    contactField.remove();
+                    updateContactNames();
+                });
+            } else {
+                alert('Puedes agregar hasta 4 medios de contacto.');
+            }
+        });
+
+        function updateContactNames() {
+            const contactFields = contactFieldsContainer.children;
+            contactCount = 0; // Reset counter
+            Array.from(contactFields).forEach((contactField) => {
+                const select = contactField.querySelector('select');
+                const input = contactField.querySelector('input');
+                select.name = `contact[${contactCount}][type]`;
+                input.name = `contact[${contactCount}][value]`;
+                contactCount++;
+            });
+        }
+    </script>
 
 </body>
 
