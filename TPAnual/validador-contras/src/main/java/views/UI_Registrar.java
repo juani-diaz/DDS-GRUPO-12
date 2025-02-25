@@ -243,11 +243,13 @@ public class UI_Registrar implements Handler {
         nuevaPersona.setFechaNacimiento(LocalDate.parse(fecha));
         nuevaPersona.setSexo(sexo);
         Colaborador nuevoColaborador = new Colaborador(nuevaPersona);
+        RepoColaborador c = RepoColaborador.getInstance();
+
+        c.add_Colaborador(nuevoColaborador);
+
         u.setRol(nuevoColaborador);
 
         RepoUsuarios r = RepoUsuarios.getInstance();
-        RepoColaborador c = RepoColaborador.getInstance();
-        c.add_Colaborador(nuevoColaborador);
         r.update_Usuario(u);
 
         ctx.redirect("/page-login");
@@ -330,10 +332,13 @@ public class UI_Registrar implements Handler {
             String valor = ctx.formParam("contact["+indice+"][value]");
             if(Objects.equals(tipo, "email")){
                 m = new EmailDir(valor);
+                m.setPersona(nuevaPersona);
             } else if(Objects.equals(tipo, "telefono")){
                 m = new Telefono(valor);
+                m.setPersona(nuevaPersona);
             } else if(Objects.equals(tipo, "whatsapp")){
                 m = new WhatsApp(valor);
+                m.setPersona(nuevaPersona);
             }
             medios.add(m);
         }

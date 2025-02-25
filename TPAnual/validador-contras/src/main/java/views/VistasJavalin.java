@@ -48,8 +48,13 @@ public class VistasJavalin {
             }).start(port);
 
             app.before(ctx -> {
-                AccesoUsuarios.getInstance().revisarPermiso(ctx);
+                String path = ctx.path();
+
+                if (!path.equals("/broker/temperatura") && !path.equals("/broker/abrirHeladera")) {
+                    AccesoUsuarios.getInstance().revisarPermiso(ctx);
+                }
             });
+
 
             app.get("/", ctx -> {
                 ctx.redirect("/page-login");

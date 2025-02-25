@@ -1,5 +1,6 @@
 package controllers;
 
+import com.ctc.wstx.shaded.msv.org_jp_gr_xml.dom.UDOM;
 import domain.heladera.AdministradorSolicitudes;
 import domain.heladera.EnumMotivoApertura;
 import domain.heladera.Heladera;
@@ -19,6 +20,7 @@ import java.util.Date;
 import java.util.Map;
 
 public class BrokerControllers {
+    String domain=System.getenv("DOMAIN");
     public void incidenteTemperatura(Context ctx){
         Map<String, Object> body = ctx.bodyAsClass(Map.class);
 
@@ -26,7 +28,7 @@ public class BrokerControllers {
         Float temperatura = (Float) body.getOrDefault("temperatura", "");
 
 
-        Broker broker=new Broker("http://localhost:8001/");
+        Broker broker=new Broker(domain);
 
          broker.setFallaTemperatura(heladeraId,temperatura);
                  ctx.status(200);
@@ -40,7 +42,7 @@ public class BrokerControllers {
         Integer colaboradorId = (Integer) body.getOrDefault("colaboradorId", "");
         Integer motivoApertura = (Integer) body.getOrDefault("motivoApertura", "");
 
-        Broker broker=new Broker("http://localhost:8001/");
+        Broker broker=new Broker(domain);
 
         broker.abrirHeladera(heladeraId,motivoApertura,colaboradorId);
         ctx.status(200);
