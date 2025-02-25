@@ -50,8 +50,6 @@ public class UI_NuevaHeladera extends UI_Navegable implements Handler {
 
         colaborador.realizarColaboracion(colaboracion);
 
-        RepoHeladera.getInstance().add_Heladera(nuevaHeladera);
-
         ctx.redirect("/heladeras-o");
     }
 

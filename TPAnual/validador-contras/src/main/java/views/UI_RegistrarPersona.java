@@ -39,6 +39,9 @@ public class UI_RegistrarPersona extends UI_Navegable implements Handler{
     // Agarro al colaborador actual
     Colaborador colapinto = (Colaborador) getUsuario().getRol();
 
+    if(colapinto.getTarjetasParaEntregar().isEmpty()){
+      throw new IllegalArgumentException("El colaborador no tiene tarjetas para entregar");
+    }
     // Obtener parámetros del formulario (datos enviados en la solicitud)
     String nombre = ctx.formParam("nombre");
     String fechaNacimiento = ctx.formParam("fechaNacimiento");
@@ -49,9 +52,6 @@ public class UI_RegistrarPersona extends UI_Navegable implements Handler{
     String numMenoresACargo =ctx.formParam("numMenoresACargo");
     String tarjetaIdentificadorVulnerable = ctx.formParam("tarjeta");
 
-    if(colapinto.getTarjetasParaEntregar().isEmpty()){
-      throw new IllegalArgumentException("El colaborador no tiene tarjetas para entregar");
-    }
 
     // Convertir parámetros necesarios
     LocalDate fechaNacimientoParsed = LocalDate.parse(fechaNacimiento);
@@ -106,7 +106,7 @@ public class UI_RegistrarPersona extends UI_Navegable implements Handler{
 
     //repoColaborador.actualizarColaborador(colapinto);
 
-    ctx.render("/index");
+    ctx.redirect("/index");
   }
 
   public void solicitarTarjeta(Context ctx) {
@@ -138,7 +138,7 @@ public class UI_RegistrarPersona extends UI_Navegable implements Handler{
     em.merge(colapinto);
 
     BDUtils.commit(em);
-    ctx.render("registrar-persona.hbs");
+    ctx.redirect("/registrar-persona.hbs");
   }
 
 

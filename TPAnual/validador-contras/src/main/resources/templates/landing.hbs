@@ -109,7 +109,7 @@
                 <div class="col-lg-6" style="margin-top: 15px;">
                     <div class="card" style="height: 100%;">
                         <div class="card-body">
-                            <h1 style="text-align: center; font-weight: bold; font-size: 40px; margin-top: 15px;">Hay <span style="color: #7571f9;">0.000.000</span> personas sufriendo vulnerabilidad alimenticia en Argentina</h1>
+                            <h1 style="text-align: center; font-weight: bold; font-size: 40px; margin-top: 15px;">Hay <span style="color: #7571f9;">{{conteo}}</span> personas sufriendo vulnerabilidad alimenticia en Argentina</h1>
                             <h3 style="margin-top: 30px; text-align: center; font-weight: normal;">Podés aportar tu granito de mostaza de las siguientes maneras:</h3>
 
                             <ul class="lista-ayuda">
@@ -125,7 +125,7 @@
                 </div>
             </div>
 
-            <div class="card" style="margin: 15px; height: 420px;">
+            <div class="card" style="margin: 15px;">
                 <div class="card-body" style="display: flex;">
                     <div class="col-lg-6">
                         <h1>Últimas noticias</h1>
@@ -150,9 +150,8 @@
                                 </p>
                             </li>
                         </ul>
-                    </div>
-                    <div class="col-lg-6">
-                        <h1>Seguinos en nuestras redes sociales</h1>
+
+                        <h1 style="margin-top: 60px">Seguinos en nuestras redes sociales</h1>
 
 
                         <ul class="redes">
@@ -184,6 +183,24 @@
                                 <span>@aliment_ar</span>
                             </li>
                         </ul>
+                    </div>
+                    <div class="col-lg-6" style="padding: 0;">
+                        <h3>Mapa de nuestras heladeras</h3>
+                        <gmp-map
+                                center="-34.649518, -58.552020"
+                                zoom="10"
+                                map-id="DEMO_MAP_ID"
+                                class="mapa">
+                            {{#each hela}}
+                                {{#if (notEqual (estadoString this) "Propuesta")}}
+                                    <gmp-advanced-marker position="{{lat_lon this.direccion}}" title="{{this.nombre}}">
+                                        <div class="custom-marker bg-{{estadoStringStyle this}}">
+                                            <span class="marker-label">{{this.nombre}}</span>
+                                        </div>
+                                    </gmp-advanced-marker>
+                                {{/if}}
+                            {{/each}}
+                        </gmp-map>
                     </div>
                 </div>
             </div>
@@ -235,6 +252,11 @@
 
 
     <script src="./js/dashboard/dashboard-1.js"></script>
+
+    <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpLD7qIQmAy7RyR26CDKPafLsTrZ4oNjc&callback=initMap&libraries=marker&v=beta"
+            defer
+    ></script>
 
 </body>
 
