@@ -163,9 +163,6 @@ public class UI_HeladerasP extends UI_Navegable implements Handler{
             .reduce((first, second) -> first)
             .orElse(null);
 
-        System.out.println("suscripcion.getClass().getName()   "+ sus.getClass().getName());
-        System.out.println(sus.getHeladera().getNombre() +"  "+ sus.getMensaje());
-
         colaborador.getSuscripciones().remove(sus);
         RepoColaborador.getInstance().actualizarColaborador(colaborador);
 
