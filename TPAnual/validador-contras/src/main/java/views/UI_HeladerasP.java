@@ -83,7 +83,8 @@ public class UI_HeladerasP extends UI_Navegable implements Handler{
                 int cant = 0;
                 if(t.cantidad != null)
                     cant = Integer.parseInt(t.cantidad);
-                suscribirse(colaborador, heladeraId, t.tipo, cant);
+
+                suscribirse(colaborador, heladera, t.tipo, cant);
             } else if (!Objects.equals(t.tipo, "NoFunciona")) {
                 List<Suscripcion> actualizar = colaborador.getSuscripciones().stream().filter(s -> s.getClass().getName().equals("domain.suscripcion."+t.tipo)).toList();
                 for(int i = 0; i < actualizar.size(); i++){
