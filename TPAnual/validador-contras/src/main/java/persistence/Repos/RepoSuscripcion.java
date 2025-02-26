@@ -48,6 +48,16 @@ public class RepoSuscripcion extends BDUtils{
     }
   }
 
+  public void update_Suscripcion(Suscripcion suscrip) {
+    comenzarTransaccion(em);
+    try {
+      em.merge(suscrip);
+      commit(em);
+    } catch (Exception e) {
+      System.out.println("Error al modificar la Suscripcion: " + suscrip + e);
+    }
+  }
+
   public void remove_Suscripcion(Suscripcion suscrip) {
     suscripcion.remove(suscrip);
 

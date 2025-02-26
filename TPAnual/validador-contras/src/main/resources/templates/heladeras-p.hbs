@@ -181,7 +181,13 @@
                                                                {{#if (botonSubscribirActivo ../usuario this "PocasViandas")}}checked{{/if}}>
                                                         Pocas Viandas
                                                     </label>
-                                                    <input value="{{obtenerCantidadOg ../usuario this "PocasViandas"}}" type="number" min="1" max="{{restarUno this.tamanioEnViandas}}" id="input-PocasViandas-{{this.id}}" class="form-control mt-1" placeholder="Cantidad">
+                                                    <input value="{{obtenerCantidadOg ../usuario this "PocasViandas"}}"
+                                                           type="number"
+                                                           min="1"
+                                                           max="{{restarUno this.tamanioEnViandas}}"
+                                                           id="input-PocasViandas-{{this.id}}"
+                                                           class="form-control mt-1"
+                                                           placeholder="Cantidad">
                                                 </div>
 
                                                 <!-- Opción "Muchas Viandas" con input -->
@@ -191,7 +197,13 @@
                                                                {{#if (botonSubscribirActivo ../usuario this "MuchasViandas")}}checked{{/if}}>
                                                         Muchas Viandas
                                                     </label>
-                                                    <input value="{{obtenerCantidadOg ../usuario this "MuchasViandas"}}" type="number" min="1" max="{{restarUno this.tamanioEnViandas}}" id="input-MuchasViandas-{{this.id}}" class="form-control mt-1" placeholder="Cantidad">
+                                                    <input value="{{obtenerCantidadOg ../usuario this "MuchasViandas"}}"
+                                                           type="number"
+                                                           min="1"
+                                                           max="{{restarUno this.tamanioEnViandas}}"
+                                                           id="input-MuchasViandas-{{this.id}}"
+                                                           class="form-control mt-1"
+                                                           placeholder="Cantidad">
                                                 </div>
 
                                                 <!-- Opción "No Funciona" -->
@@ -287,6 +299,8 @@
         // Función para enviar la suscripción de una heladera específica
         function enviarSuscripcion(heladeraId) {
             const tiposSuscripcion = [];
+            let formularioValido = true;
+
             const checkboxes = document.querySelectorAll(`input[name="tipo_suscripcion_${heladeraId}"]:checked`);
 
             checkboxes.forEach(checkbox => {
@@ -294,12 +308,23 @@
                 const cantidadInput = document.getElementById(`input-${tipo}-${heladeraId}`);
                 const cantidad = cantidadInput ? cantidadInput.value : null;
 
-                if (tipo === "NoFunciona") {
+                if (tipo !== "NoFunciona") {
+                    if (!cantidad || cantidad < 1) {
+                        formularioValido = false;
+                        cantidadInput.classList.add("is-invalid"); // Resaltar en rojo
+                    } else {
+                        cantidadInput.classList.remove("is-invalid");
+                        tiposSuscripcion.push({ tipo, cantidad });
+                    }
+                } else {
                     tiposSuscripcion.push({ tipo, cantidad: null });
-                } else if (cantidad) {
-                    tiposSuscripcion.push({ tipo, cantidad });
                 }
             });
+
+            if (!formularioValido) {
+                toastr.error("Debe ingresar una cantidad válida en las opciones seleccionadas.");
+                return;
+            }
 
             // Enviar los datos al servidor
             fetch('/botonSuscribe', {
@@ -311,8 +336,12 @@
             })
             .then(response => response.json())
             .then(data => {
-                alert('Suscripción guardada correctamente');
-                console.log(data);
+                console.log("Respuesta del servidor:", data);
+                if (data.redirectUrl) {
+                    window.location.href = data.redirectUrl;
+                } else {
+                    location.reload();
+                }
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -356,6 +385,26 @@
             toastr.success(mensajeDecodificado);
             document.cookie = 'obs_exito=; Max-Age=0; path=/';
         }
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll('input[type="checkbox"][name^="tipo_suscripcion_"]').forEach(checkbox => {
+                checkbox.addEventListener("change", function() {
+                    const heladeraId = this.name.split("_").pop(); // Obtener el ID de la heladera
+                    const tipo = this.value; // Tipo de suscripción (PocasViandas, MuchasViandas, etc.)
+                    const cantidadInput = document.getElementById(`input-${tipo}-${heladeraId}`);
+
+                    if (cantidadInput) {
+                        cantidadInput.required = this.checked;  // Solo requerido si está tildado
+                        cantidadInput.disabled = !this.checked; // Solo habilitado si está tildado
+                    }
+                });
+
+                // Ejecutar la función al cargar la página para mantener el estado correcto
+                checkbox.dispatchEvent(new Event("change"));
+            });
+        });
     </script>
 </body>
 

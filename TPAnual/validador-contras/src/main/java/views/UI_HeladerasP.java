@@ -9,10 +9,13 @@ import domain.servicios.TwilioSendGrid;
 import domain.suscripcion.*;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
+import obs.RespuestaCliente;
+import persistence.BDUtils;
 import persistence.Repos.RepoColaborador;
 import persistence.Repos.RepoHeladera;
 import persistence.Repos.RepoSuscripcion;
 
+import javax.persistence.EntityManager;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -78,15 +81,27 @@ public class UI_HeladerasP extends UI_Navegable implements Handler{
         for(TipoSuscripcion t : tiposSuscripcion) {
             if(colaborador.getSuscripciones().stream().noneMatch(s -> s.getClass().getName().equals("domain.suscripcion."+t.tipo))){
                 int cant = 0;
-                if(t.cantidad != null){
+                if(t.cantidad != null)
                     cant = Integer.parseInt(t.cantidad);
-                }
-                System.out.println("Estoy en UI_HeladerasP::botonSuscribe->for->if");
+
                 suscribirse(colaborador, heladera, t.tipo, cant);
+            } else if (!Objects.equals(t.tipo, "NoFunciona")) {
+                List<Suscripcion> actualizar = colaborador.getSuscripciones().stream().filter(s -> s.getClass().getName().equals("domain.suscripcion."+t.tipo)).toList();
+                for(int i = 0; i < actualizar.size(); i++){
+                    if (Objects.equals(t.tipo, "PocasViandas")){
+                        PocasViandas pocas = (PocasViandas) actualizar.get(i);
+                        pocas.setNumeroMinimo(Integer.valueOf(t.cantidad));
+                        RepoSuscripcion.getInstance().update_Suscripcion(pocas);
+                    } else {
+                        MuchasViandas muchas = (MuchasViandas) actualizar.get(i);
+                        muchas.setNumeroMaximo(Integer.valueOf(t.cantidad));
+                        RepoSuscripcion.getInstance().update_Suscripcion(muchas);
+                    }
+                }
             }
         }
 
-        ctx.redirect("/heladeras-p");
+        RespuestaCliente.fetchSub(getUsuario(), "/heladeras-p", "Suscripcion actualizada", ctx);
     }
 
     private void suscribirse(Colaborador c, Heladera hela, String tipo_sub, int cantidad) throws IOException {

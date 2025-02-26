@@ -204,6 +204,8 @@ public class UI_Perfil extends UI_Navegable implements Handler {
     }
 
     private void medios(Persona p, Context ctx) {
+        p.getMediosDeContacto().clear();
+
         List<MedioDeContacto> medios = new ArrayList<MedioDeContacto>();
         for(String k : ctx.formParamMap().keySet().stream().filter(param -> param.contains("type")).toList()){
             Integer indice = Integer.valueOf(k.substring(8,9));
@@ -223,6 +225,6 @@ public class UI_Perfil extends UI_Navegable implements Handler {
             medios.add(m);
         }
 
-        p.setMediosDeContacto(medios);
+        p.getMediosDeContacto().addAll(medios);
     }
 }
