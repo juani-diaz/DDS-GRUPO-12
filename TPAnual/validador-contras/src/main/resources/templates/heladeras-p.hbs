@@ -160,27 +160,54 @@
                                     <i class="icon-cup menu-icon"></i><span style="margin-left: 5px;">{{viandas_del_total this}} viandas</span><br><br>
 
                                     <a class="btn" href="reportar-falla?id={{this.id}}" aria-expanded="false">
-                                        <button type="button" class="btn mb-1 btn-danger" style="margin-left: 5px;">Reportar falla</button>
+                                    <button type="button" class="btn mb-1 btn-danger" style="margin-left: 5px;">Reportar falla</button>
                                     </a>
 
                                     <div class="btn-group">
-
-                                        <form action="/botonSuscribe" id="{{this.id}}_formulario" method="post">
-
-                                            <input style="display:none" name="helaID" value="{{this.id}}">
-
-                                            <select type="submit" name="buton_sub" onchange="suscri_dropdown({{this.id}})" class="btn mb-1 btn-outline-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left: 5px;">
+                                        <!-- Menú desplegable personalizado -->
+                                        <div class="dropdown" style="margin-left: 5px;">
+                                            <button type="button" class="btn mb-1 btn-outline-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 Suscribirse
-                                                <div class="dropdown-menu" name="tipo_sub">
-                                                    <option selected disabled>Tipo de suscripcion</option>
-                                                    <option value="PocasViandas"  class="dropdown-item {{botonSubscribirActivo usuario this "PocasViandas"}}" >Pocas Viandas</option>
-                                                    <option value="MuchasViandas" class="dropdown-item {{botonSubscribirActivo usuario this "MuchasViandas"}}">Muchas Viandas</option>
-                                                    <option value="NoFunciona"    class="dropdown-item {{botonSubscribirActivo usuario this "NoFunciona"}}"   >No Funciona</option>
+                                            </button>
+                                            <div class="dropdown-menu p-3" name="tipo_sub" style="min-width: 250px;">
+                                                <!-- Opción deshabilitada -->
+                                                <a class="dropdown-item disabled">Tipo de suscripción</a>
+
+                                                <!-- Opción "Pocas Viandas" con input -->
+                                                <div class="dropdown-item">
+                                                    <label onclick="event.stopPropagation()">
+                                                        <input type="checkbox" name="tipo_suscripcion_{{this.id}}" value="PocasViandas"
+                                                               {{#if (botonSubscribirActivo ../usuario this "PocasViandas")}}checked{{/if}}>
+                                                        Pocas Viandas
+                                                    </label>
+                                                    <input value="{{obtenerCantidadOg ../usuario this "PocasViandas"}}" type="number" min="1" max="{{restarUno this.tamanioEnViandas}}" id="input-PocasViandas-{{this.id}}" class="form-control mt-1" placeholder="Cantidad">
                                                 </div>
-                                            </select>
 
-                                        </form>
+                                                <!-- Opción "Muchas Viandas" con input -->
+                                                <div class="dropdown-item">
+                                                    <label onclick="event.stopPropagation()">
+                                                        <input type="checkbox" name="tipo_suscripcion_{{this.id}}" value="MuchasViandas"
+                                                               {{#if (botonSubscribirActivo ../usuario this "MuchasViandas")}}checked{{/if}}>
+                                                        Muchas Viandas
+                                                    </label>
+                                                    <input value="{{obtenerCantidadOg ../usuario this "MuchasViandas"}}" type="number" min="1" max="{{restarUno this.tamanioEnViandas}}" id="input-MuchasViandas-{{this.id}}" class="form-control mt-1" placeholder="Cantidad">
+                                                </div>
 
+                                                <!-- Opción "No Funciona" -->
+                                                <div class="dropdown-item">
+                                                    <label onclick="event.stopPropagation()">
+                                                        <input type="checkbox" name="tipo_suscripcion_{{this.id}}" value="NoFunciona"
+                                                               {{#if (botonSubscribirActivo ../usuario this "NoFunciona")}}checked{{/if}}>
+                                                        No Funciona
+                                                    </label>
+                                                </div>
+
+                                                <!-- Botón "Aceptar" para enviar la suscripción de esta heladera -->
+                                                <button type="button" class="btn btn-primary mt-2 w-100" onclick="enviarSuscripcion('{{this.id}}')">
+                                                    Aceptar
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -255,6 +282,42 @@
         }
     </script>
 
+    <script>
+        // Función para enviar la suscripción de una heladera específica
+        function enviarSuscripcion(heladeraId) {
+            const tiposSuscripcion = [];
+            const checkboxes = document.querySelectorAll(`input[name="tipo_suscripcion_${heladeraId}"]:checked`);
+
+            checkboxes.forEach(checkbox => {
+                const tipo = checkbox.value;
+                const cantidadInput = document.getElementById(`input-${tipo}-${heladeraId}`);
+                const cantidad = cantidadInput ? cantidadInput.value : null;
+
+                if (tipo === "NoFunciona") {
+                    tiposSuscripcion.push({ tipo, cantidad: null });
+                } else if (cantidad) {
+                    tiposSuscripcion.push({ tipo, cantidad });
+                }
+            });
+
+            // Enviar los datos al servidor
+            fetch('/botonSuscribe', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ heladeraId, tiposSuscripcion }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('Suscripción guardada correctamente');
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
 
 </body>
 

@@ -79,7 +79,6 @@ public class Catalogo extends EntidadPersistente {
         if(o.getPuntosNecesarios() <= colaborador.getCantidadPuntos()){
             //TODO hacer lo que corresponda (mail, envio)
             colaborador.setPuntosGastados(colaborador.getPuntosGastados() + o.getPuntosNecesarios());
-            RepoColaborador.getInstance().actualizarColaborador(colaborador);
             return true;
         }
         return false;

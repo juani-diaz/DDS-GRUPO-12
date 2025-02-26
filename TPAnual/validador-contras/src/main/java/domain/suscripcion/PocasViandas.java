@@ -54,4 +54,12 @@ public class PocasViandas extends Suscripcion{
     header="Notificacion por suscripcion";
     this.mensaje="Quedan únicamente "+numeroMinimo+" viandas disponibles en la heladera";
   }
+
+  public PocasViandas(Heladera heladera, int numeroMinimo) {
+    this.heladera = heladera;
+    this.notificadores=null;
+    this.numeroMinimo=numeroMinimo;
+    header="Notificacion por suscripcion";
+    this.mensaje="Quedan únicamente "+numeroMinimo+" viandas disponibles en la heladera";
+  }
 }
