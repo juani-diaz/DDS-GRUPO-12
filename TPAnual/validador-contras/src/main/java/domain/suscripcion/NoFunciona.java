@@ -9,6 +9,9 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import java.io.IOException;
 
+import static domain.heladera.EnumEstadoHeladera.INACTIVA_POR_ALERTA;
+import static domain.heladera.EnumEstadoHeladera.INACTIVA_POR_FALLA;
+
 @Getter @Setter
 @Entity
 public class NoFunciona extends Suscripcion {
@@ -29,7 +32,7 @@ public class NoFunciona extends Suscripcion {
 
     @Override
     boolean condicion(Integer cantidad) {
-        return true;
+        return heladera.getEstado()==INACTIVA_POR_FALLA || heladera.getEstado()==INACTIVA_POR_ALERTA;
     }
 
     public NoFunciona(Heladera heladera, MedioDeContacto notificadores){

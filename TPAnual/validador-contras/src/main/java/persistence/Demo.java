@@ -16,6 +16,7 @@ import domain.vianda.Vianda;
 import domain.vianda.ViandaRecogida;
 
 import javax.persistence.EntityManager;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -632,7 +633,7 @@ public class Demo {
         BDUtils.commit(em);
     }
 
-    public static void incidentes(String[] args) {
+    public static void incidentes(String[] args) throws IOException {
 
         EntityManager em = BDUtils.getEntityManager();
         BDUtils.comenzarTransaccion(em);

@@ -45,7 +45,7 @@ public class Publicador  {
             List<Vianda> viandasFiltradas= (List<Vianda>) viandas.stream().filter(vianda -> vianda.getHeladera().getId()==observer.getHeladera().getId()).toList();
 
             switch(observer.getClass().getName()) {
-                case "domain.suscripcion.NoFunciona": observer.notificar();
+                case "domain.suscripcion.NoFunciona": if( observer.condicion(viandasFiltradas.size()))observer.notificar();
                 case "domain.suscripcion.PocasViandas": if( observer.condicion(viandasFiltradas.size()))observer.notificar();
                 case "domain.suscripcion.MuchasViandas":   if(observer.condicion(viandasFiltradas.size())) observer.notificar() ;
             }
