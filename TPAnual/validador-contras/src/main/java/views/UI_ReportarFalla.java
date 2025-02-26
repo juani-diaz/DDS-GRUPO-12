@@ -8,6 +8,7 @@ import domain.suscripcion.Publicador;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import io.javalin.http.UploadedFile;
+import obs.RespuestaCliente;
 import persistence.ArchivosUtils;
 import persistence.Repos.RepoColaborador;
 import persistence.Repos.RepoHeladera;
@@ -53,6 +54,6 @@ public class UI_ReportarFalla extends UI_Navegable implements Handler {
         Publicador pub=new Publicador();
         pub.notifyObservers();
 
-        ctx.redirect("/index");
+        RespuestaCliente.exito(getUsuario(), "/index", "Falla reportada", ctx);
     }
 }

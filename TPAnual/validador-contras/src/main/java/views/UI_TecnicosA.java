@@ -7,6 +7,7 @@ import domain.rol.Tecnico;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import lombok.NoArgsConstructor;
+import obs.RespuestaCliente;
 import persistence.Repos.RepoHeladera;
 import persistence.Repos.RepoUsuarios;
 
@@ -35,7 +36,7 @@ public class UI_TecnicosA extends UI_Navegable implements Handler {
 
         RepoUsuarios.getInstance().update_Usuario(u);
 
-        ctx.redirect("/tecnicos-a");
+        RespuestaCliente.exito(getUsuario(), "/tecnicos-a", "Tecnico habilitado", ctx);
     }
 
     public void deshabilitarTecnico(Context ctx) {
@@ -47,6 +48,6 @@ public class UI_TecnicosA extends UI_Navegable implements Handler {
 
         RepoUsuarios.getInstance().update_Usuario(u);
 
-        ctx.redirect("/tecnicos-a");
+        RespuestaCliente.exito(getUsuario(), "/tecnicos-a", "Tecnico deshabilitado", ctx);
     }
 }

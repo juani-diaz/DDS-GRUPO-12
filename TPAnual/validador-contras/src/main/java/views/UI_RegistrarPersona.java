@@ -11,6 +11,7 @@ import domain.rol.Vulnerable;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import io.jsonwebtoken.Claims;
+import obs.RespuestaCliente;
 import persistence.BDUtils;
 import persistence.Repos.RepoColaborador;
 
@@ -98,6 +99,6 @@ public class UI_RegistrarPersona extends UI_Navegable implements Handler{
     em.merge(colapinto);
     BDUtils.commit(em);
 
-    ctx.redirect("/index");
+    RespuestaCliente.exito(getUsuario(), "/index", "Persona registrada con exito", ctx);
   }
 }

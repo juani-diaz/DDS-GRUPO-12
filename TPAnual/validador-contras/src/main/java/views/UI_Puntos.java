@@ -7,6 +7,7 @@ import domain.servicios.Catalogo;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import io.jsonwebtoken.Claims;
+import obs.RespuestaCliente;
 import persistence.Repos.RepoColaborador;
 
 
@@ -42,6 +43,6 @@ public class UI_Puntos extends UI_Navegable implements Handler {
 
         RepoColaborador.getInstance().actualizarColaborador(colaborador);
 
-        ctx.redirect("/puntos");
+        RespuestaCliente.exito(getUsuario(), "/puntos", "Canje exitoso", ctx);
     }
 }

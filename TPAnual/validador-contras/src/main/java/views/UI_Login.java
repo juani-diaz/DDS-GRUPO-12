@@ -6,6 +6,7 @@ import domain.rol.Tecnico;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import lombok.NoArgsConstructor;
+import obs.RespuestaCliente;
 import persistence.Repos.RepoUsuarios;
 
 import java.net.URLDecoder;
@@ -35,21 +36,20 @@ public class UI_Login  implements Handler {
         RepoUsuarios r = RepoUsuarios.getInstance(); //linea 27, donde ocurre el error
         Usuario u = r.findByUsuario(usuario);
 
-        if(u.getRol().getClass() == Tecnico.class){
-            Tecnico t = (Tecnico) u.getRol();
-            if(t.getAprobadoPorAdmin() == null || !t.getAprobadoPorAdmin()){
-                ctx.redirect("/page-login");
-                return;
-            }
-        }
-
         if (u != null && u.getContra().equals(contra)) {
+            if(u.getRol().getClass() == Tecnico.class){
+                Tecnico t = (Tecnico) u.getRol();
+                if(t.getAprobadoPorAdmin() == null || !t.getAprobadoPorAdmin()){
+                    RespuestaCliente.error(u, "/page-login", "Cuenta no aprobada por el administrador", ctx);
+                    return;
+                }
+            }
             String token = JwtUtil.generateToken(usuario,u.getRol().getId());
             String encodedToken = URLEncoder.encode(token, StandardCharsets.UTF_8);
             ctx.cookie("Auth", "Bearer" + encodedToken);
-            ctx.redirect("/index");
+            RespuestaCliente.exito(u, "/index", "Logeado correctamente", ctx);
         } else {
-            ctx.redirect("/page-login");
+            RespuestaCliente.error(u, "/page-login", "Usuario inexistente o contraseña incorrecta", ctx);
         }
 
     }

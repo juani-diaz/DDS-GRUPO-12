@@ -8,6 +8,7 @@ import domain.rol.Colaborador;
 import domain.servicios.Catalogo;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
+import obs.RespuestaCliente;
 
 import java.util.List;
 
@@ -28,6 +29,6 @@ public class UI_Ofertas extends UI_Navegable implements Handler {
         String ofertaId = ctx.formParam("ofertaId");
         Catalogo.getInstance().retirarDelCatalogoPorId(Integer.parseInt(ofertaId));
 
-        ctx.redirect("/ofertas");
+        RespuestaCliente.exito(getUsuario(), "/ofertas", "Se elimino la oferta", ctx);
     }
 }

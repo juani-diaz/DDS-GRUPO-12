@@ -5,6 +5,7 @@ import domain.rol.Colaborador;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import io.javalin.http.UploadedFile;
+import obs.RespuestaCliente;
 import persistence.ArchivosUtils;
 import persistence.Repos.RepoColaborador;
 
@@ -40,6 +41,6 @@ public class UI_Oferta extends UI_Navegable implements Handler {
 
         c.realizarColaboracion(po);
 
-        ctx.redirect("/ofertas");
+        RespuestaCliente.exito(getUsuario(), "/ofertas", "Oferta cargada con exito", ctx);
     }
 }
