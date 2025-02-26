@@ -10,5 +10,5 @@ public class PredeterminadosYEstadisticasHeladera {
     private int heladeraPromedio = 50;
     private String personasPromedio = "30";
     private Float tempMinima = 5f;
-    private Float tempMaxima = 10f;
+    private Float tempMaxima = 20f;
 }

@@ -42,8 +42,11 @@ public class UI_NuevaHeladera extends UI_Navegable implements Handler {
         String latitud = ctx.formParam("latitud");
         String longitud = ctx.formParam("longitud");
 
+        String min = ctx.formParam("temperaturaMinima");
+        String max = ctx.formParam("temperaturaMaxima");
+
         Ubicacion nuevaUbicacion = new Ubicacion(ciudad,localidad, latitud, longitud, calle ,altura);
-        Heladera nuevaHeladera = new Heladera(nombre,nuevaUbicacion, Integer.valueOf(tamanio), LocalDate.now(), null, null, EnumEstadoHeladera.PENDIENTE_INSTALACION);
+        Heladera nuevaHeladera = new Heladera(nombre,nuevaUbicacion, Integer.valueOf(tamanio), LocalDate.now(), Float.parseFloat(min), Float.parseFloat(max), EnumEstadoHeladera.PENDIENTE_INSTALACION);
 
         Colaborador colaborador = (Colaborador) getUsuario().getRol();
 
