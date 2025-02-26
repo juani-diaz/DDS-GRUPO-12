@@ -9,6 +9,9 @@ import domain.incidente.Incidente;
 import domain.persona.EnumTipoPersonaJuridica;
 import domain.rol.*;
 
+import domain.suscripcion.MuchasViandas;
+import domain.suscripcion.PocasViandas;
+import domain.suscripcion.Suscripcion;
 import io.javalin.http.Context;
 
 import io.jsonwebtoken.Claims;
@@ -23,6 +26,7 @@ import persistence.Repos.RepoUsuarios;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 public class HelperSource {
     public String lat_lon(Ubicacion u) {
@@ -66,7 +70,7 @@ public class HelperSource {
         }
     }
 
-    public String botonSubscribirActivo(Usuario user, Heladera h, String tipo_sub){
+    public Boolean botonSubscribirActivo(Usuario user, Heladera h, String tipo_sub){
 
         Colaborador colaborador = (Colaborador) user.getRol();
 
@@ -75,8 +79,31 @@ public class HelperSource {
         if(colaborador.getSuscripciones().stream().anyMatch(
             s -> hela.equals(Integer.toString(s.getHeladera().getId())) &&
                 ("domain.suscripcion."+tipo_sub).equals(s.getClass().getName()))){
-            return "active";
-        } else return "";
+            return true;
+        } else return false;
+    }
+
+    public Integer obtenerCantidadOg(Usuario user, Heladera h, String tipo_sub){
+
+        Colaborador colaborador = (Colaborador) user.getRol();
+
+        String hela = Integer.toString(h.getId());
+
+        Optional<Suscripcion> os = colaborador.getSuscripciones().stream().filter(
+                s -> hela.equals(Integer.toString(s.getHeladera().getId())) &&
+                        ("domain.suscripcion."+tipo_sub).equals(s.getClass().getName())).findFirst();
+
+        if(os.isPresent()){
+            Suscripcion s = os.get();
+            if(s.getClass() == PocasViandas.class){
+                return ((PocasViandas) s).getNumeroMinimo();
+            } else if (s.getClass() == MuchasViandas.class) {
+                return ((MuchasViandas) s).getNumeroMaximo();
+            } else {
+                return null;
+            }
+        }
+        return null;
     }
 
     public String botonSubscribirStyle(Usuario user, Heladera h){ //Al final no lo uso
@@ -224,6 +251,10 @@ public class HelperSource {
         } else {
             return "?";
         }
+    }
+
+    public Integer restarUno(Integer c) {
+        return c - 1;
     }
 
 }

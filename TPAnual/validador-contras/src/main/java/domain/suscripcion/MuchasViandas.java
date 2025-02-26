@@ -51,4 +51,12 @@ public class MuchasViandas extends Suscripcion{
     header="Notificacion por suscripcion";
     this.mensaje="Faltan "+numeroMaximo+" viandas para que la heladera esté llena y no se puedan ingresar más viandas";
   }
+
+  public MuchasViandas(Heladera heladera, int numeroMaximo){
+    this.heladera=heladera;
+    this.notificadores=null;
+    this.numeroMaximo = numeroMaximo;
+    header="Notificacion por suscripcion";
+    this.mensaje="Faltan "+numeroMaximo+" viandas para que la heladera esté llena y no se puedan ingresar más viandas";
+  }
 }

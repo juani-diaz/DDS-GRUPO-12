@@ -38,6 +38,10 @@ public class UI_Puntos extends UI_Navegable implements Handler {
 
         colaborador.realizarCanje(o);
 
+        colaborador.actualizarPuntos();
+
+        RepoColaborador.getInstance().actualizarColaborador(colaborador);
+
         ctx.redirect("/puntos");
     }
 }

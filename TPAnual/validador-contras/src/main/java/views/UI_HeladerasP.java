@@ -1,6 +1,7 @@
 package views;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import domain.heladera.Heladera;
 import domain.persona.MedioDeContacto;
 import domain.rol.Colaborador;
@@ -13,7 +14,9 @@ import persistence.Repos.RepoHeladera;
 import persistence.Repos.RepoSuscripcion;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 public class UI_HeladerasP extends UI_Navegable implements Handler{
@@ -28,15 +31,7 @@ public class UI_HeladerasP extends UI_Navegable implements Handler{
     }
 
     public void botonSuscribe(Context ctx) throws IOException{
-        System.out.println("estoy en UI_HeladerasP::botonSuscribe");
-
-        // Obtener parámetros del formulario (datos enviados en la solicitud)
-        String tipo_sub = ctx.formParam("buton_sub");
-        System.out.println("tipo_sub_dropdown = " + tipo_sub);
-
-        String hela = ctx.formParam("helaID");
-        System.out.println("helaID = " + hela);
-
+        /*
         Colaborador colaborador = (Colaborador) this.getUsuario().getRol();
 
         if(colaborador.getSuscripciones().stream().anyMatch(
@@ -46,9 +41,49 @@ public class UI_HeladerasP extends UI_Navegable implements Handler{
         } else this.suscribirse(colaborador, hela, tipo_sub);
 
         ctx.render("index.hbs");
+
+         */
+        String jsonBody = ctx.body();
+
+        // Parsear el JSON a un objeto Java
+        ObjectMapper objectMapper = new ObjectMapper();
+        SuscripcionRequest suscripcionRequest = objectMapper.readValue(jsonBody, SuscripcionRequest.class);
+
+        // Acceder a los datos
+        String heladeraId = suscripcionRequest.getHeladeraId();
+        List<TipoSuscripcion> tiposSuscripcion = suscripcionRequest.getTiposSuscripcion();
+
+        Colaborador colaborador = (Colaborador) this.getUsuario().getRol();
+
+        for(Suscripcion s : new ArrayList<>(colaborador.getSuscripciones())){
+            if(s.getClass() == PocasViandas.class){
+                if(tiposSuscripcion.stream().noneMatch(t -> Objects.equals(t.tipo, "PocasViandas"))){
+                    desuscribirse(colaborador, heladeraId, "PocasViandas");
+                }
+            } else if (s.getClass() == MuchasViandas.class) {
+                if(tiposSuscripcion.stream().noneMatch(t -> Objects.equals(t.tipo, "MuchasViandas"))){
+                    desuscribirse(colaborador, heladeraId, "MuchasViandas");
+                }
+            } else {
+                if(tiposSuscripcion.stream().noneMatch(t -> Objects.equals(t.tipo, "NoFunciona"))){
+                    desuscribirse(colaborador, heladeraId, "NoFunciona");
+                }
+            }
+        }
+
+        for(TipoSuscripcion t : tiposSuscripcion) {
+            if(colaborador.getSuscripciones().stream().noneMatch(s -> s.getClass().getName().equals("domain.suscripcion."+t.tipo))){
+                int cant = 0;
+                if(t.cantidad != null)
+                    cant = Integer.parseInt(t.cantidad);
+                suscribirse(colaborador, heladeraId, t.tipo, cant);
+            }
+        }
+
+        ctx.redirect("/heladeras-p");
     }
 
-    private void suscribirse(Colaborador c, String hela, String tipo_sub) throws IOException {
+    private void suscribirse(Colaborador c, String hela, String tipo_sub, int cantidad) throws IOException {
         System.out.println("Estoy en UI_HeladerasP::subscribirse");
 
         List<MedioDeContacto> medios = c.getPersona().getMediosDeContacto();
@@ -65,10 +100,10 @@ public class UI_HeladerasP extends UI_Navegable implements Handler{
 
             switch (tipo_sub) {
                 case "PocasViandas":
-                    suscripcion = new PocasViandas(extracted(hela));
+                    suscripcion = new PocasViandas(extracted(hela), cantidad);
                     break;
                 case "MuchasViandas":
-                    suscripcion = new MuchasViandas(extracted(hela));
+                    suscripcion = new MuchasViandas(extracted(hela), cantidad);
                     break;
                 default:
                     suscripcion = new NoFunciona(extracted(hela));
@@ -133,6 +168,52 @@ public class UI_HeladerasP extends UI_Navegable implements Handler{
         Heladera heladera = hela.findById_Heladera(heladeraID);
         System.out.println("HelaName= "+heladera.getNombre());
         return heladera;
+    }
+
+    // Clase para representar la solicitud de suscripción
+    static class SuscripcionRequest {
+        private String heladeraId;
+        private List<TipoSuscripcion> tiposSuscripcion;
+
+        // Getters y setters
+        public String getHeladeraId() {
+            return heladeraId;
+        }
+
+        public void setHeladeraId(String heladeraId) {
+            this.heladeraId = heladeraId;
+        }
+
+        public List<TipoSuscripcion> getTiposSuscripcion() {
+            return tiposSuscripcion;
+        }
+
+        public void setTiposSuscripcion(List<TipoSuscripcion> tiposSuscripcion) {
+            this.tiposSuscripcion = tiposSuscripcion;
+        }
+    }
+
+    // Clase para representar un tipo de suscripción
+    static class TipoSuscripcion {
+        private String tipo;
+        private String cantidad;
+
+        // Getters y setters
+        public String getTipo() {
+            return tipo;
+        }
+
+        public void setTipo(String tipo) {
+            this.tipo = tipo;
+        }
+
+        public String getCantidad() {
+            return cantidad;
+        }
+
+        public void setCantidad(String cantidad) {
+            this.cantidad = cantidad;
+        }
     }
 
 }
