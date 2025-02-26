@@ -156,10 +156,6 @@
                             <div class="card-body heladera-item">
                                 <h3>{{this.nombre}} <span class="label label-pill label-{{estadoStringStyle this}}">{{estadoString this}}</span></h3>
                                 <i class="icon-cup menu-icon"></i><span style="margin-left: 5px;">{{viandas_del_total this}} viandas</span><br><br>
-                                <form action="/heladeras-a" method="post">
-                                    <button type="submit" name="buton_contactar" value="{{this.id}}" class="btn mb-1 btn-primary">Contactar dueño</button>
-                                    <span style="margin-left: 10px">Provista por: </span><span style="font-weight: bold;">{{this.responsable.persona.nombre}}</span>
-                                </form>
                                 {{#if (equal (estadoString this) "Propuesta")}}
                                     <form action="/instalar-heladera" method="post">
                                         <button type="submit" name="helaId" value="{{this.id}}" class="btn mb-1 btn-success">Aprobar Instalación</button>

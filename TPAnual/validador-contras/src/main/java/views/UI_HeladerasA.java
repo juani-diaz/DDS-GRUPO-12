@@ -19,16 +19,6 @@ public class UI_HeladerasA extends UI_Navegable implements Handler{
         ctx.render("heladeras-a.hbs", this.model);
     }
 
-    public void botonInfo(Context ctx) {
-        System.out.println("estoy en UI_HeladerasA::botonInfo");
-
-        // Obtener parámetros del formulario (datos enviados en la solicitud)
-        String buton_contactar = ctx.formParam("buton_contactar");
-        System.out.println("HeladeraID: " + buton_contactar);
-
-        ctx.render("index.hbs");
-    }
-
     public void instalarHeladera(Context ctx) {
         RepoHeladera repo = RepoHeladera.getInstance();
         Integer helaId = Integer.valueOf(ctx.formParam("helaId"));
