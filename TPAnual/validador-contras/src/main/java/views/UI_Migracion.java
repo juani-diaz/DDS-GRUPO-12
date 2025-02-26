@@ -12,6 +12,7 @@ import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import io.javalin.http.UploadedFile;
 import io.jsonwebtoken.Claims;
+import obs.RespuestaCliente;
 import persistence.BDUtils;
 import persistence.Repos.RepoColaborador;
 
@@ -64,7 +65,7 @@ public class UI_Migracion extends UI_Navegable implements Handler {
         BDUtils.commit(em);
 
 
-        ctx.render("index.hbs");
+        RespuestaCliente.exito(getUsuario(), "/index", "CSV Cargado", ctx);
     }
 
 
