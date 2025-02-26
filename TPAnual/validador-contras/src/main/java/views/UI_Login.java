@@ -2,6 +2,7 @@ package views;
 
 import domain.auth.JwtUtil;
 import domain.auth.Usuario;
+import domain.rol.Tecnico;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import lombok.NoArgsConstructor;
@@ -33,6 +34,15 @@ public class UI_Login  implements Handler {
         String contra = ctx.formParam("contra");
         RepoUsuarios r = RepoUsuarios.getInstance(); //linea 27, donde ocurre el error
         Usuario u = r.findByUsuario(usuario);
+
+        if(u.getRol().getClass() == Tecnico.class){
+            Tecnico t = (Tecnico) u.getRol();
+            if(t.getAprobadoPorAdmin() == null || !t.getAprobadoPorAdmin()){
+                ctx.redirect("/page-login");
+                return;
+            }
+        }
+
         if (u != null && u.getContra().equals(contra)) {
             String token = JwtUtil.generateToken(usuario,u.getRol().getId());
             String encodedToken = URLEncoder.encode(token, StandardCharsets.UTF_8);

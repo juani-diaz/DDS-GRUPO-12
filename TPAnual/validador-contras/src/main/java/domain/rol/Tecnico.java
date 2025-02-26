@@ -29,11 +29,15 @@ public class Tecnico extends Rol {
   @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType. LAZY)
   private List<VisitasTecnicas> visitasRealizadas;
 
+  @Column
+  private Boolean aprobadoPorAdmin;
+
   public Tecnico(Persona p, List<String> ac, List<Incidente> iAr , List<VisitasTecnicas> vT){
     this.persona = p;
     this.areaCobertura = ac;
     this.incidentesARevisar = iAr;
     this.visitasRealizadas = vT;
+    this.aprobadoPorAdmin = false;
   }
 
   public Tecnico(Persona p, List<String> ac){
@@ -41,6 +45,7 @@ public class Tecnico extends Rol {
     this.areaCobertura = ac;
     this.incidentesARevisar = new ArrayList<>();
     this.visitasRealizadas = new ArrayList<>();
+    this.aprobadoPorAdmin = false;
   }
 
   public Tecnico(Persona p){
@@ -48,6 +53,7 @@ public class Tecnico extends Rol {
     this.areaCobertura = new ArrayList<String>();
     this.incidentesARevisar = new ArrayList<Incidente>();
     this.visitasRealizadas = new ArrayList<VisitasTecnicas>();
+    this.aprobadoPorAdmin = false;
   }
 
   public boolean cubreLocalidad(String localidad){
