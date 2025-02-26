@@ -23,8 +23,9 @@ public class NoFunciona extends Suscripcion {
         String subject =
                 "Suscripcion a heladeraID "+ this.getHeladera();
         String mensaje =
-                "La heladera " + this.getHeladera().getNombre() +
-                        " No funciona!";
+            "<h1>Hola <strong>" + this.getColaborador().getPersona().getNombre() + "</strong></h1>," +
+                "<p>La heladera <strong>"+ this.getHeladera().getNombre() +"</strong>"+
+                " no funciona.";
 
     this.notificadores.notificar(subject,mensaje);
 

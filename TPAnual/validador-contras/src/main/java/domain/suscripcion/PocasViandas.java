@@ -33,7 +33,9 @@ public class PocasViandas extends Suscripcion{
       String subject =
               "Suscripcion a heladeraID " + this.getHeladera();
       String mensaje =
-              "Hay pocas viandas en la heladera "+ this.getHeladera().getNombre();
+          "<h1>Hola <strong>" + this.getColaborador().getPersona().getNombre() + "</strong>,</h1>" +
+              "<p>La heladera <strong>"+ this.getHeladera().getNombre() +"</strong>"+
+              " tiene " + this.getHeladera().cantidadViandas()+ " viandas</p>";
 
       this.notificadores.notificar(subject, mensaje);
 
@@ -60,6 +62,6 @@ public class PocasViandas extends Suscripcion{
     this.notificadores=null;
     this.numeroMinimo=numeroMinimo;
     header="Notificacion por suscripcion";
-    this.mensaje="Quedan únicamente "+numeroMinimo+" viandas disponibles en la heladera";
+    this.mensaje="Quedan únicamente <strong>"+numeroMinimo+"</strong> viandas disponibles en la heladera";
   }
 }

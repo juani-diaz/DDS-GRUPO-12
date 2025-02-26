@@ -35,7 +35,7 @@ public class TwilioSendGrid {
   public static void sendEmail(String dirCorreo, String subject, String mensage) throws IOException {
 
     Email to = new Email(dirCorreo);
-    Content content = new Content("text/plain", mensage);
+    Content content = new Content("text/html", mensage);
     System.out.println(dirCorreo);
     Email from = new Email("juanpolito02@gmail.com");
 

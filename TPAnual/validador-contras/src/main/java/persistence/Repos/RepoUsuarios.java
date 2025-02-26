@@ -69,13 +69,12 @@ public class RepoUsuarios extends BDUtils {
     public void update_Usuario(Usuario usuario) {
         comenzarTransaccion(em);
 
-        try {
-            usuario = this.em.merge(usuario);  // Asegura que el objeto esté gestionado
-            commit(em);
-        } catch (Exception e) {
-            rollback(em);
-            System.out.println("Error al actualizar el USUARIO: " + usuario + e);
-        }
+        System.out.println(usuario.getRol().getPersona().getMediosDeContacto());
+
+        em.merge(usuario.getRol());
+        em.merge(usuario.getRol().getPersona());
+        em.merge(usuario);
+        commit(em);
     }
 
 
