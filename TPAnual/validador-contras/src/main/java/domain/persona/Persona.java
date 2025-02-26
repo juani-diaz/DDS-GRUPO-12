@@ -7,6 +7,7 @@ import lombok.Setter;
 import persistence.EntidadPersistente;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
@@ -24,7 +25,7 @@ public abstract class Persona extends EntidadPersistente {
     private Documento documento;
 
     @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    private List<MedioDeContacto> mediosDeContacto;
+    private List<MedioDeContacto> mediosDeContacto=new ArrayList<>();
 
     public void agregarMedioDeContacto(MedioDeContacto medioDeContacto) {
         medioDeContacto.setPersona(this); // Vincula al medio con esta persona

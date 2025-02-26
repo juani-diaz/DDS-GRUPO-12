@@ -49,8 +49,9 @@ public class VistasJavalin {
 
             app.before(ctx -> {
                 String path = ctx.path();
+                String domain=System.getenv("DOMAIN");
 
-                if (!path.equals("/broker/temperatura") && !path.equals("/broker/abrirHeladera")) {
+                if (!path.equals("/broker/temperatura") && !path.equals("/broker/solicitarApertura") && !path.equals("/broker/sacarVianda")&&!path.equals("/api/temperatura") && !path.equals("/api/solicitarApertura") && !path.equals("/api/sacarVianda")) {
                     AccesoUsuarios.getInstance().revisarPermiso(ctx);
                 }
             });
@@ -368,7 +369,9 @@ public class VistasJavalin {
             APIControllers api = new APIControllers();
             app.post("/api/temperatura",api::crearIncidenteTemperatura);
 
-            app.post("/api/abrirHeladera", api::solicitarAperturaHeladera);
+            app.post("/api/solicitarApertura", api::solicitarAperturaHeladera);
+
+            app.post("/api/sacarVianda", api::sacarViandas);
 
 
 //====================== API del Broker que seria el endpoint para los que interactuan con nosotros. TECNICAMENTE deberia de estar separado, es decir, ser levantado a parte en otro puerto y que sea una aplicacion a parte
@@ -376,7 +379,9 @@ public class VistasJavalin {
             BrokerControllers broker = new BrokerControllers();
             app.post("/broker/temperatura",broker::incidenteTemperatura);
 
-            app.post("/broker/abrirHeladera", broker::solicitarAperturaHeladera);
+            app.post("/broker/sacarVianda", broker::sacarVianda);
+
+            app.post("/broker/solicitarApertura", broker::solicitarAperturaHeladera);
 
 //====================== NO ENCONTRADO
             app.error(404, ctx -> {

@@ -44,8 +44,10 @@ public class RepoUsuarios extends BDUtils {
         em.persist(usuario.getRol().getPersona());
         em.persist(usuario.getRol());
         em.persist(usuario);
-        for(MedioDeContacto m : usuario.getRol().getPersona().getMediosDeContacto()){
-            em.persist(m);
+        if(usuario.getRol().getPersona().getMediosDeContacto()!=null) {
+            for (MedioDeContacto m : usuario.getRol().getPersona().getMediosDeContacto()) {
+                em.persist(m);
+            }
         }
 
         commit(em);

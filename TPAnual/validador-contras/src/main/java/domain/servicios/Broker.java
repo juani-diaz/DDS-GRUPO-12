@@ -51,7 +51,27 @@ public class Broker {
         requestBody.addProperty("motivoApertura", motivo);
 
         Request request = new Request.Builder()
-                .url(serverUrl + "/api/abrirHeladera")
+                .url(serverUrl + "/api/solicitarApertura")
+                .post(RequestBody.create(requestBody.toString(), MediaType.parse("application/json")))
+                .build();
+
+        try (Response response = httpClient.newCall(request).execute()) {
+            if (!response.isSuccessful()) {
+                throw new IOException("Error al solicitar apertura: " + response.body().string());
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Error al conectar con el servidor", e);
+        }
+    }
+
+
+    public void sacarVianda(Integer viandaId) {
+
+        JsonObject requestBody = new JsonObject();
+        requestBody.addProperty("viandaId", viandaId);
+
+        Request request = new Request.Builder()
+                .url(serverUrl + "/api/sacarVianda")
                 .post(RequestBody.create(requestBody.toString(), MediaType.parse("application/json")))
                 .build();
 

@@ -25,12 +25,12 @@ public class BrokerControllers {
         Map<String, Object> body = ctx.bodyAsClass(Map.class);
 
         Integer heladeraId = (Integer) body.getOrDefault("heladeraId", -1);
-        Float temperatura = (Float) body.getOrDefault("temperatura", "");
+        Double temperatura = (Double) body.getOrDefault("temperatura", "");
 
 
         Broker broker=new Broker(domain);
 
-         broker.setFallaTemperatura(heladeraId,temperatura);
+         broker.setFallaTemperatura(heladeraId,temperatura.floatValue());
                  ctx.status(200);
     }
 
@@ -45,6 +45,18 @@ public class BrokerControllers {
         Broker broker=new Broker(domain);
 
         broker.abrirHeladera(heladeraId,motivoApertura,colaboradorId);
+        ctx.status(200);
+    }
+
+    public void sacarVianda(Context ctx){
+
+        Map<String, Object> body = ctx.bodyAsClass(Map.class);
+
+        Integer viandaId = (Integer) body.getOrDefault("viandaId", -1);
+
+        Broker broker=new Broker(domain);
+
+        broker.sacarVianda(viandaId);
         ctx.status(200);
     }
 }

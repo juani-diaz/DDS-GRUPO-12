@@ -8,9 +8,12 @@ import domain.incidente.EnumTipoDeFalla;
 import domain.incidente.IncidenteAlarma;
 import domain.rol.Colaborador;
 import domain.rol.Tarjeta;
+import domain.vianda.EnumEstadoVianda;
+import domain.vianda.Vianda;
 import io.javalin.http.Context;
 import persistence.Repos.RepoColaborador;
 import persistence.Repos.RepoHeladera;
+import persistence.Repos.RepoVianda;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -73,4 +76,13 @@ public class APIControllers {
      PedidoApertura apertura = administradorSolicitudes.solicitarApertura(tarjeta, heladeraId, enumMotivoApertura);
      ctx.status(201).json(apertura);
  }
+    public void sacarViandas(Context ctx){
+        Map<String, Object> body = ctx.bodyAsClass(Map.class);
+        int viandaId = (int) body.getOrDefault("viandaId", -1);
+        RepoVianda repoVianda = RepoVianda.getInstance();
+        Vianda vianda=repoVianda.findById_Vianda(viandaId);
+        vianda.setHeladera(null);
+        vianda.setEstado(EnumEstadoVianda.ENTREGADO);
+        repoVianda.updateVianda(vianda);
+    }
 }
