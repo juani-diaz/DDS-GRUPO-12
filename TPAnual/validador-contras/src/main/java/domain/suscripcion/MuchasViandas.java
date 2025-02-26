@@ -24,8 +24,9 @@ public class MuchasViandas extends Suscripcion{
     String subject =
             "Suscripcion a heladeraID "+ this.getHeladera();
     String mensaje =
-            "La heladera "+ this.getHeladera().getNombre() +
-                    " tiene muchas viandas";
+        "<h1>Hola <strong>" + this.getColaborador().getPersona().getNombre() + "</strong>,</h1>" +
+            "<p>La heladera <strong>"+ this.getHeladera().getNombre() +"</strong>"+
+                    " tiene " + this.getHeladera().cantidadViandas()+ " viandas</p>";
 
     this.notificadores.notificar(subject,mensaje);
 

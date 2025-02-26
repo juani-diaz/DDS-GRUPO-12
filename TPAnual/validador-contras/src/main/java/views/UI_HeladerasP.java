@@ -123,10 +123,11 @@ public class UI_HeladerasP extends UI_Navegable implements Handler{
 
             String subject = "Suscripción a heladera '" + hela.getNombre()+"'";
             String mensaje =
-                    "En hora buena " + this.getUsuario().getRol().getPersona().getNombre() +
-                            " acaba de suscribirse a la heladera '" + hela.getNombre()+"'" +
-                            " de ahora en más podrá recibir todas las notificaciones pertinentes a su suscripción del tipo " +
-                            tipo_sub + "!";
+                "<h1>En hora buena <strong>" + this.getUsuario().getRol().getPersona().getNombre() + "</strong>,</h1> " +
+                    "<p>Acabas de suscribirse a la heladera "
+                    + "<strong>'" + hela.getNombre()+"' </strong> " +
+                    "de ahora en más podrá recibir todas las notificaciones "
+                    + "pertinentes a su suscripción del tipo <strong>"+tipo_sub+"</strong>!</p>";
 
             publisher.addObservable(suscripcion);
             TwilioSendGrid.sendEmail(medio.getContacto(), subject, mensaje);
@@ -157,9 +158,11 @@ public class UI_HeladerasP extends UI_Navegable implements Handler{
         String subject =
             "Desuscribido de heladera '"+ hela.getNombre()+"'";
         String mensaje =
-            "Hola "+ this.getUsuario().getRol().getPersona().getNombre() +
-                " acabas de dessuscribirse de la heladera '" + hela.getNombre()+"'"+
-                " de ahora en mas no recibiras notificaciones de dihca heladera";
+            "Hola <strong>" + this.getUsuario().getRol().getPersona().getNombre() + "</strong>,</h1>" +
+                "<h1>Acabas de dessuscribirte de la heladera "
+                + "<strong>'" + hela.getNombre()+"' </strong> " +
+                "de ahora en mas no recibiras notificaciones "
+                + "pertinentes a su suscripción del tipo <strong>"+tipo_sub+"</strong>!</p> de dihca heladera.";
 
         System.out.println(this.getUsuario().getRol().getPersona().getMediosDeContacto().get(0).getContacto());
         TwilioSendGrid.sendEmail(this.getUsuario().getRol().getPersona().getMediosDeContacto().get(0).getContacto(), subject, mensaje);
