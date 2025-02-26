@@ -179,7 +179,6 @@ public class VistasJavalin {
             UI_HeladerasA UIHeladerasA = new UI_HeladerasA();
 
             app.get("/heladeras-a", UIHeladerasA);
-            app.post("/heladeras-a", UIHeladerasA::botonInfo);
             acceso.agregarRuta(new LinkMenu(
                     "heladeras-a",
                     "Heladeras",
