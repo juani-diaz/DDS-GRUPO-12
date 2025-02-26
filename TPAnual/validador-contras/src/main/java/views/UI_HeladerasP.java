@@ -9,7 +9,6 @@ import domain.servicios.TwilioSendGrid;
 import domain.suscripcion.*;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
-import obs.RespuestaCliente;
 import persistence.Repos.RepoColaborador;
 import persistence.Repos.RepoHeladera;
 import persistence.Repos.RepoSuscripcion;
@@ -56,18 +55,22 @@ public class UI_HeladerasP extends UI_Navegable implements Handler{
 
         Colaborador colaborador = (Colaborador) this.getUsuario().getRol();
 
+        //extracted es funcion que devuelve heladera en base a su ID
+        Heladera heladera = extracted(heladeraId);
+
         for(Suscripcion s : new ArrayList<>(colaborador.getSuscripciones())){
+
             if(s.getClass() == PocasViandas.class){
                 if(tiposSuscripcion.stream().noneMatch(t -> Objects.equals(t.tipo, "PocasViandas"))){
-                    desuscribirse(colaborador, heladeraId, "PocasViandas");
+                    desuscribirse(colaborador, heladera, "PocasViandas");
                 }
             } else if (s.getClass() == MuchasViandas.class) {
                 if(tiposSuscripcion.stream().noneMatch(t -> Objects.equals(t.tipo, "MuchasViandas"))){
-                    desuscribirse(colaborador, heladeraId, "MuchasViandas");
+                    desuscribirse(colaborador, heladera, "MuchasViandas");
                 }
             } else {
                 if(tiposSuscripcion.stream().noneMatch(t -> Objects.equals(t.tipo, "NoFunciona"))){
-                    desuscribirse(colaborador, heladeraId, "NoFunciona");
+                    desuscribirse(colaborador, heladera, "NoFunciona");
                 }
             }
         }
@@ -75,16 +78,18 @@ public class UI_HeladerasP extends UI_Navegable implements Handler{
         for(TipoSuscripcion t : tiposSuscripcion) {
             if(colaborador.getSuscripciones().stream().noneMatch(s -> s.getClass().getName().equals("domain.suscripcion."+t.tipo))){
                 int cant = 0;
-                if(t.cantidad != null)
+                if(t.cantidad != null){
                     cant = Integer.parseInt(t.cantidad);
-                suscribirse(colaborador, heladeraId, t.tipo, cant);
+                }
+                System.out.println("Estoy en UI_HeladerasP::botonSuscribe->for->if");
+                suscribirse(colaborador, heladera, t.tipo, cant);
             }
         }
 
-        RespuestaCliente.exito(getUsuario(), "/heladeras-p", "Suscripcion actualizada", ctx);
+        ctx.redirect("/heladeras-p");
     }
 
-    private void suscribirse(Colaborador c, String hela, String tipo_sub, int cantidad) throws IOException {
+    private void suscribirse(Colaborador c, Heladera hela, String tipo_sub, int cantidad) throws IOException {
         System.out.println("Estoy en UI_HeladerasP::subscribirse");
 
         List<MedioDeContacto> medios = c.getPersona().getMediosDeContacto();
@@ -101,13 +106,13 @@ public class UI_HeladerasP extends UI_Navegable implements Handler{
 
             switch (tipo_sub) {
                 case "PocasViandas":
-                    suscripcion = new PocasViandas(extracted(hela), cantidad);
+                    suscripcion = new PocasViandas(hela, cantidad);
                     break;
                 case "MuchasViandas":
-                    suscripcion = new MuchasViandas(extracted(hela), cantidad);
+                    suscripcion = new MuchasViandas(hela, cantidad);
                     break;
                 default:
-                    suscripcion = new NoFunciona(extracted(hela));
+                    suscripcion = new NoFunciona(hela);
             }
 
             suscripcion.setColaborador(c);
@@ -116,10 +121,10 @@ public class UI_HeladerasP extends UI_Navegable implements Handler{
             RepoSuscripcion.getInstance().add_Suscripcion(suscripcion);
             c.getSuscripciones().add(suscripcion);
 
-            String subject = "Suscripción a heladeraID " + hela;
+            String subject = "Suscripción a heladera '" + hela.getNombre()+"'";
             String mensaje =
                     "En hora buena " + this.getUsuario().getRol().getPersona().getNombre() +
-                            " acaba de suscribirse a la heladeraID " + hela +
+                            " acaba de suscribirse a la heladera '" + hela.getNombre()+"'" +
                             " de ahora en más podrá recibir todas las notificaciones pertinentes a su suscripción del tipo " +
                             tipo_sub + "!";
 
@@ -131,12 +136,12 @@ public class UI_HeladerasP extends UI_Navegable implements Handler{
     }
 
 
-    private void desuscribirse(Colaborador colaborador, String hela, String tipo_sub) throws IOException {
+    private void desuscribirse(Colaborador colaborador, Heladera hela, String tipo_sub) throws IOException {
 
         System.out.println("Estoy en DESUSCRIBIRSE");
 
         Suscripcion sus = colaborador.getSuscripciones().stream().filter(
-            s -> hela.equals(Integer.toString(s.getHeladera().getId())) &&
+            s -> Integer.toString(hela.getId()).equals(Integer.toString(s.getHeladera().getId())) &&
                 ("domain.suscripcion."+tipo_sub).equals(s.getClass().getName()))
             .reduce((first, second) -> first)
             .orElse(null);
@@ -150,10 +155,10 @@ public class UI_HeladerasP extends UI_Navegable implements Handler{
         RepoSuscripcion.getInstance().remove_Suscripcion(sus);
 
         String subject =
-            "Desuscribido de heladeraID "+ hela;
+            "Desuscribido de heladera '"+ hela.getNombre()+"'";
         String mensaje =
             "Hola "+ this.getUsuario().getRol().getPersona().getNombre() +
-                " acabas de dessuscribirse de la heladeraID " + hela+
+                " acabas de dessuscribirse de la heladera '" + hela.getNombre()+"'"+
                 " de ahora en mas no recibiras notificaciones de dihca heladera";
 
         System.out.println(this.getUsuario().getRol().getPersona().getMediosDeContacto().get(0).getContacto());

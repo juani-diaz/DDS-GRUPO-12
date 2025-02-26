@@ -86,6 +86,18 @@ public class RepoHeladera extends BDUtils{
     return heladera;
   }
 
+  public Heladera findById_Heladera(String heladeraID) {
+    Heladera heladera = null;
+
+    try {
+      heladera = heladeras.stream().filter(h -> Integer.toString(h.getId()) == heladeraID).findFirst().get();
+    } catch (Exception e) {
+      System.out.println("Error al agregar la heladera: " + e);
+    }
+
+    return heladera;
+  }
+
   public List<Heladera> getHeladerass_BD() {
     CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
     CriteriaQuery<Heladera> criteriaQuery = criteriaBuilder.createQuery(Heladera.class);
