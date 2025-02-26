@@ -6,7 +6,7 @@ import lombok.Setter;
 public class TAMANIO extends Requisitos {
 
     public boolean evaluarContrasena(String contra){
-        if(contra.length() > 7 && contra.length() < 64){
+        if(contra.length() >= 4 && contra.length() < 64){
             return true;
         }else{
             return false;
