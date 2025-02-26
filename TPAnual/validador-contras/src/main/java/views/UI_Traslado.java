@@ -12,6 +12,7 @@ import domain.vianda.Vianda;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import io.jsonwebtoken.Claims;
+import obs.RespuestaCliente;
 import persistence.BDUtils;
 import persistence.EntidadPersistente;
 import persistence.Repos.RepoColaborador;
@@ -83,7 +84,7 @@ public class UI_Traslado extends UI_Navegable implements Handler{
     Publicador pub=new Publicador();
     pub.notifyObservers();
 
-    ctx.redirect("/index");
+    RespuestaCliente.exito(getUsuario(), "/index", "Traslado exitoso", ctx);
   }
 
 }

@@ -7,6 +7,7 @@ import domain.rol.Colaborador;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import io.jsonwebtoken.Claims;
+import obs.RespuestaCliente;
 import persistence.BDUtils;
 import persistence.Repos.RepoColaborador;
 
@@ -59,7 +60,7 @@ public class UI_Dinero extends UI_Navegable implements Handler{
     DonacionDinero dona = new DonacionDinero(cola, LocalDate.now(), montoFloat, recurrencia, medioDePago);
     cola.realizarColaboracion(dona);
 
-    ctx.redirect("/index");
+    RespuestaCliente.exito(getUsuario(), "/index", "Donacion creada con exito", ctx);
   }
 
 

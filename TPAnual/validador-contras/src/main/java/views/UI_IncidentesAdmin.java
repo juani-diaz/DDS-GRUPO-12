@@ -6,6 +6,7 @@ import domain.incidente.Incidente;
 import domain.registro.SingletonSeguidorEstadistica;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
+import obs.RespuestaCliente;
 import persistence.Repos.RepoColaborador;
 import persistence.Repos.RepoHeladera;
 
@@ -29,7 +30,7 @@ public class UI_IncidentesAdmin extends UI_Navegable implements Handler {
         i.setEstadoDeIncidente(EnumEstadoDeIncidente.PENDIENTE_A_SOLUCIONAR);
         SingletonSeguidorEstadistica.getInstance().updateIncidente(i);
 
-        ctx.redirect("/index");
+        RespuestaCliente.exito(getUsuario(), "/index", "Se desasigno el tecnico", ctx);
     }
 
     public void forzarSolucion(Context ctx) throws Exception {
@@ -41,6 +42,6 @@ public class UI_IncidentesAdmin extends UI_Navegable implements Handler {
         RepoHeladera.getInstance().updateHeladera(i.getHeladera());
         SingletonSeguidorEstadistica.getInstance().updateIncidente(i);
 
-        ctx.redirect("/incidentes-a");
+        RespuestaCliente.exito(getUsuario(), "/incidentes-a", "Se establecio como disponible la heladera", ctx);
     }
 }

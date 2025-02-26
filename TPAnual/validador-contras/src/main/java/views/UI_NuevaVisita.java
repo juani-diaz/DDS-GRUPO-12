@@ -12,6 +12,7 @@ import domain.rol.Tecnico;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import io.javalin.http.UploadedFile;
+import obs.RespuestaCliente;
 import persistence.ArchivosUtils;
 import persistence.Repos.RepoColaborador;
 import persistence.Repos.RepoHeladera;
@@ -61,6 +62,6 @@ public class UI_NuevaVisita extends UI_Navegable implements Handler {
 
         SingletonSeguidorEstadistica.getInstance().updateIncidente(incidente);
 
-        ctx.redirect("/index");
+        RespuestaCliente.exito(getUsuario(), "/index", "Nueva visita cargada", ctx);
     }
 }

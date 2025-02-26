@@ -10,6 +10,7 @@ import domain.rol.LocalidadesTecnico;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import lombok.NoArgsConstructor;
+import obs.RespuestaCliente;
 import persistence.Repos.RepoHeladera;
 
 import java.time.LocalDate;
@@ -50,7 +51,7 @@ public class UI_NuevaHeladera extends UI_Navegable implements Handler {
 
         colaborador.realizarColaboracion(colaboracion);
 
-        ctx.redirect("/heladeras-o");
+        RespuestaCliente.exito(getUsuario(), "/heladeras-o", "Se solicito la heladera", ctx);
     }
 
     public void obtenerPuntosSugeridos(Context ctx) {

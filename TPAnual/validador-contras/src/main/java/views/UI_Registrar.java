@@ -2,6 +2,7 @@ package views;
 
 import domain.auth.JwtUtil;
 import domain.auth.Usuario;
+import domain.contra.ValidadorContras;
 import domain.persona.*;
 import domain.rol.Colaborador;
 import domain.rol.LocalidadesTecnico;
@@ -10,6 +11,7 @@ import domain.rol.Tecnico;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import io.jsonwebtoken.Claims;
+import obs.RespuestaCliente;
 import persistence.Repos.RepoColaborador;
 import persistence.Repos.RepoUsuarios;
 
@@ -49,6 +51,13 @@ public class UI_Registrar implements Handler {
         String usuario = ctx.formParam("usuario");
         String contra = ctx.formParam("contra");
         String repetirContra = ctx.formParam("repetirContra");
+
+        ValidadorContras a = new ValidadorContras();
+        if(!a.validarContra(contra, repetirContra)){
+            RespuestaCliente.error(null, "/page-register", "Error en la validacion de contraseñas", ctx);
+            return;
+        }
+
         PersonaFisica nuevaPersona = new PersonaFisica();
 
         List<MedioDeContacto> medios = new ArrayList<MedioDeContacto>();
@@ -85,7 +94,7 @@ public class UI_Registrar implements Handler {
         RepoUsuarios r = RepoUsuarios.getInstance();
         r.add_Usuario(nuevoUsuario);
 
-        ctx.redirect("/page-login");
+        RespuestaCliente.exito(null, "/page-login", "Registrado con exito", ctx);
     }
 
     public void registrarOrg(Context ctx) throws Exception {
@@ -108,6 +117,12 @@ public class UI_Registrar implements Handler {
         String usuario = ctx.formParam("usuario");
         String contra = ctx.formParam("contra");
         String repetirContra = ctx.formParam("repetirContra");
+
+        ValidadorContras a = new ValidadorContras();
+        if(!a.validarContra(contra, repetirContra)){
+            RespuestaCliente.error(null, "/page-register", "Error en la validacion de contraseñas", ctx);
+            return;
+        }
 
         Documento nuevoDocumento = new Documento(tipoDocumento,documento);
 
@@ -135,7 +150,7 @@ public class UI_Registrar implements Handler {
         RepoUsuarios r = RepoUsuarios.getInstance();
         r.add_Usuario(nuevoUsuario);
 
-        ctx.redirect("/page-login");
+        RespuestaCliente.exito(null, "/page-login", "Registrado con exito", ctx);
     }
 
     public void registrarTecnico(Context ctx) throws Exception {
@@ -150,6 +165,12 @@ public class UI_Registrar implements Handler {
         String usuario = ctx.formParam("usuario");
         String contra = ctx.formParam("contra");
         String repetirContra = ctx.formParam("repetirContra");
+
+        ValidadorContras a = new ValidadorContras();
+        if(!a.validarContra(contra, repetirContra)){
+            RespuestaCliente.error(null, "/page-register", "Error en la validacion de contraseñas", ctx);
+            return;
+        }
 
         List<MedioDeContacto> medios = new ArrayList<MedioDeContacto>();
         PersonaFisica nuevaPersona = new PersonaFisica();
@@ -186,7 +207,7 @@ public class UI_Registrar implements Handler {
         RepoUsuarios r = RepoUsuarios.getInstance();
         r.add_Usuario(nuevoUsuario);
 
-        ctx.redirect("/page-login");
+        RespuestaCliente.exito(null, "/page-login", "Registrado con exito", ctx);
     }
 
     public void registrarPersonaGoogle(Context ctx) throws Exception {
@@ -246,7 +267,7 @@ public class UI_Registrar implements Handler {
         RepoUsuarios r = RepoUsuarios.getInstance();
         r.update_Usuario(u);
 
-        ctx.redirect("/page-login");
+        RespuestaCliente.exito(null, "/page-login", "Registrado con exito", ctx);
     }
 
     public void registrarOrgGoogle(Context ctx) throws Exception {
@@ -304,7 +325,7 @@ public class UI_Registrar implements Handler {
         RepoUsuarios r = RepoUsuarios.getInstance();
         r.update_Usuario(u);
 
-        ctx.redirect("/page-login");
+        RespuestaCliente.exito(null, "/page-login", "Registrado con exito", ctx);
     }
 
     public void registrarTecnicoGoogle(Context ctx) throws Exception {
@@ -366,6 +387,6 @@ public class UI_Registrar implements Handler {
         RepoUsuarios r = RepoUsuarios.getInstance();
         r.update_Usuario(u);
 
-        ctx.redirect("/page-login");
+        RespuestaCliente.exito(null, "/page-login", "Registrado con exito", ctx);
     }
 }

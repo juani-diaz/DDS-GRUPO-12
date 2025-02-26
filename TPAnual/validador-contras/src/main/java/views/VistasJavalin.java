@@ -332,6 +332,23 @@ public class VistasJavalin {
                     true
             ));
 
+//====================== TECNICOS ADMIN
+            UI_TecnicosA UITecnicosA = new UI_TecnicosA();
+            app.get("/tecnicos-a", UITecnicosA);
+            acceso.agregarRuta(new LinkMenu(
+                    "tecnicos-a",
+                    "Técnicos",
+                    "icon-flag",
+                    false,
+                    false,
+                    false,
+                    true
+            ));
+            app.post("/habilitar-tecnico", UITecnicosA::habilitarTecnico);
+            app.post("/deshabilitar-tecnico", UITecnicosA::deshabilitarTecnico);
+            acceso.agregarRuta(new PermisosMetodo("habilitar-tecnico", false, false, false, true));
+            acceso.agregarRuta(new PermisosMetodo("deshabilitar-tecnico", false, false, false, true));
+
 //====================== LOGIN
             UI_Login UILogin = new UI_Login();
 

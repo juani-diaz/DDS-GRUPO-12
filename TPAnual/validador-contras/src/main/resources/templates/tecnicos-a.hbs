@@ -9,7 +9,7 @@
     <!-- theme meta -->
     <meta name="theme-name" content="quixlab" />
   
-    <title>Oferta</title>
+    <title>AlimentAR</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
     <!-- Pignose Calender -->
@@ -78,10 +78,9 @@
                 </div>
                 <div class="header-right">
                     <ul class="clearfix">
-
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
-                                 <img src="images/usu.png" height="40" width="40" alt="">
+                                <img src="images/usu.png" height="40" width="40" alt="">
                             </div>
                             <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
                                 <div class="dropdown-content-body">
@@ -111,7 +110,7 @@
         <!--**********************************
             Sidebar start
         ***********************************-->
-        <div class="nk-sidebar">
+        <div class="nk-sidebar">           
             <div class="nk-nav-scroll">
                 <ul class="metismenu" id="menu">
                     {{#each menu as | link |}}
@@ -132,49 +131,48 @@
             Content body start
         ***********************************-->
         <div class="content-body">
-            
-            <div style="display: flex;">
-                <div class="col-lg-6" style="margin-top: 15px;">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Datos de la oferta</h4>
-                            <div class="basic-form">
-                                <form action="/nueva-oferta" method="post" enctype="multipart/form-data">
-                                    <div class="form-group">
-                                        <label>Nombre</label>
-                                        <input type="text" name="nombre" class="form-control" placeholder="Nombre de la oferta" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Descripción</label>
-                                        <textarea name="descripcion" class="form-control" placeholder="Descripción de la oferta" rows="5" required></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Rubro</label>
-                                        <input type="text" name="rubro" class="form-control" placeholder="Rubro" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Portada</label>
-                                        <input type="file" name="imagen" class="form-control" accept="image/*">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Precio</label>
-                                        <input type="number" name="puntosNecesarios" class="form-control" placeholder="Precio en puntos" required>
-                                    </div>
-                                    <button type="submit" class="btn btn-success">Publicar</button>
-                                </form>
-                                                                                          
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6" style="margin-top: 15px;">
-                    <div class="card">
-                        <div class="card-body" style="padding: 74px 29px;">
-                            <img class="d-block w-100" src="images/reward.png" alt="">
+            <div class="col-lg-12">
+                <div class="card" style="margin: 15px;">
+                    <div class="card-body">
+                        <h4 class="card-title">Técnicos</h4>
+                        <div class="table-responsive">
+                            <table class="table table-striped zero-configuration">
+                                <thead>
+                                <tr>
+                                    <th>Usuario</th>
+                                    <th>Nombre</th>
+                                    <th>Apellido</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    {{#each usuariosTecnico}}
+                                        <tr>
+                                            <td>{{this.usuario}}</td>
+                                            <td>{{this.rol.persona.nombre}}</td>
+                                            <td>{{this.rol.persona.apellido}}</td>
+                                            {{#if this.rol.aprobadoPorAdmin}}
+                                                <td>
+                                                    <form action="/deshabilitar-tecnico" method="post">
+                                                        <button type="submit" name="usuarioId" value="{{this.id}}" class="btn mb-1 btn-outline-danger">Deshabilitar</button>
+                                                    </form>
+                                                </td>
+                                            {{else}}
+                                                <td>
+                                                    <form action="/habilitar-tecnico" method="post">
+                                                        <button type="submit" name="usuarioId" value="{{this.id}}" class="btn mb-1 btn-outline-success">Habilitar</button>
+                                                    </form>
+                                                </td>
+                                            {{/if}}
+                                        </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
         </div>
         <!--**********************************
@@ -187,7 +185,7 @@
         ***********************************-->
         <div class="footer">
             <div class="copyright">
-                <p>Trabajo Integrador DDS 2024 Grupo 12</p>
+                <p>Trabajo Integrador DDS 2024 Grupo 12{{user.id}}</p>
             </div>
         </div>
         <!--**********************************
@@ -228,20 +226,6 @@
 
 
     <script src="./js/dashboard/dashboard-1.js"></script>
-
-    <script>
-        function toggleDireccion() {
-            var checkbox = document.getElementById('situacionCalle');
-            var direccion = document.getElementById('direccion');
-            direccion.disabled = checkbox.checked;
-        }
-    
-        function toggleDocumento() {
-            var tipoDocumento = document.getElementById('tipoDocumento');
-            var documento = document.getElementById('documento');
-            documento.disabled = tipoDocumento.value === 'No tiene';
-        }
-    </script>
 
     <!-- Toastr JS + OBS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>

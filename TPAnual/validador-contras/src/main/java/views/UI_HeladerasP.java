@@ -9,6 +9,7 @@ import domain.servicios.TwilioSendGrid;
 import domain.suscripcion.*;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
+import obs.RespuestaCliente;
 import persistence.Repos.RepoColaborador;
 import persistence.Repos.RepoHeladera;
 import persistence.Repos.RepoSuscripcion;
@@ -81,7 +82,7 @@ public class UI_HeladerasP extends UI_Navegable implements Handler{
             }
         }
 
-        ctx.redirect("/heladeras-p");
+        RespuestaCliente.exito(getUsuario(), "/heladeras-p", "Suscripcion actualizada", ctx);
     }
 
     private void suscribirse(Colaborador c, String hela, String tipo_sub, int cantidad) throws IOException {

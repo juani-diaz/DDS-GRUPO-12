@@ -7,6 +7,7 @@ import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import io.jsonwebtoken.Claims;
 import lombok.NoArgsConstructor;
+import obs.RespuestaCliente;
 import persistence.BDUtils;
 import persistence.Repos.RepoColaborador;
 import persistence.Repos.RepoUsuarios;
@@ -99,7 +100,7 @@ public class UI_Perfil extends UI_Navegable implements Handler {
 
         RepoUsuarios.getInstance().update_Usuario(getUsuario());
 
-        ctx.redirect("/app-profile");
+        RespuestaCliente.exito(getUsuario(), "/app-profile", "Se actualizaron los datos", ctx);
     }
 
     public void actualizarColaboradorJuridico(Context ctx) throws Exception {
@@ -135,7 +136,7 @@ public class UI_Perfil extends UI_Navegable implements Handler {
 
         RepoUsuarios.getInstance().update_Usuario(getUsuario());
 
-        ctx.redirect("/app-profile");
+        RespuestaCliente.exito(getUsuario(), "/app-profile", "Se actualizaron los datos", ctx);
     }
 
     public void actualizarTecnico(Context ctx) throws Exception {
@@ -169,7 +170,7 @@ public class UI_Perfil extends UI_Navegable implements Handler {
 
         RepoUsuarios.getInstance().update_Usuario(getUsuario());
 
-        ctx.redirect("/app-profile");
+        RespuestaCliente.exito(getUsuario(), "/app-profile", "Se actualizaron los datos", ctx);
     }
 
     public void solicitarTarjeta(Context ctx) {
@@ -199,7 +200,7 @@ public class UI_Perfil extends UI_Navegable implements Handler {
         em.merge(colapinto);
 
         BDUtils.commit(em);
-        ctx.redirect("/app-profile");
+        RespuestaCliente.exito(getUsuario(), "/app-profile", "Tarjetas encargadas", ctx);
     }
 
     private void medios(Persona p, Context ctx) {

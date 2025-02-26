@@ -5,6 +5,7 @@ import domain.heladera.EnumEstadoHeladera;
 import domain.heladera.Heladera;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
+import obs.RespuestaCliente;
 import persistence.Repos.RepoHeladera;
 
 public class UI_HeladerasA extends UI_Navegable implements Handler{
@@ -36,7 +37,7 @@ public class UI_HeladerasA extends UI_Navegable implements Handler{
 
         repo.updateHeladera(hela);
 
-        ctx.redirect("/heladeras-a");
+        RespuestaCliente.exito(getUsuario(), "/heladeras-a", "Se aprobo la instalacion de la heladera", ctx);
     }
 }
 
