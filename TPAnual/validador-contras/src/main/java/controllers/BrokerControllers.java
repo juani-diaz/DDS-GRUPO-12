@@ -53,10 +53,11 @@ public class BrokerControllers {
         Map<String, Object> body = ctx.bodyAsClass(Map.class);
 
         Integer viandaId = (Integer) body.getOrDefault("viandaId", -1);
+        Integer vulnerableId = (Integer) body.getOrDefault("vulnerableId", -1);
 
         Broker broker=new Broker(domain);
 
-        broker.sacarVianda(viandaId);
+        broker.sacarVianda(viandaId,vulnerableId);
         ctx.status(200);
     }
 }

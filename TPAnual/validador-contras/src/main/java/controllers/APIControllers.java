@@ -93,7 +93,7 @@ public class APIControllers {
         RepoVianda repoVianda = RepoVianda.getInstance();
         Vianda vianda=repoVianda.findById_Vianda(viandaId);
         Heladera heladera=vianda.getHeladera();
-        vulnerable.retirarVianda(viandaId,heladera);
+        //vulnerable.retirarVianda(viandaId,heladera);
         vianda.setHeladera(null);
         vianda.setEstado(EnumEstadoVianda.ENTREGADO);
         repoVianda.updateVianda(vianda);

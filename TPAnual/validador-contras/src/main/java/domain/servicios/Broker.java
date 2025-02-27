@@ -9,6 +9,7 @@ import okhttp3.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import java.awt.*;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Optional;
 
 public class Broker {
@@ -36,7 +37,7 @@ public class Broker {
 
         try (Response response = httpClient.newCall(request).execute()) {
             if (!response.isSuccessful()) {
-                throw new IOException("Error al registrar la temperatura: " + response.body().string());
+                throw new IOException("Error al registrar la temperatura: " + Objects.requireNonNull(response.body()).string());
             }
         } catch (IOException e) {
             throw new RuntimeException("Error al conectar con el servidor", e);
@@ -65,11 +66,11 @@ public class Broker {
     }
 
 
-    public void sacarVianda(Integer viandaId) {
+    public void sacarVianda(Integer viandaId,Integer vulnerableId) {
 
         JsonObject requestBody = new JsonObject();
         requestBody.addProperty("viandaId", viandaId);
-
+        requestBody.addProperty("vulnerableId", vulnerableId);
         Request request = new Request.Builder()
                 .url(serverUrl + "/api/sacarVianda")
                 .post(RequestBody.create(requestBody.toString(), MediaType.parse("application/json")))
