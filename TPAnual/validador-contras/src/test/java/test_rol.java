@@ -21,7 +21,7 @@ import java.util.List;
 public class test_rol {
     MedioDeContacto medioDeContacto = new EmailDir();
 
-    PersonaFisica personaFisica1 = new PersonaFisica();
+    PersonaFisica personaFisica21 = new PersonaFisica();
     PersonaJuridica personaJuridica1 = new PersonaJuridica("Pepsi",EnumTipoPersonaJuridica.EMPRESA,"gaseosa");
     PersonaJuridica personaJuridica2 = new PersonaJuridica("Unicef",EnumTipoPersonaJuridica.ONG,"ayudar ninos");
     Heladera heladera1 = new Heladera();
